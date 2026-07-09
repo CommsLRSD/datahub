@@ -1112,7 +1112,7 @@
 		<div class="dh-header-content">
 			<div class="dh-logo">
 				<img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-logo-img dh-logo-horizontal fr-fil fr-dib">
-				<img src="https://media.lrsd.net/media/Default/frl/dh-logo-vert-fc-svg-2x.d681e083557.png" alt="Data Hub" class="dh-logo-img dh-logo-vertical fr-fic fr-dii">
+				<img src="https://media.lrsd.net/media/Default/frl/dh-logo-vert-fc-svg-2x.d681e083557.png" alt="" aria-hidden="true" class="dh-logo-img dh-logo-vertical fr-fic fr-dii">
 			</div>
 			<p class="dh-tagline">We are committed to using data to inform decision-making, monitor progress, and share our story with the community.<br>This involves a growth mindset and a solid grounding in data ethics, tools, and processes.</p>
 		</div>
@@ -1167,9 +1167,9 @@
 					<div class="dh-nav-access" id="dhPrimaryNav">
 						<details class="dh-custom-select" id="dhCustomSelect">
 							<summary class="dh-select-trigger" id="dhSelectTrigger">
-								<img src="https://media.lrsd.net/media/Default/frl/data-hub-large-4x.0eeaab84125.png" class="dh-item-icon fr-fil fr-dib" id="dhActiveIcon" alt="">
+								<img src="https://media.lrsd.net/media/Default/frl/data-hub-large-4x.0eeaab84125.png" class="dh-item-icon fr-fil fr-dib" id="dhActiveIcon" alt="" aria-hidden="true">
 								<span class="dh-select-text" id="dhSelectText">Data Governance &amp; AI Overview</span>
-								<img src="https://media.lrsd.net/media/Default/frl/dropdown-arrow.23ae4383430.png" class="dh-chevron fr-fil fr-dib" alt="Dropdown Arrow">
+								<img src="https://media.lrsd.net/media/Default/frl/dropdown-arrow.23ae4383430.png" class="dh-chevron fr-fil fr-dib" alt="" aria-hidden="true">
 							</summary>
 							<div class="dh-select-options" id="dhSelectOptions"></div>
 						</details>
@@ -1402,23 +1402,79 @@
 			});
 		}
 
+		function sanitizeUrl(value)
+		{
+			var url = String(value || '');
+			return /^https?:\/\//i.test(url) ? url.replace(/"/g, '&quot;') : '';
+		}
+
+		function sanitizeSectionHtml(html)
+		{
+			var template = document.createElement('template');
+			var allowedTags = {
+				P: true,
+				UL: true,
+				LI: true,
+				DIV: true,
+				H4: true,
+				SPAN: true
+			};
+			var allowedClasses = {
+				'dh-agent-grid': true,
+				'dh-agent-card': true,
+				'dh-resource-list': true,
+				'dh-resource-note': true
+			};
+
+			template.innerHTML = html;
+
+			Array.prototype.slice.call(template.content.querySelectorAll('*')).forEach(function(node)
+			{
+				if (!allowedTags[node.tagName])
+				{
+					node.replaceWith(document.createTextNode(node.textContent || ''));
+					return;
+				}
+
+				Array.prototype.slice.call(node.attributes).forEach(function(attribute)
+				{
+					if (attribute.name === 'class')
+					{
+						var safeClasses = attribute.value.split(/\s+/).filter(function(className)
+						{
+							return allowedClasses[className];
+						});
+
+						if (safeClasses.length) node.setAttribute('class', safeClasses.join(' '));
+						else node.removeAttribute('class');
+					}
+					else
+					{
+						node.removeAttribute(attribute.name);
+					}
+				});
+			});
+
+			return template.innerHTML;
+		}
+
 		function buildNavMarkup(kind, index, title, subtitle, icon)
 		{
-			return '<button class="dh-nav-item" type="button" data-nav-kind="' + kind + '"' + (typeof index === 'number' ? ' data-index="' + index + '"' : '') + '><img src="' + icon + '" alt="" class="dh-nav-thumb fr-fil fr-dib"><span class="dh-nav-copy"><strong>' + escapeHtml(title) + '</strong><span>' + escapeHtml(subtitle) + '</span></span></button>';
+			return '<button class="dh-nav-item" type="button" data-nav-kind="' + kind + '"' + (typeof index === 'number' ? ' data-index="' + index + '"' : '') + '><img src="' + sanitizeUrl(icon) + '" alt="" aria-hidden="true" class="dh-nav-thumb fr-fil fr-dib"><span class="dh-nav-copy"><strong>' + escapeHtml(title) + '</strong><span>' + escapeHtml(subtitle) + '</span></span></button>';
 		}
 
 		function buildOptionMarkup(kind, index, title, icon)
 		{
-			return '<div class="dh-option" data-nav-kind="' + kind + '"' + (typeof index === 'number' ? ' data-index="' + index + '"' : '') + '><img src="' + icon + '" alt="" class="dh-item-icon fr-fil fr-dib"><span class="dh-item-text">' + escapeHtml(title) + '</span></div>';
+			return '<div class="dh-option" data-nav-kind="' + kind + '"' + (typeof index === 'number' ? ' data-index="' + index + '"' : '') + '><img src="' + sanitizeUrl(icon) + '" alt="" aria-hidden="true" class="dh-item-icon fr-fil fr-dib"><span class="dh-item-text">' + escapeHtml(title) + '</span></div>';
 		}
 
 		function buildMobileMarkup()
 		{
-			var html = '<button class="dh-mobile-list-item" type="button" id="dhMobileOverviewBtn"><img src="' + LANDING_ITEM.icon + '" alt="" class="fr-fil fr-dib"><span class="dh-mobile-list-text">' + escapeHtml(LANDING_ITEM.title) + '</span><span class="dh-mobile-list-arrow">↓</span></button>';
+			var html = '<button class="dh-mobile-list-item" type="button" id="dhMobileOverviewBtn"><img src="' + sanitizeUrl(LANDING_ITEM.icon) + '" alt="" aria-hidden="true" class="fr-fil fr-dib"><span class="dh-mobile-list-text">' + escapeHtml(LANDING_ITEM.title) + '</span><span class="dh-mobile-list-arrow">↓</span></button>';
 
 			DASHBOARDS.forEach(function(d)
 			{
-				html += '<a class="dh-mobile-list-item" href="' + d.url + '" target="_blank" rel="noopener"><img src="' + d.icon + '" alt="" class="fr-fil fr-dib"><span class="dh-mobile-list-text">' + escapeHtml(d.title) + '</span><span class="dh-mobile-list-arrow">↗</span></a>';
+				html += '<a class="dh-mobile-list-item" href="' + sanitizeUrl(d.url) + '" target="_blank" rel="noopener"><img src="' + sanitizeUrl(d.icon) + '" alt="" aria-hidden="true" class="fr-fil fr-dib"><span class="dh-mobile-list-text">' + escapeHtml(d.title) + '</span><span class="dh-mobile-list-arrow">↗</span></a>';
 			});
 
 			return html;
@@ -1440,13 +1496,13 @@
 			mobileListItems.innerHTML = buildMobileMarkup();
 		}
 
-		function buildSectionPills(container, mobile)
+		function buildSectionPills(container)
 		{
 			var html = '';
 
 			LANDING_SECTIONS.forEach(function(section, index)
 			{
-				html += '<button class="dh-section-pill' + (index === currentSectionIndex ? ' is-active' : '') + '" type="button" data-section-index="' + index + '"' + (mobile ? ' data-mobile-section="true"' : '') + '>' + escapeHtml(section.title) + '</button>';
+				html += '<button class="dh-section-pill' + (index === currentSectionIndex ? ' is-active' : '') + '" type="button" data-section-index="' + index + '">' + escapeHtml(section.title) + '</button>';
 			});
 
 			container.innerHTML = html;
@@ -1457,18 +1513,18 @@
 			var section = LANDING_SECTIONS[currentSectionIndex];
 			var eyebrowText = 'Section ' + (currentSectionIndex + 1) + ' of ' + LANDING_SECTIONS.length;
 
-			buildSectionPills(sectionPills, false);
-			buildSectionPills(mobileSectionPills, true);
+			buildSectionPills(sectionPills);
+			buildSectionPills(mobileSectionPills);
 
 			sectionEyebrow.textContent = eyebrowText;
 			sectionTitle.textContent = section.title;
 			sectionSubtitle.textContent = section.summary;
-			sectionBody.innerHTML = section.bodyHtml;
+			sectionBody.innerHTML = sanitizeSectionHtml(section.bodyHtml);
 
 			mobileSectionEyebrow.textContent = eyebrowText;
 			mobileSectionTitle.textContent = section.title;
 			mobileSectionSubtitle.textContent = section.summary;
-			mobileSectionBody.innerHTML = section.bodyHtml;
+			mobileSectionBody.innerHTML = sanitizeSectionHtml(section.bodyHtml);
 
 			updateChrome();
 		}
