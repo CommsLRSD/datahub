@@ -1112,7 +1112,7 @@
 		<div class="dh-header-content">
 			<div class="dh-logo">
 				<img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-logo-img dh-logo-horizontal fr-fil fr-dib">
-				<img src="https://media.lrsd.net/media/Default/frl/dh-logo-vert-fc-svg-2x.d681e083557.png" alt="" aria-hidden="true" class="dh-logo-img dh-logo-vertical fr-fic fr-dii">
+				<img src="https://media.lrsd.net/media/Default/frl/dh-logo-vert-fc-svg-2x.d681e083557.png" alt="Data Hub" class="dh-logo-img dh-logo-vertical fr-fic fr-dii">
 			</div>
 			<p class="dh-tagline">We are committed to using data to inform decision-making, monitor progress, and share our story with the community.<br>This involves a growth mindset and a solid grounding in data ethics, tools, and processes.</p>
 		</div>
@@ -1166,7 +1166,7 @@
 					</div>
 					<div class="dh-nav-access" id="dhPrimaryNav">
 						<details class="dh-custom-select" id="dhCustomSelect">
-							<summary class="dh-select-trigger" id="dhSelectTrigger">
+							<summary class="dh-select-trigger" id="dhSelectTrigger" aria-label="Select an overview page or dashboard">
 								<img src="https://media.lrsd.net/media/Default/frl/data-hub-large-4x.0eeaab84125.png" class="dh-item-icon fr-fil fr-dib" id="dhActiveIcon" alt="" aria-hidden="true">
 								<span class="dh-select-text" id="dhSelectText">Data Governance &amp; AI Overview</span>
 								<img src="https://media.lrsd.net/media/Default/frl/dropdown-arrow.23ae4383430.png" class="dh-chevron fr-fil fr-dib" alt="" aria-hidden="true">
@@ -1186,7 +1186,7 @@
 				</div>
 			</div>
 			<div class="dh-iframe-wrap" id="dhIframeWrap">
-				<iframe name="dhFrame" id="dhFrame" title="Power BI Report" allowfullscreen=""></iframe>
+				<iframe name="dhFrame" id="dhFrame" title="Data Hub Viewer" allowfullscreen=""></iframe>
 				<div class="dh-loading" id="dhLoading">
 					<div class="dh-spinner"></div>
 					<span>Loading dashboard...</span>
@@ -1241,6 +1241,7 @@
 <script>
 	(function()
 	{
+		var MOBILE_BREAKPOINT = 760;
 		var LANDING_ITEM = {
 			title: 'Data Governance & AI Overview',
 			subtitle: 'Landing page',
@@ -1404,13 +1405,23 @@
 
 		function sanitizeUrl(value)
 		{
-			var url = String(value || '');
-			return /^https?:\/\//i.test(url) ? url.replace(/"/g, '&quot;') : '';
+			try
+			{
+				var url = new URL(String(value || ''), window.location.href);
+				if (!/^https?:$/i.test(url.protocol)) return '';
+				return url.href.replace(/"/g, '&quot;').replace(/</g, '%3C').replace(/>/g, '%3E');
+			}
+			catch (error)
+			{
+				return '';
+			}
 		}
 
 		function sanitizeSectionHtml(html)
 		{
-			var template = document.createElement('template');
+			var parser = new DOMParser();
+			var parsed = parser.parseFromString('<body>' + html + '</body>', 'text/html');
+			var body = parsed.body;
 			var allowedTags = {
 				P: true,
 				UL: true,
@@ -1426,9 +1437,7 @@
 				'dh-resource-note': true
 			};
 
-			template.innerHTML = html;
-
-			Array.prototype.slice.call(template.content.querySelectorAll('*')).forEach(function(node)
+			Array.prototype.slice.call(body.querySelectorAll('*')).forEach(function(node)
 			{
 				if (!allowedTags[node.tagName])
 				{
@@ -1455,7 +1464,7 @@
 				});
 			});
 
-			return template.innerHTML;
+			return body.innerHTML;
 		}
 
 		function buildNavMarkup(kind, index, title, subtitle, icon)
@@ -1725,15 +1734,6 @@
 			loading.classList.remove('active');
 		});
 
-		document.addEventListener('keydown', function(event)
-		{
-			if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') return;
-
-			if (event.key === 'ArrowLeft') cyclePrev();
-			if (event.key === 'ArrowRight') cycleNext();
-			if (event.key === 'f' || event.key === 'F') toggleFullscreen();
-		});
-
 		var tourBackdrop = document.getElementById('dhTourBackdrop');
 		var tourSpotlight = document.getElementById('dhTourSpotlight');
 		var tourTooltip = document.getElementById('dhTourTooltip');
@@ -1762,7 +1762,7 @@
 		{
 			targetId: 'dhFullscreen',
 			title: 'Go fullscreen',
-			body: 'Use fullscreen for a more focused dashboard view. Press Esc or the F key to exit.'
+			body: 'Use fullscreen for a more focused dashboard view. Press Esc to exit.'
 		},
 		{
 			targetId: 'dhHelpBtn',
@@ -1863,7 +1863,7 @@
 
 		function startTour()
 		{
-			if (window.innerWidth <= 760) return;
+			if (window.innerWidth <= MOBILE_BREAKPOINT) return;
 			tourActive = true;
 			firstTooltipTop = null;
 			tourBackdrop.classList.add('active');
