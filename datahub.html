@@ -1,704 +1,1252 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'); .data-hub-wrapper {
-		--dh-aspect-ratio: 16 / 9.55; --accent-red: #BE5247; --accent-green: #2BA680; --accent-red-light: rgba(190, 82, 71, 0.1); --accent-green-light: rgba(43, 166, 128, 0.1); --bg-primary: #ffffff; --bg-secondary: #f8f9fa; --bg-glass: rgba(255, 255, 255, 0.75); --bg-glass-strong: rgba(255, 255, 255, 0.9); --text-primary: #1a1a2e; --text-secondary: #64748b; --text-muted: #94a3b8; --border-light: rgba(0, 0, 0, 0.06); --border-medium: rgba(0, 0, 0, 0.1); --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.06); --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.08); --shadow-glow-green: 0 4px 20px rgba(43, 166, 128, 0.25); --blur-amount: 20px; --radius: 12px; --radius-lg: 16px; --radius-xl: 20px; --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+	.data-hub-wrapper {
+		--dh-aspect-ratio: 16 / 9.55;
+		--accent-red: #be5247;
+		--accent-green: #2ba680;
+		--accent-red-light: rgba(190, 82, 71, 0.12);
+		--accent-green-light: rgba(43, 166, 128, 0.12);
+		--bg-primary: #ffffff;
+		--bg-secondary: #f5f7fb;
+		--bg-tertiary: #eef2f7;
+		--bg-glass: rgba(255, 255, 255, 0.72);
+		--bg-glass-strong: rgba(255, 255, 255, 0.92);
+		--text-primary: #172033;
+		--text-secondary: #5f6f86;
+		--text-muted: #8da0b8;
+		--border-light: rgba(23, 32, 51, 0.08);
+		--border-medium: rgba(23, 32, 51, 0.14);
+		--shadow-soft: 0 10px 30px rgba(23, 32, 51, 0.08);
+		--shadow-medium: 0 18px 48px rgba(23, 32, 51, 0.12);
+		--shadow-green: 0 10px 28px rgba(43, 166, 128, 0.24);
+		--radius: 14px;
+		--radius-lg: 18px;
+		--radius-xl: 28px;
+		--transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+		font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+		background: linear-gradient(180deg, #f8fafc 0%, #eff4f8 100%);
+		color: var(--text-primary);
+		width: 100%;
+		max-width: 100%;
+		min-height: 100vh;
+		overflow-x: hidden;
 	}
-	
+
 	.data-hub-wrapper,
 	.data-hub-wrapper *,
 	.data-hub-wrapper *::before,
 	.data-hub-wrapper *::after {
-		box-sizing: border-box; min-width: 0;
+		box-sizing: border-box;
 	}
-	
+
 	.data-hub-wrapper * {
-		margin: 0; padding: 0;
+		margin: 0;
+		padding: 0;
 	}
-	
-	.data-hub-wrapper {
-		font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; width: 100%; max-width: 100%; overflow-x: hidden; contain: layout;
-	}
-	
-	.data-hub-wrapper > * {
-		max-width: 100%; min-width: 0;
-	}
-	
+
 	.data-hub-wrapper img {
-		max-width: 100%; height: auto;
+		max-width: 100%;
+		height: auto;
 	}
-	
+
 	.dh-header {
-		background: var(--bg-glass-strong); backdrop-filter: blur(var(--blur-amount)); -webkit-backdrop-filter: blur(var(--blur-amount)); padding: 2rem; border-bottom: 1px solid var(--border-light); position: relative; width: 100%; max-width: 100%; overflow: hidden;
+		padding: 2rem;
+		background: var(--bg-glass-strong);
+		backdrop-filter: blur(18px);
+		-webkit-backdrop-filter: blur(18px);
+		border-bottom: 1px solid var(--border-light);
 	}
-	
+
 	.dh-header-content {
-		max-width: 1800px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: auto 1fr; gap: 2.5rem; align-items: center;
+		max-width: 1800px;
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: auto 1fr;
+		align-items: center;
+		gap: 2rem;
 	}
-	
+
 	.dh-logo {
-		display: flex; align-items: center; flex-shrink: 0;
+		display: flex;
+		align-items: center;
 	}
-	
+
 	.dh-logo-img {
-		width: auto !important; display: block;
+		display: block;
+		width: auto !important;
 	}
-	
-	.dh-logo-img.dh-logo-horizontal {
-		display: block !important; height: 3rem !important; max-width: 100%;
+
+	.dh-logo-horizontal {
+		height: 3rem !important;
 	}
-	
-	.dh-logo-img.dh-logo-vertical {
-		display: none !important; height: 6rem !important; max-width: 100%;
+
+	.dh-logo-vertical {
+		display: none !important;
+		height: 5.5rem !important;
 	}
-	
+
 	.dh-tagline {
-		font-size: 1.25rem; color: var(--text-secondary); font-weight: 400; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word;
+		font-size: 1.08rem;
+		line-height: 1.7;
+		color: var(--text-secondary);
+		max-width: 860px;
 	}
-	
-	.dh-mobile-help-btn {
-		display: none !important; width: 38px !important; height: 38px !important; border: 1px solid var(--accent-red) !important; background: var(--accent-red) !important; color: #fff !important; border-radius: var(--radius) !important; cursor: pointer; align-items: center; justify-content: center; transition: var(--transition); font-family: inherit !important; font-size: 1.1rem !important; font-weight: 700 !important; padding: 0 !important; flex-shrink: 0; line-height: 1;
+
+	.dh-mobile-shell {
+		display: none;
+		padding: 1rem 0.875rem 1.5rem;
 	}
-	
-	.dh-mobile-help-btn:hover,
-	.dh-mobile-help-btn:active,
-	.dh-mobile-help-btn:focus {
-		background: #a14338 !important; border-color: #a14338 !important; box-shadow: 0 4px 20px rgba(190, 82, 71, 0.35) !important; outline: none;
+
+	.dh-mobile-intro {
+		background: rgba(255, 255, 255, 0.9);
+		border: 1px solid var(--border-light);
+		border-radius: var(--radius-lg);
+		padding: 1.1rem 1rem;
+		box-shadow: var(--shadow-soft);
+		margin-bottom: 0.85rem;
 	}
-	
-	.dh-mobile-help-modal {
-		display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; z-index: 2147483646; background: rgba(26, 26, 46, 0.6); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); align-items: center; justify-content: center; padding: 1.5rem; font-family: 'Poppins', sans-serif;
+
+	.dh-mobile-intro h2 {
+		font-size: 1rem;
+		font-weight: 600;
+		margin-bottom: 0.35rem;
 	}
-	
-	.dh-mobile-help-modal.active {
-		display: flex !important;
+
+	.dh-mobile-intro p {
+		font-size: 0.88rem;
+		line-height: 1.6;
+		color: var(--text-secondary);
 	}
-	
-	.dh-mobile-help-card {
-		background: white; border-radius: var(--radius-lg); padding: 1.5rem 1.5rem 1.25rem 1.5rem; max-width: 380px; width: 100%; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-	}
-	
-	.dh-mobile-help-card h3 {
-		font-size: 1.05rem; font-weight: 600; color: var(--text-primary); margin: 0 0 0.6rem 0;
-	}
-	
-	.dh-mobile-help-card p {
-		font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 1.1rem 0;
-	}
-	
-	.dh-mobile-help-close {
-		display: block; margin-left: auto; background: var(--accent-green) !important; color: #fff !important; border: none !important; font-family: inherit !important; font-size: 0.9rem !important; font-weight: 600 !important; padding: 0.5rem 1.25rem !important; border-radius: var(--radius) !important; cursor: pointer;
-	}
-	
-	.dh-mobile-help-close:hover {
-		background: #259473 !important;
-	}
-	
-	.dh-mobile-list {
-		display: none; padding: 0.625rem 0.875rem 1.5rem 0.875rem; width: 100%;
-	}
-	
+
 	.dh-mobile-list-items {
-		display: flex; flex-direction: column; gap: 0.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.55rem;
 	}
-	
+
 	.dh-mobile-list-item,
 	.dh-mobile-list-item:link,
 	.dh-mobile-list-item:visited {
-		display: flex !important; align-items: center; gap: 0.85rem; background: var(--bg-primary) !important; border: 1px solid var(--border-light); border-radius: var(--radius); padding: 0.85rem 1rem; text-decoration: none !important; color: var(--text-primary) !important; transition: var(--transition); box-shadow: var(--shadow-soft);
+		display: flex !important;
+		align-items: center;
+		gap: 0.8rem;
+		width: 100%;
+		background: var(--bg-primary) !important;
+		border: 1px solid var(--border-light);
+		border-radius: var(--radius);
+		padding: 0.85rem 0.95rem;
+		text-decoration: none !important;
+		color: var(--text-primary) !important;
+		box-shadow: var(--shadow-soft);
+		transition: var(--transition);
+		cursor: pointer;
+		font-family: inherit;
 	}
-	
+
 	.dh-mobile-list-item:hover,
-	.dh-mobile-list-item:active,
 	.dh-mobile-list-item:focus {
-		border-color: var(--accent-green) !important; background: var(--accent-green-light) !important; color: var(--accent-green) !important; outline: none;
+		transform: translateY(-1px);
+		border-color: rgba(43, 166, 128, 0.38);
+		box-shadow: var(--shadow-green);
+		outline: none;
 	}
-	
-	.dh-mobile-list-item img {
-		width: 38px; height: 38px; border-radius: 8px; background: #ffffff; padding: 4px; object-fit: contain; object-position: center; flex-shrink: 0;
+
+	.dh-mobile-list-item img,
+	.dh-mobile-list-item .dh-nav-thumb {
+		width: 40px;
+		height: 40px;
+		border-radius: 10px;
+		flex-shrink: 0;
 	}
-	
-	.dh-mobile-list-item .dh-mobile-list-text {
-		flex: 1 1 auto; font-size: 0.95rem; font-weight: 600; line-height: 1.3; color: inherit !important;
+
+	.dh-mobile-list-text {
+		flex: 1 1 auto;
+		font-size: 0.92rem;
+		font-weight: 600;
+		line-height: 1.35;
 	}
-	
-	.dh-mobile-list-item .dh-mobile-list-arrow {
-		color: var(--accent-green) !important; font-size: 1.2rem; flex-shrink: 0;
+
+	.dh-mobile-list-arrow {
+		font-size: 1.1rem;
+		color: var(--accent-green);
+		flex-shrink: 0;
 	}
-	
+
 	.dh-main {
-		display: flex; padding: 1.5rem; gap: 1.5rem; max-width: 1900px; margin: 0 auto; width: 100%; min-width: 0;
+		max-width: 1800px;
+		margin: 0 auto;
+		padding: 1.5rem;
+		display: grid;
+		grid-template-columns: minmax(280px, 320px) minmax(0, 1fr);
+		gap: 1.5rem;
+		width: 100%;
 	}
-	
+
+	.dh-sidebar {
+		background: var(--bg-glass-strong);
+		backdrop-filter: blur(18px);
+		-webkit-backdrop-filter: blur(18px);
+		border: 1px solid var(--border-light);
+		border-radius: var(--radius-xl);
+		box-shadow: var(--shadow-medium);
+		padding: 1.1rem;
+		align-self: start;
+		position: sticky;
+		top: 1.5rem;
+	}
+
+	.dh-sidebar-head {
+		padding: 0.45rem 0.45rem 0.95rem;
+		border-bottom: 1px solid var(--border-light);
+		margin-bottom: 0.9rem;
+	}
+
+	.dh-sidebar-eyebrow {
+		display: block;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--accent-red);
+		margin-bottom: 0.35rem;
+	}
+
+	.dh-sidebar-head h2 {
+		font-size: 1.05rem;
+		font-weight: 600;
+		line-height: 1.4;
+	}
+
+	.dh-sidebar-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.45rem;
+	}
+
+	.dh-nav-item {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		width: 100%;
+		padding: 0.72rem 0.8rem;
+		border: 1px solid transparent;
+		border-radius: var(--radius);
+		background: transparent;
+		cursor: pointer;
+		text-align: left;
+		transition: var(--transition);
+		font-family: inherit;
+		color: var(--text-primary);
+	}
+
+	.dh-nav-item:hover,
+	.dh-nav-item:focus {
+		background: rgba(255, 255, 255, 0.88);
+		border-color: rgba(43, 166, 128, 0.22);
+		outline: none;
+	}
+
+	.dh-nav-item.is-active {
+		background: linear-gradient(135deg, rgba(43, 166, 128, 0.16), rgba(43, 166, 128, 0.06));
+		border-color: rgba(43, 166, 128, 0.34);
+		box-shadow: inset 0 0 0 1px rgba(43, 166, 128, 0.08);
+	}
+
+	.dh-nav-thumb,
+	.dh-item-icon {
+		width: 42px !important;
+		height: 42px !important;
+		border-radius: 11px;
+		background: #ffffff;
+		padding: 5px !important;
+		flex-shrink: 0;
+		object-fit: contain !important;
+		object-position: center;
+		border: 1px solid rgba(23, 32, 51, 0.06);
+	}
+
+	.dh-nav-copy {
+		min-width: 0;
+		flex: 1 1 auto;
+	}
+
+	.dh-nav-copy strong {
+		display: block;
+		font-size: 0.92rem;
+		font-weight: 600;
+		line-height: 1.35;
+	}
+
+	.dh-nav-copy span {
+		display: block;
+		font-size: 0.76rem;
+		color: var(--text-secondary);
+		line-height: 1.4;
+		margin-top: 0.15rem;
+	}
+
 	.dh-viewer {
-		flex: 1 1 auto; display: flex; flex-direction: column; background: var(--bg-glass-strong); backdrop-filter: blur(var(--blur-amount)); -webkit-backdrop-filter: blur(var(--blur-amount)); border-radius: var(--radius-xl); border: 1px solid var(--border-light); box-shadow: var(--shadow-medium); overflow: hidden; min-width: 0; max-width: 100%;
+		display: flex;
+		flex-direction: column;
+		background: var(--bg-glass-strong);
+		backdrop-filter: blur(18px);
+		-webkit-backdrop-filter: blur(18px);
+		border: 1px solid var(--border-light);
+		border-radius: var(--radius-xl);
+		box-shadow: var(--shadow-medium);
+		overflow: hidden;
+		min-width: 0;
 	}
-	
+
 	.dh-viewer:fullscreen,
 	.dh-viewer:-webkit-full-screen {
-		border-radius: 0; background: var(--bg-primary); width: 100vw; height: 100vh;
-	}
-	
-	.dh-viewer:fullscreen .dh-iframe-wrap iframe,
-	.dh-viewer:-webkit-full-screen .dh-iframe-wrap iframe {
 		border-radius: 0;
+		width: 100vw;
+		height: 100vh;
+		background: var(--bg-primary);
 	}
-	
+
 	.dh-viewer-header {
-		display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; background: var(--bg-glass); border-bottom: 1px solid var(--border-light); flex-wrap: wrap; gap: 0.75rem; max-width: 100%; min-width: 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 0.8rem 1rem;
+		padding: 1rem 1.35rem;
+		background: rgba(255, 255, 255, 0.7);
+		border-bottom: 1px solid var(--border-light);
+		flex-wrap: wrap;
 	}
-	
+
 	.dh-report-info {
-		display: flex; align-items: center; gap: 1rem; min-width: 0; flex: 1 1 auto; position: relative; z-index: 100;
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		flex: 1 1 auto;
+		min-width: 0;
 	}
-	
+
+	.dh-active-copy {
+		min-width: 0;
+	}
+
+	.dh-active-label {
+		display: block;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.13em;
+		text-transform: uppercase;
+		color: var(--accent-red);
+		margin-bottom: 0.2rem;
+	}
+
+	.dh-active-title {
+		display: block;
+		font-size: 1.2rem;
+		font-weight: 600;
+		line-height: 1.35;
+		color: var(--text-primary);
+	}
+
+	.dh-nav-access {
+		display: none;
+		min-width: min(100%, 340px);
+	}
+
 	.dh-custom-select {
-		position: relative; user-select: none; max-width: 100%;
+		position: relative;
+		width: 100%;
 	}
-	
+
 	.dh-select-trigger {
 		list-style: none;
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.72rem 0.9rem;
+		background: #ffffff;
+		border: 1px solid var(--border-medium);
+		border-radius: var(--radius);
+		cursor: pointer;
+		box-shadow: var(--shadow-soft);
 	}
-	
+
 	.dh-select-trigger::-webkit-details-marker,
 	.dh-select-trigger::marker {
 		display: none;
 	}
-	
-	.dh-select-trigger {
-		display: flex; align-items: center; gap: 0.75rem; cursor: pointer; padding: 0.5rem; margin-left: -0.5rem; border-radius: var(--radius); transition: var(--transition); background: transparent; border: none; max-width: 100%; text-align: left;
-	}
-	
+
 	.dh-select-trigger:hover {
-		background: var(--bg-secondary);
+		border-color: rgba(43, 166, 128, 0.36);
 	}
-	
-	.dh-select-trigger:hover .dh-item-text {
-		color: var(--accent-green);
+
+	.dh-select-text {
+		flex: 1 1 auto;
+		font-size: 0.96rem;
+		font-weight: 600;
+		line-height: 1.3;
 	}
-	
-	.dh-item-icon {
-		width: 40px !important; height: 40px !important; border-radius: 8px; background: #ffffff !important; padding: 6px !important; box-shadow: none !important; border: none !important; object-fit: contain !important; object-position: center center !important; display: block; flex-shrink: 0;
-	}
-	
-	.dh-item-icon.dh-icon-empty {
-		display: none !important;
-	}
-	
-	.dh-item-text {
-		font-family: inherit; font-size: 1.25rem; font-weight: 600; color: var(--text-primary); white-space: nowrap; transition: color 0.2s; flex: 1 1 auto;
-	}
-	
+
 	.dh-chevron {
-		width: 20px; height: 20px; flex-shrink: 0; object-fit: contain; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		width: 18px;
+		height: 18px;
+		flex-shrink: 0;
+		transition: transform 0.25s ease;
 	}
-	
+
 	.dh-custom-select[open] .dh-chevron {
 		transform: rotate(180deg);
 	}
-	
+
 	.dh-select-options {
-		position: absolute; top: calc(100% + 5px); left: 0; width: max-content; min-width: 100%; max-width: 90vw; background: var(--bg-glass-strong); backdrop-filter: blur(var(--blur-amount)); -webkit-backdrop-filter: blur(var(--blur-amount)); border: 1px solid var(--border-light); border-radius: var(--radius-lg); box-shadow: var(--shadow-medium); max-height: 50vh; overflow-y: auto; padding: 0.5rem; display: flex; flex-direction: column; gap: 0.25rem; white-space: nowrap;
+		position: absolute;
+		top: calc(100% + 8px);
+		left: 0;
+		width: 100%;
+		max-height: min(70vh, 520px);
+		overflow-y: auto;
+		background: rgba(255, 255, 255, 0.97);
+		border: 1px solid var(--border-light);
+		border-radius: var(--radius-lg);
+		box-shadow: var(--shadow-medium);
+		padding: 0.45rem;
+		z-index: 40;
+		display: flex;
+		flex-direction: column;
+		gap: 0.28rem;
 	}
-	
+
 	.dh-option {
-		display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0.75rem; border-radius: var(--radius); cursor: pointer; transition: var(--transition);
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.62rem 0.72rem;
+		border-radius: var(--radius);
+		cursor: pointer;
+		transition: var(--transition);
 	}
-	
+
 	.dh-option:hover {
 		background: var(--bg-secondary);
 	}
-	
-	.dh-option.selected {
+
+	.dh-option.is-active {
 		background: var(--accent-green-light);
 	}
-	
+
 	.dh-option .dh-item-text {
-		font-size: 1rem; font-weight: 500;
+		font-size: 0.95rem;
+		font-weight: 600;
+		line-height: 1.35;
 	}
-	
-	.dh-option.selected .dh-item-text {
-		color: var(--accent-green); font-weight: 600;
-	}
-	
-	.dh-select-options::-webkit-scrollbar {
-		width: 6px;
-	}
-	
-	.dh-select-options::-webkit-scrollbar-track {
-		background: transparent;
-	}
-	
-	.dh-select-options::-webkit-scrollbar-thumb {
-		background: var(--border-medium); border-radius: 3px;
-	}
-	
-	.dh-select-options::-webkit-scrollbar-thumb:hover {
-		background: var(--text-muted);
-	}
-	
-	.dh-report-counter {
-		font-size: 0.8rem; color: var(--text-muted); background: var(--bg-secondary); padding: 0.3rem 0.75rem; border-radius: 50px; font-weight: 500; flex-shrink: 0; white-space: nowrap;
-	}
-	
+
 	.dh-nav-controls {
-		display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; flex-wrap: wrap;
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		flex-wrap: wrap;
 	}
-	
+
+	.dh-report-counter {
+		font-size: 0.8rem;
+		color: var(--text-muted);
+		background: rgba(255, 255, 255, 0.86);
+		padding: 0.4rem 0.8rem;
+		border-radius: 999px;
+		font-weight: 600;
+		white-space: nowrap;
+	}
+
 	.dh-nav-arrows {
-		display: flex; gap: 0.4rem;
+		display: flex;
+		gap: 0.45rem;
 	}
-	
+
 	.dh-arrow-btn {
-		width: 38px; height: 38px; border: 1px solid var(--border-light); background: var(--bg-primary); color: var(--text-primary); border-radius: var(--radius); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); font-size: 1rem; font-weight: 500; padding: 0; flex-shrink: 0;
+		width: 40px;
+		height: 40px;
+		border: 1px solid var(--border-light);
+		background: var(--bg-primary);
+		color: var(--text-primary);
+		border-radius: 12px;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1rem;
+		font-weight: 600;
+		transition: var(--transition);
+		padding: 0;
 	}
-	
+
 	.dh-arrow-btn:hover,
 	.dh-arrow-btn:focus {
-		background: var(--accent-green); color: white; border-color: var(--accent-green); box-shadow: var(--shadow-glow-green); outline: none;
+		background: var(--accent-green);
+		border-color: var(--accent-green);
+		color: #ffffff;
+		box-shadow: var(--shadow-green);
+		outline: none;
 	}
-	
+
 	.dh-fs-img {
-		width: 22px; height: 22px; object-fit: contain; transition: var(--transition);
+		width: 20px;
+		height: 20px;
+		object-fit: contain;
+		transition: var(--transition);
 	}
-	
+
 	.dh-arrow-btn:hover .dh-fs-img,
 	.dh-arrow-btn:focus .dh-fs-img {
 		filter: brightness(0) invert(1);
 	}
-	
+
 	.dh-help-btn {
-		background: var(--accent-red); color: white; border-color: var(--accent-red); font-weight: 700; font-size: 1.1rem;
+		background: var(--accent-red);
+		border-color: var(--accent-red);
+		color: #ffffff;
+		font-size: 1.05rem;
 	}
-	
+
 	.dh-help-btn:hover,
 	.dh-help-btn:focus {
-		background: #a14338; border-color: #a14338; box-shadow: 0 4px 20px rgba(190, 82, 71, 0.35);
+		background: #a14338;
+		border-color: #a14338;
+		box-shadow: 0 10px 28px rgba(190, 82, 71, 0.26);
 	}
-	
+
 	.dh-iframe-wrap {
-		position: relative; background: transparent; width: 100%; aspect-ratio: var(--dh-aspect-ratio); overflow: hidden;
+		position: relative;
+		width: 100%;
+		aspect-ratio: var(--dh-aspect-ratio);
+		overflow: hidden;
+		background: linear-gradient(180deg, #f8fbfc 0%, #edf5f5 100%);
 	}
-	
+
 	.dh-viewer:fullscreen .dh-iframe-wrap,
 	.dh-viewer:-webkit-full-screen .dh-iframe-wrap {
-		aspect-ratio: auto; flex: 1;
+		flex: 1;
+		aspect-ratio: auto;
 	}
-	
+
 	.dh-iframe-wrap iframe {
-		position: absolute; top: 0; left: 0; width: 100%; height: 100%; max-width: 100%; border: none; border-radius: 0 0 var(--radius-lg) var(--radius-lg); display: block; visibility: hidden;
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		border: none;
+		display: block;
+		visibility: hidden;
 	}
-	
+
 	.dh-iframe-wrap iframe.dh-frame-ready {
 		visibility: visible;
 	}
-	
+
 	.dh-loading {
-		position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg-glass-strong); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; border-radius: 0 0 var(--radius-lg) var(--radius-lg); z-index: 4;
+		position: absolute;
+		inset: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+		background: rgba(255, 255, 255, 0.82);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.2s ease;
+		z-index: 3;
 	}
-	
+
 	.dh-loading.active {
-		opacity: 1; pointer-events: auto;
+		opacity: 1;
+		pointer-events: auto;
 	}
-	
+
 	.dh-spinner {
-		width: 44px; height: 44px; border: 3px solid var(--border-light); border-top-color: var(--accent-green); border-radius: 50%; animation: dh-spin 0.8s linear infinite;
+		width: 42px;
+		height: 42px;
+		border-radius: 50%;
+		border: 3px solid rgba(23, 32, 51, 0.1);
+		border-top-color: var(--accent-green);
+		animation: dh-spin 0.8s linear infinite;
 	}
-	
+
 	.dh-loading span {
-		font-size: 0.9rem; color: var(--text-secondary); font-weight: 500;
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: var(--text-secondary);
 	}
-	
+
 	@keyframes dh-spin {
 		to {
 			transform: rotate(360deg);
 		}
 	}
-	
+
 	.dh-landing {
-		position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg-primary); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1.5rem; overflow: hidden; border-radius: 0 0 var(--radius-lg) var(--radius-lg); z-index: 5;
+		position: absolute;
+		inset: 0;
+		z-index: 4;
+		background:
+			radial-gradient(circle at top right, rgba(43, 166, 128, 0.16), transparent 24%),
+			radial-gradient(circle at top left, rgba(190, 82, 71, 0.14), transparent 28%),
+			linear-gradient(180deg, #fbfdff 0%, #eff5f8 100%);
+		overflow: auto;
+		padding: 1.4rem;
 	}
-	
+
 	.dh-landing.dh-hidden {
 		display: none !important;
 	}
-	
-	.dh-landing-callout {
-		position: absolute; top: 1rem; left: 1.25rem; display: flex; align-items: center; gap: 0.9rem; background: var(--accent-green); color: #ffffff; border-radius: var(--radius-lg); padding: 0.95rem 1.4rem 0.95rem 1.1rem; box-shadow: 0 8px 28px rgba(43, 166, 128, 0.45), 0 0 0 4px rgba(43, 166, 128, 0.18); max-width: calc(100% - 2.5rem); animation: dh-callout-pulse 2s ease-in-out infinite; z-index: 6;
+
+	.dh-landing-shell {
+		max-width: 1320px;
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.3fr);
+		gap: 1.1rem;
+		align-items: start;
+		min-height: 100%;
 	}
-	
-	.dh-landing-callout::before {
-		content: ''; position: absolute; top: -10px; left: 28px; width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 12px solid var(--accent-green);
+
+	.dh-landing-hero,
+	.dh-landing-card {
+		background: rgba(255, 255, 255, 0.86);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border: 1px solid rgba(255, 255, 255, 0.7);
+		box-shadow: var(--shadow-medium);
+		border-radius: 24px;
 	}
-	
-	@keyframes dh-callout-pulse {
-		0%,
-		100% {
-			box-shadow: 0 8px 28px rgba(43, 166, 128, 0.45), 0 0 0 4px rgba(43, 166, 128, 0.18);
-		}
-		50% {
-			box-shadow: 0 12px 36px rgba(43, 166, 128, 0.6), 0 0 0 10px rgba(43, 166, 128, 0.12);
-		}
+
+	.dh-landing-hero {
+		padding: 1.6rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
 	}
-	
-	.dh-landing-callout-arrow {
-		font-size: 2rem; line-height: 1; font-weight: 900; animation: dh-arrow-bounce 1.2s ease-in-out infinite; flex-shrink: 0; text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-	}
-	
-	@keyframes dh-arrow-bounce {
-		0%,
-		100% {
-			transform: translateY(0);
-		}
-		50% {
-			transform: translateY(-7px);
-		}
-	}
-	
-	.dh-landing-callout-text {
-		font-size: 1.05rem; font-weight: 600; line-height: 1.35; letter-spacing: 0.1px;
-	}
-	
-	.dh-landing-callout-text strong {
-		font-weight: 800; background: rgba(255, 255, 255, 0.22); padding: 1px 6px; border-radius: 4px; white-space: nowrap;
-	}
-	
-	.dh-landing-center {
-		display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1.25rem; max-width: 640px;
-	}
-	
+
 	.dh-landing-logo {
-		height: clamp(120px, 22vh, 220px); width: auto; display: block;
+		height: clamp(110px, 22vh, 200px);
+		width: auto;
 	}
-	
-	.dh-landing-divider {
-		width: 60px; height: 4px; background: var(--accent-red); border-radius: 2px;
+
+	.dh-landing-kicker {
+		display: inline-flex;
+		align-self: flex-start;
+		padding: 0.4rem 0.8rem;
+		border-radius: 999px;
+		background: var(--accent-green-light);
+		color: var(--accent-green);
+		font-size: 0.74rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
 	}
-	
-	.dh-landing-heading {
-		font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-weight: 700; color: var(--text-primary); line-height: 1.2; margin: 0;
+
+	.dh-landing-hero h2 {
+		font-size: clamp(1.45rem, 2vw, 2rem);
+		line-height: 1.2;
+		font-weight: 700;
 	}
-	
-	.dh-landing-sub {
-		font-size: clamp(0.92rem, 1.2vw, 1.05rem); color: var(--text-secondary); line-height: 1.55; margin: 0; max-width: 520px;
+
+	.dh-landing-hero p {
+		font-size: 0.97rem;
+		line-height: 1.7;
+		color: var(--text-secondary);
 	}
-	
-	.dh-info-panel {
-		background: var(--bg-glass-strong); backdrop-filter: blur(var(--blur-amount)); -webkit-backdrop-filter: blur(var(--blur-amount)); padding: 1.5rem 2rem; border-top: 1px solid var(--border-light); width: 100%; max-width: 100%; overflow: hidden;
+
+	.dh-landing-points {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.7rem;
 	}
-	
-	.dh-info-grid {
-		max-width: 1800px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25rem; width: 100%;
+
+	.dh-landing-point {
+		background: rgba(248, 250, 252, 0.92);
+		border: 1px solid var(--border-light);
+		border-radius: 16px;
+		padding: 0.9rem;
 	}
-	
-	.dh-info-card {
-		background: var(--bg-primary); padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border-light); transition: var(--transition); min-width: 0; max-width: 100%; overflow-wrap: break-word; word-wrap: break-word;
+
+	.dh-landing-point strong {
+		display: block;
+		font-size: 0.9rem;
+		font-weight: 600;
+		margin-bottom: 0.3rem;
 	}
-	
-	.dh-info-card:hover {
-		box-shadow: var(--shadow-soft); transform: translateY(-2px);
+
+	.dh-landing-point span {
+		font-size: 0.82rem;
+		line-height: 1.55;
+		color: var(--text-secondary);
 	}
-	
-	.dh-info-card h4 {
-		font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-red); margin-bottom: 0.5rem; font-weight: 600;
+
+	.dh-landing-content {
+		display: flex;
+		flex-direction: column;
+		gap: 0.9rem;
+		min-width: 0;
 	}
-	
-	.dh-info-card p {
-		font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; font-weight: 400;
+
+	.dh-section-controls {
+		display: flex;
+		align-items: center;
+		gap: 0.65rem;
+		padding: 0.15rem 0;
 	}
-	
+
+	.dh-section-scroll {
+		display: flex;
+		gap: 0.5rem;
+		overflow-x: auto;
+		scrollbar-width: none;
+		flex: 1 1 auto;
+	}
+
+	.dh-section-scroll::-webkit-scrollbar {
+		display: none;
+	}
+
+	.dh-section-pill {
+		border: 1px solid rgba(23, 32, 51, 0.1);
+		background: rgba(255, 255, 255, 0.82);
+		color: var(--text-secondary);
+		border-radius: 999px;
+		padding: 0.58rem 0.95rem;
+		font-size: 0.78rem;
+		font-weight: 600;
+		white-space: nowrap;
+		cursor: pointer;
+		transition: var(--transition);
+		font-family: inherit;
+	}
+
+	.dh-section-pill:hover,
+	.dh-section-pill:focus {
+		border-color: rgba(43, 166, 128, 0.34);
+		color: var(--accent-green);
+		outline: none;
+	}
+
+	.dh-section-pill.is-active {
+		background: var(--accent-green);
+		border-color: var(--accent-green);
+		color: #ffffff;
+		box-shadow: var(--shadow-green);
+	}
+
+	.dh-landing-card {
+		padding: 1.35rem 1.4rem;
+		min-height: 520px;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.dh-landing-card-head {
+		padding-bottom: 1rem;
+		border-bottom: 1px solid var(--border-light);
+		margin-bottom: 1rem;
+	}
+
+	.dh-section-eyebrow {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.36rem 0.7rem;
+		border-radius: 999px;
+		background: var(--accent-red-light);
+		color: var(--accent-red);
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		margin-bottom: 0.75rem;
+	}
+
+	.dh-section-title {
+		font-size: clamp(1.18rem, 1.8vw, 1.55rem);
+		line-height: 1.3;
+		font-weight: 700;
+	}
+
+	.dh-section-subtitle {
+		font-size: 0.92rem;
+		line-height: 1.6;
+		color: var(--text-secondary);
+		margin-top: 0.55rem;
+	}
+
+	.dh-section-body {
+		flex: 1 1 auto;
+		overflow-y: auto;
+		padding-right: 0.2rem;
+	}
+
+	.dh-section-body p,
+	.dh-section-body li {
+		font-size: 0.92rem;
+		line-height: 1.72;
+		color: var(--text-secondary);
+	}
+
+	.dh-section-body p + p,
+	.dh-section-body p + ul,
+	.dh-section-body ul + p,
+	.dh-section-body ul + ul {
+		margin-top: 0.95rem;
+	}
+
+	.dh-section-body ul {
+		padding-left: 1.15rem;
+	}
+
+	.dh-section-body li + li {
+		margin-top: 0.55rem;
+	}
+
+	.dh-agent-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.8rem;
+		margin-top: 1rem;
+	}
+
+	.dh-agent-card {
+		background: rgba(248, 250, 252, 0.9);
+		border: 1px solid var(--border-light);
+		border-radius: 16px;
+		padding: 0.95rem;
+	}
+
+	.dh-agent-card h4 {
+		font-size: 0.9rem;
+		font-weight: 700;
+		margin-bottom: 0.4rem;
+		color: var(--text-primary);
+	}
+
+	.dh-agent-card p {
+		font-size: 0.84rem;
+		line-height: 1.62;
+	}
+
+	.dh-resource-list {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.7rem;
+		list-style: none;
+		padding: 0;
+		margin-top: 0.9rem;
+	}
+
+	.dh-resource-list li {
+		background: rgba(248, 250, 252, 0.9);
+		border: 1px solid var(--border-light);
+		border-radius: 16px;
+		padding: 0.9rem;
+		font-size: 0.86rem;
+		line-height: 1.55;
+	}
+
+	.dh-resource-note {
+		display: inline-block;
+		margin-top: 0.25rem;
+		font-size: 0.72rem;
+		color: var(--accent-red);
+		font-weight: 600;
+	}
+
 	.dh-tour-backdrop {
-		display: none; position: fixed; inset: 0; z-index: 99990; background: transparent; cursor: pointer;
+		display: none;
+		position: fixed;
+		inset: 0;
+		z-index: 99990;
+		background: transparent;
+		cursor: pointer;
 	}
-	
+
 	.dh-tour-backdrop.active {
 		display: block;
 	}
-	
+
 	.dh-tour-spotlight {
-		display: none; position: fixed; z-index: 99991; border-radius: 12px; box-shadow: 0 0 0 9999px rgba(26, 26, 46, 0.78), 0 0 0 4px var(--accent-green), 0 0 24px rgba(43, 166, 128, 0.6); pointer-events: none; transition: top 0.35s cubic-bezier(0.4, 0, 0.2, 1), left 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1), height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+		display: none;
+		position: fixed;
+		z-index: 99991;
+		border-radius: 14px;
+		box-shadow: 0 0 0 9999px rgba(17, 24, 39, 0.72), 0 0 0 4px var(--accent-green), 0 0 28px rgba(43, 166, 128, 0.5);
+		pointer-events: none;
+		transition: top 0.3s ease, left 0.3s ease, width 0.3s ease, height 0.3s ease;
 	}
-	
+
 	.dh-tour-spotlight.active {
 		display: block;
 	}
-	
+
 	.dh-tour-tooltip {
-		display: none; position: fixed; z-index: 99992; max-width: 360px; background: white; border-radius: var(--radius-lg); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); padding: 1.25rem 1.5rem; font-family: 'Poppins', sans-serif; transition: top 0.35s cubic-bezier(0.4, 0, 0.2, 1), left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+		display: none;
+		position: fixed;
+		z-index: 99992;
+		max-width: 360px;
+		background: #ffffff;
+		border-radius: var(--radius-lg);
+		box-shadow: 0 16px 50px rgba(15, 23, 42, 0.26);
+		padding: 1.2rem 1.35rem;
+		transition: top 0.3s ease, left 0.3s ease;
 	}
-	
+
 	.dh-tour-tooltip.active {
 		display: block;
 	}
-	
-	.dh-tour-tooltip .dh-tour-step {
-		font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-green); font-weight: 700; margin-bottom: 0.4rem;
+
+	.dh-tour-step {
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.13em;
+		text-transform: uppercase;
+		color: var(--accent-green);
+		margin-bottom: 0.35rem;
 	}
-	
+
 	.dh-tour-tooltip h3 {
-		font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin: 0 0 0.5rem 0;
+		font-size: 1.06rem;
+		font-weight: 600;
+		margin-bottom: 0.45rem;
 	}
-	
+
 	.dh-tour-tooltip p {
-		font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin: 0 0 1rem 0;
+		font-size: 0.88rem;
+		line-height: 1.6;
+		color: var(--text-secondary);
+		margin-bottom: 1rem;
 	}
-	
+
 	.dh-tour-actions {
-		display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 0.5rem;
 	}
-	
+
 	.dh-tour-skip {
-		background: transparent; border: none; color: var(--text-muted); font-family: inherit; font-size: 0.8rem; font-weight: 500; cursor: pointer; padding: 0.4rem 0.5rem; border-radius: 6px; transition: var(--transition);
+		border: none;
+		background: transparent;
+		color: var(--text-muted);
+		font-size: 0.8rem;
+		font-weight: 600;
+		cursor: pointer;
+		padding: 0.35rem 0.5rem;
+		border-radius: 8px;
+		font-family: inherit;
 	}
-	
+
 	.dh-tour-skip:hover {
-		color: var(--accent-red); background: var(--accent-red-light);
+		background: var(--accent-red-light);
+		color: var(--accent-red);
 	}
-	
+
 	.dh-tour-nav {
-		display: flex; gap: 0.4rem;
+		display: flex;
+		gap: 0.4rem;
 	}
-	
+
 	.dh-tour-btn {
-		font-family: inherit !important; font-size: 0.85rem !important; font-weight: 600 !important; padding: 0.5rem 1.1rem !important; border-radius: var(--radius) !important; cursor: pointer !important; border: 1px solid var(--border-medium) !important; background: var(--bg-secondary) !important; color: var(--text-primary) !important; text-decoration: none !important; transition: background 0.2s ease, border-color 0.2s ease !important;
+		font-family: inherit !important;
+		font-size: 0.84rem !important;
+		font-weight: 600 !important;
+		padding: 0.55rem 1.05rem !important;
+		border-radius: 10px !important;
+		border: 1px solid var(--border-medium) !important;
+		background: var(--bg-secondary) !important;
+		color: var(--text-primary) !important;
+		cursor: pointer !important;
 	}
-	
-	.dh-tour-btn:hover:not(:disabled) {
-		background: var(--bg-primary) !important; border-color: var(--text-secondary) !important;
-	}
-	
+
 	.dh-tour-btn.primary {
-		background: #2BA680 !important; background-color: #2BA680 !important; color: #ffffff !important; border-color: #2BA680 !important;
+		background: var(--accent-green) !important;
+		border-color: var(--accent-green) !important;
+		color: #ffffff !important;
 	}
-	
-	.dh-tour-btn.primary:hover:not(:disabled) {
-		background: #259473 !important; background-color: #259473 !important; border-color: #259473 !important; color: #ffffff !important;
-	}
-	
+
 	.dh-tour-btn:disabled {
-		opacity: 0.4 !important; cursor: not-allowed !important;
+		opacity: 0.45 !important;
+		cursor: not-allowed !important;
 	}
-	
-	@media (max-width: 1200px) {
-		.dh-info-grid {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
+
+	@media (max-width: 1280px) {
+		.dh-landing-shell {
+			grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.2fr);
+		}
+
+		.dh-agent-grid,
+		.dh-resource-list {
+			grid-template-columns: 1fr;
 		}
 	}
-	
+
+	@media (max-width: 1180px) {
+		.dh-main {
+			grid-template-columns: 1fr;
+		}
+
+		.dh-sidebar {
+			display: none;
+		}
+
+		.dh-nav-access {
+			display: block;
+		}
+
+		.dh-active-copy {
+			display: none;
+		}
+
+		.dh-landing-shell {
+			grid-template-columns: 1fr;
+		}
+
+		.dh-landing-card {
+			min-height: 460px;
+		}
+	}
+
 	@media (max-width: 900px) {
 		.dh-header {
 			padding: 1.5rem;
 		}
+
 		.dh-header-content {
-			gap: 1.5rem;
+			gap: 1.4rem;
 		}
-		.dh-logo-img.dh-logo-horizontal {
+
+		.dh-logo-horizontal {
 			display: none !important;
 		}
-		.dh-logo-img.dh-logo-vertical {
-			display: block !important; height: 5.5rem !important;
-		}
-		.dh-main {
-			padding: 0.75rem;
-		}
-		.dh-info-panel {
-			padding: 1.25rem;
-		}
-	}
-	
-	@media (max-width: 600px) {
-		.dh-header {
-			padding: 0.625rem 0.875rem 0.625rem 0.875rem;
-		}
-		.dh-header-content {
-			grid-template-columns: 1fr auto; gap: 0.4rem 0.75rem; text-align: left; justify-items: stretch; align-items: center;
-		}
-		.dh-logo-img.dh-logo-horizontal {
-			display: block !important; height: 2.4rem !important;
-		}
-		.dh-logo-img.dh-logo-vertical {
-			display: none !important;
-		}
-		.dh-mobile-help-btn {
-			display: none !important;
-		}
-		.dh-tagline {
-			font-size: 0.85rem; text-align: left; grid-column: 1 / -1; line-height: 1.45;
-		}
-		.dh-main {
-			display: none !important;
-		}
-		.dh-mobile-list {
+
+		.dh-logo-vertical {
 			display: block !important;
 		}
-		.dh-info-grid {
-			grid-template-columns: 1fr;
-		}
-		.dh-info-panel {
-			padding: 1rem 0.875rem;
-		}
-		.dh-tour-tooltip {
-			max-width: calc(100vw - 2rem);
-		}
-	}
-	
-	@media (pointer: coarse) and (max-width: 1024px) {
-		.dh-header {
-			padding: 0.625rem 0.875rem 0.625rem 0.875rem;
-		}
-		.dh-header-content {
-			grid-template-columns: 1fr auto !important; gap: 0.4rem 0.75rem; text-align: left; justify-items: stretch; align-items: center;
-		}
-		.dh-logo-img.dh-logo-horizontal {
-			display: block !important; height: 2.4rem !important;
-		}
-		.dh-logo-img.dh-logo-vertical {
-			display: none !important;
-		}
-		.dh-mobile-help-btn {
-			display: none !important;
-		}
-		.dh-tagline {
-			font-size: 0.85rem; text-align: left; grid-column: 1 / -1; line-height: 1.45;
-		}
+
 		.dh-main {
-			display: none !important;
-		}
-		.dh-mobile-list {
-			display: block !important;
-		}
-		.dh-info-grid {
-			grid-template-columns: 1fr;
-		}
-		.dh-info-panel {
-			padding: 1rem 0.875rem;
-		}
-		.dh-tour-tooltip {
-			max-width: calc(100vw - 2rem);
-		}
-	}
-	
-	@media (max-width: 400px) {
-		.dh-header {
-			padding: 0.5rem 0.625rem;
-		}
-		.dh-logo-img.dh-logo-horizontal {
-			height: 2.1rem !important;
-		}
-		.dh-info-panel {
-			padding: 0.875rem 0.625rem;
+			padding: 1rem;
 		}
 	}
 
+	@media (max-width: 760px) {
+		.dh-header {
+			padding: 0.75rem 0.9rem;
+		}
+
+		.dh-header-content {
+			grid-template-columns: 1fr;
+			gap: 0.7rem;
+		}
+
+		.dh-logo-horizontal {
+			display: block !important;
+			height: 2.45rem !important;
+		}
+
+		.dh-logo-vertical {
+			display: none !important;
+		}
+
+		.dh-tagline {
+			font-size: 0.88rem;
+			line-height: 1.55;
+		}
+
+		.dh-main {
+			display: none;
+		}
+
+		.dh-mobile-shell {
+			display: block;
+		}
+
+		.dh-tour-tooltip {
+			max-width: calc(100vw - 1.25rem);
+		}
+	}
+
+	@media (max-width: 460px) {
+		.dh-header {
+			padding-inline: 0.7rem;
+		}
+
+		.dh-mobile-shell {
+			padding-inline: 0.7rem;
+		}
+
+		.dh-mobile-list-item {
+			padding-inline: 0.8rem;
+		}
+
+		.dh-mobile-list-item img,
+		.dh-mobile-list-item .dh-nav-thumb {
+			width: 36px;
+			height: 36px;
+		}
+	}
 </style>
-<div class="dh-tour-backdrop" id="dhTourBackdrop">
-	<br>
-</div>
-<div class="dh-tour-spotlight" id="dhTourSpotlight">
-	<br>
-</div>
+<div class="dh-tour-backdrop" id="dhTourBackdrop"></div>
+<div class="dh-tour-spotlight" id="dhTourSpotlight"></div>
 <div class="dh-tour-tooltip" id="dhTourTooltip">
 	<div class="dh-tour-step" id="dhTourStep">Step 1 of 5</div>
-
 	<h3 id="dhTourTitle">Title</h3>
-
 	<p id="dhTourBody">Body text.</p>
 	<div class="dh-tour-actions">
 		<button class="dh-tour-skip" id="dhTourSkip" type="button">Skip tour</button>
 		<div class="dh-tour-nav">
 			<button class="dh-tour-btn" id="dhTourBack" type="button">Back</button>
 			<button class="dh-tour-btn primary" id="dhTourNext" type="button">Next</button>
-		</div></div></div>
-<div class="dh-mobile-help-modal" id="dhMobileHelpModal">
-	<div class="dh-mobile-help-card">
-
-		<h3>About these dashboards</h3>
-
-		<p>These reports are best viewed on a larger screen. Tap any dashboard to open it directly in a new tab for the best mobile viewing experience.</p>
-		<button type="button" class="dh-mobile-help-close" id="dhMobileHelpClose">Got it</button>
-	</div></div>
+		</div>
+	</div>
+</div>
 <div class="data-hub-wrapper">
 	<header class="dh-header">
 		<div class="dh-header-content">
-			<div class="dh-logo"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-logo-img dh-logo-horizontal fr-fil fr-dib">&nbsp; <img src="https://media.lrsd.net/media/Default/frl/dh-logo-vert-fc-svg-2x.d681e083557.png" alt="Data Hub" class="dh-logo-img dh-logo-vertical fr-fic fr-dii"></div>
-			<button type="button" class="dh-mobile-help-btn" id="dhMobileHelpBtn" title="About these dashboards">?</button>
-
-			<p class="dh-tagline">We are committed to using data to inform decision-making, monitor progress, and share our story with the community.&nbsp;
-				<br>This involves a growth mindset and a solid grounding in data ethics, tools, and processes.</p>
+			<div class="dh-logo">
+				<img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-logo-img dh-logo-horizontal fr-fil fr-dib">
+				<img src="https://media.lrsd.net/media/Default/frl/dh-logo-vert-fc-svg-2x.d681e083557.png" alt="Data Hub" class="dh-logo-img dh-logo-vertical fr-fic fr-dii">
+			</div>
+			<p class="dh-tagline">We are committed to using data to inform decision-making, monitor progress, and share our story with the community.<br>This involves a growth mindset and a solid grounding in data ethics, tools, and processes.</p>
 		</div>
 	</header>
-	<div class="dh-mobile-list" id="dhMobileList">
-		<div class="dh-mobile-list-items" id="dhMobileListItems">
-			<br>
-		</div></div>
-	<div class="dh-main">
-		<main class="dh-viewer" id="dhViewer">
-			<div class="dh-viewer-header">
-				<div class="dh-report-info">
-					<details class="dh-custom-select" id="dhCustomSelect">
-						<summary class="dh-select-trigger" id="dhSelectTrigger"><img src="" class="dh-item-icon dh-icon-empty fr-fil fr-dib" id="dhActiveIcon" alt=""> <span class="dh-item-text" id="dhActiveText">Select a dashboard</span> &nbsp;<img src="https://media.lrsd.net/media/Default/frl/dropdown-arrow.23ae4383430.png" class="dh-chevron fr-fil fr-dib" alt="Dropdown Arrow"></summary>
-						<div class="dh-select-options" id="dhSelectOptions">
-							<br>
-						</div>
-					</details>
+	<div class="dh-mobile-shell">
+		<div class="dh-mobile-intro">
+			<h2>Explore the Data Hub</h2>
+			<p>Open the overview first for LRSD's data governance and AI story, or jump straight to any dashboard below.</p>
+		</div>
+		<div class="dh-mobile-list-items" id="dhMobileListItems"></div>
+		<section class="dh-landing" id="dhMobileOverview" style="position:static; inset:auto; margin-top:0.95rem; padding:0; background:none; overflow:visible;">
+			<div class="dh-landing-shell" style="grid-template-columns:1fr;">
+				<div class="dh-landing-hero">
+					<img class="dh-landing-logo fr-fil fr-dib" src="https://media.lrsd.net/media/Default/frl/data-hub-large-4x.0eeaab84125.png" alt="Data Hub">
+					<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
+					<h2>We Are All Data Stewards</h2>
+					<p>This overview brings together LRSD's approach to data governance, responsible AI use, and the work underway across the division.</p>
 				</div>
-				<div class="dh-nav-controls"><span class="dh-report-counter" id="dhCounter">Select a dashboard</span>
+				<div class="dh-landing-content">
+					<div class="dh-section-controls">
+						<button class="dh-arrow-btn" id="dhMobileSectionPrev" type="button" title="Previous section">&larr;</button>
+						<div class="dh-section-scroll" id="dhMobileSectionPills"></div>
+						<button class="dh-arrow-btn" id="dhMobileSectionNext" type="button" title="Next section">&rarr;</button>
+					</div>
+					<div class="dh-landing-card" style="min-height:0;">
+						<div class="dh-landing-card-head">
+							<div class="dh-section-eyebrow" id="dhMobileSectionEyebrow">Section 1 of 8</div>
+							<h3 class="dh-section-title" id="dhMobileSectionTitle">Section title</h3>
+							<p class="dh-section-subtitle" id="dhMobileSectionSubtitle">Section summary</p>
+						</div>
+						<div class="dh-section-body" id="dhMobileSectionBody"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<div class="dh-main">
+		<aside class="dh-sidebar" id="dhSidebar">
+			<div class="dh-sidebar-head">
+				<span class="dh-sidebar-eyebrow">Explore</span>
+				<h2>Overview + dashboards</h2>
+			</div>
+			<div class="dh-sidebar-list" id="dhSidebarList"></div>
+		</aside>
+		<main class="dh-viewer" id="dhViewer">
+			<div class="dh-viewer-header" id="dhViewerHeader">
+				<div class="dh-report-info">
+					<div class="dh-active-copy">
+						<span class="dh-active-label">Now viewing</span>
+						<span class="dh-active-title" id="dhActiveTitle">Data Governance &amp; AI Overview</span>
+					</div>
+					<div class="dh-nav-access" id="dhPrimaryNav">
+						<details class="dh-custom-select" id="dhCustomSelect">
+							<summary class="dh-select-trigger" id="dhSelectTrigger">
+								<img src="https://media.lrsd.net/media/Default/frl/data-hub-large-4x.0eeaab84125.png" class="dh-item-icon fr-fil fr-dib" id="dhActiveIcon" alt="">
+								<span class="dh-select-text" id="dhSelectText">Data Governance &amp; AI Overview</span>
+								<img src="https://media.lrsd.net/media/Default/frl/dropdown-arrow.23ae4383430.png" class="dh-chevron fr-fil fr-dib" alt="Dropdown Arrow">
+							</summary>
+							<div class="dh-select-options" id="dhSelectOptions"></div>
+						</details>
+					</div>
+				</div>
+				<div class="dh-nav-controls">
+					<span class="dh-report-counter" id="dhCounter">Section 1 / 8</span>
 					<div class="dh-nav-arrows">
-						<button class="dh-arrow-btn" id="dhPrev" title="Previous dashboard">&larr;</button>
-						<button class="dh-arrow-btn" id="dhNext" title="Next dashboard">&rarr;</button>
-						<button class="dh-arrow-btn" id="dhFullscreen" title="Toggle Fullscreen"><img src="https://media.lrsd.net/media/Default/frl/fullscreenicon.f13c4683422.png" alt="Fullscreen Icon" class="dh-fs-img fr-dib"></button>
+						<button class="dh-arrow-btn" id="dhPrev" type="button" title="Previous section">&larr;</button>
+						<button class="dh-arrow-btn" id="dhNext" type="button" title="Next section">&rarr;</button>
+						<button class="dh-arrow-btn" id="dhFullscreen" type="button" title="Toggle Fullscreen"><img src="https://media.lrsd.net/media/Default/frl/fullscreenicon.f13c4683422.png" alt="Fullscreen Icon" class="dh-fs-img fr-dib"></button>
 						<button class="dh-arrow-btn dh-help-btn" id="dhHelpBtn" type="button" title="Show tutorial">?</button>
-					</div></div></div>
+					</div>
+				</div>
+			</div>
 			<div class="dh-iframe-wrap" id="dhIframeWrap">
 				<iframe name="dhFrame" id="dhFrame" title="Power BI Report" allowfullscreen=""></iframe>
 				<div class="dh-loading" id="dhLoading">
-					<div class="dh-spinner">
-						<br>
-					</div><span>Loading Dashboard...</span></div>
+					<div class="dh-spinner"></div>
+					<span>Loading dashboard...</span>
+				</div>
 				<div class="dh-landing" id="dhLanding">
-					<div class="dh-landing-callout"><span class="dh-landing-callout-arrow">&uarr;</span> <span class="dh-landing-callout-text">Click <strong>&quot;Select a dashboard&quot;</strong> above to begin &mdash; and use that same menu anytime to switch between the 12 dashboards.</span></div>
-					<div class="dh-landing-center"><img class="dh-landing-logo fr-fil fr-dib" src="https://media.lrsd.net/media/Default/frl/data-hub-large-4x.0eeaab84125.png" alt="Data Hub">
-						<div class="dh-landing-divider">
-							<br>
+					<div class="dh-landing-shell">
+						<div class="dh-landing-hero">
+							<img class="dh-landing-logo fr-fil fr-dib" src="https://media.lrsd.net/media/Default/frl/data-hub-large-4x.0eeaab84125.png" alt="Data Hub">
+							<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
+							<h2>We Are All Data Stewards</h2>
+							<p>Explore LRSD's public-facing story about data stewardship, responsible AI use, the systems already in place, and the work that continues ahead.</p>
+							<div class="dh-landing-points">
+								<div class="dh-landing-point">
+									<strong>Shared responsibility</strong>
+									<span>Data governance is not just an IT function — it belongs to everyone who works with information in LRSD.</span>
+								</div>
+								<div class="dh-landing-point">
+									<strong>Responsible AI</strong>
+									<span>LRSD uses secure tools, clear governance, and human judgment to keep AI aligned with divisional values.</span>
+								</div>
+								<div class="dh-landing-point">
+									<strong>Built for LRSD</strong>
+									<span>Purpose-built AI agents are designed in-house for Manitoba curriculum, privacy requirements, and ethical safeguards.</span>
+								</div>
+								<div class="dh-landing-point">
+									<strong>Still evolving</strong>
+									<span>The division is continuing to improve systems, policy, literacy, and community engagement.</span>
+								</div>
+							</div>
 						</div>
-
-						<h2 class="dh-landing-heading">Welcome to the&nbsp;
-							<br>Louis Riel School Division Data Hub</h2>
-
-						<p class="dh-landing-sub">12 interactive dashboards, all in one place. Pick one from the dropdown menu stating &quot;Select a dashboard&quot; above to get started.</p>
-					</div></div></div>
+						<div class="dh-landing-content">
+							<div class="dh-section-controls">
+								<button class="dh-arrow-btn" id="dhSectionPrev" type="button" title="Previous section">&larr;</button>
+								<div class="dh-section-scroll" id="dhSectionPills"></div>
+								<button class="dh-arrow-btn" id="dhSectionNext" type="button" title="Next section">&rarr;</button>
+							</div>
+							<div class="dh-landing-card">
+								<div class="dh-landing-card-head">
+									<div class="dh-section-eyebrow" id="dhSectionEyebrow">Section 1 of 8</div>
+									<h3 class="dh-section-title" id="dhSectionTitle">Section title</h3>
+									<p class="dh-section-subtitle" id="dhSectionSubtitle">Section summary</p>
+								</div>
+								<div class="dh-section-body" id="dhSectionBody"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</main>
 	</div>
-	<section class="dh-info-panel">
-		<div class="dh-info-grid">
-			<div class="dh-info-card">
-
-				<h4>Data Informed</h4>
-
-				<p>Using evidence to make decisions with confidence.</p>
-			</div>
-			<div class="dh-info-card">
-
-				<h4>Data Ready</h4>
-
-				<p>Ensuring the right data is available in the right format at the right time.</p>
-			</div>
-			<div class="dh-info-card">
-
-				<h4>Data Efficacious</h4>
-
-				<p>Building the skills to understand and use data effectively.</p>
-			</div>
-			<div class="dh-info-card">
-
-				<h4>Data Stewards</h4>
-
-				<p>Using data ethically as a flashlight, not a hammer&mdash;to help, not harm.</p>
-			</div></div>
-	</section>
 </div>
 <script>
 	(function()
 	{
-		// Single source of truth for all dashboards
+		var LANDING_ITEM = {
+			title: 'Data Governance & AI Overview',
+			subtitle: 'Landing page',
+			icon: 'https://media.lrsd.net/media/Default/frl/data-hub-large-4x.0eeaab84125.png'
+		};
+
 		var DASHBOARDS = [
 		{
 			title: 'Learning Indicators',
@@ -761,36 +1309,91 @@
 			url: 'https://app.powerbi.com/view?r=eyJrIjoiM2EyNzZhZGQtMTQ5ZC00Mzc4LWEyMGMtZjM2NzE4OTBhYmVhIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
 		}];
 
-		var customSelect = document.getElementById('dhCustomSelect');
+		var LANDING_SECTIONS = [
+		{
+			title: 'We Are All Data Stewards',
+			summary: 'Improving accuracy, maintaining security, and using information ethically across LRSD.',
+			bodyHtml: '<p>Every day, LRSD works with information that matters enormously — student achievement, attendance, well-being, family records, and staff data. This information represents real people and real lives, and how we collect, protect, use, and share it reflects who we are as a school division.</p><p>Good data governance is not an IT matter. It is a shared responsibility that belongs to everyone — teachers, educational assistants, school leaders, support staff, and students alike. That is the idea at the heart of our work: We Are All Data Stewards.</p><p>To lead this work, LRSD has established a Data Governance Executive Committee — senior divisional leaders with clear accountability for how data is managed across the division — supported by a growing network of Data Advisors and Data Champions in schools. Our Data Governance Charter defines the principles, roles, and commitments that guide all of this. And our AI guidelines establish a clear framework for how artificial intelligence tools are used responsibly at LRSD, grounded in our values and in Manitoba\'s Freedom of Information and Protection of Privacy Act (FIPPA).</p>'
+		},
+		{
+			title: 'How LRSD Uses Data',
+			summary: 'Data informs decision-making, program evaluation, and understanding student needs.',
+			bodyHtml: '<p>Good decisions depend on good information. LRSD is a data-informed school division — data shapes how we allocate support, how we assess whether our programming is working, and how we understand what our students need.</p><p>We draw on many kinds of information: numbers, documents, observations, and student voice. We do not rely on any single source to tell the whole story. Good data practice means bringing different sources together, seeking the whole picture, and remembering that there is a person behind every piece of information.</p><p>LRSD is actively working to improve the quality and accessibility of our data — reducing our reliance on paper-based processes, centralizing information so it can be shared appropriately, and ensuring that what we collect is only what we actually need. Under FIPPA, staff access only the information relevant to their role. That principle — collect only what we need, protect it carefully, use it only for its purpose — guides everything we do.</p>'
+		},
+		{
+			title: 'How LRSD Uses Artificial Intelligence',
+			summary: 'AI is treated as a secure, optional support for professional judgment rather than a replacement for it.',
+			bodyHtml: '<p>LRSD\'s position on AI is not to resist it and not to rush it. We believe AI can genuinely support the work of educators and staff — reducing administrative burden, supporting planning and communication, and freeing up time for the work that only people can do.</p><p>We also believe that no AI tool replaces the relationship between a teacher and a student, or the professional expertise that educators bring to their work. AI is a tool to support good judgment, not substitute for it.</p><p>LRSD\'s only approved AI tool for any work involving student or staff data is Microsoft Copilot, accessed through our enterprise Microsoft 365 environment. Free, public AI tools — such as publicly available versions of ChatGPT or Google Gemini — are not approved for Division work. When information is entered into those tools, it leaves our secure environment.</p><p>Our enterprise Copilot operates within LRSD\'s own digital tenant: data stays with us and is not used to train external AI systems. Staff use of AI is optional, not required.</p>'
+		},
+		{
+			title: 'Our AI Agents',
+			summary: 'Purpose-built AI agents are designed in-house for LRSD\'s context, curriculum, privacy expectations, and ethical safeguards.',
+			bodyHtml: '<p>Beyond Copilot itself, LRSD has developed a set of purpose-built AI agents — tools configured to do one specific job, with LRSD\'s values, Manitoba curriculum expectations, privacy requirements, and ethical safeguards encoded directly into their design.</p><p>These are not generic tools imported from elsewhere. They are built in-house, for our context, our community, and our students. A shared design principle runs through all of them: rather than relying on policy documents or training to shape how people use AI, we encode our values and requirements into the tools themselves.</p><div class="dh-agent-grid"><div class="dh-agent-card"><h4>SPARK</h4><p>Strategic Partner for Amplifying Reflective Knowledge was built for school leaders so they can explore, question, and develop informed perspectives on AI before supporting staff and students.</p></div><div class="dh-agent-card"><h4>LEAP</h4><p>Language Education Assessment and Planning supports Student Services staff with consistent, high-quality, equity-centred planning for multilingual learners across the division.</p></div><div class="dh-agent-card"><h4>ATLAS</h4><p>Assisting Teachers with Lessons, Adaptations and Support helps teachers move from Manitoba learning outcomes to classroom-ready materials more efficiently while keeping professional judgment in their hands.</p></div><div class="dh-agent-card"><h4>CHALK</h4><p>Classroom Helper for Academic Learning and Knowledge supports students in Grades 7 through 12 by guiding thinking instead of giving answers, and includes a crisis support protocol directly in its design.</p></div><div class="dh-agent-card"><h4>CLARA</h4><p>Curriculum-Linked Assessment and Reporting Assistant helps teachers create outcome-aligned, strength-based, parent-friendly report card comments while preserving the teacher\'s voice, review, edits, and approval.</p></div></div><p>LRSD\'s integrated approach — building governance and AI strategy together, led from the leadership table, grounded in our own values — has been recognized by Microsoft, Google, Dell Canada, and C21 Canada. Dell and C21 selected LRSD as a national case study on responsible AI adoption in education.</p>'
+		},
+		{
+			title: 'Responsible Use Means Knowing When Not to Use AI',
+			summary: 'Judgment, relationships, and environmental responsibility still matter every time AI is considered.',
+			bodyHtml: '<p>Responsible AI use is not only about privacy and security — it is also about judgment. We ask whether using an AI tool genuinely serves our students and our work, or whether the human approach would simply be better. Not every task benefits from AI.</p><p>A thoughtful conversation, a teacher\'s direct observation, the relationship between an educator and a student — these have a value that no tool replicates.</p><p>Part of what LRSD is building, for staff and students alike, is the capacity to make these distinctions well. That means understanding what AI can and cannot do, thinking critically about its outputs, and recognizing that an AI-assisted result is only as good as the human judgment applied to it.</p><p>It also means being honest about environmental costs: AI systems consume real resources, and using them intentionally — for purposes that genuinely matter — is both a practical and an ethical responsibility. We ask whether a given use of AI saves more human time and energy than it expends. That question shapes which tools we build and how we encourage people to use them.</p><p>For students, these skills extend well beyond school. They are foundational to participating thoughtfully in a world where AI is woven into workplaces and institutions at every level. LRSD has a real opportunity — and a responsibility — to model and teach what that looks like.</p>'
+		},
+		{
+			title: 'What We\'ve Built',
+			summary: 'LRSD has already established governance, guidelines, awareness, and tools that many systems are only beginning to consider.',
+			bodyHtml: '<p>In the past year, LRSD has completed a division-wide data maturity assessment, formed the Data Governance Executive Committee, finalized comprehensive AI guidelines and distributed them to all staff, completed the Data Governance Charter, launched the “We Are All Data Stewards” awareness campaign, and deployed five purpose-built AI agents across the division.</p><p>A review of divisional policies and procedures is underway. Canada\'s federal government released a national AI strategy in June 2026; as of that date, only a small number of provincial ministries of education had published formal AI guidance for K–12 schools. LRSD has already built what many school divisions are only beginning to consider.</p>'
+		},
+		{
+			title: 'What\'s Still Ahead',
+			summary: 'The work continues through broader engagement, better systems, evolving guidance, stronger learning, and clearer community pathways.',
+			bodyHtml: '<p>We want to be clear: there is significant work still to do, and we are committed to doing it thoughtfully.</p><ul><li>Our data governance structure is in its early stages. The Executive Committee has provided foundational leadership, but broader voices — schools, families, students, and community members — have not yet been meaningfully included. Building those connections is part of what comes next, including growing a Data Champions Network in every school and department.</li><li>Our data itself is a work in progress. We are continuing to move away from paper-based processes, improve data quality and consistency, and build the shared systems that allow information to be used well across the division.</li><li>Our AI guidelines and policies will need to evolve as tools change, as research develops, and as our own experience teaches us more. We are committed to updating our frameworks as we learn and to communicating those changes openly.</li><li>We are also developing professional learning opportunities to support staff in building their data literacy and AI literacy — and working toward the resources and structures that will help teachers introduce these topics meaningfully in classrooms.</li><li>A process for community members to raise questions or concerns is in development. More information to come.</li></ul>'
+		},
+		{
+			title: 'Resources',
+			summary: 'Supporting documents, links, and reference material that accompany the public overview.',
+			bodyHtml: '<p>The following materials are identified in the public content package:</p><ul class="dh-resource-list"><li>Data Governance Charter</li><li>“We Are All Data Stewards” poster</li><li>AI Guidelines (full document)</li><li>Links to Board meeting discussions on Data Governance and AI</li><li>Link to C21 Use case</li><li>Link to Free Press article “Agents of Change”</li><li>FAQ document <span class="dh-resource-note">(to be developed)</span></li><li>Link to relevant policies</li><li>Bibliography of resources <span class="dh-resource-note">(to be developed)</span></li><li>Link to Canada’s AI Strategy</li></ul>'
+		}];
+
+		var sidebarList = document.getElementById('dhSidebarList');
 		var selectOptions = document.getElementById('dhSelectOptions');
 		var mobileListItems = document.getElementById('dhMobileListItems');
+		var customSelect = document.getElementById('dhCustomSelect');
+		var activeTitle = document.getElementById('dhActiveTitle');
 		var activeIcon = document.getElementById('dhActiveIcon');
-		var activeText = document.getElementById('dhActiveText');
+		var selectText = document.getElementById('dhSelectText');
 		var frame = document.getElementById('dhFrame');
+		var landing = document.getElementById('dhLanding');
 		var counter = document.getElementById('dhCounter');
 		var loading = document.getElementById('dhLoading');
 		var prevBtn = document.getElementById('dhPrev');
 		var nextBtn = document.getElementById('dhNext');
 		var fsBtn = document.getElementById('dhFullscreen');
-		var viewer = document.getElementById('dhViewer');
 		var helpBtn = document.getElementById('dhHelpBtn');
+		var viewer = document.getElementById('dhViewer');
 		var iframeWrap = document.getElementById('dhIframeWrap');
-		var mobileHelpBtn = document.getElementById('dhMobileHelpBtn');
-		var mobileHelpModal = document.getElementById('dhMobileHelpModal');
-		var mobileHelpClose = document.getElementById('dhMobileHelpClose');
-		var landing = document.getElementById('dhLanding');
+		var sectionPills = document.getElementById('dhSectionPills');
+		var sectionEyebrow = document.getElementById('dhSectionEyebrow');
+		var sectionTitle = document.getElementById('dhSectionTitle');
+		var sectionSubtitle = document.getElementById('dhSectionSubtitle');
+		var sectionBody = document.getElementById('dhSectionBody');
+		var desktopSectionPrev = document.getElementById('dhSectionPrev');
+		var desktopSectionNext = document.getElementById('dhSectionNext');
+		var mobileOverview = document.getElementById('dhMobileOverview');
+		var mobileSectionPills = document.getElementById('dhMobileSectionPills');
+		var mobileSectionEyebrow = document.getElementById('dhMobileSectionEyebrow');
+		var mobileSectionTitle = document.getElementById('dhMobileSectionTitle');
+		var mobileSectionSubtitle = document.getElementById('dhMobileSectionSubtitle');
+		var mobileSectionBody = document.getElementById('dhMobileSectionBody');
+		var mobileSectionPrev = document.getElementById('dhMobileSectionPrev');
+		var mobileSectionNext = document.getElementById('dhMobileSectionNext');
 
-		var currentIndex = -1;
-		var totalDashboards = DASHBOARDS.length;
-		var optionsElements = [];
+		var currentMode = 'landing';
+		var currentDashboardIndex = -1;
+		var currentSectionIndex = 0;
 
-		function escapeHtml(s)
+		function escapeHtml(value)
 		{
-			return s.replace(/[&<>"']/g, function(ch)
+			return String(value).replace(/[&<>"']/g, function(ch)
 			{
-				return (
-				{
-					'&': '&',
+				return ({
+					'&': '&amp;',
 					'<': '&lt;',
 					'>': '&gt;',
 					'"': '&quot;',
@@ -799,56 +1402,189 @@
 			});
 		}
 
-		function buildDashboardUI()
+		function buildNavMarkup(kind, index, title, subtitle, icon)
 		{
-			var optionsHtml = '';
-			var mobileHtml = '';
+			return '<button class="dh-nav-item" type="button" data-nav-kind="' + kind + '"' + (typeof index === 'number' ? ' data-index="' + index + '"' : '') + '><img src="' + icon + '" alt="" class="dh-nav-thumb fr-fil fr-dib"><span class="dh-nav-copy"><strong>' + escapeHtml(title) + '</strong><span>' + escapeHtml(subtitle) + '</span></span></button>';
+		}
 
-			DASHBOARDS.forEach(function(d, idx)
+		function buildOptionMarkup(kind, index, title, icon)
+		{
+			return '<div class="dh-option" data-nav-kind="' + kind + '"' + (typeof index === 'number' ? ' data-index="' + index + '"' : '') + '><img src="' + icon + '" alt="" class="dh-item-icon fr-fil fr-dib"><span class="dh-item-text">' + escapeHtml(title) + '</span></div>';
+		}
+
+		function buildMobileMarkup()
+		{
+			var html = '<button class="dh-mobile-list-item" type="button" id="dhMobileOverviewBtn"><img src="' + LANDING_ITEM.icon + '" alt="" class="fr-fil fr-dib"><span class="dh-mobile-list-text">' + escapeHtml(LANDING_ITEM.title) + '</span><span class="dh-mobile-list-arrow">↓</span></button>';
+
+			DASHBOARDS.forEach(function(d)
 			{
-				optionsHtml +=
-					'<div class="dh-option" data-index="' + idx + '" data-url="' + d.url + '" data-title="' + escapeHtml(d.title) + '">' +
-					'<img src="' + d.icon + '" class="dh-item-icon fr-fil fr-dib" alt="">' +
-					'<span class="dh-item-text">' + escapeHtml(d.title) + '</span>' +
-					'</div>';
-
-				mobileHtml +=
-					'<a class="dh-mobile-list-item" href="' + d.url + '" target="_blank" rel="noopener">' +
-					'<img src="' + d.icon + '" alt="" class="fr-fil fr-dib">' +
-					'<span class="dh-mobile-list-text">' + escapeHtml(d.title) + '</span>' +
-					'<span class="dh-mobile-list-arrow">↗</span>' +
-					'</a>';
+				html += '<a class="dh-mobile-list-item" href="' + d.url + '" target="_blank" rel="noopener"><img src="' + d.icon + '" alt="" class="fr-fil fr-dib"><span class="dh-mobile-list-text">' + escapeHtml(d.title) + '</span><span class="dh-mobile-list-arrow">↗</span></a>';
 			});
 
+			return html;
+		}
+
+		function buildNavigation()
+		{
+			var sidebarHtml = buildNavMarkup('landing', null, LANDING_ITEM.title, LANDING_ITEM.subtitle, LANDING_ITEM.icon);
+			var optionsHtml = buildOptionMarkup('landing', null, LANDING_ITEM.title, LANDING_ITEM.icon);
+
+			DASHBOARDS.forEach(function(d, index)
+			{
+				sidebarHtml += buildNavMarkup('dashboard', index, d.title, 'Open in the viewer', d.icon);
+				optionsHtml += buildOptionMarkup('dashboard', index, d.title, d.icon);
+			});
+
+			sidebarList.innerHTML = sidebarHtml;
 			selectOptions.innerHTML = optionsHtml;
-			mobileListItems.innerHTML = mobileHtml;
-			optionsElements = Array.prototype.slice.call(document.querySelectorAll('.dh-option'));
+			mobileListItems.innerHTML = buildMobileMarkup();
 		}
 
-		frame.removeAttribute('src');
-		frame.classList.remove('dh-frame-ready');
-
-		buildDashboardUI();
-
-		if (mobileHelpModal && mobileHelpModal.parentNode !== document.body)
+		function buildSectionPills(container, mobile)
 		{
-			document.body.appendChild(mobileHelpModal);
+			var html = '';
+
+			LANDING_SECTIONS.forEach(function(section, index)
+			{
+				html += '<button class="dh-section-pill' + (index === currentSectionIndex ? ' is-active' : '') + '" type="button" data-section-index="' + index + '"' + (mobile ? ' data-mobile-section="true"' : '') + '>' + escapeHtml(section.title) + '</button>';
+			});
+
+			container.innerHTML = html;
 		}
 
-		if (mobileHelpBtn && mobileHelpModal && mobileHelpClose)
+		function renderCurrentSection()
 		{
-			mobileHelpBtn.addEventListener('click', function(e)
+			var section = LANDING_SECTIONS[currentSectionIndex];
+			var eyebrowText = 'Section ' + (currentSectionIndex + 1) + ' of ' + LANDING_SECTIONS.length;
+
+			buildSectionPills(sectionPills, false);
+			buildSectionPills(mobileSectionPills, true);
+
+			sectionEyebrow.textContent = eyebrowText;
+			sectionTitle.textContent = section.title;
+			sectionSubtitle.textContent = section.summary;
+			sectionBody.innerHTML = section.bodyHtml;
+
+			mobileSectionEyebrow.textContent = eyebrowText;
+			mobileSectionTitle.textContent = section.title;
+			mobileSectionSubtitle.textContent = section.summary;
+			mobileSectionBody.innerHTML = section.bodyHtml;
+
+			updateChrome();
+		}
+
+		function syncNavigationState()
+		{
+			var itemSelector = '.dh-nav-item, .dh-option';
+			var activeKind = currentMode === 'landing' ? 'landing' : 'dashboard';
+			var activeIndex = currentMode === 'dashboard' ? String(currentDashboardIndex) : null;
+
+			Array.prototype.slice.call(document.querySelectorAll(itemSelector)).forEach(function(item)
 			{
-				e.preventDefault(); e.stopPropagation(); mobileHelpModal.classList.add('active');
+				var matchesKind = item.getAttribute('data-nav-kind') === activeKind;
+				var matchesIndex = activeKind === 'landing' || item.getAttribute('data-index') === activeIndex;
+				item.classList.toggle('is-active', matchesKind && matchesIndex);
 			});
-			mobileHelpClose.addEventListener('click', function(e)
+		}
+
+		function updateChrome()
+		{
+			if (currentMode === 'landing')
 			{
-				e.preventDefault(); e.stopPropagation(); mobileHelpModal.classList.remove('active');
-			});
-			mobileHelpModal.addEventListener('click', function(e)
+				activeTitle.textContent = LANDING_ITEM.title;
+				selectText.textContent = LANDING_ITEM.title;
+				activeIcon.setAttribute('src', LANDING_ITEM.icon);
+				counter.textContent = 'Section ' + (currentSectionIndex + 1) + ' / ' + LANDING_SECTIONS.length;
+				prevBtn.setAttribute('title', 'Previous section');
+				nextBtn.setAttribute('title', 'Next section');
+			}
+			else
 			{
-				if (e.target === mobileHelpModal) mobileHelpModal.classList.remove('active');
-			});
+				var dashboard = DASHBOARDS[currentDashboardIndex];
+
+				activeTitle.textContent = dashboard.title;
+				selectText.textContent = dashboard.title;
+				activeIcon.setAttribute('src', dashboard.icon);
+				counter.textContent = 'Dashboard ' + (currentDashboardIndex + 1) + ' / ' + DASHBOARDS.length;
+				prevBtn.setAttribute('title', 'Previous dashboard');
+				nextBtn.setAttribute('title', 'Next dashboard');
+			}
+
+			syncNavigationState();
+		}
+
+		function showLanding()
+		{
+			currentMode = 'landing';
+			landing.classList.remove('dh-hidden');
+			frame.classList.remove('dh-frame-ready');
+			frame.removeAttribute('src');
+			loading.classList.remove('active');
+			customSelect.removeAttribute('open');
+			updateChrome();
+		}
+
+		function loadDashboard(index)
+		{
+			if (index < 0 || index >= DASHBOARDS.length) return;
+
+			var dashboard = DASHBOARDS[index];
+			var currentSrc = frame.getAttribute('src');
+
+			currentMode = 'dashboard';
+			currentDashboardIndex = index;
+			landing.classList.add('dh-hidden');
+			frame.classList.remove('dh-frame-ready');
+			loading.classList.add('active');
+			frame.setAttribute('title', dashboard.title + ' dashboard');
+
+			if (currentSrc !== dashboard.url)
+			{
+				frame.setAttribute('src', dashboard.url);
+			}
+			else
+			{
+				window.setTimeout(function()
+				{
+					frame.classList.add('dh-frame-ready');
+					loading.classList.remove('active');
+				}, 120);
+			}
+
+			customSelect.removeAttribute('open');
+			updateChrome();
+		}
+
+		function goToItem(kind, index)
+		{
+			if (kind === 'landing') showLanding();
+			else loadDashboard(index);
+		}
+
+		function cyclePrev()
+		{
+			if (currentMode === 'landing')
+			{
+				currentSectionIndex = (currentSectionIndex - 1 + LANDING_SECTIONS.length) % LANDING_SECTIONS.length;
+				renderCurrentSection();
+			}
+			else
+			{
+				loadDashboard((currentDashboardIndex - 1 + DASHBOARDS.length) % DASHBOARDS.length);
+			}
+		}
+
+		function cycleNext()
+		{
+			if (currentMode === 'landing')
+			{
+				currentSectionIndex = (currentSectionIndex + 1) % LANDING_SECTIONS.length;
+				renderCurrentSection();
+			}
+			else
+			{
+				loadDashboard((currentDashboardIndex + 1) % DASHBOARDS.length);
+			}
 		}
 
 		function requestFullscreenSafe(el)
@@ -864,44 +1600,66 @@
 			{}
 		}
 
-		document.addEventListener('click', function(e)
+		function toggleFullscreen()
 		{
-			if (!customSelect.contains(e.target)) customSelect.removeAttribute('open');
+			var fsElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+
+			if (!fsElement) requestFullscreenSafe(viewer);
+			else if (document.exitFullscreen) document.exitFullscreen();
+			else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+			else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+			else if (document.msExitFullscreen) document.msExitFullscreen();
+		}
+
+		buildNavigation();
+		renderCurrentSection();
+		showLanding();
+
+		sidebarList.addEventListener('click', function(event)
+		{
+			var button = event.target.closest('.dh-nav-item');
+			if (!button) return;
+			goToItem(button.getAttribute('data-nav-kind'), button.hasAttribute('data-index') ? parseInt(button.getAttribute('data-index'), 10) : null);
 		});
 
-		function hideLanding()
+		selectOptions.addEventListener('click', function(event)
 		{
-			if (landing && !landing.classList.contains('dh-hidden')) landing.classList.add('dh-hidden');
-		}
+			var option = event.target.closest('.dh-option');
+			if (!option) return;
+			goToItem(option.getAttribute('data-nav-kind'), option.hasAttribute('data-index') ? parseInt(option.getAttribute('data-index'), 10) : null);
+		});
 
-		function loadDashboard(idx)
+		document.addEventListener('click', function(event)
 		{
-			if (idx < 0 || idx >= totalDashboards) return;
-			currentIndex = idx;
+			if (!customSelect.contains(event.target)) customSelect.removeAttribute('open');
+		});
 
-			var targetOption = optionsElements[idx];
-			var d = DASHBOARDS[idx];
-
-			optionsElements.forEach(function(opt)
-			{
-				opt.classList.remove('selected');
+		mobileListItems.addEventListener('click', function(event)
+		{
+			var overviewButton = event.target.closest('#dhMobileOverviewBtn');
+			if (!overviewButton) return;
+			event.preventDefault();
+			mobileOverview.scrollIntoView({
+				behavior: 'smooth',
+				block: 'start'
 			});
-			targetOption.classList.add('selected');
+		});
 
-			activeText.textContent = d.title;
-			activeIcon.src = d.icon;
-			activeIcon.classList.remove('dh-icon-empty');
+		document.addEventListener('click', function(event)
+		{
+			var pill = event.target.closest('.dh-section-pill');
+			if (!pill) return;
+			currentSectionIndex = parseInt(pill.getAttribute('data-section-index'), 10);
+			renderCurrentSection();
+		});
 
-			counter.textContent = (idx + 1) + ' / ' + totalDashboards;
-
-			frame.classList.remove('dh-frame-ready');
-			loading.classList.add('active');
-
-			if (frame.getAttribute('src') !== d.url) frame.setAttribute('src', d.url);
-
-			hideLanding();
-			customSelect.removeAttribute('open');
-		}
+		prevBtn.addEventListener('click', cyclePrev);
+		nextBtn.addEventListener('click', cycleNext);
+		desktopSectionPrev.addEventListener('click', cyclePrev);
+		desktopSectionNext.addEventListener('click', cycleNext);
+		mobileSectionPrev.addEventListener('click', cyclePrev);
+		mobileSectionNext.addEventListener('click', cycleNext);
+		fsBtn.addEventListener('click', toggleFullscreen);
 
 		frame.addEventListener('load', function()
 		{
@@ -911,54 +1669,15 @@
 			loading.classList.remove('active');
 		});
 
-		function nextDashboard()
+		document.addEventListener('keydown', function(event)
 		{
-			var newIdx = (currentIndex < 0) ? 0 : (currentIndex + 1) % totalDashboards;
-			loadDashboard(newIdx);
-		}
+			if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') return;
 
-		function prevDashboard()
-		{
-			var newIdx = (currentIndex < 0) ? (totalDashboards - 1) : (currentIndex - 1 + totalDashboards) % totalDashboards;
-			loadDashboard(newIdx);
-		}
-
-		function toggleFullscreen()
-		{
-			var fsElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
-			if (!fsElement) requestFullscreenSafe(viewer);
-			else
-			{
-				if (document.exitFullscreen) document.exitFullscreen();
-				else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-				else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
-				else if (document.msExitFullscreen) document.msExitFullscreen();
-			}
-		}
-
-		fsBtn.addEventListener('click', toggleFullscreen);
-
-		optionsElements.forEach(function(option)
-		{
-			option.addEventListener('click', function(e)
-			{
-				e.stopPropagation();
-				loadDashboard(parseInt(this.getAttribute('data-index'), 10));
-			});
+			if (event.key === 'ArrowLeft') cyclePrev();
+			if (event.key === 'ArrowRight') cycleNext();
+			if (event.key === 'f' || event.key === 'F') toggleFullscreen();
 		});
 
-		prevBtn.addEventListener('click', prevDashboard);
-		nextBtn.addEventListener('click', nextDashboard);
-
-		document.addEventListener('keydown', function(e)
-		{
-			if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-			if (e.key === 'ArrowLeft') prevDashboard();
-			if (e.key === 'ArrowRight') nextDashboard();
-			if (e.key === 'f' || e.key === 'F') toggleFullscreen();
-		});
-
-		// Spotlight tutorial
 		var tourBackdrop = document.getElementById('dhTourBackdrop');
 		var tourSpotlight = document.getElementById('dhTourSpotlight');
 		var tourTooltip = document.getElementById('dhTourTooltip');
@@ -968,37 +1687,36 @@
 		var tourSkip = document.getElementById('dhTourSkip');
 		var tourBack = document.getElementById('dhTourBack');
 		var tourNext = document.getElementById('dhTourNext');
-
 		var tourSteps = [
 		{
-			targetId: 'dhCustomSelect',
-			title: 'Choose a Dashboard',
-			body: 'Click here to open the menu and pick from any of the 12 available dashboards.'
+			targetId: 'dhViewerHeader',
+			title: 'Choose where to start',
+			body: 'Use the always-visible sidebar on wider screens, or the dropdown on narrower screens, to switch between the overview page and any dashboard.'
 		},
 		{
 			targetId: 'dhIframeWrap',
-			title: 'Explore the Dashboard',
-			body: 'This is your Power BI report. Many reports have multiple pages. Use the page navigation built into the report (typically in a sidebar on the left, but in some instances arrows at the bottom of the report) to switch between pages. You can also click directly on many charts, bars, or data points to filter and explore the underlying data in more specific detail. To reset the dashboard, click on the LRSD logo in the top left corner.',
-			tooltipPlacement: 'matchPrevTopCenterIframe'
+			title: 'Read or explore inside the viewer',
+			body: 'The overview content appears right in this viewer area, and every dashboard you choose loads here as well.'
 		},
 		{
-			targetId: 'dhPrev',
-			title: 'Switch Between Dashboards',
-			body: 'Use the left and right arrows to quickly jump to the previous or next dashboard. You can also use the ← and → keys on your keyboard.',
-			targetGroup: ['dhPrev', 'dhNext']
+			targetGroup: ['dhPrev', 'dhNext'],
+			title: 'Move through sections or dashboards',
+			body: 'The arrows change sections when you are on the overview page and switch dashboards when you are viewing reports.'
 		},
 		{
 			targetId: 'dhFullscreen',
-			title: 'Go Fullscreen',
-			body: 'Click here to expand the dashboard to fill your entire screen for a focused view. Press Esc or the F key to exit.'
+			title: 'Go fullscreen',
+			body: 'Use fullscreen for a more focused dashboard view. Press Esc or the F key to exit.'
 		},
 		{
 			targetId: 'dhHelpBtn',
-			title: 'Need Help Again?',
-			body: 'Click this Help button anytime to revisit this tour.'
+			title: 'Need the tour again?',
+			body: 'Use this help button anytime to revisit the quick tour.'
 		}];
 
-		var tourIndex = 0, tourActive = false, firstStepTooltipTop = null;
+		var tourIndex = 0;
+		var tourActive = false;
+		var firstTooltipTop = null;
 
 		function getCombinedRect(ids)
 		{
@@ -1006,21 +1724,21 @@
 			{
 				return document.getElementById(id).getBoundingClientRect();
 			});
-			var top = Math.min.apply(null, rects.map(function(r)
+			var top = Math.min.apply(null, rects.map(function(rect)
 			{
-				return r.top;
+				return rect.top;
 			}));
-			var left = Math.min.apply(null, rects.map(function(r)
+			var left = Math.min.apply(null, rects.map(function(rect)
 			{
-				return r.left;
+				return rect.left;
 			}));
-			var right = Math.max.apply(null, rects.map(function(r)
+			var right = Math.max.apply(null, rects.map(function(rect)
 			{
-				return r.right;
+				return rect.right;
 			}));
-			var bottom = Math.max.apply(null, rects.map(function(r)
+			var bottom = Math.max.apply(null, rects.map(function(rect)
 			{
-				return r.bottom;
+				return rect.bottom;
 			}));
 			return {
 				top: top,
@@ -1033,6 +1751,7 @@
 		function positionSpotlightAndTooltip()
 		{
 			if (!tourActive) return;
+
 			var step = tourSteps[tourIndex];
 			var ids = step.targetGroup || [step.targetId];
 			var rect = getCombinedRect(ids);
@@ -1044,52 +1763,53 @@
 			tourSpotlight.style.height = (rect.height + pad * 2) + 'px';
 
 			var tooltipRect = tourTooltip.getBoundingClientRect();
-			var tooltipH = tooltipRect.height || 200;
-			var tooltipW = tooltipRect.width || 340;
-			var gap = 16;
-			var topPos, leftPos;
+			var tooltipHeight = tooltipRect.height || 200;
+			var tooltipWidth = tooltipRect.width || 340;
+			var gap = 14;
+			var topPos;
+			var leftPos;
 
-			if (step.tooltipPlacement === 'matchPrevTopCenterIframe' && firstStepTooltipTop !== null)
+			if (tourIndex === 1 && firstTooltipTop !== null)
 			{
-				topPos = firstStepTooltipTop;
-				var iframeRect = iframeWrap.getBoundingClientRect();
-				leftPos = iframeRect.left + (iframeRect.width / 2) - (tooltipW / 2);
+				topPos = firstTooltipTop;
+				leftPos = iframeWrap.getBoundingClientRect().left + (iframeWrap.getBoundingClientRect().width / 2) - (tooltipWidth / 2);
 			}
 			else
 			{
 				topPos = rect.top + rect.height + pad + gap;
-				if (topPos + tooltipH > window.innerHeight - 10)
+				if (topPos + tooltipHeight > window.innerHeight - 10)
 				{
-					topPos = rect.top - pad - gap - tooltipH;
+					topPos = rect.top - tooltipHeight - pad - gap;
 					if (topPos < 10) topPos = 10;
 				}
-				leftPos = rect.left + (rect.width / 2) - (tooltipW / 2);
+				leftPos = rect.left + (rect.width / 2) - (tooltipWidth / 2);
 			}
 
 			if (leftPos < 10) leftPos = 10;
-			if (leftPos + tooltipW > window.innerWidth - 10) leftPos = window.innerWidth - tooltipW - 10;
+			if (leftPos + tooltipWidth > window.innerWidth - 10) leftPos = window.innerWidth - tooltipWidth - 10;
 
 			tourTooltip.style.top = topPos + 'px';
 			tourTooltip.style.left = leftPos + 'px';
-			if (tourIndex === 0) firstStepTooltipTop = topPos;
+
+			if (tourIndex === 0) firstTooltipTop = topPos;
 		}
 
-		function showStep(i)
+		function showStep(index)
 		{
-			tourIndex = i;
-			var step = tourSteps[i];
-			tourStep.textContent = 'Step ' + (i + 1) + ' of ' + tourSteps.length;
-			tourTitle.textContent = step.title;
-			tourBody.textContent = step.body;
-			tourBack.disabled = (i === 0);
-			tourNext.textContent = (i === tourSteps.length - 1) ? 'Finish' : 'Next';
-			requestAnimationFrame(positionSpotlightAndTooltip);
+			tourIndex = index;
+			tourStep.textContent = 'Step ' + (index + 1) + ' of ' + tourSteps.length;
+			tourTitle.textContent = tourSteps[index].title;
+			tourBody.textContent = tourSteps[index].body;
+			tourBack.disabled = (index === 0);
+			tourNext.textContent = index === tourSteps.length - 1 ? 'Finish' : 'Next';
+			window.requestAnimationFrame(positionSpotlightAndTooltip);
 		}
 
 		function startTour()
 		{
+			if (window.innerWidth <= 760) return;
 			tourActive = true;
-			firstStepTooltipTop = null;
+			firstTooltipTop = null;
 			tourBackdrop.classList.add('active');
 			tourSpotlight.classList.add('active');
 			tourTooltip.classList.add('active');
@@ -1117,16 +1837,15 @@
 			else endTour();
 		});
 
-		document.addEventListener('keydown', function(e)
+		document.addEventListener('keydown', function(event)
 		{
 			if (!tourActive) return;
-			if (e.key === 'Escape') endTour();
-			else if (e.key === 'ArrowRight') tourNext.click();
-			else if (e.key === 'ArrowLeft') tourBack.click();
+			if (event.key === 'Escape') endTour();
+			else if (event.key === 'ArrowRight') tourNext.click();
+			else if (event.key === 'ArrowLeft') tourBack.click();
 		});
 
 		window.addEventListener('resize', positionSpotlightAndTooltip);
 		window.addEventListener('scroll', positionSpotlightAndTooltip, true);
 	})();
-
 </script>
