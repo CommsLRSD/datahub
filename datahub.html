@@ -1648,6 +1648,7 @@
 
 		function getNavigationHref(kind, index)
 		{
+			if (kind !== 'landing' && kind !== 'dashboard') return '#dhLanding';
 			if (kind === 'dashboard' && typeof index === 'number' && DASHBOARDS[index])
 			{
 				return sanitizeUrl(DASHBOARDS[index].url);
@@ -1747,6 +1748,7 @@
 
 		function getOverviewArticleId(index)
 		{
+			if (typeof index !== 'number' || !isFinite(index)) return 'dh-overview-section-introduction';
 			return index === LANDING_INTRO_SECTION_INDEX ? 'dh-overview-section-introduction' : 'dh-overview-section-' + index;
 		}
 
@@ -1946,7 +1948,9 @@
 		// skipScroll is used on initial render so the intro state doesn't animate the landing panel.
 		function renderCurrentSection(skipScroll)
 		{
-			var currentSection = getCurrentLandingSection() || LANDING_INTRO_SECTION;
+			var currentSection = getCurrentLandingSection();
+			// Preserve the intro state if a malformed section index ever slips through.
+			if (!currentSection) currentSection = LANDING_INTRO_SECTION;
 			var eyebrowText = getCurrentSectionLabel();
 			var tagText = getCurrentSectionTagLabel();
 
