@@ -1,277 +1,673 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-	.data-hub-wrapper {
-		--dh-aspect-ratio: 16 / 9;
-		--dh-frame-height: 540px;
-		--dh-sidebar-height: var(--dh-frame-height);
-		--dh-viewer-height: 760px;
-		--dh-viewer-max-height: 95vh;
-		--dh-section-directory-offset: 2.7rem;
-		--dh-overview-card-min-height: 420px;
-		--accent-red: #be5247;
-		--accent-green: #2ba680;
-		--accent-red-light: rgba(190, 82, 71, 0.12);
-		--accent-green-light: rgba(43, 166, 128, 0.12);
-		--bg-primary: #ffffff;
-		--bg-secondary: #f5f7fb;
-		--bg-tertiary: #eef2f7;
-		--bg-glass: rgba(255, 255, 255, 0.72);
-		--bg-glass-strong: rgba(255, 255, 255, 0.92);
-		--text-primary: #172033;
-		--text-secondary: #5f6f86;
-		--text-muted: #8da0b8;
-		--border-light: rgba(23, 32, 51, 0.08);
-		--border-medium: rgba(23, 32, 51, 0.14);
-		--shadow-soft: 0 10px 30px rgba(23, 32, 51, 0.08);
-		--shadow-medium: 0 18px 48px rgba(23, 32, 51, 0.12);
-		--shadow-green: 0 10px 28px rgba(43, 166, 128, 0.24);
-		--radius: 14px;
-		--radius-lg: 18px;
-		--radius-xl: 28px;
-		--transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-		font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-		background: linear-gradient(180deg, #f8fafc 0%, #eff4f8 100%);
-		color: var(--text-primary);
-		width: 100%;
-		max-width: 100%;
-		min-height: 100vh;
-		overflow-x: hidden;
+	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'); .data-hub-wrapper {
+		--dh-aspect-ratio: 16 / 9.55; --accent-red: #BE5247; --accent-green: #2BA680; --accent-red-light: rgba(190, 82, 71, 0.1); --accent-green-light: rgba(43, 166, 128, 0.1); --bg-primary: #ffffff; --bg-secondary: #f8f9fa; --bg-glass: rgba(255, 255, 255, 0.75); --bg-glass-strong: rgba(255, 255, 255, 0.9); --text-primary: #1a1a2e; --text-secondary: #64748b; --text-muted: #94a3b8; --border-light: rgba(0, 0, 0, 0.06); --border-medium: rgba(0, 0, 0, 0.1); --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.06); --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.08); --shadow-glow-green: 0 4px 20px rgba(43, 166, 128, 0.25); --blur-amount: 20px; --radius: 12px; --radius-lg: 16px; --radius-xl: 20px; --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	}
-
+	
 	.data-hub-wrapper,
 	.data-hub-wrapper *,
 	.data-hub-wrapper *::before,
 	.data-hub-wrapper *::after {
-		box-sizing: border-box;
+		box-sizing: border-box; min-width: 0;
 	}
-
+	
 	.data-hub-wrapper * {
-		margin: 0;
-		padding: 0;
+		margin: 0; padding: 0;
 	}
-
+	
+	.data-hub-wrapper {
+		font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; width: 100%; max-width: 100%; overflow-x: hidden; contain: layout;
+	}
+	
+	.data-hub-wrapper > * {
+		max-width: 100%; min-width: 0;
+	}
+	
 	.data-hub-wrapper img {
-		max-width: 100%;
-		height: auto;
+		max-width: 100%; height: auto;
 	}
-
+	
 	.dh-header {
-		padding: 2rem;
-		background: var(--bg-glass-strong);
-		backdrop-filter: blur(18px);
-		-webkit-backdrop-filter: blur(18px);
-		border-bottom: 1px solid var(--border-light);
+		background: var(--bg-glass-strong); backdrop-filter: blur(var(--blur-amount)); -webkit-backdrop-filter: blur(var(--blur-amount)); padding: 2rem; border-bottom: 1px solid var(--border-light); position: relative; width: 100%; max-width: 100%; overflow: hidden;
 	}
-
+	
 	.dh-header-content {
-		max-width: 1800px;
-		margin: 0 auto;
-		display: grid;
-		grid-template-columns: auto 1fr;
-		align-items: center;
-		gap: 2rem;
+		max-width: 1800px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: auto 1fr; gap: 2.5rem; align-items: center;
 	}
-
+	
 	.dh-logo {
-		display: flex;
-		align-items: center;
+		display: flex; align-items: center; flex-shrink: 0;
 	}
-
+	
 	.dh-logo-img {
-		display: block;
-		width: auto !important;
+		width: auto !important; display: block;
 	}
-
-	.dh-logo-horizontal {
-		height: 3rem !important;
+	
+	.dh-logo-img.dh-logo-horizontal {
+		display: block !important; height: 3rem !important; max-width: 100%;
 	}
-
-	.dh-logo-vertical {
-		display: none !important;
-		height: 5.5rem !important;
+	
+	.dh-logo-img.dh-logo-vertical {
+		display: none !important; height: 6rem !important; max-width: 100%;
 	}
-
+	
 	.dh-tagline {
-		font-size: 1.08rem;
-		line-height: 1.7;
-		color: var(--text-secondary);
-		max-width: 860px;
+		font-size: 1.25rem; color: var(--text-secondary); font-weight: 400; line-height: 1.6; overflow-wrap: break-word; word-wrap: break-word;
 	}
-
-	.dh-mobile-shell {
-		display: none;
-		padding: 1rem 0.875rem 1.5rem;
+	
+	.dh-mobile-help-btn {
+		display: none !important; width: 38px !important; height: 38px !important; border: 1px solid var(--accent-red) !important; background: var(--accent-red) !important; color: #fff !important; border-radius: var(--radius) !important; cursor: pointer; align-items: center; justify-content: center; transition: var(--transition); font-family: inherit !important; font-size: 1.1rem !important; font-weight: 700 !important; padding: 0 !important; flex-shrink: 0; line-height: 1;
 	}
-
-	.dh-mobile-intro {
-		background: rgba(255, 255, 255, 0.9);
-		border: 1px solid var(--border-light);
-		border-radius: var(--radius-lg);
-		padding: 1.1rem 1rem;
-		box-shadow: var(--shadow-soft);
-		margin-bottom: 0.85rem;
+	
+	.dh-mobile-help-btn:hover,
+	.dh-mobile-help-btn:active,
+	.dh-mobile-help-btn:focus {
+		background: #a14338 !important; border-color: #a14338 !important; box-shadow: 0 4px 20px rgba(190, 82, 71, 0.35) !important; outline: none;
 	}
-
-	.dh-mobile-intro h2 {
-		font-size: 1rem;
-		font-weight: 600;
-		margin-bottom: 0.35rem;
+	
+	.dh-mobile-help-modal {
+		display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; z-index: 2147483646; background: rgba(26, 26, 46, 0.6); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); align-items: center; justify-content: center; padding: 1.5rem; font-family: 'Poppins', sans-serif;
 	}
-
-	.dh-mobile-intro p {
-		font-size: 0.88rem;
-		line-height: 1.6;
-		color: var(--text-secondary);
+	
+	.dh-mobile-help-modal.active {
+		display: flex !important;
 	}
-
+	
+	.dh-mobile-help-card {
+		background: white; border-radius: var(--radius-lg); padding: 1.5rem 1.5rem 1.25rem 1.5rem; max-width: 380px; width: 100%; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+	}
+	
+	.dh-mobile-help-card h3 {
+		font-size: 1.05rem; font-weight: 600; color: var(--text-primary); margin: 0 0 0.6rem 0;
+	}
+	
+	.dh-mobile-help-card p {
+		font-size: 0.9rem; color: var(--text-secondary); line-height: 1.55; margin: 0 0 1.1rem 0;
+	}
+	
+	.dh-mobile-help-close {
+		display: block; margin-left: auto; background: var(--accent-green) !important; color: #fff !important; border: none !important; font-family: inherit !important; font-size: 0.9rem !important; font-weight: 600 !important; padding: 0.5rem 1.25rem !important; border-radius: var(--radius) !important; cursor: pointer;
+	}
+	
+	.dh-mobile-help-close:hover {
+		background: #259473 !important;
+	}
+	
+	.dh-mobile-list {
+		display: none; padding: 0.625rem 0.875rem 1.5rem 0.875rem; width: 100%;
+	}
+	
 	.dh-mobile-list-items {
-		display: flex;
-		flex-direction: column;
-		gap: 0.55rem;
+		display: flex; flex-direction: column; gap: 0.5rem;
 	}
-
+	
 	.dh-mobile-list-item,
 	.dh-mobile-list-item:link,
 	.dh-mobile-list-item:visited {
-		display: flex !important;
-		align-items: center;
-		gap: 0.8rem;
-		width: 100%;
-		background: var(--bg-primary) !important;
-		border: 1px solid var(--border-light);
-		border-radius: var(--radius);
-		padding: 0.85rem 0.95rem;
-		text-decoration: none !important;
-		color: var(--text-primary) !important;
-		box-shadow: var(--shadow-soft);
-		transition: var(--transition);
-		cursor: pointer;
-		font-family: inherit;
+		display: flex !important; align-items: center; gap: 0.85rem; background: var(--bg-primary) !important; border: 1px solid var(--border-light); border-radius: var(--radius); padding: 0.85rem 1rem; text-decoration: none !important; color: var(--text-primary) !important; transition: var(--transition); box-shadow: var(--shadow-soft);
 	}
-
+	
 	.dh-mobile-list-item:hover,
+	.dh-mobile-list-item:active,
 	.dh-mobile-list-item:focus {
-		transform: translateY(-1px);
-		border-color: rgba(43, 166, 128, 0.38);
-		box-shadow: var(--shadow-green);
-		outline: none;
+		border-color: var(--accent-green) !important; background: var(--accent-green-light) !important; color: var(--accent-green) !important; outline: none;
 	}
-
-	.dh-mobile-list-item img,
-	.dh-mobile-list-item .dh-nav-thumb {
-		width: 40px;
-		height: 40px;
-		border-radius: 10px;
-		flex-shrink: 0;
+	
+	.dh-mobile-list-item img {
+		width: 38px; height: 38px; border-radius: 8px; background: #ffffff; padding: 4px; object-fit: contain; object-position: center; flex-shrink: 0;
 	}
-
-	.dh-mobile-list-text {
-		flex: 1 1 auto;
-		font-size: 0.92rem;
-		font-weight: 600;
-		line-height: 1.35;
+	
+	.dh-mobile-list-item .dh-mobile-list-text {
+		flex: 1 1 auto; font-size: 0.95rem; font-weight: 600; line-height: 1.3; color: inherit !important;
 	}
-
-	.dh-mobile-list-arrow {
-		font-size: 1.1rem;
+	
+	.dh-mobile-list-item .dh-mobile-list-arrow {
+		color: var(--accent-green) !important; font-size: 1.2rem; flex-shrink: 0;
+	}
+	
+	.dh-main {
+		display: flex; padding: 1.5rem; gap: 1.5rem; max-width: 1900px; margin: 0 auto; width: 100%; min-width: 0;
+	}
+	
+	.dh-viewer {
+		flex: 1 1 auto; display: flex; flex-direction: column; background: var(--bg-glass-strong); backdrop-filter: blur(var(--blur-amount)); -webkit-backdrop-filter: blur(var(--blur-amount)); border-radius: var(--radius-xl); border: 1px solid var(--border-light); box-shadow: var(--shadow-medium); overflow: hidden; min-width: 0; max-width: 100%;
+	}
+	
+	.dh-viewer:fullscreen,
+	.dh-viewer:-webkit-full-screen {
+		border-radius: 0; background: var(--bg-primary); width: 100vw; height: 100vh;
+	}
+	
+	.dh-viewer:fullscreen .dh-iframe-wrap iframe,
+	.dh-viewer:-webkit-full-screen .dh-iframe-wrap iframe {
+		border-radius: 0;
+	}
+	
+	.dh-viewer-header {
+		display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; background: var(--bg-glass); border-bottom: 1px solid var(--border-light); flex-wrap: wrap; gap: 0.75rem; max-width: 100%; min-width: 0;
+	}
+	
+	.dh-report-info {
+		display: flex; align-items: center; gap: 1rem; min-width: 0; flex: 1 1 auto; position: relative; z-index: 100;
+	}
+	
+	.dh-custom-select {
+		position: relative; user-select: none; max-width: 100%;
+	}
+	
+	.dh-select-trigger {
+		list-style: none;
+	}
+	
+	.dh-select-trigger::-webkit-details-marker,
+	.dh-select-trigger::marker {
+		display: none;
+	}
+	
+	.dh-select-trigger {
+		display: flex; align-items: center; gap: 0.75rem; cursor: pointer; padding: 0.5rem; margin-left: -0.5rem; border-radius: var(--radius); transition: var(--transition); background: transparent; border: none; max-width: 100%; text-align: left;
+	}
+	
+	.dh-select-trigger:hover {
+		background: var(--bg-secondary);
+	}
+	
+	.dh-select-trigger:hover .dh-item-text {
 		color: var(--accent-green);
-		flex-shrink: 0;
+	}
+	
+	.dh-item-icon {
+		width: 40px !important; height: 40px !important; border-radius: 8px; background: #ffffff !important; padding: 6px !important; box-shadow: none !important; border: none !important; object-fit: contain !important; object-position: center center !important; display: block; flex-shrink: 0;
+	}
+	
+	.dh-item-icon.dh-icon-empty {
+		display: none !important;
+	}
+	
+	.dh-item-text {
+		font-family: inherit; font-size: 1.25rem; font-weight: 600; color: var(--text-primary); white-space: nowrap; transition: color 0.2s; flex: 1 1 auto;
+	}
+	
+	.dh-chevron {
+		width: 20px; height: 20px; flex-shrink: 0; object-fit: contain; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+	
+	.dh-custom-select[open] .dh-chevron {
+		transform: rotate(180deg);
+	}
+	
+	.dh-select-options {
+		position: absolute; top: calc(100% + 5px); left: 0; width: max-content; min-width: 100%; max-width: 90vw; background: var(--bg-glass-strong); backdrop-filter: blur(var(--blur-amount)); -webkit-backdrop-filter: blur(var(--blur-amount)); border: 1px solid var(--border-light); border-radius: var(--radius-lg); box-shadow: var(--shadow-medium); max-height: 50vh; overflow-y: auto; padding: 0.5rem; display: flex; flex-direction: column; gap: 0.25rem; white-space: nowrap;
+	}
+	
+	.dh-option {
+		display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0.75rem; border-radius: var(--radius); cursor: pointer; transition: var(--transition);
+	}
+	
+	.dh-option:hover {
+		background: var(--bg-secondary);
+	}
+	
+	.dh-option.selected {
+		background: var(--accent-green-light);
+	}
+	
+	.dh-option .dh-item-text {
+		font-size: 1rem; font-weight: 500;
+	}
+	
+	.dh-option.selected .dh-item-text {
+		color: var(--accent-green); font-weight: 600;
+	}
+	
+	.dh-select-options::-webkit-scrollbar {
+		width: 6px;
+	}
+	
+	.dh-select-options::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	
+	.dh-select-options::-webkit-scrollbar-thumb {
+		background: var(--border-medium); border-radius: 3px;
+	}
+	
+	.dh-select-options::-webkit-scrollbar-thumb:hover {
+		background: var(--text-muted);
+	}
+	
+	.dh-report-counter {
+		font-size: 0.8rem; color: var(--text-muted); background: var(--bg-secondary); padding: 0.3rem 0.75rem; border-radius: 50px; font-weight: 500; flex-shrink: 0; white-space: nowrap;
+	}
+	
+	.dh-nav-controls {
+		display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; flex-wrap: wrap;
+	}
+	
+	.dh-nav-arrows {
+		display: flex; gap: 0.4rem;
+	}
+	
+	.dh-arrow-btn {
+		width: 38px; height: 38px; border: 1px solid var(--border-light); background: var(--bg-primary); color: var(--text-primary); border-radius: var(--radius); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); font-size: 1rem; font-weight: 500; padding: 0; flex-shrink: 0;
+	}
+	
+	.dh-arrow-btn:hover,
+	.dh-arrow-btn:focus {
+		background: var(--accent-green); color: white; border-color: var(--accent-green); box-shadow: var(--shadow-glow-green); outline: none;
+	}
+	
+	.dh-fs-img {
+		width: 22px; height: 22px; object-fit: contain; transition: var(--transition);
+	}
+	
+	.dh-arrow-btn:hover .dh-fs-img,
+	.dh-arrow-btn:focus .dh-fs-img {
+		filter: brightness(0) invert(1);
+	}
+	
+	.dh-help-btn {
+		background: var(--accent-red); color: white; border-color: var(--accent-red); font-weight: 700; font-size: 1.1rem;
+	}
+	
+	.dh-help-btn:hover,
+	.dh-help-btn:focus {
+		background: #a14338; border-color: #a14338; box-shadow: 0 4px 20px rgba(190, 82, 71, 0.35);
+	}
+	
+	.dh-iframe-wrap {
+		position: relative; background: transparent; width: 100%; aspect-ratio: var(--dh-aspect-ratio); overflow: hidden;
+	}
+	
+	.dh-viewer:fullscreen .dh-iframe-wrap,
+	.dh-viewer:-webkit-full-screen .dh-iframe-wrap {
+		aspect-ratio: auto; flex: 1;
+	}
+	
+	.dh-iframe-wrap iframe {
+		position: absolute; top: 0; left: 0; width: 100%; height: 100%; max-width: 100%; border: none; border-radius: 0 0 var(--radius-lg) var(--radius-lg); display: block; visibility: hidden;
+	}
+	
+	.dh-iframe-wrap iframe.dh-frame-ready {
+		visibility: visible;
+	}
+	
+	.dh-loading {
+		position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg-glass-strong); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; border-radius: 0 0 var(--radius-lg) var(--radius-lg); z-index: 4;
+	}
+	
+	.dh-loading.active {
+		opacity: 1; pointer-events: auto;
+	}
+	
+	.dh-spinner {
+		width: 44px; height: 44px; border: 3px solid var(--border-light); border-top-color: var(--accent-green); border-radius: 50%; animation: dh-spin 0.8s linear infinite;
+	}
+	
+	.dh-loading span {
+		font-size: 0.9rem; color: var(--text-secondary); font-weight: 500;
+	}
+	
+	@keyframes dh-spin {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+	
+	.dh-landing {
+		position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg-primary); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1.5rem; overflow: hidden; border-radius: 0 0 var(--radius-lg) var(--radius-lg); z-index: 5;
+	}
+	
+	.dh-landing.dh-hidden {
+		display: none !important;
+	}
+	
+	.dh-landing-callout {
+		position: absolute; top: 1rem; left: 1.25rem; display: flex; align-items: center; gap: 0.9rem; background: var(--accent-green); color: #ffffff; border-radius: var(--radius-lg); padding: 0.95rem 1.4rem 0.95rem 1.1rem; box-shadow: 0 8px 28px rgba(43, 166, 128, 0.45), 0 0 0 4px rgba(43, 166, 128, 0.18); max-width: calc(100% - 2.5rem); animation: dh-callout-pulse 2s ease-in-out infinite; z-index: 6;
+	}
+	
+	.dh-landing-callout::before {
+		content: ''; position: absolute; top: -10px; left: 28px; width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 12px solid var(--accent-green);
+	}
+	
+	@keyframes dh-callout-pulse {
+		0%,
+		100% {
+			box-shadow: 0 8px 28px rgba(43, 166, 128, 0.45), 0 0 0 4px rgba(43, 166, 128, 0.18);
+		}
+		50% {
+			box-shadow: 0 12px 36px rgba(43, 166, 128, 0.6), 0 0 0 10px rgba(43, 166, 128, 0.12);
+		}
+	}
+	
+	.dh-landing-callout-arrow {
+		font-size: 2rem; line-height: 1; font-weight: 900; animation: dh-arrow-bounce 1.2s ease-in-out infinite; flex-shrink: 0; text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+	}
+	
+	@keyframes dh-arrow-bounce {
+		0%,
+		100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-7px);
+		}
+	}
+	
+	.dh-landing-callout-text {
+		font-size: 1.05rem; font-weight: 600; line-height: 1.35; letter-spacing: 0.1px;
+	}
+	
+	.dh-landing-callout-text strong {
+		font-weight: 800; background: rgba(255, 255, 255, 0.22); padding: 1px 6px; border-radius: 4px; white-space: nowrap;
+	}
+	
+	.dh-landing-center {
+		display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1.25rem; max-width: 640px;
+	}
+	
+	.dh-landing-logo {
+		height: clamp(120px, 22vh, 220px); width: auto; display: block;
+	}
+	
+	.dh-landing-divider {
+		width: 60px; height: 4px; background: var(--accent-red); border-radius: 2px;
+	}
+	
+	.dh-landing-heading {
+		font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-weight: 700; color: var(--text-primary); line-height: 1.2; margin: 0;
+	}
+	
+	.dh-landing-sub {
+		font-size: clamp(0.92rem, 1.2vw, 1.05rem); color: var(--text-secondary); line-height: 1.55; margin: 0; max-width: 520px;
+	}
+	
+	.dh-info-panel {
+		background: var(--bg-glass-strong); backdrop-filter: blur(var(--blur-amount)); -webkit-backdrop-filter: blur(var(--blur-amount)); padding: 1.5rem 2rem; border-top: 1px solid var(--border-light); width: 100%; max-width: 100%; overflow: hidden;
+	}
+	
+	.dh-info-grid {
+		max-width: 1800px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25rem; width: 100%;
+	}
+	
+	.dh-info-card {
+		background: var(--bg-primary); padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border-light); transition: var(--transition); min-width: 0; max-width: 100%; overflow-wrap: break-word; word-wrap: break-word;
+	}
+	
+	.dh-info-card:hover {
+		box-shadow: var(--shadow-soft); transform: translateY(-2px);
+	}
+	
+	.dh-info-card h4 {
+		font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-red); margin-bottom: 0.5rem; font-weight: 600;
+	}
+	
+	.dh-info-card p {
+		font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; font-weight: 400;
+	}
+	
+	.dh-tour-backdrop {
+		display: none; position: fixed; inset: 0; z-index: 99990; background: transparent; cursor: pointer;
+	}
+	
+	.dh-tour-backdrop.active {
+		display: block;
+	}
+	
+	.dh-tour-spotlight {
+		display: none; position: fixed; z-index: 99991; border-radius: 12px; box-shadow: 0 0 0 9999px rgba(26, 26, 46, 0.78), 0 0 0 4px var(--accent-green), 0 0 24px rgba(43, 166, 128, 0.6); pointer-events: none; transition: top 0.35s cubic-bezier(0.4, 0, 0.2, 1), left 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1), height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+	
+	.dh-tour-spotlight.active {
+		display: block;
+	}
+	
+	.dh-tour-tooltip {
+		display: none; position: fixed; z-index: 99992; max-width: 360px; background: white; border-radius: var(--radius-lg); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); padding: 1.25rem 1.5rem; font-family: 'Poppins', sans-serif; transition: top 0.35s cubic-bezier(0.4, 0, 0.2, 1), left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+	
+	.dh-tour-tooltip.active {
+		display: block;
+	}
+	
+	.dh-tour-tooltip .dh-tour-step {
+		font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-green); font-weight: 700; margin-bottom: 0.4rem;
+	}
+	
+	.dh-tour-tooltip h3 {
+		font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin: 0 0 0.5rem 0;
+	}
+	
+	.dh-tour-tooltip p {
+		font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin: 0 0 1rem 0;
+	}
+	
+	.dh-tour-actions {
+		display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;
+	}
+	
+	.dh-tour-skip {
+		background: transparent; border: none; color: var(--text-muted); font-family: inherit; font-size: 0.8rem; font-weight: 500; cursor: pointer; padding: 0.4rem 0.5rem; border-radius: 6px; transition: var(--transition);
+	}
+	
+	.dh-tour-skip:hover {
+		color: var(--accent-red); background: var(--accent-red-light);
+	}
+	
+	.dh-tour-nav {
+		display: flex; gap: 0.4rem;
+	}
+	
+	.dh-tour-btn {
+		font-family: inherit !important; font-size: 0.85rem !important; font-weight: 600 !important; padding: 0.5rem 1.1rem !important; border-radius: var(--radius) !important; cursor: pointer !important; border: 1px solid var(--border-medium) !important; background: var(--bg-secondary) !important; color: var(--text-primary) !important; text-decoration: none !important; transition: background 0.2s ease, border-color 0.2s ease !important;
+	}
+	
+	.dh-tour-btn:hover:not(:disabled) {
+		background: var(--bg-primary) !important; border-color: var(--text-secondary) !important;
+	}
+	
+	.dh-tour-btn.primary {
+		background: #2BA680 !important; background-color: #2BA680 !important; color: #ffffff !important; border-color: #2BA680 !important;
+	}
+	
+	.dh-tour-btn.primary:hover:not(:disabled) {
+		background: #259473 !important; background-color: #259473 !important; border-color: #259473 !important; color: #ffffff !important;
+	}
+	
+	.dh-tour-btn:disabled {
+		opacity: 0.4 !important; cursor: not-allowed !important;
+	}
+	
+	@media (max-width: 1200px) {
+		.dh-info-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+	
+	@media (max-width: 900px) {
+		.dh-header {
+			padding: 1.5rem;
+		}
+		.dh-header-content {
+			gap: 1.5rem;
+		}
+		.dh-logo-img.dh-logo-horizontal {
+			display: none !important;
+		}
+		.dh-logo-img.dh-logo-vertical {
+			display: block !important; height: 5.5rem !important;
+		}
+		.dh-main {
+			padding: 0.75rem;
+		}
+		.dh-info-panel {
+			padding: 1.25rem;
+		}
+	}
+	
+	@media (max-width: 600px) {
+		.dh-header {
+			padding: 0.625rem 0.875rem 0.625rem 0.875rem;
+		}
+		.dh-header-content {
+			grid-template-columns: 1fr auto; gap: 0.4rem 0.75rem; text-align: left; justify-items: stretch; align-items: center;
+		}
+		.dh-logo-img.dh-logo-horizontal {
+			display: block !important; height: 2.4rem !important;
+		}
+		.dh-logo-img.dh-logo-vertical {
+			display: none !important;
+		}
+		.dh-mobile-help-btn {
+			display: none !important;
+		}
+		.dh-tagline {
+			font-size: 0.85rem; text-align: left; grid-column: 1 / -1; line-height: 1.45;
+		}
+		.dh-main {
+			display: none !important;
+		}
+		.dh-mobile-list {
+			display: block !important;
+		}
+		.dh-info-grid {
+			grid-template-columns: 1fr;
+		}
+		.dh-info-panel {
+			padding: 1rem 0.875rem;
+		}
+		.dh-tour-tooltip {
+			max-width: calc(100vw - 2rem);
+		}
+	}
+	
+	@media (pointer: coarse) and (max-width: 1024px) {
+		.dh-header {
+			padding: 0.625rem 0.875rem 0.625rem 0.875rem;
+		}
+		.dh-header-content {
+			grid-template-columns: 1fr auto !important; gap: 0.4rem 0.75rem; text-align: left; justify-items: stretch; align-items: center;
+		}
+		.dh-logo-img.dh-logo-horizontal {
+			display: block !important; height: 2.4rem !important;
+		}
+		.dh-logo-img.dh-logo-vertical {
+			display: none !important;
+		}
+		.dh-mobile-help-btn {
+			display: none !important;
+		}
+		.dh-tagline {
+			font-size: 0.85rem; text-align: left; grid-column: 1 / -1; line-height: 1.45;
+		}
+		.dh-main {
+			display: none !important;
+		}
+		.dh-mobile-list {
+			display: block !important;
+		}
+		.dh-info-grid {
+			grid-template-columns: 1fr;
+		}
+		.dh-info-panel {
+			padding: 1rem 0.875rem;
+		}
+		.dh-tour-tooltip {
+			max-width: calc(100vw - 2rem);
+		}
+	}
+	
+	@media (max-width: 400px) {
+		.dh-header {
+			padding: 0.5rem 0.625rem;
+		}
+		.dh-logo-img.dh-logo-horizontal {
+			height: 2.1rem !important;
+		}
+		.dh-info-panel {
+			padding: 0.875rem 0.625rem;
+		}
 	}
 
 	.dh-main {
-		max-width: 1900px;
-		margin: 0 auto;
+		display: block;
 		padding: 1.5rem;
-		display: grid;
-		grid-template-columns: minmax(220px, 248px) minmax(0, 1fr);
-		gap: 1rem;
-		align-items: start;
+		max-width: 2140px;
+		margin: 0 auto;
 		width: 100%;
+		min-width: 0;
+	}
+
+	.dh-viewer-body {
+		display: grid;
+		grid-template-columns: 240px minmax(0, 1fr);
+		gap: 1rem;
+		padding: 1rem 1rem 1rem 1.25rem;
+		align-items: stretch;
 	}
 
 	.dh-sidebar {
-		background: var(--bg-glass-strong);
-		backdrop-filter: blur(18px);
-		-webkit-backdrop-filter: blur(18px);
+		background: rgba(248, 250, 252, 0.96);
 		border: 1px solid var(--border-light);
-		border-radius: var(--radius-xl);
-		box-shadow: var(--shadow-medium);
-		padding: 0.75rem;
-		align-self: start;
-		position: sticky;
-		top: 1.5rem;
+		border-radius: var(--radius-lg);
+		padding: 0.9rem;
 		display: flex;
 		flex-direction: column;
-		gap: 0.55rem;
-		height: var(--dh-sidebar-height);
+		gap: 0.7rem;
 		overflow: hidden;
+		min-height: 100%;
 	}
 
 	.dh-sidebar-head {
-		padding: 0 0.15rem 0.45rem;
+		padding-bottom: 0.55rem;
 		border-bottom: 1px solid var(--border-light);
-		margin-bottom: 0;
 	}
 
 	.dh-sidebar-head h2 {
 		font-size: 0.82rem;
-		font-weight: 600;
-		line-height: 1.35;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--text-secondary);
 	}
 
 	.dh-sidebar-list {
 		display: flex;
 		flex-direction: column;
 		gap: 0.35rem;
-		min-height: 0;
 		overflow-y: auto;
-		padding-right: 0.2rem;
+		padding-right: 0.15rem;
 	}
 
-	.dh-nav-item {
+	.dh-nav-item,
+	.dh-nav-item:link,
+	.dh-nav-item:visited {
 		display: flex;
 		align-items: center;
-		gap: 0.6rem;
-		width: 100%;
-		padding: 0.52rem 0.58rem;
-		border: 1px solid transparent;
+		gap: 0.75rem;
+		padding: 0.6rem 0.7rem;
 		border-radius: var(--radius);
+		border: 1px solid transparent;
 		background: transparent;
 		cursor: pointer;
 		text-align: left;
+		text-decoration: none !important;
+		color: var(--text-primary) !important;
 		transition: var(--transition);
 		font-family: inherit;
-		color: var(--text-primary);
-		text-decoration: none;
 	}
 
 	.dh-nav-item:hover,
 	.dh-nav-item:focus {
-		background: rgba(255, 255, 255, 0.88);
-		border-color: rgba(43, 166, 128, 0.22);
+		background: var(--bg-primary);
+		border-color: rgba(43, 166, 128, 0.2);
 		outline: none;
 	}
 
-	.dh-nav-item.is-active {
-		background: linear-gradient(135deg, rgba(43, 166, 128, 0.16), rgba(43, 166, 128, 0.06));
-		border-color: rgba(43, 166, 128, 0.34);
-		box-shadow: inset 0 0 0 1px rgba(43, 166, 128, 0.08);
-	}
-
-	.dh-nav-thumb,
-	.dh-item-icon {
-		width: 34px !important;
-		height: 34px !important;
-		border-radius: 9px;
-		background: #ffffff;
-		padding: 4px !important;
-		flex-shrink: 0;
-		object-fit: contain !important;
-		object-position: center;
-		border: 1px solid rgba(23, 32, 51, 0.06);
+	.dh-nav-item.selected {
+		background: var(--accent-green-light);
+		border-color: rgba(43, 166, 128, 0.28);
 	}
 
 	.dh-nav-copy {
@@ -281,1104 +677,326 @@
 
 	.dh-nav-copy strong {
 		display: block;
-		font-size: 0.8rem;
-		font-weight: 600;
-		line-height: 1.3;
+		font-size: 0.88rem;
+		line-height: 1.35;
 	}
 
 	.dh-nav-copy span {
 		display: block;
-		font-size: 0.68rem;
+		margin-top: 0.12rem;
+		font-size: 0.74rem;
+		line-height: 1.4;
 		color: var(--text-secondary);
-		line-height: 1.35;
-		margin-top: 0.1rem;
 	}
 
 	.dh-viewer {
-		display: flex;
-		flex-direction: column;
-		background: var(--bg-glass-strong);
-		backdrop-filter: blur(18px);
-		-webkit-backdrop-filter: blur(18px);
-		border: 1px solid var(--border-light);
-		border-radius: var(--radius-xl);
-		box-shadow: var(--shadow-medium);
-		overflow: hidden;
-		min-width: 0;
-		height: var(--dh-viewer-height);
-		max-height: var(--dh-viewer-max-height);
-	}
-
-	.dh-viewer:fullscreen,
-	.dh-viewer:-webkit-full-screen {
-		border-radius: 0;
-		width: 100vw;
-		height: 100vh;
-		background: var(--bg-primary);
-	}
-
-	.dh-viewer-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		gap: 0.8rem 1rem;
-		padding: 0.9rem 1.2rem;
-		background: rgba(255, 255, 255, 0.7);
-		border-bottom: 1px solid var(--border-light);
-		flex-wrap: wrap;
-	}
-
-	.dh-report-info {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-		flex: 1 1 auto;
-		min-width: 0;
-	}
-
-	.dh-active-copy {
-		min-width: 0;
-	}
-
-	.dh-active-label {
-		display: block;
-		font-size: 0.72rem;
-		font-weight: 700;
-		letter-spacing: 0.13em;
-		text-transform: uppercase;
-		color: var(--accent-red);
-		margin-bottom: 0.2rem;
-	}
-
-	.dh-active-title {
-		display: block;
-		font-size: 1.2rem;
-		font-weight: 600;
-		line-height: 1.35;
-		color: var(--text-primary);
-	}
-
-	.dh-nav-access {
-		display: none;
-		min-width: min(100%, 340px);
-	}
-
-	.dh-custom-select {
-		position: relative;
-		width: 100%;
-	}
-
-	.dh-select-trigger {
-		list-style: none;
-		display: flex;
-		align-items: center;
-		gap: 0.75rem;
-		padding: 0.72rem 0.9rem;
-		background: #ffffff;
-		border: 1px solid var(--border-medium);
-		border-radius: var(--radius);
-		cursor: pointer;
-		box-shadow: var(--shadow-soft);
-	}
-
-	.dh-select-trigger::-webkit-details-marker,
-	.dh-select-trigger::marker {
-		display: none;
-	}
-
-	.dh-select-trigger:hover {
-		border-color: rgba(43, 166, 128, 0.36);
-	}
-
-	.dh-select-text {
-		flex: 1 1 auto;
-		font-size: 0.96rem;
-		font-weight: 600;
-		line-height: 1.3;
-	}
-
-	.dh-chevron {
-		width: 18px;
-		height: 18px;
-		flex-shrink: 0;
-		transition: transform 0.25s ease;
-	}
-
-	.dh-custom-select[open] .dh-chevron {
-		transform: rotate(180deg);
-	}
-
-	.dh-select-options {
-		position: absolute;
-		top: calc(100% + 8px);
-		left: 0;
-		width: 100%;
-		max-height: min(70vh, 520px);
-		overflow-y: auto;
-		background: rgba(255, 255, 255, 0.97);
-		border: 1px solid var(--border-light);
-		border-radius: var(--radius-lg);
-		box-shadow: var(--shadow-medium);
-		padding: 0.45rem;
-		z-index: 40;
-		display: flex;
-		flex-direction: column;
-		gap: 0.28rem;
-	}
-
-	.dh-option {
-		display: flex;
-		align-items: center;
-		gap: 0.75rem;
-		width: 100%;
-		padding: 0.62rem 0.72rem;
-		border: none;
-		border-radius: var(--radius);
-		background: transparent;
-		cursor: pointer;
-		transition: var(--transition);
-		font-family: inherit;
-		text-align: left;
-		color: var(--text-primary);
-		text-decoration: none;
-	}
-
-	.dh-option:hover,
-	.dh-option:focus {
-		background: var(--bg-secondary);
-		outline: none;
-	}
-
-	.dh-option.is-active {
-		background: var(--accent-green-light);
-	}
-
-	.dh-option .dh-item-text {
-		font-size: 0.95rem;
-		font-weight: 600;
-		line-height: 1.35;
-	}
-
-	.dh-nav-controls {
-		display: flex;
-		align-items: center;
-		gap: 0.75rem;
-		flex-wrap: wrap;
-	}
-
-	.dh-report-counter {
-		font-size: 0.8rem;
-		color: var(--text-muted);
-		background: rgba(255, 255, 255, 0.86);
-		padding: 0.4rem 0.8rem;
-		border-radius: 999px;
-		font-weight: 600;
-		white-space: nowrap;
-	}
-
-	.dh-nav-arrows {
-		display: flex;
-		gap: 0.45rem;
-	}
-
-	.dh-arrow-btn {
-		width: 40px;
-		height: 40px;
-		border: 1px solid var(--border-light);
-		background: var(--bg-primary);
-		color: var(--text-primary);
-		border-radius: 12px;
-		cursor: pointer;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 1rem;
-		font-weight: 600;
-		transition: var(--transition);
-		padding: 0;
-	}
-
-	.dh-arrow-btn:hover,
-	.dh-arrow-btn:focus {
-		background: var(--accent-green);
-		border-color: var(--accent-green);
-		color: #ffffff;
-		box-shadow: var(--shadow-green);
-		outline: none;
-	}
-
-	.dh-fs-img {
-		width: 20px;
-		height: 20px;
-		object-fit: contain;
-		transition: var(--transition);
-	}
-
-	.dh-arrow-btn:hover .dh-fs-img,
-	.dh-arrow-btn:focus .dh-fs-img {
-		filter: brightness(0) invert(1);
-	}
-
-	.dh-help-btn {
-		background: var(--accent-red);
-		border-color: var(--accent-red);
-		color: #ffffff;
-		font-size: 1.05rem;
-	}
-
-	.dh-help-btn:hover,
-	.dh-help-btn:focus {
-		background: #a14338;
-		border-color: #a14338;
-		box-shadow: 0 10px 28px rgba(190, 82, 71, 0.26);
+		max-width: 100%;
 	}
 
 	.dh-iframe-wrap {
-		position: relative;
-		width: 100%;
-		flex: 0 0 var(--dh-frame-height);
-		height: var(--dh-frame-height);
-		min-height: 0;
-		overflow: hidden;
 		background: linear-gradient(180deg, #f8fbfc 0%, #edf5f5 100%);
 	}
 
-	.dh-viewer:fullscreen .dh-iframe-wrap,
-	.dh-viewer:-webkit-full-screen .dh-iframe-wrap {
-		flex: 1;
-		height: auto;
+	.dh-mobile-overview {
+		margin-top: 0.85rem;
 	}
 
-	.dh-iframe-wrap iframe {
-		position: absolute;
-		inset: 0;
-		width: 100%;
-		height: 100%;
-		border: none;
-		display: block;
-		visibility: hidden;
+	.dh-mobile-overview-card {
+		background: var(--bg-glass-strong);
+		border: 1px solid var(--border-light);
+		border-radius: var(--radius-lg);
+		padding: 1rem;
+		box-shadow: var(--shadow-soft);
 	}
 
-	.dh-iframe-wrap iframe.dh-frame-ready {
-		visibility: visible;
-	}
-
-	.dh-loading {
-		position: absolute;
-		inset: 0;
+	.dh-mobile-overview-head,
+	.dh-overview-nav-head {
 		display: flex;
-		flex-direction: column;
 		align-items: center;
-		justify-content: center;
-		gap: 1rem;
-		background: rgba(255, 255, 255, 0.82);
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
-		opacity: 0;
-		pointer-events: none;
-		transition: opacity 0.2s ease;
-		z-index: 3;
+		justify-content: space-between;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+		margin-bottom: 0.9rem;
 	}
 
-	.dh-loading.active {
-		opacity: 1;
-		pointer-events: auto;
+	.dh-mobile-section-directory {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.45rem 0.9rem;
+		margin-bottom: 1rem;
 	}
 
-	.dh-spinner {
-		width: 42px;
-		height: 42px;
-		border-radius: 50%;
-		border: 3px solid rgba(23, 32, 51, 0.1);
-		border-top-color: var(--accent-green);
-		animation: dh-spin 0.8s linear infinite;
+	.dh-mobile-overview-copy {
+		margin-bottom: 0.9rem;
 	}
 
-	.dh-loading span {
-		font-size: 0.9rem;
-		font-weight: 600;
-		color: var(--text-secondary);
-	}
-
-	@keyframes dh-spin {
-		to {
-			transform: rotate(360deg);
-		}
+	.dh-mobile-section-controls {
+		margin-bottom: 0.9rem;
 	}
 
 	.dh-landing {
-		position: absolute;
-		inset: 0;
-		z-index: 4;
-		background:
-			radial-gradient(circle at top right, rgba(43, 166, 128, 0.16), transparent 24%),
-			radial-gradient(circle at top left, rgba(190, 82, 71, 0.14), transparent 28%),
-			linear-gradient(180deg, #fbfdff 0%, #eff5f8 100%);
-		overflow: auto;
-		padding: 1.4rem;
-	}
-
-	.dh-landing.dh-hidden {
-		display: none !important;
+		padding: 1.15rem;
 	}
 
 	.dh-landing-shell {
-		max-width: 1120px;
-		margin: 0 auto;
+		max-width: 100%;
+		margin: 0;
 		display: grid;
-		grid-template-columns: minmax(0, 1fr);
-		gap: 0.9rem;
-		align-items: start;
+		grid-template-columns: 260px minmax(0, 1fr);
+		gap: 1rem;
+		align-items: stretch;
 		min-height: 100%;
 	}
 
-	.dh-landing-card {
-		background: rgba(255, 255, 255, 0.86);
-		backdrop-filter: blur(16px);
-		-webkit-backdrop-filter: blur(16px);
-		border: 1px solid rgba(255, 255, 255, 0.7);
-		box-shadow: var(--shadow-medium);
-		border-radius: 24px;
+	.dh-overview-nav,
+	.dh-overview-panel {
+		background: rgba(255, 255, 255, 0.88);
+		border: 1px solid rgba(255, 255, 255, 0.72);
+		border-radius: var(--radius-lg);
+		box-shadow: var(--shadow-soft);
 	}
 
-	.dh-landing-kicker {
-		display: inline-flex;
-		align-self: flex-start;
-		padding: 0.4rem 0.8rem;
-		border-radius: 999px;
-		background: var(--accent-green-light);
-		color: var(--accent-green);
-		font-size: 0.74rem;
-		font-weight: 700;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-	}
-
-	.dh-landing-content {
+	.dh-overview-nav {
+		padding: 1rem;
 		display: flex;
 		flex-direction: column;
-		gap: 0.75rem;
-		min-width: 0;
 	}
 
-	.dh-overview-meta {
+	.dh-overview-panel {
+		padding: 1.15rem 1.25rem;
 		display: flex;
-		flex-wrap: wrap;
-		gap: 0.45rem;
-		align-items: flex-start;
-		margin-bottom: 0.95rem;
+		flex-direction: column;
 	}
 
-	.dh-overview-meta .dh-landing-kicker,
-	.dh-overview-meta .dh-section-eyebrow {
-		margin-bottom: 0;
+	.dh-overview-copy {
+		margin-bottom: 0.95rem;
 	}
 
 	.dh-section-directory {
 		display: flex;
-		flex-wrap: wrap;
-		gap: 0.4rem 1rem;
-		align-items: center;
-		margin-bottom: 1rem;
+		flex-direction: column;
+		gap: 0.4rem;
+		margin-bottom: 0;
 	}
 
-	.dh-section-link {
-		display: inline-flex;
-		align-items: center;
-		padding: 0;
-		border: none;
-		border-radius: 0;
+	.dh-section-link,
+	.dh-section-link:link,
+	.dh-section-link:visited {
+		display: block;
+		width: 100%;
+		padding: 0.72rem 0.8rem;
+		border-radius: var(--radius);
+		border: 1px solid transparent;
 		background: transparent;
-		color: var(--text-secondary);
-		cursor: pointer;
-		font-family: inherit;
-		text-align: left;
-		font-size: 0.84rem;
+		text-decoration: none !important;
+		color: var(--text-secondary) !important;
+		font-size: 0.86rem;
 		font-weight: 500;
-		line-height: 1.45;
-		text-decoration: none;
+		line-height: 1.42;
 		transition: var(--transition);
 	}
 
 	.dh-section-link:hover,
 	.dh-section-link:focus {
-		color: var(--accent-green);
+		background: rgba(248, 250, 252, 0.9);
+		border-color: rgba(43, 166, 128, 0.2);
+		color: var(--text-primary) !important;
 		outline: none;
 	}
 
 	.dh-section-link.is-active {
-		color: var(--text-primary);
-		font-weight: 700;
+		background: var(--bg-primary);
+		border-color: rgba(43, 166, 128, 0.3);
+		color: var(--text-primary) !important;
+		box-shadow: var(--shadow-soft);
 	}
 
 	.dh-section-link-title {
-		display: inline;
-		padding-bottom: 0.08rem;
-		border-bottom: 1px solid transparent;
-	}
-
-	.dh-section-link.is-active .dh-section-link-title {
-		border-bottom-color: rgba(43, 166, 128, 0.38);
-	}
-
-	.dh-section-controls {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 0.65rem;
-		padding: 0.15rem 0;
-		flex-wrap: wrap;
+		display: block;
 	}
 
 	.dh-section-status {
-		font-size: 0.8rem;
-		font-weight: 600;
-		color: var(--text-secondary);
-		background: rgba(255, 255, 255, 0.84);
-		border: 1px solid var(--border-light);
-		border-radius: 999px;
-		padding: 0.45rem 0.8rem;
-	}
-
-	.dh-section-scroll,
-	.dh-section-actions {
-		display: flex;
-		gap: 0.5rem;
-	}
-
-	.dh-landing-card {
-		padding: 1.25rem 1.3rem;
-		min-height: var(--dh-overview-card-min-height);
-		display: flex;
-		flex-direction: column;
-	}
-
-	.dh-overview-card .dh-section-controls {
-		padding: 0 0 1rem;
-		margin-bottom: 1rem;
-		border-bottom: 1px solid var(--border-light);
-	}
-
-	.dh-overview-card .dh-landing-card-head {
-		padding-bottom: 0.85rem;
-		margin-bottom: 0;
-		border-bottom: none;
-	}
-
-	.dh-landing-card-head {
-		padding-bottom: 1rem;
-		border-bottom: 1px solid var(--border-light);
-		margin-bottom: 1rem;
-	}
-
-	.dh-section-eyebrow {
-		display: inline-flex;
-		align-items: center;
-		padding: 0.36rem 0.7rem;
-		border-radius: 999px;
-		background: var(--accent-red-light);
-		color: var(--accent-red);
-		font-size: 0.72rem;
-		font-weight: 700;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		margin-bottom: 0.75rem;
-	}
-
-	.dh-section-title {
-		font-size: clamp(1.18rem, 1.8vw, 1.55rem);
-		line-height: 1.3;
-		font-weight: 700;
-	}
-
-	.dh-section-subtitle {
-		font-size: 0.92rem;
-		line-height: 1.6;
-		color: var(--text-secondary);
-		margin-top: 0.55rem;
+		background: rgba(248, 250, 252, 0.92);
 	}
 
 	.dh-section-body {
 		flex: 1 1 auto;
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
+		padding: 1.1rem 1.15rem;
+		border-radius: var(--radius-lg);
+		background: rgba(255, 255, 255, 0.92);
+		border: 1px solid var(--border-light);
 	}
 
-	#dhLanding .dh-landing-shell {
-		max-width: 1260px;
+	.dh-section-body a,
+	.dh-section-body a:link,
+	.dh-section-body a:visited {
+		color: var(--accent-green) !important;
+		text-decoration-color: rgba(43, 166, 128, 0.3);
 	}
 
-	#dhLanding .dh-overview-card {
-		display: grid;
-		grid-template-columns: minmax(220px, 240px) minmax(0, 1fr);
-		column-gap: 1.35rem;
-		row-gap: 0.95rem;
-		padding: 1.35rem;
-		align-items: start;
+	.dh-section-body a:hover,
+	.dh-section-body a:focus {
+		color: #259473 !important;
 	}
 
-	#dhLanding .dh-overview-meta,
-	#dhLanding .dh-landing-card-head,
-	#dhLanding .dh-section-controls,
-	#dhLanding .dh-section-body {
-		grid-column: 2;
-	}
-
-	#dhLanding .dh-overview-meta {
-		margin-bottom: 0;
-	}
-
-	#dhLanding .dh-section-directory {
-		grid-column: 1;
-		grid-row: 1 / span 4;
-		display: flex;
-		flex-direction: column;
-		flex-wrap: nowrap;
-		align-items: stretch;
-		gap: 0.35rem;
-		padding-right: 0.4rem;
-		margin-bottom: 0;
-		position: sticky;
-		top: 0;
-		max-height: calc(var(--dh-viewer-height) - var(--dh-section-directory-offset));
-		overflow-y: auto;
-	}
-
-	#dhLanding .dh-landing-card-head {
-		padding-bottom: 0.8rem;
-	}
-
-	#dhLanding .dh-overview-card .dh-section-controls {
-		padding: 0.1rem 0 0.95rem;
-		margin-bottom: 0;
-	}
-
-	#dhLanding .dh-section-link {
-		display: block;
-		width: 100%;
-		padding: 0.72rem 0.85rem;
-		border: 1px solid transparent;
-		border-radius: 14px;
-		background: rgba(245, 247, 251, 0.92);
-		font-size: 0.88rem;
-		line-height: 1.45;
-	}
-
-	#dhLanding .dh-section-link:hover,
-	#dhLanding .dh-section-link:focus {
-		background: #ffffff;
-		border-color: rgba(43, 166, 128, 0.28);
-	}
-
-	#dhLanding .dh-section-link.is-active {
-		background: rgba(255, 255, 255, 0.98);
-		border-color: rgba(43, 166, 128, 0.36);
-		box-shadow: var(--shadow-soft);
-	}
-
-	#dhLanding .dh-section-link-title {
-		display: block;
-		padding-bottom: 0;
-		border-bottom: none;
-	}
-
-	#dhLanding .dh-section-body {
-		gap: 0.9rem;
-	}
-
-	#dhLanding .dh-overview-section {
-		padding: 1.2rem 1.25rem;
-	}
-
-	#dhLanding .dh-overview-section-body {
-		max-width: 72ch;
-	}
-
-	#dhLanding .dh-agent-grid,
-	#dhLanding .dh-resource-list {
+	.dh-agent-grid,
+	.dh-resource-list {
 		grid-template-columns: 1fr;
 	}
 
-	.dh-overview-section {
-		padding: 1.05rem 1.1rem;
-		border: 1px solid var(--border-light);
-		border-radius: 20px;
-		background: rgba(255, 255, 255, 0.7);
-		scroll-margin-top: 1rem;
-		transition: var(--transition);
-	}
-
-	.dh-overview-section.is-active {
-		border-color: rgba(43, 166, 128, 0.36);
-		box-shadow: inset 0 0 0 1px rgba(43, 166, 128, 0.1), var(--shadow-soft);
-	}
-
-	.dh-overview-section-title {
-		font-size: 1.08rem;
-		font-weight: 700;
-		line-height: 1.35;
-		margin-bottom: 0.45rem;
-	}
-
-	.dh-overview-section-summary {
-		font-size: 0.9rem;
-		line-height: 1.65;
-		color: var(--text-secondary);
-		margin-bottom: 0.85rem;
-	}
-
-	.dh-overview-section-body {
-		max-width: 920px;
-		width: 100%;
-	}
-
-	.dh-section-body p,
-	.dh-section-body li {
-		font-size: 0.95rem;
-		line-height: 1.74;
-		color: var(--text-secondary);
-	}
-
-	.dh-section-body p + p,
-	.dh-section-body p + ul,
-	.dh-section-body ul + p,
-	.dh-section-body ul + ul {
-		margin-top: 0.95rem;
-	}
-
-	.dh-section-body ul {
-		padding-left: 1.15rem;
-	}
-
-	.dh-section-body li + li {
-		margin-top: 0.55rem;
-	}
-
-	.dh-agent-grid {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 0.8rem;
-		margin-top: 1rem;
-	}
-
-	.dh-agent-card {
-		background: rgba(248, 250, 252, 0.9);
-		border: 1px solid var(--border-light);
-		border-radius: 16px;
-		padding: 0.95rem;
-	}
-
-	.dh-agent-card h4 {
-		font-size: 0.9rem;
-		font-weight: 700;
-		margin-bottom: 0.4rem;
-		color: var(--text-primary);
-	}
-
-	.dh-agent-card p {
-		font-size: 0.84rem;
-		line-height: 1.62;
-	}
-
-	.dh-resource-list {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 0.7rem;
-		list-style: none;
-		padding: 0;
-		margin-top: 0.9rem;
-	}
-
-	.dh-resource-list li {
-		background: rgba(248, 250, 252, 0.9);
-		border: 1px solid var(--border-light);
-		border-radius: 16px;
-		padding: 0.9rem;
-		font-size: 0.86rem;
-		line-height: 1.55;
-	}
-
-	.dh-resource-note {
-		display: inline-block;
-		margin-top: 0.25rem;
-		font-size: 0.72rem;
-		color: var(--accent-red);
-		font-weight: 600;
-	}
-
-	.dh-tour-backdrop {
-		display: none;
-		position: fixed;
-		inset: 0;
-		z-index: 99990;
-		background: transparent;
-		cursor: pointer;
-	}
-
-	.dh-tour-backdrop.active {
-		display: block;
-	}
-
-	.dh-tour-spotlight {
-		display: none;
-		position: fixed;
-		z-index: 99991;
-		border-radius: 14px;
-		box-shadow: 0 0 0 9999px rgba(17, 24, 39, 0.72), 0 0 0 4px var(--accent-green), 0 0 28px rgba(43, 166, 128, 0.5);
-		pointer-events: none;
-		transition: top 0.3s ease, left 0.3s ease, width 0.3s ease, height 0.3s ease;
-	}
-
-	.dh-tour-spotlight.active {
-		display: block;
-	}
-
-	.dh-tour-tooltip {
-		display: none;
-		position: fixed;
-		z-index: 99992;
-		max-width: 360px;
-		background: #ffffff;
-		border-radius: var(--radius-lg);
-		box-shadow: 0 16px 50px rgba(15, 23, 42, 0.26);
-		padding: 1.2rem 1.35rem;
-		transition: top 0.3s ease, left 0.3s ease;
-	}
-
-	.dh-tour-tooltip.active {
-		display: block;
-	}
-
-	.dh-tour-step {
-		font-size: 0.7rem;
-		font-weight: 700;
-		letter-spacing: 0.13em;
-		text-transform: uppercase;
-		color: var(--accent-green);
-		margin-bottom: 0.35rem;
-	}
-
-	.dh-tour-tooltip h3 {
-		font-size: 1.06rem;
-		font-weight: 600;
-		margin-bottom: 0.45rem;
-	}
-
-	.dh-tour-tooltip p {
-		font-size: 0.88rem;
-		line-height: 1.6;
-		color: var(--text-secondary);
-		margin-bottom: 1rem;
-	}
-
-	.dh-tour-actions {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	.dh-tour-skip {
-		border: none;
-		background: transparent;
-		color: var(--text-muted);
-		font-size: 0.8rem;
-		font-weight: 600;
-		cursor: pointer;
-		padding: 0.35rem 0.5rem;
-		border-radius: 8px;
-		font-family: inherit;
-	}
-
-	.dh-tour-skip:hover {
-		background: var(--accent-red-light);
-		color: var(--accent-red);
-	}
-
-	.dh-tour-nav {
-		display: flex;
-		gap: 0.4rem;
-	}
-
-	.dh-tour-btn {
-		font-family: inherit !important;
-		font-size: 0.84rem !important;
-		font-weight: 600 !important;
-		padding: 0.55rem 1.05rem !important;
-		border-radius: 10px !important;
-		border: 1px solid var(--border-medium) !important;
-		background: var(--bg-secondary) !important;
-		color: var(--text-primary) !important;
-		cursor: pointer !important;
-	}
-
-	.dh-tour-btn.primary {
-		background: var(--accent-green) !important;
-		border-color: var(--accent-green) !important;
-		color: #ffffff !important;
-	}
-
-	.dh-tour-btn:disabled {
-		opacity: 0.45 !important;
-		cursor: not-allowed !important;
-	}
-
-	@media (max-width: 1280px) {
-		.dh-agent-grid,
-		.dh-resource-list {
+	@media (max-width: 1200px) {
+		.dh-viewer-body {
 			grid-template-columns: 1fr;
-		}
-	}
-
-	@media (max-width: 1180px) {
-		.dh-main {
-			grid-template-columns: 1fr;
+			padding: 0 0 1rem 0;
 		}
 
 		.dh-sidebar {
 			display: none;
 		}
 
-		.dh-nav-access {
-			display: block;
-		}
-
-		.dh-active-copy {
-			display: none;
+		.dh-iframe-wrap {
+			border-top: 1px solid var(--border-light);
 		}
 
 		.dh-landing-shell {
 			grid-template-columns: 1fr;
 		}
 
-		#dhLanding .dh-overview-card {
-			grid-template-columns: 1fr;
-		}
-
-		#dhLanding .dh-overview-meta,
-		#dhLanding .dh-landing-card-head,
-		#dhLanding .dh-section-controls,
-		#dhLanding .dh-section-body {
-			grid-column: 1;
-		}
-
-		#dhLanding .dh-section-directory {
-			grid-column: 1;
-			grid-row: auto;
-			position: static;
-			max-height: none;
+		.dh-section-directory {
 			flex-direction: row;
 			flex-wrap: wrap;
-			padding-right: 0;
-		}
-
-		#dhLanding .dh-section-link {
-			width: auto;
 		}
 	}
 
-	@media (max-width: 900px) {
-		.dh-header {
-			padding: 1.5rem;
+	@media (max-width: 768px) {
+		.dh-mobile-overview-card {
+			padding: 0.9rem;
 		}
 
-		.dh-header-content {
-			gap: 1.4rem;
+		.dh-mobile-section-directory {
+			flex-direction: column;
+			gap: 0.35rem;
 		}
 
-		.dh-logo-horizontal {
-			display: none !important;
-		}
-
-		.dh-logo-vertical {
-			display: block !important;
-		}
-
-		.dh-main {
-			padding: 1rem;
+		.dh-section-body {
+			padding: 0.95rem;
 		}
 	}
 
-	@media (max-width: 760px) {
-		.dh-header {
-			padding: 0.75rem 0.9rem;
-		}
-
-		.dh-header-content {
-			grid-template-columns: 1fr;
-			gap: 0.7rem;
-		}
-
-		.dh-logo-horizontal {
-			display: block !important;
-			height: 2.45rem !important;
-		}
-
-		.dh-logo-vertical {
-			display: none !important;
-		}
-
-		.dh-tagline {
-			font-size: 0.88rem;
-			line-height: 1.55;
-		}
-
-		.dh-main {
-			display: none;
-		}
-
-		.dh-mobile-shell {
-			display: block;
-		}
-
-		.dh-tour-tooltip {
-			max-width: calc(100vw - 1.25rem);
-		}
-	}
-
-	@media (max-width: 640px) {
-		.dh-section-controls {
-			align-items: flex-start;
-		}
-	}
-
-	@media (max-width: 460px) {
-		.dh-header {
-			padding-inline: 0.7rem;
-		}
-
-		.dh-mobile-shell {
-			padding-inline: 0.7rem;
-		}
-
-		.dh-mobile-list-item {
-			padding-inline: 0.8rem;
-		}
-
-		.dh-mobile-list-item img,
-		.dh-mobile-list-item .dh-nav-thumb {
-			width: 36px;
-			height: 36px;
-		}
-	}
 </style>
-<div class="dh-tour-backdrop" id="dhTourBackdrop"></div>
-<div class="dh-tour-spotlight" id="dhTourSpotlight"></div>
+<div class="dh-tour-backdrop" id="dhTourBackdrop">
+	<br>
+</div>
+<div class="dh-tour-spotlight" id="dhTourSpotlight">
+	<br>
+</div>
 <div class="dh-tour-tooltip" id="dhTourTooltip">
 	<div class="dh-tour-step" id="dhTourStep">Step 1 of 5</div>
+
 	<h3 id="dhTourTitle">Title</h3>
+
 	<p id="dhTourBody">Body text.</p>
 	<div class="dh-tour-actions">
 		<button class="dh-tour-skip" id="dhTourSkip" type="button">Skip tour</button>
 		<div class="dh-tour-nav">
 			<button class="dh-tour-btn" id="dhTourBack" type="button">Back</button>
 			<button class="dh-tour-btn primary" id="dhTourNext" type="button">Next</button>
-		</div>
-	</div>
-</div>
+		</div></div></div>
+<div class="dh-mobile-help-modal" id="dhMobileHelpModal">
+	<div class="dh-mobile-help-card">
+
+		<h3>About these dashboards</h3>
+
+		<p>These reports are best viewed on a larger screen. Tap any dashboard to open it directly in a new tab for the best mobile viewing experience.</p>
+		<button type="button" class="dh-mobile-help-close" id="dhMobileHelpClose">Got it</button>
+	</div></div>
 <div class="data-hub-wrapper">
 	<header class="dh-header">
 		<div class="dh-header-content">
-			<div class="dh-logo">
-				<img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-logo-img dh-logo-horizontal fr-fil fr-dib">
-				<img src="https://media.lrsd.net/media/Default/frl/dh-logo-vert-fc-svg-2x.d681e083557.png" alt="Data Hub" class="dh-logo-img dh-logo-vertical fr-fic fr-dii">
-			</div>
-			<p class="dh-tagline">We are committed to using data to inform decision-making, monitor progress, and share our story with the community.<br>This involves a growth mindset and a solid grounding in data ethics, tools, and processes.</p>
+			<div class="dh-logo"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-logo-img dh-logo-horizontal fr-fil fr-dib">&nbsp; <img src="https://media.lrsd.net/media/Default/frl/dh-logo-vert-fc-svg-2x.d681e083557.png" alt="Data Hub" class="dh-logo-img dh-logo-vertical fr-fic fr-dii"></div>
+			<button type="button" class="dh-mobile-help-btn" id="dhMobileHelpBtn" title="About these dashboards">?</button>
+
+			<p class="dh-tagline">We are committed to using data to inform decision-making, monitor progress, and share our story with the community.&nbsp;
+				<br>This involves a growth mindset and a solid grounding in data ethics, tools, and processes.</p>
 		</div>
 	</header>
-	<div class="dh-mobile-shell">
-		<div class="dh-mobile-intro">
-			<h2>Explore the Data Hub</h2>
-			<p>Open the overview first for LRSD's data governance and AI story, or jump straight to any dashboard below.</p>
+	<div class="dh-mobile-list" id="dhMobileList">
+		<div class="dh-mobile-list-items" id="dhMobileListItems">
+			<br>
 		</div>
-		<div class="dh-mobile-list-items" id="dhMobileListItems"></div>
-		<section class="dh-landing" id="dhMobileOverview" style="position:static; inset:auto; margin-top:0.95rem; padding:0; background:none; overflow:visible;">
-			<div class="dh-landing-shell" style="grid-template-columns:1fr;">
-				<div class="dh-landing-content">
-					<div class="dh-landing-card dh-overview-card" style="min-height:0;">
-						<div class="dh-overview-meta">
-							<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
-							<span class="dh-section-eyebrow" id="dhMobileSectionEyebrow"></span>
-						</div>
-						<nav class="dh-section-directory" id="dhMobileSectionDirectory" aria-label="Data Governance &amp; AI Overview sections navigation"></nav>
-						<div class="dh-landing-card-head">
-							<h3 class="dh-section-title" id="dhMobileSectionTitle"></h3>
-							<p class="dh-section-subtitle" id="dhMobileSectionSubtitle">Start here, then move through each section or jump ahead using the titles below.</p>
-						</div>
-						<div class="dh-section-controls">
-							<div class="dh-section-actions">
-								<button class="dh-arrow-btn" id="dhMobileSectionPrev" type="button" title="Previous section">&larr;</button>
-								<button class="dh-arrow-btn" id="dhMobileSectionNext" type="button" title="Next section">&rarr;</button>
-							</div>
-							<span class="dh-section-status" id="dhMobileSectionStatus"></span>
-						</div>
-						<div class="dh-section-body" id="dhMobileSectionBody"></div>
+		<section class="dh-mobile-overview" id="dhMobileOverview">
+			<div class="dh-mobile-overview-card">
+				<div class="dh-mobile-overview-head">
+					<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
+					<span class="dh-section-status" id="dhMobileSectionStatus">Section 1 of 9</span>
+				</div>
+				<nav class="dh-mobile-section-directory" id="dhMobileSectionDirectory" aria-label="Mobile data governance and AI section navigation"></nav>
+				<div class="dh-mobile-overview-copy">
+					<div class="dh-section-eyebrow" id="dhMobileSectionEyebrow">Section 1 of 9</div>
+					<h3 class="dh-section-title" id="dhMobileSectionTitle">Data Governance &amp; AI Overview</h3>
+					<p class="dh-section-subtitle" id="dhMobileSectionSubtitle">LRSD's public-facing overview of data stewardship, AI use, and the work underway across the division.</p>
+				</div>
+				<div class="dh-section-controls dh-mobile-section-controls">
+					<div class="dh-section-actions">
+						<button class="dh-arrow-btn" id="dhMobileSectionPrev" type="button" title="Previous section">&larr;</button>
+						<button class="dh-arrow-btn" id="dhMobileSectionNext" type="button" title="Next section">&rarr;</button>
 					</div>
 				</div>
+				<div class="dh-section-body" id="dhMobileSectionBody"></div>
 			</div>
 		</section>
 	</div>
 	<div class="dh-main">
-		<aside class="dh-sidebar" id="dhSidebar">
-			<div class="dh-sidebar-head">
-				<h2>Explore</h2>
-			</div>
-			<div class="dh-sidebar-list" id="dhSidebarList"></div>
-		</aside>
 		<main class="dh-viewer" id="dhViewer">
-			<div class="dh-viewer-header" id="dhViewerHeader">
+			<div class="dh-viewer-header">
 				<div class="dh-report-info">
-					<div class="dh-active-copy">
-						<span class="dh-active-label">Now viewing</span>
-						<span class="dh-active-title" id="dhActiveTitle">Data Governance &amp; AI Overview</span>
-					</div>
-					<div class="dh-nav-access" id="dhPrimaryNav">
-						<details class="dh-custom-select" id="dhCustomSelect">
-							<summary class="dh-select-trigger" id="dhSelectTrigger" aria-label="Select an overview page or dashboard">
-								<img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" class="dh-item-icon fr-fil fr-dib" id="dhActiveIcon" alt="" aria-hidden="true">
-								<span class="dh-select-text" id="dhSelectText">Data Governance &amp; AI Overview</span>
-								<img src="https://media.lrsd.net/media/Default/frl/dropdown-arrow.23ae4383430.png" class="dh-chevron fr-fil fr-dib" alt="" aria-hidden="true">
-							</summary>
-							<div class="dh-select-options" id="dhSelectOptions"></div>
-						</details>
-					</div>
+					<details class="dh-custom-select" id="dhCustomSelect">
+						<summary class="dh-select-trigger" id="dhSelectTrigger"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" class="dh-item-icon fr-fil fr-dib" id="dhActiveIcon" alt=""> <span class="dh-item-text" id="dhActiveText">Data Governance &amp; AI Overview</span> &nbsp;<img src="https://media.lrsd.net/media/Default/frl/dropdown-arrow.23ae4383430.png" class="dh-chevron fr-fil fr-dib" alt="Dropdown Arrow"></summary>
+						<div class="dh-select-options" id="dhSelectOptions">
+							<br>
+						</div>
+					</details>
 				</div>
-				<div class="dh-nav-controls">
-					<span class="dh-report-counter" id="dhCounter">Introduction</span>
+				<div class="dh-nav-controls"><span class="dh-report-counter" id="dhCounter">Section 1 of 9</span>
 					<div class="dh-nav-arrows">
-						<button class="dh-arrow-btn" id="dhPrev" type="button" title="Previous section">&larr;</button>
-						<button class="dh-arrow-btn" id="dhNext" type="button" title="Next section">&rarr;</button>
-						<button class="dh-arrow-btn" id="dhFullscreen" type="button" title="Toggle Fullscreen"><img src="https://media.lrsd.net/media/Default/frl/fullscreenicon.f13c4683422.png" alt="Fullscreen Icon" class="dh-fs-img fr-dib"></button>
+						<button class="dh-arrow-btn" id="dhPrev" title="Previous section">&larr;</button>
+						<button class="dh-arrow-btn" id="dhNext" title="Next section">&rarr;</button>
+						<button class="dh-arrow-btn" id="dhFullscreen" title="Toggle Fullscreen"><img src="https://media.lrsd.net/media/Default/frl/fullscreenicon.f13c4683422.png" alt="Fullscreen Icon" class="dh-fs-img fr-dib"></button>
 						<button class="dh-arrow-btn dh-help-btn" id="dhHelpBtn" type="button" title="Show tutorial">?</button>
+					</div></div></div>
+			<div class="dh-viewer-body" id="dhViewerBody">
+				<aside class="dh-sidebar" id="dhSidebar">
+					<div class="dh-sidebar-head">
+						<h2>Explore</h2>
 					</div>
-				</div>
-			</div>
-			<div class="dh-iframe-wrap" id="dhIframeWrap">
-				<iframe name="dhFrame" id="dhFrame" title="Data Hub Viewer" allowfullscreen=""></iframe>
-				<div class="dh-loading" id="dhLoading">
-					<div class="dh-spinner"></div>
-					<span>Loading dashboard...</span>
-				</div>
-				<div class="dh-landing" id="dhLanding">
-					<div class="dh-landing-shell">
-						<div class="dh-landing-content">
-							<div class="dh-landing-card dh-overview-card">
-								<div class="dh-overview-meta">
+					<div class="dh-sidebar-list" id="dhSidebarList"></div>
+				</aside>
+				<div class="dh-iframe-wrap" id="dhIframeWrap">
+					<iframe name="dhFrame" id="dhFrame" title="Data Hub Viewer" allowfullscreen=""></iframe>
+					<div class="dh-loading" id="dhLoading">
+						<div class="dh-spinner">
+							<br>
+						</div><span>Loading Dashboard...</span></div>
+					<div class="dh-landing" id="dhLanding">
+						<div class="dh-landing-shell">
+							<aside class="dh-overview-nav">
+								<div class="dh-overview-nav-head">
 									<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
-									<span class="dh-section-eyebrow" id="dhSectionEyebrow"></span>
+									<span class="dh-section-status" id="dhSectionStatus">Section 1 of 9</span>
 								</div>
-								<nav class="dh-section-directory" id="dhSectionDirectory" aria-label="Data Governance &amp; AI Overview sections navigation"></nav>
-								<div class="dh-landing-card-head">
-									<h3 class="dh-section-title" id="dhSectionTitle"></h3>
-									<p class="dh-section-subtitle" id="dhSectionSubtitle">Start here, then move through each section or jump ahead using the titles below.</p>
+								<nav class="dh-section-directory" id="dhSectionDirectory" aria-label="Data Governance and AI section navigation"></nav>
+							</aside>
+							<div class="dh-overview-panel">
+								<div class="dh-overview-copy">
+									<div class="dh-section-eyebrow" id="dhSectionEyebrow">Section 1 of 9</div>
+									<h2 class="dh-section-title" id="dhSectionTitle">Data Governance &amp; AI Overview</h2>
+									<p class="dh-section-subtitle" id="dhSectionSubtitle">LRSD's public-facing overview of data stewardship, AI use, and the work underway across the division.</p>
 								</div>
 								<div class="dh-section-controls">
 									<div class="dh-section-actions">
 										<button class="dh-arrow-btn" id="dhSectionPrev" type="button" title="Previous section">&larr;</button>
 										<button class="dh-arrow-btn" id="dhSectionNext" type="button" title="Next section">&rarr;</button>
 									</div>
-									<span class="dh-section-status" id="dhSectionStatus"></span>
 								</div>
 								<div class="dh-section-body" id="dhSectionBody"></div>
 							</div>
@@ -1388,32 +1006,40 @@
 			</div>
 		</main>
 	</div>
+	<section class="dh-info-panel">
+		<div class="dh-info-grid">
+			<div class="dh-info-card">
+
+				<h4>Data Informed</h4>
+
+				<p>Using evidence to make decisions with confidence.</p>
+			</div>
+			<div class="dh-info-card">
+
+				<h4>Data Ready</h4>
+
+				<p>Ensuring the right data is available in the right format at the right time.</p>
+			</div>
+			<div class="dh-info-card">
+
+				<h4>Data Efficacious</h4>
+
+				<p>Building the skills to understand and use data effectively.</p>
+			</div>
+			<div class="dh-info-card">
+
+				<h4>Data Stewards</h4>
+
+				<p>Using data ethically as a flashlight, not a hammer&mdash;to help, not harm.</p>
+			</div></div>
+	</section>
 </div>
 <script>
 	(function()
 	{
-		var MOBILE_BREAKPOINT = 760;
-		// Keep this in sync with the desktop-only sidebar media query.
-		var DESKTOP_SIDEBAR_BREAKPOINT = 1181;
-		var VIEWER_MAX_VIEWPORT_RATIO = 0.95;
-		var VIEWER_MIN_FRAME_HEIGHT_RATIO = 0.42;
-		var VIEWER_MIN_FRAME_HEIGHT_PX = 360;
-		var VIEWER_MAX_FRAME_HEIGHT_PX = 440;
-		var DEFAULT_HEADER_HEIGHT = 0;
-		var LANDING_OVERVIEW_SUMMARY = 'Use the section navigation, arrow buttons, or keyboard controls to move through LRSD\'s public overview of data governance and AI.';
 		var LANDING_ITEM = {
 			title: 'Data Governance & AI Overview',
-			subtitle: 'Landing page',
 			icon: 'https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png'
-		};
-
-		var LANDING_INTRO_SECTION_INDEX = -1;
-		var LANDING_INTRO_SECTION_ID = 'dh-overview-section-introduction';
-
-		var LANDING_INTRO_SECTION = {
-			title: 'Introduction',
-			summary: 'Start here, then move through each section or jump ahead using the titles below.',
-			bodyHtml: `<p>Explore LRSD's public-facing story about data stewardship, responsible AI use, the systems already in place, and the ongoing work across the division.</p>`
 		};
 
 		var DASHBOARDS = [
@@ -1480,6 +1106,12 @@
 
 		var LANDING_SECTIONS = [
 		{
+			title: 'Introduction',
+			summary: 'Start here for LRSD\'s public-facing overview of data stewardship, AI use, and the work underway across the division.',
+			bodyHtml: '<p>Explore how LRSD approaches data stewardship, responsible artificial intelligence, and the systems already in place to support students, staff, and families.</p><p>Use the section list to jump directly to a topic, or use the arrows to move through the overview one section at a time.</p>'
+		},
+
+		{
 			title: 'We Are All Data Stewards',
 			summary: 'Improving accuracy, maintaining security, and using information ethically across LRSD.',
 			bodyHtml: '<p>Every day, LRSD works with information that matters enormously — student achievement, attendance, well-being, family records, and staff data. This information represents real people and real lives, and how we collect, protect, use, and share it reflects who we are as a school division.</p><p>Good data governance is not an IT matter. It is a shared responsibility that belongs to everyone — teachers, educational assistants, school leaders, support staff, and students alike. That is the idea at the heart of our work: We Are All Data Stewards.</p><p>To lead this work, LRSD has established a Data Governance Executive Committee — senior divisional leaders with clear accountability for how data is managed across the division — supported by a growing network of Data Advisors and Data Champions in schools. Our Data Governance Charter defines the principles, roles, and commitments that guide all of this. And our AI guidelines establish a clear framework for how artificial intelligence tools are used responsibly at LRSD, grounded in our values and in Manitoba\'s Freedom of Information and Protection of Privacy Act (FIPPA).</p>'
@@ -1518,500 +1150,223 @@
 			title: 'Resources',
 			summary: 'Supporting documents, links, and reference material that accompany the public overview.',
 			bodyHtml: '<p>The following materials are identified in the public content package:</p><ul class="dh-resource-list"><li>Data Governance Charter</li><li>“We Are All Data Stewards” poster</li><li>AI Guidelines (full document)</li><li>Links to Board meeting discussions on Data Governance and AI</li><li>Link to C21 Use case</li><li>Link to Free Press article “Agents of Change”</li><li>FAQ document <span class="dh-resource-note">(to be developed)</span></li><li>Link to relevant policies</li><li>Bibliography of resources <span class="dh-resource-note">(to be developed)</span></li><li>Link to Canada’s AI Strategy</li></ul>'
-		}];
+		}
+		];
 
-		var sidebarList = document.getElementById('dhSidebarList');
+		var customSelect = document.getElementById('dhCustomSelect');
 		var selectOptions = document.getElementById('dhSelectOptions');
 		var mobileListItems = document.getElementById('dhMobileListItems');
-		var customSelect = document.getElementById('dhCustomSelect');
-		var activeTitle = document.getElementById('dhActiveTitle');
 		var activeIcon = document.getElementById('dhActiveIcon');
-		var selectText = document.getElementById('dhSelectText');
-		var dataHubWrapper = document.querySelector('.data-hub-wrapper');
+		var activeText = document.getElementById('dhActiveText');
 		var frame = document.getElementById('dhFrame');
-		var landing = document.getElementById('dhLanding');
 		var counter = document.getElementById('dhCounter');
 		var loading = document.getElementById('dhLoading');
 		var prevBtn = document.getElementById('dhPrev');
 		var nextBtn = document.getElementById('dhNext');
 		var fsBtn = document.getElementById('dhFullscreen');
-		var helpBtn = document.getElementById('dhHelpBtn');
 		var viewer = document.getElementById('dhViewer');
-		var viewerHeader = document.getElementById('dhViewerHeader');
+		var helpBtn = document.getElementById('dhHelpBtn');
 		var iframeWrap = document.getElementById('dhIframeWrap');
+		var mobileHelpBtn = document.getElementById('dhMobileHelpBtn');
+		var mobileHelpModal = document.getElementById('dhMobileHelpModal');
+		var mobileHelpClose = document.getElementById('dhMobileHelpClose');
+		var landing = document.getElementById('dhLanding');
+		var sidebarList = document.getElementById('dhSidebarList');
 		var sectionDirectory = document.getElementById('dhSectionDirectory');
+		var sectionStatus = document.getElementById('dhSectionStatus');
 		var sectionEyebrow = document.getElementById('dhSectionEyebrow');
 		var sectionTitle = document.getElementById('dhSectionTitle');
 		var sectionSubtitle = document.getElementById('dhSectionSubtitle');
-		var sectionStatus = document.getElementById('dhSectionStatus');
 		var sectionBody = document.getElementById('dhSectionBody');
-		var desktopSectionPrev = document.getElementById('dhSectionPrev');
-		var desktopSectionNext = document.getElementById('dhSectionNext');
+		var sectionPrev = document.getElementById('dhSectionPrev');
+		var sectionNext = document.getElementById('dhSectionNext');
 		var mobileOverview = document.getElementById('dhMobileOverview');
 		var mobileSectionDirectory = document.getElementById('dhMobileSectionDirectory');
+		var mobileSectionStatus = document.getElementById('dhMobileSectionStatus');
 		var mobileSectionEyebrow = document.getElementById('dhMobileSectionEyebrow');
 		var mobileSectionTitle = document.getElementById('dhMobileSectionTitle');
 		var mobileSectionSubtitle = document.getElementById('dhMobileSectionSubtitle');
-		var mobileSectionStatus = document.getElementById('dhMobileSectionStatus');
 		var mobileSectionBody = document.getElementById('dhMobileSectionBody');
 		var mobileSectionPrev = document.getElementById('dhMobileSectionPrev');
 		var mobileSectionNext = document.getElementById('dhMobileSectionNext');
 
 		var currentMode = 'landing';
+		var currentSectionIndex = 0;
 		var currentDashboardIndex = -1;
-		var currentSectionIndex = LANDING_INTRO_SECTION_INDEX;
-		var optionMarkupUid = 0;
-		var navigationHandlerMap = new WeakMap();
-		var sectionHandlerMap = new WeakMap();
+		var optionElements = [];
+		var sidebarElements = [];
 
-		function escapeHtml(value)
+		function escapeHtml(s)
 		{
-			return String(value).replace(/[&<>"']/g, function(ch)
+			return String(s).replace(/[&<>"']/g, function(ch)
 			{
-				return ({
-					'&': '&amp;',
-					'<': '&lt;',
-					'>': '&gt;',
-					'"': '&quot;',
-					"'": '&#39;'
-				})[ch];
+				return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch];
 			});
 		}
 
 		function sanitizeUrl(value)
 		{
-			try
-			{
-				var url = new URL(String(value || ''), window.location.href);
-				if (!/^https?:$/i.test(url.protocol)) return '';
-				return url.href.replace(/"/g, '&quot;').replace(/</g, '%3C').replace(/>/g, '%3E');
-			}
-			catch (error)
-			{
-				return '';
-			}
+			if (!value) return '';
+			var trimmed = String(value).trim();
+			if (/^(https?:)?\/\//i.test(trimmed)) return trimmed;
+			return '';
 		}
 
 		function sanitizeSectionHtml(html)
 		{
-			var parser = new DOMParser();
-			var parsed = parser.parseFromString('<body>' + html + '</body>', 'text/html');
-			var body = parsed.body;
-			var allowedTags = {
-				P: true,
-				UL: true,
-				LI: true,
-				DIV: true,
-				H4: true,
-				SPAN: true
-			};
-			var allowedClasses = {
-				'dh-agent-grid': true,
-				'dh-agent-card': true,
-				'dh-resource-list': true,
-				'dh-resource-note': true
-			};
+			var template = document.createElement('template');
+			template.innerHTML = html || '';
 
-			Array.prototype.slice.call(body.querySelectorAll('*')).forEach(function(node)
+			Array.prototype.slice.call(template.content.querySelectorAll('script, style, iframe, object, embed')).forEach(function(node)
 			{
-				if (!allowedTags[node.tagName])
-				{
-					node.replaceWith(document.createTextNode(node.textContent || ''));
-					return;
-				}
+				node.remove();
+			});
 
-				Array.prototype.slice.call(node.attributes).forEach(function(attribute)
+			Array.prototype.slice.call(template.content.querySelectorAll('*')).forEach(function(node)
+			{
+				Array.prototype.slice.call(node.attributes).forEach(function(attr)
 				{
-					if (attribute.name === 'class')
+					var name = attr.name.toLowerCase();
+					if (name.indexOf('on') === 0)
 					{
-						var safeClasses = attribute.value.split(/\s+/).filter(function(className)
-						{
-							return allowedClasses[className];
-						});
-
-						if (safeClasses.length) node.setAttribute('class', safeClasses.join(' '));
-						else node.removeAttribute('class');
+						node.removeAttribute(attr.name);
+						return;
 					}
-					else
+					if (name === 'href' || name === 'src')
 					{
-						node.removeAttribute(attribute.name);
+						var safeValue = sanitizeUrl(attr.value);
+						if (safeValue) node.setAttribute(attr.name, safeValue);
+						else node.removeAttribute(attr.name);
+					}
+					if (name === 'class')
+					{
+						node.setAttribute('class', attr.value.split(/\s+/).filter(function(className)
+						{
+							return ['dh-agent-grid', 'dh-agent-card', 'dh-resource-list', 'dh-resource-note'].indexOf(className) !== -1;
+						}).join(' '));
 					}
 				});
+
+				if (node.tagName === 'A')
+				{
+					node.setAttribute('target', '_blank');
+					node.setAttribute('rel', 'noopener');
+				}
 			});
 
-			return body.innerHTML;
-		}
-
-		function clamp(clampValue, minValue, maxValue)
-		{
-			return Math.max(minValue, Math.min(maxValue, clampValue));
-		}
-
-		function getNavigationUrl(kind, index)
-		{
-			if (kind === 'dashboard' && Number.isFinite(index) && DASHBOARDS[index])
-			{
-				return sanitizeUrl(DASHBOARDS[index].url);
-			}
-			return '#dhLanding';
-		}
-
-		function buildNavMarkup(kind, index, title, subtitle, icon)
-		{
-			var targetAttribute = kind === 'dashboard' ? ' target="dhFrame" rel="noopener"' : '';
-			var indexAttribute = typeof index === 'number' ? ' data-index="' + index + '"' : '';
-			return [
-				'<a class="dh-nav-item" href="' + getNavigationUrl(kind, index) + '"' + targetAttribute + ' data-nav-kind="' + kind + '"' + indexAttribute + '>',
-				'<img src="' + sanitizeUrl(icon) + '" alt="" aria-hidden="true" class="dh-nav-thumb fr-fil fr-dib">',
-				'<span class="dh-nav-copy"><strong>' + escapeHtml(title) + '</strong><span>' + escapeHtml(subtitle) + '</span></span>',
-				'</a>'
-			].join('');
-		}
-
-		function buildOptionMarkup(kind, index, title, icon)
-		{
-			optionMarkupUid += 1;
-			var labelId = 'dh-option-label-' + optionMarkupUid;
-			var targetAttribute = kind === 'dashboard' ? ' target="dhFrame" rel="noopener"' : '';
-			var indexAttribute = typeof index === 'number' ? ' data-index="' + index + '"' : '';
-			return [
-				'<a class="dh-option" href="' + getNavigationUrl(kind, index) + '"' + targetAttribute + ' aria-labelledby="' + labelId + '" data-nav-kind="' + kind + '"' + indexAttribute + '>',
-				'<img src="' + sanitizeUrl(icon) + '" alt="" aria-hidden="true" class="dh-item-icon fr-fil fr-dib">',
-				'<span class="dh-item-text" id="' + labelId + '">' + escapeHtml(title) + '</span>',
-				'</a>'
-			].join('');
-		}
-
-		function buildMobileMarkup()
-		{
-			var html = '<button class="dh-mobile-list-item" type="button" id="dhMobileOverviewBtn"><img src="' + sanitizeUrl(LANDING_ITEM.icon) + '" alt="" aria-hidden="true" class="fr-fil fr-dib"><span class="dh-mobile-list-text">' + escapeHtml(LANDING_ITEM.title) + '</span><span class="dh-mobile-list-arrow">↓</span></button>';
-
-			DASHBOARDS.forEach(function(d)
-			{
-				html += '<a class="dh-mobile-list-item" href="' + sanitizeUrl(d.url) + '" target="_blank" rel="noopener"><img src="' + sanitizeUrl(d.icon) + '" alt="" aria-hidden="true" class="fr-fil fr-dib"><span class="dh-mobile-list-text">' + escapeHtml(d.title) + '</span><span class="dh-mobile-list-arrow">↗</span></a>';
-			});
-
-			return html;
-		}
-
-		function buildNavigation()
-		{
-			var sidebarHtml = buildNavMarkup('landing', null, LANDING_ITEM.title, LANDING_ITEM.subtitle, LANDING_ITEM.icon);
-			var optionsHtml = buildOptionMarkup('landing', null, LANDING_ITEM.title, LANDING_ITEM.icon);
-
-			DASHBOARDS.forEach(function(d, index)
-			{
-				sidebarHtml += buildNavMarkup('dashboard', index, d.title, 'Open in the viewer', d.icon);
-				optionsHtml += buildOptionMarkup('dashboard', index, d.title, d.icon);
-			});
-
-			sidebarList.innerHTML = sidebarHtml;
-			selectOptions.innerHTML = optionsHtml;
-			mobileListItems.innerHTML = buildMobileMarkup();
-			bindNavigationButtons(sidebarList, '.dh-nav-item');
-			bindNavigationButtons(selectOptions, '.dh-option');
-		}
-
-		function getCurrentLandingSection()
-		{
-			if (currentSectionIndex === LANDING_INTRO_SECTION_INDEX) return LANDING_INTRO_SECTION;
-			if (currentSectionIndex < LANDING_INTRO_SECTION_INDEX || currentSectionIndex >= LANDING_SECTIONS.length)
-			{
-				console.warn('Unexpected landing section index:', currentSectionIndex);
-				currentSectionIndex = LANDING_INTRO_SECTION_INDEX;
-				return LANDING_INTRO_SECTION;
-			}
-
-			var section = LANDING_SECTIONS[currentSectionIndex];
-			return section || LANDING_INTRO_SECTION;
+			return template.innerHTML;
 		}
 
 		function getSectionLabel(index)
 		{
-			return index === LANDING_INTRO_SECTION_INDEX ? LANDING_INTRO_SECTION.title : 'Section ' + (index + 1) + ' of ' + LANDING_SECTIONS.length;
+			return 'Section ' + (index + 1) + ' of ' + LANDING_SECTIONS.length;
 		}
 
-		function getCurrentSectionLabel()
+		function buildSidebarItem(kind, index, title, subtitle, icon)
 		{
-			return getSectionLabel(currentSectionIndex);
+			return '<button class="dh-nav-item" type="button" data-nav-kind="' + kind + '"' + (index === null ? '' : ' data-index="' + index + '"') + '>' +
+				'<img src="' + sanitizeUrl(icon) + '" class="dh-item-icon fr-fil fr-dib" alt="">' +
+				'<span class="dh-nav-copy"><strong>' + escapeHtml(title) + '</strong><span>' + escapeHtml(subtitle) + '</span></span>' +
+			'</button>';
 		}
 
-		function getCurrentSectionTagLabel()
+		function buildOptionItem(kind, index, title, icon)
 		{
-			return currentSectionIndex === LANDING_INTRO_SECTION_INDEX ? LANDING_SECTIONS.length + ' sections' : 'Section ' + (currentSectionIndex + 1) + ' of ' + LANDING_SECTIONS.length;
+			return '<div class="dh-option" data-nav-kind="' + kind + '"' + (index === null ? '' : ' data-index="' + index + '"') + '>' +
+				'<img src="' + sanitizeUrl(icon) + '" class="dh-item-icon fr-fil fr-dib" alt="">' +
+				'<span class="dh-item-text">' + escapeHtml(title) + '</span>' +
+			'</div>';
 		}
 
-		function isMobileView()
+		function buildMobileList()
 		{
-			return window.innerWidth <= MOBILE_BREAKPOINT;
-		}
+			var html = '<button class="dh-mobile-list-item" type="button" id="dhMobileOverviewBtn">' +
+				'<img src="' + LANDING_ITEM.icon + '" alt="" class="fr-fil fr-dib">' +
+				'<span class="dh-mobile-list-text">' + escapeHtml(LANDING_ITEM.title) + '</span>' +
+				'<span class="dh-mobile-list-arrow">&darr;</span>' +
+			'</button>';
 
-		function getOverviewArticleId(index)
-		{
-			if (!Number.isFinite(index) || index === LANDING_INTRO_SECTION_INDEX) return LANDING_INTRO_SECTION_ID;
-			return 'dh-overview-section-' + index;
-		}
-
-		function getOverviewSections()
-		{
-			var sections = [{
-				index: LANDING_INTRO_SECTION_INDEX,
-				section: LANDING_INTRO_SECTION
-			}];
-
-			LANDING_SECTIONS.forEach(function(section, index)
+			DASHBOARDS.forEach(function(d, idx)
 			{
-				sections.push({
-					index: index,
-					section: section
-				});
+				html += '<button class="dh-mobile-list-item" type="button" data-mobile-dashboard="' + idx + '">' +
+					'<img src="' + sanitizeUrl(d.icon) + '" alt="" class="fr-fil fr-dib">' +
+					'<span class="dh-mobile-list-text">' + escapeHtml(d.title) + '</span>' +
+					'<span class="dh-mobile-list-arrow">&rarr;</span>' +
+				'</button>';
 			});
 
-			return sections;
+			mobileListItems.innerHTML = html;
 		}
 
-		function buildSectionDirectory(container)
+		function buildNavigation()
 		{
-			var items = [{
-				index: LANDING_INTRO_SECTION_INDEX,
-				title: LANDING_INTRO_SECTION.title,
-				ariaLabel: LANDING_INTRO_SECTION.title
-			}];
+			var sidebarHtml = buildSidebarItem('landing', null, LANDING_ITEM.title, 'Read the overview', LANDING_ITEM.icon);
+			var optionsHtml = buildOptionItem('landing', null, LANDING_ITEM.title, LANDING_ITEM.icon);
 
-			LANDING_SECTIONS.forEach(function(section, index)
+			DASHBOARDS.forEach(function(d, idx)
 			{
-				items.push({
-					index: index,
-					title: section.title,
-					ariaLabel: 'Section ' + (index + 1) + ' of ' + LANDING_SECTIONS.length + ': ' + section.title
-				});
+				sidebarHtml += buildSidebarItem('dashboard', idx, d.title, 'Open dashboard', d.icon);
+				optionsHtml += buildOptionItem('dashboard', idx, d.title, d.icon);
 			});
 
-			container.innerHTML = items.map(function(item)
+			sidebarList.innerHTML = sidebarHtml;
+			selectOptions.innerHTML = optionsHtml;
+			optionElements = Array.prototype.slice.call(selectOptions.querySelectorAll('.dh-option'));
+			sidebarElements = Array.prototype.slice.call(sidebarList.querySelectorAll('.dh-nav-item'));
+		}
+
+		function buildSectionLinks(target)
+		{
+			target.innerHTML = LANDING_SECTIONS.map(function(section, idx)
 			{
-				return [
-					'<a class="dh-section-link' + (item.index === currentSectionIndex ? ' is-active' : '') + '" href="#' + getOverviewArticleId(item.index) + '" data-section-index="' + item.index + '" aria-label="' + escapeHtml(item.ariaLabel) + '">',
-					'<span class="dh-section-link-title">' + escapeHtml(item.title) + '</span>',
-					'</a>'
-				].join('');
+				return '<a class="dh-section-link' + (idx === currentSectionIndex ? ' is-active' : '') + '" href="#" data-section-index="' + idx + '"><span class="dh-section-link-title">' + escapeHtml(section.title) + '</span></a>';
 			}).join('');
-			bindSectionDirectory(container);
 		}
 
-		function bindNavigationButtons(container, selector)
+		function renderSections()
 		{
-			if (!container) return;
-			var existingHandler = navigationHandlerMap.get(container);
-			if (existingHandler)
-			{
-				container.removeEventListener('click', existingHandler);
-			}
+			var currentSection = LANDING_SECTIONS[currentSectionIndex];
+			buildSectionLinks(sectionDirectory);
+			buildSectionLinks(mobileSectionDirectory);
 
-			var handler = function(event)
-			{
-				var button = event.target.closest(selector);
-				if (!button) return;
-				// Use JS navigation when available so the shared UI state stays in sync; the href remains as a no-JS fallback.
-				event.preventDefault();
-				var dataIndex = button.getAttribute('data-index');
-				goToItem(button.getAttribute('data-nav-kind'), dataIndex === null ? null : parseInt(dataIndex, 10));
-			};
-			navigationHandlerMap.set(container, handler);
-			container.addEventListener('click', handler);
-		}
+			sectionStatus.textContent = getSectionLabel(currentSectionIndex);
+			sectionEyebrow.textContent = getSectionLabel(currentSectionIndex);
+			sectionTitle.textContent = currentSection.title;
+			sectionSubtitle.textContent = currentSection.summary;
+			sectionBody.innerHTML = sanitizeSectionHtml(currentSection.bodyHtml);
 
-		function bindSectionDirectory(container)
-		{
-			if (!container) return;
-			var existingHandler = sectionHandlerMap.get(container);
-			if (existingHandler)
-			{
-				container.removeEventListener('click', existingHandler);
-			}
+			mobileSectionStatus.textContent = getSectionLabel(currentSectionIndex);
+			mobileSectionEyebrow.textContent = getSectionLabel(currentSectionIndex);
+			mobileSectionTitle.textContent = currentSection.title;
+			mobileSectionSubtitle.textContent = currentSection.summary;
+			mobileSectionBody.innerHTML = sanitizeSectionHtml(currentSection.bodyHtml);
 
-			var handler = function(event)
-			{
-				var button = event.target.closest('.dh-section-link');
-				if (!button) return;
-				event.preventDefault();
-				currentSectionIndex = parseInt(button.getAttribute('data-section-index'), 10);
-				renderCurrentSection();
-			};
-			sectionHandlerMap.set(container, handler);
-			container.addEventListener('click', handler);
-		}
-
-		function buildOverviewSectionMarkup(section, index)
-		{
-			return [
-				'<article class="dh-overview-section' + (index === currentSectionIndex ? ' is-active' : '') + '" id="' + getOverviewArticleId(index) + '" data-section-index="' + index + '">',
-				'<div class="dh-section-eyebrow">' + escapeHtml(getSectionLabel(index)) + '</div>',
-				'<h4 class="dh-overview-section-title">' + escapeHtml(section.title) + '</h4>',
-				'<p class="dh-overview-section-summary">' + escapeHtml(section.summary) + '</p>',
-				'<div class="dh-overview-section-body">' + sanitizeSectionHtml(section.bodyHtml) + '</div>',
-				'</article>'
-			].join('');
-		}
-
-		function renderOverviewBody()
-		{
-			var overviewMarkup = getOverviewSections().map(function(item)
-			{
-				return buildOverviewSectionMarkup(item.section, item.index);
-			}).join('');
-			sectionBody.innerHTML = overviewMarkup;
-			mobileSectionBody.innerHTML = overviewMarkup;
-		}
-
-		function syncActiveOverviewSection(container)
-		{
-			Array.prototype.slice.call(container.querySelectorAll('.dh-overview-section')).forEach(function(node)
-			{
-				node.classList.toggle('is-active', parseInt(node.getAttribute('data-section-index'), 10) === currentSectionIndex);
-			});
-		}
-
-		function scrollOverviewSectionIntoView()
-		{
-			var targetContainer = isMobileView() ? mobileSectionBody : sectionBody;
-			var targetSection = targetContainer ? targetContainer.querySelector('#' + getOverviewArticleId(currentSectionIndex)) : null;
-			if (targetSection)
-			{
-				targetSection.scrollIntoView({
-					behavior: 'smooth',
-					block: 'start'
-				});
-				return;
-			}
-
-			if (isMobileView())
-			{
-				mobileOverview.scrollIntoView({
-					behavior: 'smooth',
-					block: 'start'
-				});
-				return;
-			}
-
-			landing.scrollTo({
-				top: 0,
-				behavior: 'smooth'
-			});
-		}
-
-		function syncViewerHeight()
-		{
-			if (!dataHubWrapper || !viewer || !viewerHeader) return;
-			if (window.innerWidth <= MOBILE_BREAKPOINT)
-			{
-				dataHubWrapper.style.setProperty('--dh-viewer-height', 'auto');
-				dataHubWrapper.style.setProperty('--dh-frame-height', 'auto');
-				return;
-			}
-
-			var viewerWidth = viewer.getBoundingClientRect().width;
-			if (!viewerWidth) return;
-
-			var headerHeight = viewerHeader.offsetHeight || DEFAULT_HEADER_HEIGHT;
-			var maxViewerHeight = Math.floor(window.innerHeight * VIEWER_MAX_VIEWPORT_RATIO);
-			var frameHeightLimit = Math.max(VIEWER_MIN_FRAME_HEIGHT_PX, maxViewerHeight - headerHeight);
-			var targetFrameHeight = Math.round(viewerWidth * 9 / 16);
-			var viewportBasedMinimumFrameHeight = Math.floor(window.innerHeight * VIEWER_MIN_FRAME_HEIGHT_RATIO);
-			var clampedMinimumFrameHeight = clamp(viewportBasedMinimumFrameHeight, VIEWER_MIN_FRAME_HEIGHT_PX, VIEWER_MAX_FRAME_HEIGHT_PX);
-			var frameHeight = Math.min(frameHeightLimit, Math.max(clampedMinimumFrameHeight, targetFrameHeight));
-			var totalHeight = headerHeight + frameHeight;
-
-			dataHubWrapper.style.setProperty('--dh-frame-height', frameHeight + 'px');
-			dataHubWrapper.style.setProperty('--dh-viewer-height', totalHeight + 'px');
-		}
-
-		function syncSidebarHeight()
-		{
-			if (!dataHubWrapper) return;
-			syncViewerHeight();
-			if (!viewer)
-			{
-				dataHubWrapper.style.setProperty('--dh-sidebar-height', 'auto');
-				return;
-			}
-
-			if (window.innerWidth < DESKTOP_SIDEBAR_BREAKPOINT)
-			{
-				dataHubWrapper.style.setProperty('--dh-sidebar-height', 'auto');
-				return;
-			}
-
-			var frameWrapHeight = iframeWrap ? iframeWrap.offsetHeight : 0;
-			var sidebarHeight = frameWrapHeight || viewer.offsetHeight;
-			dataHubWrapper.style.setProperty('--dh-sidebar-height', sidebarHeight + 'px');
-		}
-
-		// skipScroll is used on initial render so the intro state doesn't animate the landing panel.
-		function renderCurrentSection(skipScroll)
-		{
-			var eyebrowText = getCurrentSectionLabel();
-			var tagText = getCurrentSectionTagLabel();
-
-			buildSectionDirectory(sectionDirectory);
-			buildSectionDirectory(mobileSectionDirectory);
-
-			sectionEyebrow.textContent = tagText;
-			sectionTitle.textContent = LANDING_ITEM.title;
-			sectionSubtitle.textContent = LANDING_OVERVIEW_SUMMARY;
-			sectionStatus.textContent = eyebrowText;
-
-			mobileSectionEyebrow.textContent = tagText;
-			mobileSectionTitle.textContent = LANDING_ITEM.title;
-			mobileSectionSubtitle.textContent = LANDING_OVERVIEW_SUMMARY;
-			mobileSectionStatus.textContent = eyebrowText;
-
-			renderOverviewBody();
-			syncActiveOverviewSection(sectionBody);
-			syncActiveOverviewSection(mobileSectionBody);
-			queueSidebarHeightSync();
-			if (!skipScroll) scrollOverviewSectionIntoView();
-
-			updateChrome();
-		}
-
-		function syncNavigationState()
-		{
-			var itemSelector = '.dh-nav-item, .dh-option';
-			var activeKind = currentMode === 'landing' ? 'landing' : 'dashboard';
-			var activeIndex = currentMode === 'dashboard' ? String(currentDashboardIndex) : null;
-
-			Array.prototype.slice.call(document.querySelectorAll(itemSelector)).forEach(function(item)
-			{
-				var matchesKind = item.getAttribute('data-nav-kind') === activeKind;
-				var matchesIndex = activeKind === 'landing' || item.getAttribute('data-index') === activeIndex;
-				item.classList.toggle('is-active', matchesKind && matchesIndex);
-			});
-		}
-
-		function updateChrome()
-		{
 			if (currentMode === 'landing')
 			{
-				activeTitle.textContent = LANDING_ITEM.title;
-				selectText.textContent = LANDING_ITEM.title;
-				activeIcon.setAttribute('src', LANDING_ITEM.icon);
-				counter.textContent = getCurrentSectionLabel().replace(' of ', ' / ');
-				prevBtn.setAttribute('title', 'Previous section');
-				nextBtn.setAttribute('title', 'Next section');
+				counter.textContent = getSectionLabel(currentSectionIndex);
 			}
-			else
+		}
+
+		function updateSelectedNavigation()
+		{
+			optionElements.forEach(function(option)
 			{
-				var dashboard = DASHBOARDS[currentDashboardIndex];
+				var isLanding = option.getAttribute('data-nav-kind') === 'landing';
+				var isActive = currentMode === 'landing' ? isLanding : (!isLanding && parseInt(option.getAttribute('data-index'), 10) === currentDashboardIndex);
+				option.classList.toggle('selected', isActive);
+			});
 
-				activeTitle.textContent = dashboard.title;
-				selectText.textContent = dashboard.title;
-				activeIcon.setAttribute('src', dashboard.icon);
-				counter.textContent = 'Dashboard ' + (currentDashboardIndex + 1) + ' / ' + DASHBOARDS.length;
-				prevBtn.setAttribute('title', 'Previous dashboard');
-				nextBtn.setAttribute('title', 'Next dashboard');
-			}
+			sidebarElements.forEach(function(option)
+			{
+				var isLanding = option.getAttribute('data-nav-kind') === 'landing';
+				var isActive = currentMode === 'landing' ? isLanding : (!isLanding && parseInt(option.getAttribute('data-index'), 10) === currentDashboardIndex);
+				option.classList.toggle('selected', isActive);
+			});
+		}
 
-			syncNavigationState();
+		function hideLanding()
+		{
+			landing.classList.add('dh-hidden');
 		}
 
 		function showLanding()
@@ -2021,87 +1376,63 @@
 			frame.classList.remove('dh-frame-ready');
 			frame.removeAttribute('src');
 			loading.classList.remove('active');
+			activeIcon.src = LANDING_ITEM.icon;
+			activeText.textContent = LANDING_ITEM.title;
+			prevBtn.title = 'Previous section';
+			nextBtn.title = 'Next section';
+			renderSections();
+			updateSelectedNavigation();
 			customSelect.removeAttribute('open');
-			queueSidebarHeightSync();
-			updateChrome();
 		}
 
-		function loadDashboard(index)
+		function loadDashboard(idx)
 		{
-			if (index < 0 || index >= DASHBOARDS.length) return;
-
-			var dashboard = DASHBOARDS[index];
-			var currentSrc = frame.getAttribute('src');
-
+			if (idx < 0 || idx >= DASHBOARDS.length) return;
 			currentMode = 'dashboard';
-			currentDashboardIndex = index;
-			landing.classList.add('dh-hidden');
+			currentDashboardIndex = idx;
+			var d = DASHBOARDS[idx];
+			hideLanding();
+			activeText.textContent = d.title;
+			activeIcon.src = d.icon;
+			counter.textContent = 'Dashboard ' + (idx + 1) + ' / ' + DASHBOARDS.length;
+			prevBtn.title = 'Previous dashboard';
+			nextBtn.title = 'Next dashboard';
 			frame.classList.remove('dh-frame-ready');
 			loading.classList.add('active');
-			frame.setAttribute('title', dashboard.title + ' dashboard');
-
-			if (currentSrc !== dashboard.url)
-			{
-				frame.setAttribute('src', dashboard.url);
-			}
-			else
-			{
-				window.setTimeout(function()
-				{
-					frame.classList.add('dh-frame-ready');
-					loading.classList.remove('active');
-				}, 120);
-			}
-
+			if (frame.getAttribute('src') !== d.url) frame.setAttribute('src', d.url);
+			else window.setTimeout(function() { frame.classList.add('dh-frame-ready'); loading.classList.remove('active'); }, 120);
 			customSelect.removeAttribute('open');
-			queueSidebarHeightSync();
-			updateChrome();
+			updateSelectedNavigation();
 		}
 
-		function goToItem(kind, index)
+		function goToItem(kind, idx)
 		{
 			if (kind === 'landing') showLanding();
-			else loadDashboard(index);
+			else loadDashboard(parseInt(idx, 10));
 		}
 
-		function getPreviousSectionIndex()
+		function prevSection()
 		{
-			if (currentSectionIndex === LANDING_INTRO_SECTION_INDEX) return LANDING_SECTIONS.length - 1;
-			if (currentSectionIndex === 0) return LANDING_INTRO_SECTION_INDEX;
-			return currentSectionIndex - 1;
+			currentSectionIndex = (currentSectionIndex - 1 + LANDING_SECTIONS.length) % LANDING_SECTIONS.length;
+			renderSections();
 		}
 
-		function getNextSectionIndex()
+		function nextSection()
 		{
-			if (currentSectionIndex === LANDING_INTRO_SECTION_INDEX) return 0;
-			if (currentSectionIndex === LANDING_SECTIONS.length - 1) return LANDING_INTRO_SECTION_INDEX;
-			return currentSectionIndex + 1;
+			currentSectionIndex = (currentSectionIndex + 1) % LANDING_SECTIONS.length;
+			renderSections();
 		}
 
 		function cyclePrev()
 		{
-			if (currentMode === 'landing')
-			{
-				currentSectionIndex = getPreviousSectionIndex();
-				renderCurrentSection();
-			}
-			else
-			{
-				loadDashboard((currentDashboardIndex - 1 + DASHBOARDS.length) % DASHBOARDS.length);
-			}
+			if (currentMode === 'landing') prevSection();
+			else loadDashboard((currentDashboardIndex - 1 + DASHBOARDS.length) % DASHBOARDS.length);
 		}
 
 		function cycleNext()
 		{
-			if (currentMode === 'landing')
-			{
-				currentSectionIndex = getNextSectionIndex();
-				renderCurrentSection();
-			}
-			else
-			{
-				loadDashboard((currentDashboardIndex + 1) % DASHBOARDS.length);
-			}
+			if (currentMode === 'landing') nextSection();
+			else loadDashboard((currentDashboardIndex + 1) % DASHBOARDS.length);
 		}
 
 		function requestFullscreenSafe(el)
@@ -2120,57 +1451,98 @@
 		function toggleFullscreen()
 		{
 			var fsElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
-
 			if (!fsElement) requestFullscreenSafe(viewer);
-			else if (document.exitFullscreen) document.exitFullscreen();
-			else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-			else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
-			else if (document.msExitFullscreen) document.msExitFullscreen();
-		}
-
-		function createAnimationFrameDebouncer(callback)
-		{
-			var frameId = 0;
-			return function()
+			else
 			{
-				if (frameId) window.cancelAnimationFrame(frameId);
-				frameId = window.requestAnimationFrame(function()
-				{
-					frameId = 0;
-					callback();
-				});
-			};
+				if (document.exitFullscreen) document.exitFullscreen();
+				else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+				else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+				else if (document.msExitFullscreen) document.msExitFullscreen();
+			}
 		}
-
-		var queueSidebarHeightSync = createAnimationFrameDebouncer(syncSidebarHeight);
 
 		buildNavigation();
-		renderCurrentSection(true);
+		buildMobileList();
+		renderSections();
 		showLanding();
-		queueSidebarHeightSync();
 
-		document.addEventListener('click', function(event)
+		if (mobileHelpModal && mobileHelpModal.parentNode !== document.body)
 		{
-			if (!customSelect.contains(event.target)) customSelect.removeAttribute('open');
-		});
+			document.body.appendChild(mobileHelpModal);
+		}
 
-		mobileListItems.addEventListener('click', function(event)
+		if (mobileHelpBtn && mobileHelpModal && mobileHelpClose)
 		{
-			var overviewButton = event.target.closest('#dhMobileOverviewBtn');
-			if (!overviewButton) return;
-			event.preventDefault();
-			mobileOverview.scrollIntoView({
-				behavior: 'smooth',
-				block: 'start'
+			mobileHelpBtn.addEventListener('click', function(e)
+			{
+				e.preventDefault(); e.stopPropagation(); mobileHelpModal.classList.add('active');
 			});
+			mobileHelpClose.addEventListener('click', function(e)
+			{
+				e.preventDefault(); e.stopPropagation(); mobileHelpModal.classList.remove('active');
+			});
+			mobileHelpModal.addEventListener('click', function(e)
+			{
+				if (e.target === mobileHelpModal) mobileHelpModal.classList.remove('active');
+			});
+		}
+
+		document.addEventListener('click', function(e)
+		{
+			if (!customSelect.contains(e.target)) customSelect.removeAttribute('open');
 		});
+
+		selectOptions.addEventListener('click', function(e)
+		{
+			var option = e.target.closest('.dh-option');
+			if (!option) return;
+			e.stopPropagation();
+			goToItem(option.getAttribute('data-nav-kind'), option.getAttribute('data-index'));
+		});
+
+		sidebarList.addEventListener('click', function(e)
+		{
+			var option = e.target.closest('.dh-nav-item');
+			if (!option) return;
+			goToItem(option.getAttribute('data-nav-kind'), option.getAttribute('data-index'));
+		});
+
+		mobileListItems.addEventListener('click', function(e)
+		{
+			var overviewButton = e.target.closest('#dhMobileOverviewBtn');
+			if (overviewButton)
+			{
+				mobileOverview.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				return;
+			}
+
+			var dashboardButton = e.target.closest('[data-mobile-dashboard]');
+			if (!dashboardButton) return;
+			loadDashboard(parseInt(dashboardButton.getAttribute('data-mobile-dashboard'), 10));
+			window.scrollTo({ top: viewer.getBoundingClientRect().top + window.pageYOffset - 16, behavior: 'smooth' });
+		});
+
+		function bindSectionDirectory(target)
+		{
+			target.addEventListener('click', function(e)
+			{
+				var link = e.target.closest('.dh-section-link');
+				if (!link) return;
+				e.preventDefault();
+				currentSectionIndex = parseInt(link.getAttribute('data-section-index'), 10);
+				renderSections();
+			});
+		}
+
+		bindSectionDirectory(sectionDirectory);
+		bindSectionDirectory(mobileSectionDirectory);
 
 		prevBtn.addEventListener('click', cyclePrev);
 		nextBtn.addEventListener('click', cycleNext);
-		desktopSectionPrev.addEventListener('click', cyclePrev);
-		desktopSectionNext.addEventListener('click', cycleNext);
-		mobileSectionPrev.addEventListener('click', cyclePrev);
-		mobileSectionNext.addEventListener('click', cycleNext);
+		sectionPrev.addEventListener('click', prevSection);
+		sectionNext.addEventListener('click', nextSection);
+		mobileSectionPrev.addEventListener('click', prevSection);
+		mobileSectionNext.addEventListener('click', nextSection);
 		fsBtn.addEventListener('click', toggleFullscreen);
 
 		frame.addEventListener('load', function()
@@ -2179,24 +1551,14 @@
 			if (!src || src === 'about:blank') return;
 			frame.classList.add('dh-frame-ready');
 			loading.classList.remove('active');
-			syncSidebarHeight();
 		});
 
-		document.addEventListener('keydown', function(event)
+		document.addEventListener('keydown', function(e)
 		{
-			if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) return;
-			if (/^(input|textarea|select)$/i.test((event.target && event.target.tagName) || '')) return;
-
-			if (event.key === 'ArrowLeft')
-			{
-				event.preventDefault();
-				cyclePrev();
-			}
-			else if (event.key === 'ArrowRight')
-			{
-				event.preventDefault();
-				cycleNext();
-			}
+			if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+			if (e.key === 'ArrowLeft') { e.preventDefault(); cyclePrev(); }
+			if (e.key === 'ArrowRight') { e.preventDefault(); cycleNext(); }
+			if (e.key === 'f' || e.key === 'F') toggleFullscreen();
 		});
 
 		var tourBackdrop = document.getElementById('dhTourBackdrop');
@@ -2208,36 +1570,16 @@
 		var tourSkip = document.getElementById('dhTourSkip');
 		var tourBack = document.getElementById('dhTourBack');
 		var tourNext = document.getElementById('dhTourNext');
-		var tourSteps = [
-		{
-			targetId: 'dhViewerHeader',
-			title: 'Choose where to start',
-			body: 'Use the always-visible sidebar on wider screens, or the dropdown on narrower screens, to switch between the overview page and any dashboard.'
-		},
-		{
-			targetId: 'dhIframeWrap',
-			title: 'Read or explore inside the viewer',
-			body: 'The overview content appears right in this viewer area, and every dashboard you choose loads here as well.'
-		},
-		{
-			targetGroup: ['dhPrev', 'dhNext'],
-			title: 'Move through sections or dashboards',
-			body: 'The arrows change sections when you are on the overview page and switch dashboards when you are viewing reports.'
-		},
-		{
-			targetId: 'dhFullscreen',
-			title: 'Go fullscreen',
-			body: 'Use fullscreen for a more focused dashboard view. Press Esc to exit.'
-		},
-		{
-			targetId: 'dhHelpBtn',
-			title: 'Need the tour again?',
-			body: 'Use this help button anytime to revisit the quick tour.'
-		}];
 
-		var tourIndex = 0;
-		var tourActive = false;
-		var firstTooltipTop = null;
+		var tourSteps = [
+		{ targetId: 'dhCustomSelect', title: 'Choose a view', body: 'Use the dropdown to open the overview or jump directly to any dashboard.' },
+		{ targetId: 'dhIframeWrap', title: 'Read or explore', body: 'The viewer holds either the public overview or the selected Power BI dashboard.' },
+		{ targetId: 'dhPrev', title: 'Move through content', body: 'Use the arrows to move between overview sections or switch dashboards once a report is open.', targetGroup: ['dhPrev', 'dhNext'] },
+		{ targetId: 'dhFullscreen', title: 'Go fullscreen', body: 'Expand the viewer when you want more room for reading or dashboard exploration.' },
+		{ targetId: 'dhHelpBtn', title: 'Need help again?', body: 'Open this tour any time from the help button.' }
+		];
+
+		var tourIndex = 0, tourActive = false;
 
 		function getCombinedRect(ids)
 		{
@@ -2245,92 +1587,56 @@
 			{
 				return document.getElementById(id).getBoundingClientRect();
 			});
-			var top = Math.min.apply(null, rects.map(function(rect)
-			{
-				return rect.top;
-			}));
-			var left = Math.min.apply(null, rects.map(function(rect)
-			{
-				return rect.left;
-			}));
-			var right = Math.max.apply(null, rects.map(function(rect)
-			{
-				return rect.right;
-			}));
-			var bottom = Math.max.apply(null, rects.map(function(rect)
-			{
-				return rect.bottom;
-			}));
-			return {
-				top: top,
-				left: left,
-				width: right - left,
-				height: bottom - top
-			};
+			var top = Math.min.apply(null, rects.map(function(r) { return r.top; }));
+			var left = Math.min.apply(null, rects.map(function(r) { return r.left; }));
+			var right = Math.max.apply(null, rects.map(function(r) { return r.right; }));
+			var bottom = Math.max.apply(null, rects.map(function(r) { return r.bottom; }));
+			return { top: top, left: left, width: right - left, height: bottom - top };
 		}
 
 		function positionSpotlightAndTooltip()
 		{
 			if (!tourActive) return;
-
 			var step = tourSteps[tourIndex];
 			var ids = step.targetGroup || [step.targetId];
 			var rect = getCombinedRect(ids);
 			var pad = 8;
-
 			tourSpotlight.style.top = (rect.top - pad) + 'px';
 			tourSpotlight.style.left = (rect.left - pad) + 'px';
 			tourSpotlight.style.width = (rect.width + pad * 2) + 'px';
 			tourSpotlight.style.height = (rect.height + pad * 2) + 'px';
-
 			var tooltipRect = tourTooltip.getBoundingClientRect();
-			var tooltipHeight = tooltipRect.height || 200;
-			var tooltipWidth = tooltipRect.width || 340;
-			var gap = 14;
-			var topPos;
-			var leftPos;
-
-			if (tourIndex === 1 && firstTooltipTop !== null)
+			var tooltipH = tooltipRect.height || 200;
+			var tooltipW = tooltipRect.width || 340;
+			var gap = 16;
+			var topPos = rect.top + rect.height + pad + gap;
+			if (topPos + tooltipH > window.innerHeight - 10)
 			{
-				topPos = firstTooltipTop;
-				leftPos = iframeWrap.getBoundingClientRect().left + (iframeWrap.getBoundingClientRect().width / 2) - (tooltipWidth / 2);
+				topPos = rect.top - pad - gap - tooltipH;
+				if (topPos < 10) topPos = 10;
 			}
-			else
-			{
-				topPos = rect.top + rect.height + pad + gap;
-				if (topPos + tooltipHeight > window.innerHeight - 10)
-				{
-					topPos = rect.top - tooltipHeight - pad - gap;
-					if (topPos < 10) topPos = 10;
-				}
-				leftPos = rect.left + (rect.width / 2) - (tooltipWidth / 2);
-			}
-
+			var leftPos = rect.left + (rect.width / 2) - (tooltipW / 2);
 			if (leftPos < 10) leftPos = 10;
-			if (leftPos + tooltipWidth > window.innerWidth - 10) leftPos = window.innerWidth - tooltipWidth - 10;
-
+			if (leftPos + tooltipW > window.innerWidth - 10) leftPos = window.innerWidth - tooltipW - 10;
 			tourTooltip.style.top = topPos + 'px';
 			tourTooltip.style.left = leftPos + 'px';
-
-			if (tourIndex === 0) firstTooltipTop = topPos;
 		}
 
-		function showStep(index)
+		function showStep(i)
 		{
-			tourIndex = index;
-			tourStep.textContent = 'Step ' + (index + 1) + ' of ' + tourSteps.length;
-			tourTitle.textContent = tourSteps[index].title;
-			tourBody.textContent = tourSteps[index].body;
-			tourBack.disabled = (index === 0);
-			tourNext.textContent = index === tourSteps.length - 1 ? 'Finish' : 'Next';
-			window.requestAnimationFrame(positionSpotlightAndTooltip);
+			tourIndex = i;
+			var step = tourSteps[i];
+			tourStep.textContent = 'Step ' + (i + 1) + ' of ' + tourSteps.length;
+			tourTitle.textContent = step.title;
+			tourBody.textContent = step.body;
+			tourBack.disabled = (i === 0);
+			tourNext.textContent = (i === tourSteps.length - 1) ? 'Finish' : 'Next';
+			requestAnimationFrame(positionSpotlightAndTooltip);
 		}
 
 		function startTour()
 		{
-			if (isMobileView()) return;
 			tourActive = true;
-			firstTooltipTop = null;
 			tourBackdrop.classList.add('active');
 			tourSpotlight.classList.add('active');
 			tourTooltip.classList.add('active');
@@ -2348,45 +1654,11 @@
 		helpBtn.addEventListener('click', startTour);
 		tourSkip.addEventListener('click', endTour);
 		tourBackdrop.addEventListener('click', endTour);
-		tourBack.addEventListener('click', function()
-		{
-			if (tourIndex > 0) showStep(tourIndex - 1);
-		});
-		tourNext.addEventListener('click', function()
-		{
-			if (tourIndex < tourSteps.length - 1) showStep(tourIndex + 1);
-			else endTour();
-		});
-
-		document.addEventListener('keydown', function(event)
-		{
-			if (!tourActive) return;
-			if (event.key === 'Escape') endTour();
-			else if (event.key === 'ArrowRight') tourNext.click();
-			else if (event.key === 'ArrowLeft') tourBack.click();
-		});
-
-		window.addEventListener('resize', function()
-		{
-			queueSidebarHeightSync();
-			positionSpotlightAndTooltip();
-		});
-		window.addEventListener('load', queueSidebarHeightSync);
-		document.addEventListener('fullscreenchange', queueSidebarHeightSync);
-		document.addEventListener('webkitfullscreenchange', queueSidebarHeightSync);
-
-		if (window.ResizeObserver)
-		{
-			var layoutObserver = new ResizeObserver(function()
-			{
-				queueSidebarHeightSync();
-			});
-
-			if (viewer) layoutObserver.observe(viewer);
-			if (viewerHeader) layoutObserver.observe(viewerHeader);
-			if (iframeWrap) layoutObserver.observe(iframeWrap);
-		}
-
+		tourBack.addEventListener('click', function() { if (tourIndex > 0) showStep(tourIndex - 1); });
+		tourNext.addEventListener('click', function() { if (tourIndex < tourSteps.length - 1) showStep(tourIndex + 1); else endTour(); });
+		document.addEventListener('keydown', function(e) { if (!tourActive) return; if (e.key === 'Escape') endTour(); });
+		window.addEventListener('resize', positionSpotlightAndTooltip);
 		window.addEventListener('scroll', positionSpotlightAndTooltip, true);
 	})();
+
 </script>
