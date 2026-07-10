@@ -208,23 +208,13 @@
 	}
 
 	.dh-sidebar-head {
-		padding: 0.25rem 0.25rem 0.7rem;
+		padding: 0.2rem 0.25rem 0.55rem;
 		border-bottom: 1px solid var(--border-light);
 		margin-bottom: 0;
 	}
 
-	.dh-sidebar-eyebrow {
-		display: block;
-		font-size: 0.72rem;
-		font-weight: 700;
-		letter-spacing: 0.14em;
-		text-transform: uppercase;
-		color: var(--accent-red);
-		margin-bottom: 0.35rem;
-	}
-
 	.dh-sidebar-head h2 {
-		font-size: 0.96rem;
+		font-size: 0.88rem;
 		font-weight: 600;
 		line-height: 1.35;
 	}
@@ -625,7 +615,6 @@
 		min-height: 100%;
 	}
 
-	.dh-landing-hero,
 	.dh-landing-card {
 		background: rgba(255, 255, 255, 0.86);
 		backdrop-filter: blur(16px);
@@ -635,17 +624,17 @@
 		border-radius: 24px;
 	}
 
-	.dh-landing-hero {
-		padding: 1.15rem 1.3rem;
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-	}
-
 	.dh-landing-logo {
 		display: block;
-		height: 2.5rem;
+		height: 1.55rem;
 		width: auto;
+	}
+
+	.dh-overview-brand {
+		display: flex;
+		flex-direction: column;
+		gap: 0.6rem;
+		margin-bottom: 1rem;
 	}
 
 	.dh-landing-kicker {
@@ -659,18 +648,6 @@
 		font-weight: 700;
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
-	}
-
-	.dh-landing-hero h2 {
-		font-size: clamp(1.35rem, 1.8vw, 1.85rem);
-		line-height: 1.2;
-		font-weight: 700;
-	}
-
-	.dh-landing-hero p {
-		font-size: 0.93rem;
-		line-height: 1.65;
-		color: var(--text-secondary);
 	}
 
 	.dh-landing-content {
@@ -732,6 +709,18 @@
 		min-height: var(--dh-overview-card-min-height);
 		display: flex;
 		flex-direction: column;
+	}
+
+	.dh-overview-card .dh-section-controls {
+		padding: 0 0 1rem;
+		margin-bottom: 1rem;
+		border-bottom: 1px solid var(--border-light);
+	}
+
+	.dh-overview-card .dh-landing-card-head {
+		padding-bottom: 0.85rem;
+		margin-bottom: 0;
+		border-bottom: none;
 	}
 
 	.dh-landing-card-head {
@@ -1111,23 +1100,21 @@
 		<div class="dh-mobile-list-items" id="dhMobileListItems"></div>
 		<section class="dh-landing" id="dhMobileOverview" style="position:static; inset:auto; margin-top:0.95rem; padding:0; background:none; overflow:visible;">
 			<div class="dh-landing-shell" style="grid-template-columns:1fr;">
-				<div class="dh-landing-hero">
-					<img class="dh-landing-logo dh-logo-img fr-fil fr-dib" src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub">
-					<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
-					<h2>We Are All Data Stewards</h2>
-					<p>This overview brings together LRSD's approach to data governance, responsible AI use, and the work underway across the division.</p>
-				</div>
 				<div class="dh-landing-content">
-					<div class="dh-section-controls">
-						<button class="dh-arrow-btn" id="dhMobileSectionPrev" type="button" title="Previous section">&larr;</button>
-						<div class="dh-section-scroll" id="dhMobileSectionPills"></div>
-						<button class="dh-arrow-btn" id="dhMobileSectionNext" type="button" title="Next section">&rarr;</button>
-					</div>
-					<div class="dh-landing-card" style="min-height:0;">
+					<div class="dh-landing-card dh-overview-card" style="min-height:0;">
+						<div class="dh-overview-brand">
+							<img class="dh-landing-logo dh-logo-img fr-fil fr-dib" src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub">
+							<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
+						</div>
 						<div class="dh-landing-card-head">
-							<div class="dh-section-eyebrow" id="dhMobileSectionEyebrow">Section 1 of 8</div>
-							<h3 class="dh-section-title" id="dhMobileSectionTitle">Section title</h3>
-							<p class="dh-section-subtitle" id="dhMobileSectionSubtitle">Section summary</p>
+							<div class="dh-section-eyebrow" id="dhMobileSectionEyebrow">Introduction</div>
+							<h3 class="dh-section-title" id="dhMobileSectionTitle">Introduction</h3>
+							<p class="dh-section-subtitle" id="dhMobileSectionSubtitle">Start here, then move through each section or jump ahead using the titles below.</p>
+						</div>
+						<div class="dh-section-controls">
+							<button class="dh-arrow-btn" id="dhMobileSectionPrev" type="button" title="Previous section">&larr;</button>
+							<div class="dh-section-scroll" id="dhMobileSectionPills"></div>
+							<button class="dh-arrow-btn" id="dhMobileSectionNext" type="button" title="Next section">&rarr;</button>
 						</div>
 						<div class="dh-section-body" id="dhMobileSectionBody"></div>
 					</div>
@@ -1138,8 +1125,7 @@
 	<div class="dh-main">
 		<aside class="dh-sidebar" id="dhSidebar">
 			<div class="dh-sidebar-head">
-				<span class="dh-sidebar-eyebrow">Explore</span>
-				<h2>Overview + dashboards</h2>
+				<h2>Explore</h2>
 			</div>
 			<div class="dh-sidebar-list" id="dhSidebarList"></div>
 		</aside>
@@ -1162,7 +1148,7 @@
 					</div>
 				</div>
 				<div class="dh-nav-controls">
-					<span class="dh-report-counter" id="dhCounter">Section 1 / 8</span>
+					<span class="dh-report-counter" id="dhCounter">Introduction</span>
 					<div class="dh-nav-arrows">
 						<button class="dh-arrow-btn" id="dhPrev" type="button" title="Previous section">&larr;</button>
 						<button class="dh-arrow-btn" id="dhNext" type="button" title="Next section">&rarr;</button>
@@ -1179,23 +1165,21 @@
 				</div>
 				<div class="dh-landing" id="dhLanding">
 					<div class="dh-landing-shell">
-						<div class="dh-landing-hero">
-							<img class="dh-landing-logo dh-logo-img fr-fil fr-dib" src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub">
-							<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
-							<h2>We Are All Data Stewards</h2>
-							<p>Explore LRSD's public-facing story about data stewardship, responsible AI use, the systems already in place, and the work that continues ahead.</p>
-						</div>
 						<div class="dh-landing-content">
-							<div class="dh-section-controls">
-								<button class="dh-arrow-btn" id="dhSectionPrev" type="button" title="Previous section">&larr;</button>
-								<div class="dh-section-scroll" id="dhSectionPills"></div>
-								<button class="dh-arrow-btn" id="dhSectionNext" type="button" title="Next section">&rarr;</button>
-							</div>
-							<div class="dh-landing-card">
+							<div class="dh-landing-card dh-overview-card">
+								<div class="dh-overview-brand">
+									<img class="dh-landing-logo dh-logo-img fr-fil fr-dib" src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub">
+									<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
+								</div>
 								<div class="dh-landing-card-head">
-									<div class="dh-section-eyebrow" id="dhSectionEyebrow">Section 1 of 8</div>
-									<h3 class="dh-section-title" id="dhSectionTitle">Section title</h3>
-									<p class="dh-section-subtitle" id="dhSectionSubtitle">Section summary</p>
+									<div class="dh-section-eyebrow" id="dhSectionEyebrow">Introduction</div>
+									<h3 class="dh-section-title" id="dhSectionTitle">Introduction</h3>
+									<p class="dh-section-subtitle" id="dhSectionSubtitle">Start here, then move through each section or jump ahead using the titles below.</p>
+								</div>
+								<div class="dh-section-controls">
+									<button class="dh-arrow-btn" id="dhSectionPrev" type="button" title="Previous section">&larr;</button>
+									<div class="dh-section-scroll" id="dhSectionPills"></div>
+									<button class="dh-arrow-btn" id="dhSectionNext" type="button" title="Next section">&rarr;</button>
 								</div>
 								<div class="dh-section-body" id="dhSectionBody"></div>
 							</div>
@@ -1214,6 +1198,12 @@
 			title: 'Data Governance & AI Overview',
 			subtitle: 'Landing page',
 			icon: 'https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png'
+		};
+
+		var LANDING_INTRO = {
+			title: 'Introduction',
+			summary: 'Start here, then move through each section or jump ahead using the titles below.',
+			bodyHtml: '<p>Explore LRSD\'s public-facing story about data stewardship, responsible AI use, the systems already in place, and the work that continues ahead.</p><p>This overview brings together LRSD\'s approach to data governance, responsible AI use, and the work underway across the division.</p>'
 		};
 
 		var DASHBOARDS = [
@@ -1355,7 +1345,7 @@
 
 		var currentMode = 'landing';
 		var currentDashboardIndex = -1;
-		var currentSectionIndex = 0;
+		var currentSectionIndex = -1;
 
 		function escapeHtml(value)
 		{
@@ -1487,8 +1477,9 @@
 
 		function renderCurrentSection()
 		{
-			var section = LANDING_SECTIONS[currentSectionIndex];
-			var eyebrowText = 'Section ' + (currentSectionIndex + 1) + ' of ' + LANDING_SECTIONS.length;
+			var isIntro = currentSectionIndex < 0;
+			var section = isIntro ? LANDING_INTRO : LANDING_SECTIONS[currentSectionIndex];
+			var eyebrowText = isIntro ? 'Introduction' : 'Section ' + (currentSectionIndex + 1) + ' of ' + LANDING_SECTIONS.length;
 
 			buildSectionPills(sectionPills);
 			buildSectionPills(mobileSectionPills);
@@ -1527,7 +1518,7 @@
 				activeTitle.textContent = LANDING_ITEM.title;
 				selectText.textContent = LANDING_ITEM.title;
 				activeIcon.setAttribute('src', LANDING_ITEM.icon);
-				counter.textContent = 'Section ' + (currentSectionIndex + 1) + ' / ' + LANDING_SECTIONS.length;
+				counter.textContent = currentSectionIndex < 0 ? 'Introduction' : 'Section ' + (currentSectionIndex + 1) + ' / ' + LANDING_SECTIONS.length;
 				prevBtn.setAttribute('title', 'Previous section');
 				nextBtn.setAttribute('title', 'Next section');
 			}
@@ -1598,7 +1589,7 @@
 		{
 			if (currentMode === 'landing')
 			{
-				currentSectionIndex = (currentSectionIndex - 1 + LANDING_SECTIONS.length) % LANDING_SECTIONS.length;
+				currentSectionIndex = currentSectionIndex < 0 ? LANDING_SECTIONS.length - 1 : currentSectionIndex - 1;
 				renderCurrentSection();
 			}
 			else
@@ -1611,7 +1602,7 @@
 		{
 			if (currentMode === 'landing')
 			{
-				currentSectionIndex = (currentSectionIndex + 1) % LANDING_SECTIONS.length;
+				currentSectionIndex = currentSectionIndex < 0 ? 0 : (currentSectionIndex === LANDING_SECTIONS.length - 1 ? -1 : currentSectionIndex + 1);
 				renderCurrentSection();
 			}
 			else
