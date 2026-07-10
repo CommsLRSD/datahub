@@ -884,12 +884,8 @@
 	}
 
 </style>
-<div class="dh-tour-backdrop" id="dhTourBackdrop">
-	<br>
-</div>
-<div class="dh-tour-spotlight" id="dhTourSpotlight">
-	<br>
-</div>
+<div class="dh-tour-backdrop" id="dhTourBackdrop"></div>
+<div class="dh-tour-spotlight" id="dhTourSpotlight"></div>
 <div class="dh-tour-tooltip" id="dhTourTooltip">
 	<div class="dh-tour-step" id="dhTourStep">Step 1 of 5</div>
 
@@ -913,17 +909,15 @@
 <div class="data-hub-wrapper">
 	<header class="dh-header">
 		<div class="dh-header-content">
-			<div class="dh-logo"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-logo-img dh-logo-horizontal fr-fil fr-dib">&nbsp; <img src="https://media.lrsd.net/media/Default/frl/dh-logo-vert-fc-svg-2x.d681e083557.png" alt="Data Hub" class="dh-logo-img dh-logo-vertical fr-fic fr-dii"></div>
+			<div class="dh-logo"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-logo-img dh-logo-horizontal fr-fil fr-dib"> <img src="https://media.lrsd.net/media/Default/frl/dh-logo-vert-fc-svg-2x.d681e083557.png" alt="Data Hub" class="dh-logo-img dh-logo-vertical fr-fic fr-dii"></div>
 			<button type="button" class="dh-mobile-help-btn" id="dhMobileHelpBtn" title="About these dashboards">?</button>
 
-			<p class="dh-tagline">We are committed to using data to inform decision-making, monitor progress, and share our story with the community.&nbsp;
+			<p class="dh-tagline">We are committed to using data to inform decision-making, monitor progress, and share our story with the community.
 				<br>This involves a growth mindset and a solid grounding in data ethics, tools, and processes.</p>
 		</div>
 	</header>
 	<div class="dh-mobile-list" id="dhMobileList">
-		<div class="dh-mobile-list-items" id="dhMobileListItems">
-			<br>
-		</div>
+		<div class="dh-mobile-list-items" id="dhMobileListItems"></div>
 		<section class="dh-mobile-overview" id="dhMobileOverview">
 			<div class="dh-mobile-overview-card">
 				<div class="dh-mobile-overview-head">
@@ -951,10 +945,8 @@
 			<div class="dh-viewer-header">
 				<div class="dh-report-info">
 					<details class="dh-custom-select" id="dhCustomSelect">
-						<summary class="dh-select-trigger" id="dhSelectTrigger"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" class="dh-item-icon fr-fil fr-dib" id="dhActiveIcon" alt=""> <span class="dh-item-text" id="dhActiveText">Data Governance &amp; AI Overview</span> &nbsp;<img src="https://media.lrsd.net/media/Default/frl/dropdown-arrow.23ae4383430.png" class="dh-chevron fr-fil fr-dib" alt="Dropdown Arrow"></summary>
-						<div class="dh-select-options" id="dhSelectOptions">
-							<br>
-						</div>
+						<summary class="dh-select-trigger" id="dhSelectTrigger"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" class="dh-item-icon fr-fil fr-dib" id="dhActiveIcon" alt=""> <span class="dh-item-text" id="dhActiveText">Data Governance &amp; AI Overview</span> <img src="https://media.lrsd.net/media/Default/frl/dropdown-arrow.23ae4383430.png" class="dh-chevron fr-fil fr-dib" alt="Dropdown Arrow"></summary>
+						<div class="dh-select-options" id="dhSelectOptions"></div>
 					</details>
 				</div>
 				<div class="dh-nav-controls"><span class="dh-report-counter" id="dhCounter">Section 1 of 9</span>
@@ -974,9 +966,7 @@
 				<div class="dh-iframe-wrap" id="dhIframeWrap">
 					<iframe name="dhFrame" id="dhFrame" title="Data Hub Viewer" allowfullscreen=""></iframe>
 					<div class="dh-loading" id="dhLoading">
-						<div class="dh-spinner">
-							<br>
-						</div><span>Loading Dashboard...</span></div>
+						<div class="dh-spinner"></div><span>Loading Dashboard...</span></div>
 					<div class="dh-landing" id="dhLanding">
 						<div class="dh-landing-shell">
 							<aside class="dh-overview-nav">
@@ -1190,6 +1180,8 @@
 		var mobileSectionPrev = document.getElementById('dhMobileSectionPrev');
 		var mobileSectionNext = document.getElementById('dhMobileSectionNext');
 
+		var ALLOWED_SECTION_CLASS_NAMES = ['dh-agent-grid', 'dh-agent-card', 'dh-resource-list', 'dh-resource-note'];
+		var FRAME_REUSE_DELAY_MS = 120;
 		var currentMode = 'landing';
 		var currentSectionIndex = 0;
 		var currentDashboardIndex = -1;
@@ -1198,18 +1190,25 @@
 
 		function escapeHtml(s)
 		{
-			return String(s).replace(/[&<>"']/g, function(ch)
+			return String(s).replace(/[&<>"'`]/g, function(ch)
 			{
-				return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch];
+				return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '`': '&#96;' })[ch];
 			});
 		}
 
 		function sanitizeUrl(value)
 		{
 			if (!value) return '';
-			var trimmed = String(value).trim();
-			if (/^(https?:)?\/\//i.test(trimmed)) return trimmed;
-			return '';
+			try
+			{
+				var parsed = new URL(String(value).trim(), window.location.href);
+				if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') return '';
+				return parsed.href;
+			}
+			catch (e)
+			{
+				return '';
+			}
 		}
 
 		function sanitizeSectionHtml(html)
@@ -1242,7 +1241,7 @@
 					{
 						node.setAttribute('class', attr.value.split(/\s+/).filter(function(className)
 						{
-							return ['dh-agent-grid', 'dh-agent-card', 'dh-resource-list', 'dh-resource-note'].indexOf(className) !== -1;
+							return ALLOWED_SECTION_CLASS_NAMES.indexOf(className) !== -1;
 						}).join(' '));
 					}
 				});
@@ -1400,9 +1399,16 @@
 			frame.classList.remove('dh-frame-ready');
 			loading.classList.add('active');
 			if (frame.getAttribute('src') !== d.url) frame.setAttribute('src', d.url);
-			else window.setTimeout(function() { frame.classList.add('dh-frame-ready'); loading.classList.remove('active'); }, 120);
+			else window.setTimeout(function() { frame.classList.add('dh-frame-ready'); loading.classList.remove('active'); }, FRAME_REUSE_DELAY_MS);
 			customSelect.removeAttribute('open');
 			updateSelectedNavigation();
+		}
+
+		function isEditableTarget(target)
+		{
+			if (!target) return false;
+			if (target.isContentEditable) return true;
+			return /^(input|textarea|select)$/i.test(target.tagName || '');
 		}
 
 		function goToItem(kind, idx)
@@ -1555,7 +1561,7 @@
 
 		document.addEventListener('keydown', function(e)
 		{
-			if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+			if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || isEditableTarget(e.target)) return;
 			if (e.key === 'ArrowLeft') { e.preventDefault(); cyclePrev(); }
 			if (e.key === 'ArrowRight') { e.preventDefault(); cycleNext(); }
 			if (e.key === 'f' || e.key === 'F') toggleFullscreen();
