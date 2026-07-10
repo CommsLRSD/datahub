@@ -203,7 +203,6 @@
 		flex-direction: column;
 		gap: 0.55rem;
 		height: var(--dh-sidebar-max-height);
-		max-height: var(--dh-sidebar-max-height);
 		overflow: hidden;
 	}
 
@@ -1288,6 +1287,7 @@
 	(function()
 	{
 		var MOBILE_BREAKPOINT = 760;
+		var DESKTOP_SIDEBAR_BREAKPOINT = 1180;
 		var LANDING_ITEM = {
 			title: 'Data Governance & AI Overview',
 			subtitle: 'Landing page',
@@ -1582,7 +1582,7 @@
 
 		function getCurrentSectionTagLabel()
 		{
-			return 'Section ' + (currentSectionIndex === LANDING_INTRO_SECTION_INDEX ? 0 : currentSectionIndex + 1) + ' of ' + LANDING_SECTIONS.length;
+			return currentSectionIndex === LANDING_INTRO_SECTION_INDEX ? LANDING_SECTIONS.length + ' sections' : 'Section ' + (currentSectionIndex + 1) + ' of ' + LANDING_SECTIONS.length;
 		}
 
 		function buildSectionDirectory(container)
@@ -1654,7 +1654,7 @@
 		function syncSidebarHeight()
 		{
 			if (!dataHubWrapper) return;
-			if (window.innerWidth <= 1180 || !viewer)
+			if (window.innerWidth <= DESKTOP_SIDEBAR_BREAKPOINT || !viewer)
 			{
 				dataHubWrapper.style.setProperty('--dh-sidebar-max-height', 'auto');
 				return;
