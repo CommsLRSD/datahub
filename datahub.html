@@ -1201,7 +1201,10 @@
 		};
 
 		var INTRO_SECTION_INDEX = -1;
-		var LANDING_INTRO_BODY_HTML = '<p>Explore LRSD\'s public-facing story about data stewardship, responsible AI use, the systems already in place, and the work that continues ahead.</p><p>This overview brings together LRSD\'s approach to data governance, responsible AI use, and the work underway across the division.</p>';
+		var LANDING_INTRO_BODY_HTML = `
+			<p>Explore LRSD's public-facing story about data stewardship, responsible AI use, the systems already in place, and the work that continues ahead.</p>
+			<p>This overview brings together LRSD's approach to data governance, responsible AI use, and the work underway across the division.</p>
+		`;
 
 		var LANDING_INTRO = {
 			title: 'Introduction',
@@ -1478,10 +1481,22 @@
 			container.innerHTML = html;
 		}
 
+		function getCurrentLandingSection()
+		{
+			if (currentSectionIndex === INTRO_SECTION_INDEX) return LANDING_INTRO;
+			if (currentSectionIndex < 0 || currentSectionIndex >= LANDING_SECTIONS.length)
+			{
+				currentSectionIndex = INTRO_SECTION_INDEX;
+				return LANDING_INTRO;
+			}
+
+			return LANDING_SECTIONS[currentSectionIndex];
+		}
+
 		function renderCurrentSection()
 		{
+			var section = getCurrentLandingSection();
 			var isIntro = currentSectionIndex === INTRO_SECTION_INDEX;
-			var section = isIntro ? LANDING_INTRO : LANDING_SECTIONS[currentSectionIndex];
 			var eyebrowText = isIntro ? 'Introduction' : 'Section ' + (currentSectionIndex + 1) + ' of ' + LANDING_SECTIONS.length;
 
 			buildSectionPills(sectionPills);
