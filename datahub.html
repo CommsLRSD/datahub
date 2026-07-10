@@ -1657,7 +1657,12 @@
 
 		function buildNavMarkup(kind, index, title, subtitle, icon)
 		{
-			return '<a class="dh-nav-item" href="' + getNavigationHref(kind, index) + '"' + (kind === 'dashboard' ? ' target="dhFrame"' : '') + ' data-nav-kind="' + kind + '"' + (typeof index === 'number' ? ' data-index="' + index + '"' : '') + '><img src="' + sanitizeUrl(icon) + '" alt="" aria-hidden="true" class="dh-nav-thumb fr-fil fr-dib"><span class="dh-nav-copy"><strong>' + escapeHtml(title) + '</strong><span>' + escapeHtml(subtitle) + '</span></span></a>';
+			return [
+				'<a class="dh-nav-item" href="' + getNavigationHref(kind, index) + '"' + (kind === 'dashboard' ? ' target="dhFrame"' : '') + ' data-nav-kind="' + kind + '"' + (typeof index === 'number' ? ' data-index="' + index + '"' : '') + '>',
+				'<img src="' + sanitizeUrl(icon) + '" alt="" aria-hidden="true" class="dh-nav-thumb fr-fil fr-dib">',
+				'<span class="dh-nav-copy"><strong>' + escapeHtml(title) + '</strong><span>' + escapeHtml(subtitle) + '</span></span>',
+				'</a>'
+			].join('');
 		}
 
 		function buildOptionMarkup(kind, index, title, icon)
@@ -1937,7 +1942,7 @@
 		// skipScroll is used on initial render so the intro state doesn't animate the landing panel.
 		function renderCurrentSection(skipScroll)
 		{
-			var section = getCurrentLandingSection();
+			var currentSection = getCurrentLandingSection();
 			var eyebrowText = getCurrentSectionLabel();
 			var tagText = getCurrentSectionTagLabel();
 
@@ -1945,13 +1950,13 @@
 			buildSectionDirectory(mobileSectionDirectory);
 
 			sectionEyebrow.textContent = tagText;
-			sectionTitle.textContent = section.title;
-			sectionSubtitle.textContent = section.summary;
+			sectionTitle.textContent = currentSection.title;
+			sectionSubtitle.textContent = currentSection.summary;
 			sectionStatus.textContent = eyebrowText;
 
 			mobileSectionEyebrow.textContent = tagText;
-			mobileSectionTitle.textContent = section.title;
-			mobileSectionSubtitle.textContent = section.summary;
+			mobileSectionTitle.textContent = currentSection.title;
+			mobileSectionSubtitle.textContent = currentSection.summary;
 			mobileSectionStatus.textContent = eyebrowText;
 
 			renderOverviewBody();
