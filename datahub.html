@@ -1748,7 +1748,8 @@
 
 		function getOverviewArticleId(index)
 		{
-			if (typeof index !== 'number' || !isFinite(index)) return 'dh-overview-section-introduction';
+			if (typeof index !== 'number') return 'dh-overview-section-introduction';
+			if (!isFinite(index)) return 'dh-overview-section-introduction';
 			return index === LANDING_INTRO_SECTION_INDEX ? 'dh-overview-section-introduction' : 'dh-overview-section-' + index;
 		}
 
@@ -1948,9 +1949,9 @@
 		// skipScroll is used on initial render so the intro state doesn't animate the landing panel.
 		function renderCurrentSection(skipScroll)
 		{
-			var currentSection = getCurrentLandingSection();
+			var selectedSection = getCurrentLandingSection();
 			// Preserve the intro state if a malformed section index ever slips through.
-			if (!currentSection) currentSection = LANDING_INTRO_SECTION;
+			var resolvedSection = selectedSection || LANDING_INTRO_SECTION;
 			var eyebrowText = getCurrentSectionLabel();
 			var tagText = getCurrentSectionTagLabel();
 
@@ -1958,13 +1959,13 @@
 			buildSectionDirectory(mobileSectionDirectory);
 
 			sectionEyebrow.textContent = tagText;
-			sectionTitle.textContent = currentSection.title;
-			sectionSubtitle.textContent = currentSection.summary;
+			sectionTitle.textContent = resolvedSection.title;
+			sectionSubtitle.textContent = resolvedSection.summary;
 			sectionStatus.textContent = eyebrowText;
 
 			mobileSectionEyebrow.textContent = tagText;
-			mobileSectionTitle.textContent = currentSection.title;
-			mobileSectionSubtitle.textContent = currentSection.summary;
+			mobileSectionTitle.textContent = resolvedSection.title;
+			mobileSectionSubtitle.textContent = resolvedSection.summary;
 			mobileSectionStatus.textContent = eyebrowText;
 
 			renderOverviewBody();
@@ -2130,15 +2131,14 @@
 			else if (document.msExitFullscreen) document.msExitFullscreen();
 		}
 
-		var queuedSidebarSync = false;
+		var queuedSidebarSyncFrame = 0;
 
 		function queueSidebarHeightSync()
 		{
-			if (queuedSidebarSync) return;
-			queuedSidebarSync = true;
-			window.requestAnimationFrame(function()
+			if (queuedSidebarSyncFrame) window.cancelAnimationFrame(queuedSidebarSyncFrame);
+			queuedSidebarSyncFrame = window.requestAnimationFrame(function()
 			{
-				queuedSidebarSync = false;
+				queuedSidebarSyncFrame = 0;
 				syncSidebarHeight();
 			});
 		}
