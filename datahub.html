@@ -8,6 +8,7 @@
 		--dh-sidebar-height: auto;
 		--dh-viewer-height: 760px;
 		--dh-viewer-max-height: 95vh;
+		--dh-section-directory-offset: 2.7rem;
 		--dh-overview-card-min-height: 420px;
 		--accent-red: #be5247;
 		--accent-green: #2ba680;
@@ -829,7 +830,7 @@
 		margin-bottom: 0;
 		position: sticky;
 		top: 0;
-		max-height: calc(var(--dh-viewer-height) - 2.7rem);
+		max-height: calc(var(--dh-viewer-height) - var(--dh-section-directory-offset));
 		overflow-y: auto;
 	}
 
@@ -1389,6 +1390,10 @@
 		var MOBILE_BREAKPOINT = 760;
 		// Keep this in sync with the desktop-only sidebar media query.
 		var DESKTOP_SIDEBAR_BREAKPOINT = 1181;
+		var VIEWER_MAX_VIEWPORT_RATIO = 0.95;
+		var VIEWER_MIN_FRAME_HEIGHT_RATIO = 0.42;
+		var VIEWER_MIN_FRAME_HEIGHT_PX = 360;
+		var VIEWER_MAX_FRAME_HEIGHT_PX = 440;
 		var LANDING_ITEM = {
 			title: 'Data Governance & AI Overview',
 			subtitle: 'Landing page',
@@ -1783,9 +1788,9 @@
 			if (!viewerWidth) return;
 
 			var headerHeight = viewerHeader.offsetHeight || 0;
-			var maxViewerHeight = Math.floor(window.innerHeight * 0.95);
+			var maxViewerHeight = Math.floor(window.innerHeight * VIEWER_MAX_VIEWPORT_RATIO);
 			var targetFrameHeight = Math.round(viewerWidth * 9 / 16);
-			var minimumFrameHeight = Math.max(360, Math.min(440, Math.floor(window.innerHeight * 0.42)));
+			var minimumFrameHeight = Math.max(VIEWER_MIN_FRAME_HEIGHT_PX, Math.min(VIEWER_MAX_FRAME_HEIGHT_PX, Math.floor(window.innerHeight * VIEWER_MIN_FRAME_HEIGHT_RATIO)));
 			var totalHeight = Math.min(maxViewerHeight, Math.max(headerHeight + minimumFrameHeight, headerHeight + targetFrameHeight));
 
 			dataHubWrapper.style.setProperty('--dh-viewer-height', totalHeight + 'px');
