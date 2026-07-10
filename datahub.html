@@ -5,6 +5,7 @@
 
 	.data-hub-wrapper {
 		--dh-aspect-ratio: 16 / 9.55;
+		--dh-desktop-frame-height: clamp(680px, calc(100vw * 0.57), 760px);
 		--accent-red: #be5247;
 		--accent-green: #2ba680;
 		--accent-red-light: rgba(190, 82, 71, 0.12);
@@ -176,12 +177,13 @@
 	}
 
 	.dh-main {
-		max-width: 1800px;
+		max-width: 1900px;
 		margin: 0 auto;
 		padding: 1.5rem;
 		display: grid;
-		grid-template-columns: minmax(280px, 320px) minmax(0, 1fr);
-		gap: 1.5rem;
+		grid-template-columns: minmax(220px, 248px) minmax(0, 1fr);
+		gap: 1rem;
+		align-items: start;
 		width: 100%;
 	}
 
@@ -192,16 +194,21 @@
 		border: 1px solid var(--border-light);
 		border-radius: var(--radius-xl);
 		box-shadow: var(--shadow-medium);
-		padding: 1.1rem;
+		padding: 0.85rem;
 		align-self: start;
 		position: sticky;
 		top: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.7rem;
+		max-height: calc(var(--dh-desktop-frame-height) + 5rem);
+		overflow: hidden;
 	}
 
 	.dh-sidebar-head {
-		padding: 0.45rem 0.45rem 0.95rem;
+		padding: 0.25rem 0.25rem 0.7rem;
 		border-bottom: 1px solid var(--border-light);
-		margin-bottom: 0.9rem;
+		margin-bottom: 0;
 	}
 
 	.dh-sidebar-eyebrow {
@@ -215,23 +222,26 @@
 	}
 
 	.dh-sidebar-head h2 {
-		font-size: 1.05rem;
+		font-size: 0.96rem;
 		font-weight: 600;
-		line-height: 1.4;
+		line-height: 1.35;
 	}
 
 	.dh-sidebar-list {
 		display: flex;
 		flex-direction: column;
-		gap: 0.45rem;
+		gap: 0.35rem;
+		min-height: 0;
+		overflow-y: auto;
+		padding-right: 0.2rem;
 	}
 
 	.dh-nav-item {
 		display: flex;
 		align-items: center;
-		gap: 0.75rem;
+		gap: 0.6rem;
 		width: 100%;
-		padding: 0.72rem 0.8rem;
+		padding: 0.56rem 0.62rem;
 		border: 1px solid transparent;
 		border-radius: var(--radius);
 		background: transparent;
@@ -257,11 +267,11 @@
 
 	.dh-nav-thumb,
 	.dh-item-icon {
-		width: 42px !important;
-		height: 42px !important;
-		border-radius: 11px;
+		width: 34px !important;
+		height: 34px !important;
+		border-radius: 9px;
 		background: #ffffff;
-		padding: 5px !important;
+		padding: 4px !important;
 		flex-shrink: 0;
 		object-fit: contain !important;
 		object-position: center;
@@ -275,17 +285,17 @@
 
 	.dh-nav-copy strong {
 		display: block;
-		font-size: 0.92rem;
+		font-size: 0.84rem;
 		font-weight: 600;
-		line-height: 1.35;
+		line-height: 1.3;
 	}
 
 	.dh-nav-copy span {
 		display: block;
-		font-size: 0.76rem;
+		font-size: 0.71rem;
 		color: var(--text-secondary);
-		line-height: 1.4;
-		margin-top: 0.15rem;
+		line-height: 1.35;
+		margin-top: 0.1rem;
 	}
 
 	.dh-viewer {
@@ -604,11 +614,11 @@
 	}
 
 	.dh-landing-shell {
-		max-width: 1320px;
+		max-width: 980px;
 		margin: 0 auto;
 		display: grid;
-		grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.3fr);
-		gap: 1.1rem;
+		grid-template-columns: minmax(0, 1fr);
+		gap: 0.9rem;
 		align-items: start;
 		min-height: 100%;
 	}
@@ -624,14 +634,15 @@
 	}
 
 	.dh-landing-hero {
-		padding: 1.6rem;
+		padding: 1.15rem 1.3rem;
 		display: flex;
 		flex-direction: column;
-		gap: 1rem;
+		gap: 0.75rem;
 	}
 
 	.dh-landing-logo {
-		height: clamp(110px, 22vh, 200px);
+		display: block;
+		height: 2.5rem !important;
 		width: auto;
 	}
 
@@ -649,47 +660,21 @@
 	}
 
 	.dh-landing-hero h2 {
-		font-size: clamp(1.45rem, 2vw, 2rem);
+		font-size: clamp(1.35rem, 1.8vw, 1.85rem);
 		line-height: 1.2;
 		font-weight: 700;
 	}
 
 	.dh-landing-hero p {
-		font-size: 0.97rem;
-		line-height: 1.7;
-		color: var(--text-secondary);
-	}
-
-	.dh-landing-points {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 0.7rem;
-	}
-
-	.dh-landing-point {
-		background: rgba(248, 250, 252, 0.92);
-		border: 1px solid var(--border-light);
-		border-radius: 16px;
-		padding: 0.9rem;
-	}
-
-	.dh-landing-point strong {
-		display: block;
-		font-size: 0.9rem;
-		font-weight: 600;
-		margin-bottom: 0.3rem;
-	}
-
-	.dh-landing-point span {
-		font-size: 0.82rem;
-		line-height: 1.55;
+		font-size: 0.93rem;
+		line-height: 1.65;
 		color: var(--text-secondary);
 	}
 
 	.dh-landing-content {
 		display: flex;
 		flex-direction: column;
-		gap: 0.9rem;
+		gap: 0.75rem;
 		min-width: 0;
 	}
 
@@ -741,8 +726,8 @@
 	}
 
 	.dh-landing-card {
-		padding: 1.35rem 1.4rem;
-		min-height: 520px;
+		padding: 1.25rem 1.3rem;
+		min-height: 0;
 		display: flex;
 		flex-direction: column;
 	}
@@ -788,8 +773,8 @@
 
 	.dh-section-body p,
 	.dh-section-body li {
-		font-size: 0.92rem;
-		line-height: 1.72;
+		font-size: 0.95rem;
+		line-height: 1.74;
 		color: var(--text-secondary);
 	}
 
@@ -978,13 +963,16 @@
 	}
 
 	@media (max-width: 1280px) {
-		.dh-landing-shell {
-			grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.2fr);
-		}
-
 		.dh-agent-grid,
 		.dh-resource-list {
 			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (min-width: 1181px) {
+		.dh-iframe-wrap {
+			aspect-ratio: auto;
+			min-height: var(--dh-desktop-frame-height);
 		}
 	}
 
@@ -1007,10 +995,6 @@
 
 		.dh-landing-shell {
 			grid-template-columns: 1fr;
-		}
-
-		.dh-landing-card {
-			min-height: 460px;
 		}
 	}
 
@@ -1126,7 +1110,7 @@
 		<section class="dh-landing" id="dhMobileOverview" style="position:static; inset:auto; margin-top:0.95rem; padding:0; background:none; overflow:visible;">
 			<div class="dh-landing-shell" style="grid-template-columns:1fr;">
 				<div class="dh-landing-hero">
-					<img class="dh-landing-logo fr-fil fr-dib" src="https://media.lrsd.net/media/Default/frl/data-hub-large-4x.0eeaab84125.png" alt="Data Hub">
+					<img class="dh-landing-logo dh-logo-img fr-fil fr-dib" src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub">
 					<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
 					<h2>We Are All Data Stewards</h2>
 					<p>This overview brings together LRSD's approach to data governance, responsible AI use, and the work underway across the division.</p>
@@ -1167,7 +1151,7 @@
 					<div class="dh-nav-access" id="dhPrimaryNav">
 						<details class="dh-custom-select" id="dhCustomSelect">
 							<summary class="dh-select-trigger" id="dhSelectTrigger" aria-label="Select an overview page or dashboard">
-								<img src="https://media.lrsd.net/media/Default/frl/data-hub-large-4x.0eeaab84125.png" class="dh-item-icon fr-fil fr-dib" id="dhActiveIcon" alt="" aria-hidden="true">
+								<img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" class="dh-item-icon fr-fil fr-dib" id="dhActiveIcon" alt="" aria-hidden="true">
 								<span class="dh-select-text" id="dhSelectText">Data Governance &amp; AI Overview</span>
 								<img src="https://media.lrsd.net/media/Default/frl/dropdown-arrow.23ae4383430.png" class="dh-chevron fr-fil fr-dib" alt="" aria-hidden="true">
 							</summary>
@@ -1194,28 +1178,10 @@
 				<div class="dh-landing" id="dhLanding">
 					<div class="dh-landing-shell">
 						<div class="dh-landing-hero">
-							<img class="dh-landing-logo fr-fil fr-dib" src="https://media.lrsd.net/media/Default/frl/data-hub-large-4x.0eeaab84125.png" alt="Data Hub">
+							<img class="dh-landing-logo dh-logo-img fr-fil fr-dib" src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub">
 							<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
 							<h2>We Are All Data Stewards</h2>
 							<p>Explore LRSD's public-facing story about data stewardship, responsible AI use, the systems already in place, and the work that continues ahead.</p>
-							<div class="dh-landing-points">
-								<div class="dh-landing-point">
-									<strong>Shared responsibility</strong>
-									<span>Data governance is not just an IT function — it belongs to everyone who works with information in LRSD.</span>
-								</div>
-								<div class="dh-landing-point">
-									<strong>Responsible AI</strong>
-									<span>LRSD uses secure tools, clear governance, and human judgment to keep AI aligned with divisional values.</span>
-								</div>
-								<div class="dh-landing-point">
-									<strong>Built for LRSD</strong>
-									<span>Purpose-built AI agents are designed in-house for Manitoba curriculum, privacy requirements, and ethical safeguards.</span>
-								</div>
-								<div class="dh-landing-point">
-									<strong>Still evolving</strong>
-									<span>The division is continuing to improve systems, policy, literacy, and community engagement.</span>
-								</div>
-							</div>
 						</div>
 						<div class="dh-landing-content">
 							<div class="dh-section-controls">
@@ -1245,7 +1211,7 @@
 		var LANDING_ITEM = {
 			title: 'Data Governance & AI Overview',
 			subtitle: 'Landing page',
-			icon: 'https://media.lrsd.net/media/Default/frl/data-hub-large-4x.0eeaab84125.png'
+			icon: 'https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png'
 		};
 
 		var DASHBOARDS = [
