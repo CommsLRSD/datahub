@@ -1107,8 +1107,8 @@
 							<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
 						</div>
 						<div class="dh-landing-card-head">
-							<div class="dh-section-eyebrow" id="dhMobileSectionEyebrow">Introduction</div>
-							<h3 class="dh-section-title" id="dhMobileSectionTitle">Introduction</h3>
+							<div class="dh-section-eyebrow" id="dhMobileSectionEyebrow"></div>
+							<h3 class="dh-section-title" id="dhMobileSectionTitle"></h3>
 							<p class="dh-section-subtitle" id="dhMobileSectionSubtitle">Start here, then move through each section or jump ahead using the titles below.</p>
 						</div>
 						<div class="dh-section-controls">
@@ -1172,8 +1172,8 @@
 									<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
 								</div>
 								<div class="dh-landing-card-head">
-									<div class="dh-section-eyebrow" id="dhSectionEyebrow">Introduction</div>
-									<h3 class="dh-section-title" id="dhSectionTitle">Introduction</h3>
+									<div class="dh-section-eyebrow" id="dhSectionEyebrow"></div>
+									<h3 class="dh-section-title" id="dhSectionTitle"></h3>
 									<p class="dh-section-subtitle" id="dhSectionSubtitle">Start here, then move through each section or jump ahead using the titles below.</p>
 								</div>
 								<div class="dh-section-controls">
@@ -1492,7 +1492,7 @@
 
 		function getCurrentSectionLabel()
 		{
-			return currentSectionIndex === LANDING_INTRO_SECTION_INDEX ? 'Introduction' : 'Section ' + (currentSectionIndex + 1) + ' of ' + LANDING_SECTIONS.length;
+			return currentSectionIndex === LANDING_INTRO_SECTION_INDEX ? LANDING_INTRO_SECTION.title : 'Section ' + (currentSectionIndex + 1) + ' of ' + LANDING_SECTIONS.length;
 		}
 
 		function renderCurrentSection()
@@ -1537,7 +1537,7 @@
 				activeTitle.textContent = LANDING_ITEM.title;
 				selectText.textContent = LANDING_ITEM.title;
 				activeIcon.setAttribute('src', LANDING_ITEM.icon);
-				counter.textContent = currentSectionIndex === LANDING_INTRO_SECTION_INDEX ? 'Introduction' : getCurrentSectionLabel().replace(' of ', ' / ');
+				counter.textContent = getCurrentSectionLabel().replace(' of ', ' / ');
 				prevBtn.setAttribute('title', 'Previous section');
 				nextBtn.setAttribute('title', 'Next section');
 			}
