@@ -23,7 +23,8 @@
 		--shadow-glow-green: 0 4px 20px rgba(43, 166, 128, 0.25);
 		--blur-amount: 20px;
 		--overview-logo-max-width: 300px;
-		--overview-reading-width: 71ch;
+		--overview-nav-width: 21rem;
+		--overview-reading-width: 66ch;
 		--section-status-min-width: 9.5rem;
 		--radius: 12px;
 		--radius-lg: 16px;
@@ -718,19 +719,23 @@
 		color: var(--accent-green);
 	}
 
-	.dh-section-title {
-		font-size: clamp(1.55rem, 2.1vw, 2.15rem);
-		line-height: 1.14;
-		letter-spacing: -0.02em;
-		font-weight: 700;
-		color: var(--text-primary);
+	.data-hub-wrapper .dh-section-title,
+	.data-hub-wrapper h2.dh-section-title,
+	.data-hub-wrapper h3.dh-section-title {
+		font-size: clamp(1.55rem, 2.1vw, 2.15rem) !important;
+		line-height: 1.14 !important;
+		letter-spacing: -0.02em !important;
+		font-weight: 700 !important;
+		color: var(--text-primary) !important;
+		margin: 0 !important;
+		text-align: left !important;
 	}
 
-	.dh-section-subtitle {
+	.data-hub-wrapper .dh-section-subtitle {
 		margin-top: 0.6rem;
 		font-size: 1rem;
 		line-height: 1.65;
-		color: var(--text-secondary);
+		color: var(--text-secondary) !important;
 		max-width: 62ch;
 	}
 
@@ -810,7 +815,7 @@
 		max-width: 100%;
 		margin: 0;
 		display: grid;
-		grid-template-columns: 260px minmax(0, 1fr);
+		grid-template-columns: minmax(var(--overview-nav-width), var(--overview-nav-width)) minmax(0, 1fr);
 		gap: 1rem;
 		align-items: stretch;
 		min-height: 100%;
@@ -837,7 +842,8 @@
 	}
 
 	.dh-overview-copy {
-		margin-bottom: 1rem;
+		width: min(100%, var(--overview-reading-width));
+		margin: 0 auto 1rem;
 	}
 
 	.dh-section-directory {
@@ -881,6 +887,7 @@
 
 	.dh-section-link-title {
 		display: block;
+		font-weight: inherit !important;
 	}
 
 	.dh-section-body {
@@ -911,6 +918,11 @@
 	.dh-section-body li {
 		font-size: 0.98rem;
 		line-height: 1.78;
+		color: var(--text-primary);
+	}
+
+	.dh-section-body strong {
+		font-weight: 700;
 		color: var(--text-primary);
 	}
 
@@ -1076,7 +1088,7 @@
 				</div>
 				<nav class="dh-mobile-section-directory" id="dhMobileSectionDirectory" aria-label="Mobile data governance and AI section navigation"></nav>
 				<div class="dh-mobile-overview-copy">
-					<h3 class="dh-section-title" id="dhMobileSectionTitle">Data Governance &amp; AI Overview</h3>
+					<h3 class="dh-section-title" id="dhMobileSectionTitle" style="font-size:clamp(1.55rem,2.1vw,2.15rem);line-height:1.14;letter-spacing:-0.02em;font-weight:700;color:var(--text-primary);margin:0;text-align:left;">Data Governance &amp; AI Overview</h3>
 					<p class="dh-section-subtitle" id="dhMobileSectionSubtitle">LRSD's public-facing overview of data stewardship, AI use, and the work underway across the division.</p>
 				</div>
 				<div class="dh-section-body" id="dhMobileSectionBody"></div>
@@ -1116,16 +1128,14 @@
 								<div class="dh-overview-nav-head">
 									<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
 									<div class="dh-section-actions">
-										<button class="dh-arrow-btn" id="dhSectionPrev" type="button" title="Previous section">&larr;</button>
 										<span class="dh-section-status" id="dhSectionStatus">Section 1 of 9</span>
-										<button class="dh-arrow-btn" id="dhSectionNext" type="button" title="Next section">&rarr;</button>
 									</div>
 								</div>
 								<nav class="dh-section-directory" id="dhSectionDirectory" aria-label="Data Governance and AI section navigation"></nav>
 							</aside>
 							<div class="dh-overview-panel">
 								<div class="dh-overview-copy">
-									<h2 class="dh-section-title" id="dhSectionTitle">Data Governance &amp; AI Overview</h2>
+									<h2 class="dh-section-title" id="dhSectionTitle" style="font-size:clamp(1.55rem,2.1vw,2.15rem);line-height:1.14;letter-spacing:-0.02em;font-weight:700;color:var(--text-primary);margin:0;text-align:left;">Data Governance &amp; AI Overview</h2>
 									<p class="dh-section-subtitle" id="dhSectionSubtitle">LRSD's public-facing overview of data stewardship, AI use, and the work underway across the division.</p>
 								</div>
 								<div class="dh-section-body" id="dhSectionBody"></div>
@@ -1238,43 +1248,43 @@
 		{
 			title: 'Introduction',
 			summary: 'Start here for LRSD\'s public-facing overview of data stewardship, AI use, and the work underway across the division.',
-			bodyHtml: '<p>Explore how LRSD approaches data stewardship, responsible artificial intelligence, and the systems already in place to support students, staff, and families.</p><p>Use the section list to jump directly to a topic, or use the arrows to move through the overview one section at a time.</p>'
+			bodyHtml: '<p><strong>Explore how LRSD approaches data stewardship, responsible artificial intelligence, and the systems already in place to support students, staff, and families.</strong></p><p>Use the section list to jump directly to a topic, or use the arrows in the viewer header to move through the overview one section at a time.</p>'
 		},
 
 		{
 			title: 'We Are All Data Stewards',
 			summary: 'Improving accuracy, maintaining security, and using information ethically across LRSD.',
-			bodyHtml: '<p>Every day, LRSD works with information that matters enormously — student achievement, attendance, well-being, family records, and staff data. This information represents real people and real lives, and how we collect, protect, use, and share it reflects who we are as a school division.</p><p>Good data governance is not an IT matter. It is a shared responsibility that belongs to everyone — teachers, educational assistants, school leaders, support staff, and students alike. That is the idea at the heart of our work: We Are All Data Stewards.</p><p>To lead this work, LRSD has established a Data Governance Executive Committee — senior divisional leaders with clear accountability for how data is managed across the division — supported by a growing network of Data Advisors and Data Champions in schools. Our Data Governance Charter defines the principles, roles, and commitments that guide all of this. And our AI guidelines establish a clear framework for how artificial intelligence tools are used responsibly at LRSD, grounded in our values and in Manitoba\'s Freedom of Information and Protection of Privacy Act (FIPPA).</p>'
+			bodyHtml: '<p><strong>Every day, LRSD works with information that matters enormously</strong> — student achievement, attendance, well-being, family records, and staff data. This information represents real people and real lives, and how we collect, protect, use, and share it reflects who we are as a school division.</p><p>Good data governance is not an IT matter. It is a shared responsibility that belongs to everyone — teachers, educational assistants, school leaders, support staff, and students alike. <strong>That is the idea at the heart of our work: We Are All Data Stewards.</strong></p><p>To lead this work, LRSD has established a Data Governance Executive Committee — senior divisional leaders with clear accountability for how data is managed across the division — supported by a growing network of Data Advisors and Data Champions in schools. Our Data Governance Charter defines the principles, roles, and commitments that guide all of this. And our AI guidelines establish a clear framework for how artificial intelligence tools are used responsibly at LRSD, grounded in our values and in Manitoba\'s Freedom of Information and Protection of Privacy Act (FIPPA).</p>'
 		},
 		{
 			title: 'How LRSD Uses Data',
 			summary: 'Data informs decision-making, program evaluation, and understanding student needs.',
-			bodyHtml: '<p>Good decisions depend on good information. LRSD is a data-informed school division — data shapes how we allocate support, how we assess whether our programming is working, and how we understand what our students need.</p><p>We draw on many kinds of information: numbers, documents, observations, and student voice. We do not rely on any single source to tell the whole story. Good data practice means bringing different sources together, seeking the whole picture, and remembering that there is a person behind every piece of information.</p><p>LRSD is actively working to improve the quality and accessibility of our data — reducing our reliance on paper-based processes, centralizing information so it can be shared appropriately, and ensuring that what we collect is only what we actually need. Under FIPPA, staff access only the information relevant to their role. That principle — collect only what we need, protect it carefully, use it only for its purpose — guides everything we do.</p>'
+			bodyHtml: '<p><strong>Good decisions depend on good information.</strong> LRSD is a data-informed school division — data shapes how we allocate support, how we assess whether our programming is working, and how we understand what our students need.</p><p>We draw on many kinds of information: numbers, documents, observations, and student voice. We do not rely on any single source to tell the whole story. Good data practice means bringing different sources together, seeking the whole picture, and remembering that there is a person behind every piece of information.</p><p>LRSD is actively working to improve the quality and accessibility of our data — reducing our reliance on paper-based processes, centralizing information so it can be shared appropriately, and ensuring that what we collect is only what we actually need. Under FIPPA, staff access only the information relevant to their role. <strong>Collect only what we need, protect it carefully, use it only for its purpose</strong> — that principle guides everything we do.</p>'
 		},
 		{
 			title: 'How LRSD Uses Artificial Intelligence',
 			summary: 'AI is treated as a secure, optional support for professional judgment rather than a replacement for it.',
-			bodyHtml: '<p>LRSD\'s position on AI is not to resist it and not to rush it. We believe AI can genuinely support the work of educators and staff — reducing administrative burden, supporting planning and communication, and freeing up time for the work that only people can do.</p><p>We also believe that no AI tool replaces the relationship between a teacher and a student, or the professional expertise that educators bring to their work. AI is a tool to support good judgment, not substitute for it.</p><p>LRSD\'s only approved AI tool for any work involving student or staff data is Microsoft Copilot, accessed through our enterprise Microsoft 365 environment. Free, public AI tools — such as publicly available versions of ChatGPT or Google Gemini — are not approved for Division work. When information is entered into those tools, it leaves our secure environment.</p><p>Our enterprise Copilot operates within LRSD\'s own digital tenant: data stays with us and is not used to train external AI systems. Staff use of AI is optional, not required.</p>'
+			bodyHtml: '<p><strong>LRSD\'s position on AI is not to resist it and not to rush it.</strong> We believe AI can genuinely support the work of educators and staff — reducing administrative burden, supporting planning and communication, and freeing up time for the work that only people can do.</p><p>We also believe that no AI tool replaces the relationship between a teacher and a student, or the professional expertise that educators bring to their work. <strong>AI is a tool to support good judgment, not substitute for it.</strong></p><p><strong>LRSD\'s only approved AI tool for any work involving student or staff data is Microsoft Copilot</strong>, accessed through our enterprise Microsoft 365 environment. Free, public AI tools — such as publicly available versions of ChatGPT or Google Gemini — are not approved for Division work. When information is entered into those tools, it leaves our secure environment.</p><p>Our enterprise Copilot operates within LRSD\'s own digital tenant: data stays with us and is not used to train external AI systems. Staff use of AI is optional, not required.</p>'
 		},
 		{
 			title: 'Our AI Agents',
 			summary: 'Purpose-built AI agents are designed in-house for LRSD\'s context, curriculum, privacy expectations, and ethical safeguards.',
-			bodyHtml: '<p>Beyond Copilot itself, LRSD has developed a set of purpose-built AI agents — tools configured to do one specific job, with LRSD\'s values, Manitoba curriculum expectations, privacy requirements, and ethical safeguards encoded directly into their design.</p><p>These are not generic tools imported from elsewhere. They are built in-house, for our context, our community, and our students. A shared design principle runs through all of them: rather than relying on policy documents or training to shape how people use AI, we encode our values and requirements into the tools themselves.</p><div class="dh-agent-grid"><div class="dh-agent-card"><h4>SPARK</h4><p>Strategic Partner for Amplifying Reflective Knowledge was built for school leaders so they can explore, question, and develop informed perspectives on AI before supporting staff and students.</p></div><div class="dh-agent-card"><h4>LEAP</h4><p>Language Education Assessment and Planning supports Student Services staff with consistent, high-quality, equity-centred planning for multilingual learners across the division.</p></div><div class="dh-agent-card"><h4>ATLAS</h4><p>Assisting Teachers with Lessons, Adaptations and Support helps teachers move from Manitoba learning outcomes to classroom-ready materials more efficiently while keeping professional judgment in their hands.</p></div><div class="dh-agent-card"><h4>CHALK</h4><p>Classroom Helper for Academic Learning and Knowledge supports students in Grades 7 through 12 by guiding thinking instead of giving answers, and includes a crisis support protocol directly in its design.</p></div><div class="dh-agent-card"><h4>CLARA</h4><p>Curriculum-Linked Assessment and Reporting Assistant helps teachers create outcome-aligned, strength-based, parent-friendly report card comments while preserving the teacher\'s voice, review, edits, and approval.</p></div></div><p>LRSD\'s integrated approach — building governance and AI strategy together, led from the leadership table, grounded in our own values — has been recognized by Microsoft, Google, Dell Canada, and C21 Canada. Dell and C21 selected LRSD as a national case study on responsible AI adoption in education.</p>'
+			bodyHtml: '<p><strong>Beyond Copilot itself, LRSD has developed a set of purpose-built AI agents</strong> — tools configured to do one specific job, with LRSD\'s values, Manitoba curriculum expectations, privacy requirements, and ethical safeguards encoded directly into their design.</p><p>These are not generic tools imported from elsewhere. <strong>They are built in-house, for our context, our community, and our students.</strong> A shared design principle runs through all of them: rather than relying on policy documents or training to shape how people use AI, we encode our values and requirements into the tools themselves.</p><div class="dh-agent-grid"><div class="dh-agent-card"><h4>SPARK</h4><p>Strategic Partner for Amplifying Reflective Knowledge was built for school leaders so they can explore, question, and develop informed perspectives on AI before supporting staff and students.</p></div><div class="dh-agent-card"><h4>LEAP</h4><p>Language Education Assessment and Planning supports Student Services staff with consistent, high-quality, equity-centred planning for multilingual learners across the division.</p></div><div class="dh-agent-card"><h4>ATLAS</h4><p>Assisting Teachers with Lessons, Adaptations and Support helps teachers move from Manitoba learning outcomes to classroom-ready materials more efficiently while keeping professional judgment in their hands.</p></div><div class="dh-agent-card"><h4>CHALK</h4><p>Classroom Helper for Academic Learning and Knowledge supports students in Grades 7 through 12 by guiding thinking instead of giving answers, and includes a crisis support protocol directly in its design.</p></div><div class="dh-agent-card"><h4>CLARA</h4><p>Curriculum-Linked Assessment and Reporting Assistant helps teachers create outcome-aligned, strength-based, parent-friendly report card comments while preserving the teacher\'s voice, review, edits, and approval.</p></div></div><p>LRSD\'s integrated approach — building governance and AI strategy together, led from the leadership table, grounded in our own values — has been recognized by Microsoft, Google, Dell Canada, and C21 Canada. Dell and C21 selected LRSD as a national case study on responsible AI adoption in education.</p>'
 		},
 		{
 			title: 'Responsible Use Means Knowing When Not to Use AI',
 			summary: 'Judgment, relationships, and environmental responsibility still matter every time AI is considered.',
-			bodyHtml: '<p>Responsible AI use is not only about privacy and security — it is also about judgment. We ask whether using an AI tool genuinely serves our students and our work, or whether the human approach would simply be better. Not every task benefits from AI.</p><p>A thoughtful conversation, a teacher\'s direct observation, the relationship between an educator and a student — these have a value that no tool replicates.</p><p>Part of what LRSD is building, for staff and students alike, is the capacity to make these distinctions well. That means understanding what AI can and cannot do, thinking critically about its outputs, and recognizing that an AI-assisted result is only as good as the human judgment applied to it.</p><p>It also means being honest about environmental costs: AI systems consume real resources, and using them intentionally — for purposes that genuinely matter — is both a practical and an ethical responsibility. We ask whether a given use of AI saves more human time and energy than it expends. That question shapes which tools we build and how we encourage people to use them.</p><p>For students, these skills extend well beyond school. They are foundational to participating thoughtfully in a world where AI is woven into workplaces and institutions at every level. LRSD has a real opportunity — and a responsibility — to model and teach what that looks like.</p>'
+			bodyHtml: '<p><strong>Responsible AI use is not only about privacy and security — it is also about judgment.</strong> We ask whether using an AI tool genuinely serves our students and our work, or whether the human approach would simply be better. Not every task benefits from AI.</p><p>A thoughtful conversation, a teacher\'s direct observation, the relationship between an educator and a student — these have a value that no tool replicates.</p><p>Part of what LRSD is building, for staff and students alike, is the capacity to make these distinctions well. That means understanding what AI can and cannot do, thinking critically about its outputs, and recognizing that an AI-assisted result is only as good as the human judgment applied to it.</p><p><strong>AI systems consume real resources</strong>, and using them intentionally — for purposes that genuinely matter — is both a practical and an ethical responsibility. We ask whether a given use of AI saves more human time and energy than it expends. That question shapes which tools we build and how we encourage people to use them.</p><p>For students, these skills extend well beyond school. They are foundational to participating thoughtfully in a world where AI is woven into workplaces and institutions at every level. LRSD has a real opportunity — and a responsibility — to model and teach what that looks like.</p>'
 		},
 		{
 			title: 'What We\'ve Built',
 			summary: 'LRSD has already established governance, guidelines, awareness, and tools that many systems are only beginning to consider.',
-			bodyHtml: '<p>In the past year, LRSD has completed a division-wide data maturity assessment, formed the Data Governance Executive Committee, finalized comprehensive AI guidelines and distributed them to all staff, completed the Data Governance Charter, launched the “We Are All Data Stewards” awareness campaign, and deployed five purpose-built AI agents across the division.</p><p>A review of divisional policies and procedures is underway. Canada\'s federal government released a national AI strategy in June 2026; as of that date, only a small number of provincial ministries of education had published formal AI guidance for K–12 schools. LRSD has already built what many school divisions are only beginning to consider.</p>'
+			bodyHtml: '<p><strong>In the past year, LRSD has completed a division-wide data maturity assessment, formed the Data Governance Executive Committee, finalized comprehensive AI guidelines, completed the Data Governance Charter, launched the “We Are All Data Stewards” awareness campaign, and deployed five purpose-built AI agents across the division.</strong></p><p>A review of divisional policies and procedures is underway. Canada\'s federal government released a national AI strategy in June 2026; as of that date, only a small number of provincial ministries of education had published formal AI guidance for K–12 schools. <strong>LRSD has already built what many school divisions are only beginning to consider.</strong></p>'
 		},
 		{
 			title: 'What\'s Still Ahead',
 			summary: 'The work continues through broader engagement, better systems, evolving guidance, stronger learning, and clearer community pathways.',
-			bodyHtml: '<p>We want to be clear: there is significant work still to do, and we are committed to doing it thoughtfully.</p><ul><li>Our data governance structure is in its early stages. The Executive Committee has provided foundational leadership, but broader voices — schools, families, students, and community members — have not yet been meaningfully included. Building those connections is part of what comes next, including growing a Data Champions Network in every school and department.</li><li>Our data itself is a work in progress. We are continuing to move away from paper-based processes, improve data quality and consistency, and build the shared systems that allow information to be used well across the division.</li><li>Our AI guidelines and policies will need to evolve as tools change, as research develops, and as our own experience teaches us more. We are committed to updating our frameworks as we learn and to communicating those changes openly.</li><li>We are also developing professional learning opportunities to support staff in building their data literacy and AI literacy — and working toward the resources and structures that will help teachers introduce these topics meaningfully in classrooms.</li><li>A process for community members to raise questions or concerns is in development. More information to come.</li></ul>'
+			bodyHtml: '<p><strong>We want to be clear: there is significant work still to do, and we are committed to doing it thoughtfully.</strong></p><ul><li><strong>Governance:</strong> Our data governance structure is in its early stages. The Executive Committee has provided foundational leadership, but broader voices — schools, families, students, and community members — have not yet been meaningfully included. Building those connections is part of what comes next, including growing a Data Champions Network in every school and department.</li><li><strong>Systems:</strong> Our data itself is a work in progress. We are continuing to move away from paper-based processes, improve data quality and consistency, and build the shared systems that allow information to be used well across the division.</li><li><strong>Guidance:</strong> Our AI guidelines and policies will need to evolve as tools change, as research develops, and as our own experience teaches us more. We are committed to updating our frameworks as we learn and to communicating those changes openly.</li><li><strong>Learning:</strong> We are also developing professional learning opportunities to support staff in building their data literacy and AI literacy — and working toward the resources and structures that will help teachers introduce these topics meaningfully in classrooms.</li><li><strong>Community pathways:</strong> A process for community members to raise questions or concerns is in development. More information to come.</li></ul>'
 		},
 		{
 			title: 'Resources',
@@ -1700,8 +1710,8 @@
 
 		prevBtn.addEventListener('click', cyclePrev);
 		nextBtn.addEventListener('click', cycleNext);
-		sectionPrev.addEventListener('click', prevSection);
-		sectionNext.addEventListener('click', nextSection);
+		if (sectionPrev) sectionPrev.addEventListener('click', prevSection);
+		if (sectionNext) sectionNext.addEventListener('click', nextSection);
 		mobileSectionPrev.addEventListener('click', prevSection);
 		mobileSectionNext.addEventListener('click', nextSection);
 		fsBtn.addEventListener('click', toggleFullscreen);
