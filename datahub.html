@@ -1643,6 +1643,11 @@
 			return body.innerHTML;
 		}
 
+		function clamp(value, minimum, maximum)
+		{
+			return Math.max(minimum, Math.min(maximum, value));
+		}
+
 		function buildNavMarkup(kind, index, title, subtitle, icon)
 		{
 			return '<button class="dh-nav-item" type="button" data-nav-kind="' + kind + '"' + (typeof index === 'number' ? ' data-index="' + index + '"' : '') + '><img src="' + sanitizeUrl(icon) + '" alt="" aria-hidden="true" class="dh-nav-thumb fr-fil fr-dib"><span class="dh-nav-copy"><strong>' + escapeHtml(title) + '</strong><span>' + escapeHtml(subtitle) + '</span></span></button>';
@@ -1755,7 +1760,7 @@
 			].join('');
 		}
 
-		function buildOverviewBodyMarkup(section, index)
+		function buildSingleSectionMarkup(section, index)
 		{
 			return buildOverviewSectionMarkup(section, index);
 		}
@@ -1763,7 +1768,7 @@
 		function renderOverviewBody()
 		{
 			var section = getCurrentLandingSection();
-			var overviewMarkup = buildOverviewBodyMarkup(section, currentSectionIndex);
+			var overviewMarkup = buildSingleSectionMarkup(section, currentSectionIndex);
 			sectionBody.innerHTML = overviewMarkup;
 			mobileSectionBody.innerHTML = overviewMarkup;
 		}
@@ -1809,7 +1814,7 @@
 			var maxViewerHeight = Math.floor(window.innerHeight * VIEWER_MAX_VIEWPORT_RATIO);
 			var targetFrameHeight = Math.round(viewerWidth * 9 / 16);
 			var viewportBasedMinimumFrameHeight = Math.floor(window.innerHeight * VIEWER_MIN_FRAME_HEIGHT_RATIO);
-			var clampedMinimumFrameHeight = Math.max(VIEWER_MIN_FRAME_HEIGHT_PX, Math.min(VIEWER_MAX_FRAME_HEIGHT_PX, viewportBasedMinimumFrameHeight));
+			var clampedMinimumFrameHeight = clamp(viewportBasedMinimumFrameHeight, VIEWER_MIN_FRAME_HEIGHT_PX, VIEWER_MAX_FRAME_HEIGHT_PX);
 			var totalHeight = Math.min(maxViewerHeight, Math.max(headerHeight + clampedMinimumFrameHeight, headerHeight + targetFrameHeight));
 
 			dataHubWrapper.style.setProperty('--dh-viewer-height', totalHeight + 'px');
