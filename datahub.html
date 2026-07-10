@@ -1394,7 +1394,8 @@
 		var VIEWER_MIN_FRAME_HEIGHT_RATIO = 0.42;
 		var VIEWER_MIN_FRAME_HEIGHT_PX = 360;
 		var VIEWER_MAX_FRAME_HEIGHT_PX = 440;
-		var LANDING_OVERVIEW_SUMMARY = 'Use the section navigation or arrows to move through LRSD\'s public overview of data governance and AI.';
+		var DEFAULT_HEADER_HEIGHT = 0;
+		var LANDING_OVERVIEW_SUMMARY = 'Use the section navigation, arrow buttons, or keyboard controls to move through LRSD\'s public overview of data governance and AI.';
 		var LANDING_ITEM = {
 			title: 'Data Governance & AI Overview',
 			subtitle: 'Landing page',
@@ -1632,9 +1633,9 @@
 			return body.innerHTML;
 		}
 
-		function clamp(value, min, max)
+		function clamp(clampValue, minValue, maxValue)
 		{
-			return Math.max(min, Math.min(max, value));
+			return Math.max(minValue, Math.min(maxValue, clampValue));
 		}
 
 		function buildNavMarkup(kind, index, title, subtitle, icon)
@@ -1685,7 +1686,8 @@
 				return LANDING_INTRO_SECTION;
 			}
 
-			return LANDING_SECTIONS[currentSectionIndex];
+			var section = LANDING_SECTIONS[currentSectionIndex];
+			return section || LANDING_INTRO_SECTION;
 		}
 
 		function getSectionLabel(index)
@@ -1792,7 +1794,7 @@
 			var viewerWidth = viewer.getBoundingClientRect().width;
 			if (!viewerWidth) return;
 
-			var headerHeight = viewerHeader.offsetHeight || 0;
+			var headerHeight = viewerHeader.offsetHeight || DEFAULT_HEADER_HEIGHT;
 			var maxViewerHeight = Math.floor(window.innerHeight * VIEWER_MAX_VIEWPORT_RATIO);
 			var targetFrameHeight = Math.round(viewerWidth * 9 / 16);
 			var viewportBasedMinimumFrameHeight = Math.floor(window.innerHeight * VIEWER_MIN_FRAME_HEIGHT_RATIO);
