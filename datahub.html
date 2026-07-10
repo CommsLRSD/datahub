@@ -1201,9 +1201,7 @@
 		};
 
 		var INTRO_SECTION_INDEX = -1;
-		var LANDING_INTRO_BODY_HTML = `
-			<p>Explore LRSD's public-facing story about data stewardship, responsible AI use, the systems already in place, and the work still ahead across the division.</p>
-		`;
+		var LANDING_INTRO_BODY_HTML = `<p>Explore LRSD's public-facing story about data stewardship, responsible AI use, the systems already in place, and the work still ahead across the division.</p>`;
 
 		var LANDING_INTRO = {
 			title: 'Introduction',
@@ -1483,7 +1481,7 @@
 		function getCurrentLandingSection()
 		{
 			if (currentSectionIndex === INTRO_SECTION_INDEX) return LANDING_INTRO;
-			if (currentSectionIndex < 0 || currentSectionIndex >= LANDING_SECTIONS.length)
+			if (currentSectionIndex < INTRO_SECTION_INDEX || currentSectionIndex >= LANDING_SECTIONS.length)
 			{
 				currentSectionIndex = INTRO_SECTION_INDEX;
 				return LANDING_INTRO;
