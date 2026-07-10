@@ -1,8 +1,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'); .data-hub-wrapper {
-		--dh-aspect-ratio: 16 / 9.55; --accent-red: #BE5247; --accent-green: #2BA680; --accent-red-light: rgba(190, 82, 71, 0.1); --accent-green-light: rgba(43, 166, 128, 0.1); --bg-primary: #ffffff; --bg-secondary: #f8f9fa; --bg-glass: rgba(255, 255, 255, 0.75); --bg-glass-strong: rgba(255, 255, 255, 0.9); --text-primary: #1a1a2e; --text-secondary: #64748b; --text-muted: #94a3b8; --border-light: rgba(0, 0, 0, 0.06); --border-medium: rgba(0, 0, 0, 0.1); --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.06); --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.08); --shadow-glow-green: 0 4px 20px rgba(43, 166, 128, 0.25); --blur-amount: 20px; --radius: 12px; --radius-lg: 16px; --radius-xl: 20px; --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+	.data-hub-wrapper {
+		--dh-aspect-ratio: 16 / 9.55;
+		--accent-red: #BE5247;
+		--accent-green: #2BA680;
+		--accent-red-light: rgba(190, 82, 71, 0.1);
+		--accent-green-light: rgba(43, 166, 128, 0.1);
+		--bg-primary: #ffffff;
+		--bg-secondary: #f8f9fa;
+		--bg-glass: rgba(255, 255, 255, 0.75);
+		--bg-glass-strong: rgba(255, 255, 255, 0.9);
+		--text-primary: #1a1a2e;
+		--text-secondary: #64748b;
+		--text-muted: #94a3b8;
+		--border-light: rgba(0, 0, 0, 0.06);
+		--border-medium: rgba(0, 0, 0, 0.1);
+		--shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.06);
+		--shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.08);
+		--shadow-glow-green: 0 4px 20px rgba(43, 166, 128, 0.25);
+		--blur-amount: 20px;
+		--radius: 12px;
+		--radius-lg: 16px;
+		--radius-xl: 20px;
+		--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 	
 	.data-hub-wrapper,
@@ -909,7 +932,10 @@
 <div class="data-hub-wrapper">
 	<header class="dh-header">
 		<div class="dh-header-content">
-			<div class="dh-logo"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-logo-img dh-logo-horizontal fr-fil fr-dib"> <img src="https://media.lrsd.net/media/Default/frl/dh-logo-vert-fc-svg-2x.d681e083557.png" alt="Data Hub" class="dh-logo-img dh-logo-vertical fr-fic fr-dii"></div>
+			<div class="dh-logo">
+				<img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-logo-img dh-logo-horizontal fr-fil fr-dib">
+				<img src="https://media.lrsd.net/media/Default/frl/dh-logo-vert-fc-svg-2x.d681e083557.png" alt="Data Hub" class="dh-logo-img dh-logo-vertical fr-fic fr-dii">
+			</div>
 			<button type="button" class="dh-mobile-help-btn" id="dhMobileHelpBtn" title="About these dashboards">?</button>
 
 			<p class="dh-tagline">We are committed to using data to inform decision-making, monitor progress, and share our story with the community.
@@ -1180,8 +1206,8 @@
 		var mobileSectionPrev = document.getElementById('dhMobileSectionPrev');
 		var mobileSectionNext = document.getElementById('dhMobileSectionNext');
 
-		var ALLOWED_SECTION_CLASS_NAMES = ['dh-agent-grid', 'dh-agent-card', 'dh-resource-list', 'dh-resource-note'];
-		var FRAME_REUSE_DELAY_MS = 120;
+		var allowedSectionClassNames = ['dh-agent-grid', 'dh-agent-card', 'dh-resource-list', 'dh-resource-note'];
+		var frameReuseDelayMs = 120;
 		var currentMode = 'landing';
 		var currentSectionIndex = 0;
 		var currentDashboardIndex = -1;
@@ -1241,7 +1267,7 @@
 					{
 						node.setAttribute('class', attr.value.split(/\s+/).filter(function(className)
 						{
-							return ALLOWED_SECTION_CLASS_NAMES.indexOf(className) !== -1;
+							return allowedSectionClassNames.indexOf(className) !== -1;
 						}).join(' '));
 					}
 				});
@@ -1399,7 +1425,7 @@
 			frame.classList.remove('dh-frame-ready');
 			loading.classList.add('active');
 			if (frame.getAttribute('src') !== d.url) frame.setAttribute('src', d.url);
-			else window.setTimeout(function() { frame.classList.add('dh-frame-ready'); loading.classList.remove('active'); }, FRAME_REUSE_DELAY_MS);
+			else window.setTimeout(function() { frame.classList.add('dh-frame-ready'); loading.classList.remove('active'); }, frameReuseDelayMs);
 			customSelect.removeAttribute('open');
 			updateSelectedNavigation();
 		}
@@ -1564,7 +1590,7 @@
 			if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || isEditableTarget(e.target)) return;
 			if (e.key === 'ArrowLeft') { e.preventDefault(); cyclePrev(); }
 			if (e.key === 'ArrowRight') { e.preventDefault(); cycleNext(); }
-			if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+			if (e.key === 'f' || e.key === 'F') { e.preventDefault(); toggleFullscreen(); }
 		});
 
 		var tourBackdrop = document.getElementById('dhTourBackdrop');
