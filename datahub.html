@@ -4,8 +4,9 @@
 	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 	.data-hub-wrapper {
-		--dh-aspect-ratio: 19 / 6;
+		--dh-aspect-ratio: 16 / 9;
 		--dh-sidebar-height: auto;
+		--dh-viewer-height: 95vh;
 		--dh-overview-card-min-height: 420px;
 		--accent-red: #be5247;
 		--accent-green: #2ba680;
@@ -300,6 +301,8 @@
 		box-shadow: var(--shadow-medium);
 		overflow: hidden;
 		min-width: 0;
+		height: var(--dh-viewer-height);
+		max-height: var(--dh-viewer-height);
 	}
 
 	.dh-viewer:fullscreen,
@@ -520,6 +523,8 @@
 	.dh-iframe-wrap {
 		position: relative;
 		width: 100%;
+		flex: 1 1 auto;
+		min-height: 0;
 		aspect-ratio: var(--dh-aspect-ratio);
 		overflow: hidden;
 		background: linear-gradient(180deg, #f8fbfc 0%, #edf5f5 100%);
@@ -623,20 +628,6 @@
 		border-radius: 24px;
 	}
 
-	.dh-landing-logo {
-		display: block;
-		height: 0.92rem;
-		width: auto;
-	}
-
-	.dh-overview-brand {
-		display: grid;
-		grid-template-columns: auto minmax(0, 1fr);
-		gap: 0.75rem;
-		align-items: start;
-		margin-bottom: 0.95rem;
-	}
-
 	.dh-landing-kicker {
 		display: inline-flex;
 		align-self: flex-start;
@@ -662,6 +653,7 @@
 		flex-wrap: wrap;
 		gap: 0.45rem;
 		align-items: flex-start;
+		margin-bottom: 0.95rem;
 	}
 
 	.dh-overview-meta .dh-landing-kicker,
@@ -670,53 +662,50 @@
 	}
 
 	.dh-section-directory {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 0.55rem;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem 1rem;
+		align-items: center;
 		margin-bottom: 1rem;
-		max-width: 920px;
 	}
 
 	.dh-section-link {
-		display: flex;
-		flex-direction: column;
-		gap: 0.2rem;
-		padding: 0.72rem 0.85rem;
-		border: 1px solid rgba(23, 32, 51, 0.1);
-		border-radius: 16px;
-		background: rgba(255, 255, 255, 0.84);
-		color: var(--text-primary);
+		display: inline-flex;
+		align-items: center;
+		padding: 0;
+		border: none;
+		border-radius: 0;
+		background: transparent;
+		color: var(--text-secondary);
 		cursor: pointer;
 		font-family: inherit;
 		text-align: left;
+		font-size: 0.84rem;
+		font-weight: 500;
+		line-height: 1.45;
+		text-decoration: none;
 		transition: var(--transition);
 	}
 
 	.dh-section-link:hover,
 	.dh-section-link:focus {
-		border-color: rgba(43, 166, 128, 0.34);
-		box-shadow: var(--shadow-soft);
+		color: var(--accent-green);
 		outline: none;
 	}
 
 	.dh-section-link.is-active {
-		border-color: rgba(43, 166, 128, 0.42);
-		background: rgba(43, 166, 128, 0.08);
-		box-shadow: inset 0 0 0 1px rgba(43, 166, 128, 0.1);
-	}
-
-	.dh-section-link-label {
-		font-size: 0.68rem;
+		color: var(--text-primary);
 		font-weight: 700;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		color: var(--accent-green);
 	}
 
 	.dh-section-link-title {
-		font-size: 0.9rem;
-		font-weight: 600;
-		line-height: 1.4;
+		display: inline;
+		padding-bottom: 0.08rem;
+		border-bottom: 1px solid transparent;
+	}
+
+	.dh-section-link.is-active .dh-section-link-title {
+		border-bottom-color: rgba(43, 166, 128, 0.38);
 	}
 
 	.dh-section-controls {
@@ -1122,10 +1111,6 @@
 	}
 
 	@media (max-width: 640px) {
-		.dh-overview-brand {
-			grid-template-columns: 1fr;
-		}
-
 		.dh-section-controls {
 			align-items: flex-start;
 		}
@@ -1185,12 +1170,9 @@
 			<div class="dh-landing-shell" style="grid-template-columns:1fr;">
 				<div class="dh-landing-content">
 					<div class="dh-landing-card dh-overview-card" style="min-height:0;">
-						<div class="dh-overview-brand">
-							<img class="dh-landing-logo dh-logo-img fr-fil fr-dib" src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub">
-							<div class="dh-overview-meta">
-								<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
-								<span class="dh-section-eyebrow" id="dhMobileSectionEyebrow"></span>
-							</div>
+						<div class="dh-overview-meta">
+							<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
+							<span class="dh-section-eyebrow" id="dhMobileSectionEyebrow"></span>
 						</div>
 						<div class="dh-section-directory" id="dhMobileSectionDirectory"></div>
 						<div class="dh-landing-card-head">
@@ -1255,12 +1237,9 @@
 					<div class="dh-landing-shell">
 						<div class="dh-landing-content">
 							<div class="dh-landing-card dh-overview-card">
-								<div class="dh-overview-brand">
-									<img class="dh-landing-logo dh-logo-img fr-fil fr-dib" src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub">
-									<div class="dh-overview-meta">
-										<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
-										<span class="dh-section-eyebrow" id="dhSectionEyebrow"></span>
-									</div>
+								<div class="dh-overview-meta">
+									<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
+									<span class="dh-section-eyebrow" id="dhSectionEyebrow"></span>
 								</div>
 								<div class="dh-section-directory" id="dhSectionDirectory"></div>
 								<div class="dh-landing-card-head">
@@ -1600,7 +1579,6 @@
 		{
 			var items = [{
 				index: LANDING_INTRO_SECTION_INDEX,
-				label: LANDING_INTRO_SECTION.title,
 				title: LANDING_INTRO_SECTION.title
 			}];
 
@@ -1608,7 +1586,6 @@
 			{
 				items.push({
 					index: index,
-					label: 'Section ' + (index + 1),
 					title: section.title
 				});
 			});
@@ -1616,8 +1593,7 @@
 			container.innerHTML = items.map(function(item)
 			{
 				return [
-					'<button class="dh-section-link' + (item.index === currentSectionIndex ? ' is-active' : '') + '" type="button" data-section-index="' + item.index + '">',
-					'<span class="dh-section-link-label">' + escapeHtml(item.label) + '</span>',
+					'<button class="dh-section-link' + (item.index === currentSectionIndex ? ' is-active' : '') + '" type="button" data-section-index="' + item.index + '" aria-label="' + escapeHtml(getSectionLabel(item.index) + ': ' + item.title) + '">',
 					'<span class="dh-section-link-title">' + escapeHtml(item.title) + '</span>',
 					'</button>'
 				].join('');
