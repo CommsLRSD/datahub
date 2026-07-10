@@ -813,7 +813,7 @@
 		max-width: 100%;
 		margin: 0;
 		display: grid;
-		grid-template-columns: minmax(var(--overview-nav-width), var(--overview-nav-width)) minmax(0, 1fr);
+		grid-template-columns: var(--overview-nav-width) minmax(0, 1fr);
 		gap: 1rem;
 		align-items: stretch;
 		min-height: 100%;
@@ -1037,6 +1037,16 @@
 	}
 
 </style>
+<style>
+	.data-hub-wrapper #dhSectionTitle.dh-section-title,
+	.data-hub-wrapper #dhMobileSectionTitle.dh-section-title {
+		font: 700 clamp(1.55rem, 2.1vw, 2.15rem) / 1.14 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;
+		letter-spacing: -0.02em !important;
+		color: var(--text-primary) !important;
+		margin: 0 !important;
+		text-align: left !important;
+	}
+</style>
 <div class="dh-tour-backdrop" id="dhTourBackdrop"></div>
 <div class="dh-tour-spotlight" id="dhTourSpotlight"></div>
 <div class="dh-tour-tooltip" id="dhTourTooltip">
@@ -1080,7 +1090,7 @@
 					<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
 					<div class="dh-section-actions">
 						<button class="dh-arrow-btn" id="dhMobileSectionPrev" type="button" title="Previous section">&larr;</button>
-						<span class="dh-section-status" id="dhMobileSectionStatus"></span>
+						<span class="dh-section-status" id="dhMobileSectionStatus">Section 1 of 9</span>
 						<button class="dh-arrow-btn" id="dhMobileSectionNext" type="button" title="Next section">&rarr;</button>
 					</div>
 				</div>
@@ -1126,7 +1136,7 @@
 								<div class="dh-overview-nav-head">
 									<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
 									<div class="dh-section-actions">
-										<span class="dh-section-status" id="dhSectionStatus"></span>
+										<span class="dh-section-status" id="dhSectionStatus">Section 1 of 9</span>
 									</div>
 								</div>
 								<nav class="dh-section-directory" id="dhSectionDirectory" aria-label="Data Governance and AI section navigation"></nav>
@@ -1407,18 +1417,6 @@
 			return 'Section ' + (index + 1) + ' of ' + LANDING_SECTIONS.length;
 		}
 
-		function applyForcedSectionTitleStyles(element)
-		{
-			if (!element) return;
-			element.style.setProperty('font-size', 'clamp(1.55rem, 2.1vw, 2.15rem)', 'important');
-			element.style.setProperty('line-height', '1.14', 'important');
-			element.style.setProperty('letter-spacing', '-0.02em', 'important');
-			element.style.setProperty('font-weight', '700', 'important');
-			element.style.setProperty('color', 'var(--text-primary)', 'important');
-			element.style.setProperty('margin', '0', 'important');
-			element.style.setProperty('text-align', 'left', 'important');
-		}
-
 		function buildSidebarItem(kind, index, title, icon)
 		{
 			var safeKind = kind === 'dashboard' ? 'dashboard' : 'landing';
@@ -1642,7 +1640,6 @@
 
 		buildNavigation();
 		buildMobileList();
-		[sectionTitle, mobileSectionTitle].forEach(applyForcedSectionTitleStyles);
 		renderSections();
 		showLanding();
 
