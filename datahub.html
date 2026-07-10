@@ -206,7 +206,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.55rem;
-		height: var(--dh-sidebar-height);
+		height: var(--dh-frame-height);
 		overflow: hidden;
 	}
 
@@ -245,6 +245,7 @@
 		transition: var(--transition);
 		font-family: inherit;
 		color: var(--text-primary);
+		text-decoration: none;
 	}
 
 	.dh-nav-item:hover,
@@ -439,6 +440,7 @@
 		font-family: inherit;
 		text-align: left;
 		color: var(--text-primary);
+		text-decoration: none;
 	}
 
 	.dh-option:hover,
@@ -882,7 +884,7 @@
 	}
 
 	#dhLanding .dh-section-body {
-		gap: 0;
+		gap: 0.9rem;
 	}
 
 	#dhLanding .dh-overview-section {
@@ -1644,9 +1646,18 @@
 			return Math.max(minValue, Math.min(maxValue, clampValue));
 		}
 
+		function getNavigationHref(kind, index)
+		{
+			if (kind === 'dashboard' && typeof index === 'number' && DASHBOARDS[index])
+			{
+				return sanitizeUrl(DASHBOARDS[index].url);
+			}
+			return '#dhLanding';
+		}
+
 		function buildNavMarkup(kind, index, title, subtitle, icon)
 		{
-			return '<button class="dh-nav-item" type="button" data-nav-kind="' + kind + '"' + (typeof index === 'number' ? ' data-index="' + index + '"' : '') + '><img src="' + sanitizeUrl(icon) + '" alt="" aria-hidden="true" class="dh-nav-thumb fr-fil fr-dib"><span class="dh-nav-copy"><strong>' + escapeHtml(title) + '</strong><span>' + escapeHtml(subtitle) + '</span></span></button>';
+			return '<a class="dh-nav-item" href="' + getNavigationHref(kind, index) + '"' + (kind === 'dashboard' ? ' target="dhFrame"' : '') + ' data-nav-kind="' + kind + '"' + (typeof index === 'number' ? ' data-index="' + index + '"' : '') + '><img src="' + sanitizeUrl(icon) + '" alt="" aria-hidden="true" class="dh-nav-thumb fr-fil fr-dib"><span class="dh-nav-copy"><strong>' + escapeHtml(title) + '</strong><span>' + escapeHtml(subtitle) + '</span></span></a>';
 		}
 
 		function buildOptionMarkup(kind, index, title, icon)
@@ -1654,10 +1665,10 @@
 			optionMarkupUid += 1;
 			var labelId = 'dh-option-label-' + optionMarkupUid;
 			return [
-				'<button class="dh-option" type="button" aria-labelledby="' + labelId + '" data-nav-kind="' + kind + '"' + (typeof index === 'number' ? ' data-index="' + index + '"' : '') + '>',
+				'<a class="dh-option" href="' + getNavigationHref(kind, index) + '"' + (kind === 'dashboard' ? ' target="dhFrame"' : '') + ' aria-labelledby="' + labelId + '" data-nav-kind="' + kind + '"' + (typeof index === 'number' ? ' data-index="' + index + '"' : '') + '>',
 				'<img src="' + sanitizeUrl(icon) + '" alt="" aria-hidden="true" class="dh-item-icon fr-fil fr-dib">',
 				'<span class="dh-item-text" id="' + labelId + '">' + escapeHtml(title) + '</span>',
-				'</button>'
+				'</a>'
 			].join('');
 		}
 
@@ -1725,6 +1736,29 @@
 			return window.innerWidth <= MOBILE_BREAKPOINT;
 		}
 
+		function getOverviewArticleId(index)
+		{
+			return index === LANDING_INTRO_SECTION_INDEX ? 'dh-overview-section-introduction' : 'dh-overview-section-' + index;
+		}
+
+		function getOverviewSections()
+		{
+			var sections = [{
+				index: LANDING_INTRO_SECTION_INDEX,
+				section: LANDING_INTRO_SECTION
+			}];
+
+			LANDING_SECTIONS.forEach(function(section, index)
+			{
+				sections.push({
+					index: index,
+					section: section
+				});
+			});
+
+			return sections;
+		}
+
 		function buildSectionDirectory(container)
 		{
 			var items = [{
@@ -1745,9 +1779,9 @@
 			container.innerHTML = items.map(function(item)
 			{
 				return [
-					'<button class="dh-section-link' + (item.index === currentSectionIndex ? ' is-active' : '') + '" type="button" data-section-index="' + item.index + '" aria-label="' + escapeHtml(item.ariaLabel) + '">',
+					'<a class="dh-section-link' + (item.index === currentSectionIndex ? ' is-active' : '') + '" href="#' + getOverviewArticleId(item.index) + '" data-section-index="' + item.index + '" aria-label="' + escapeHtml(item.ariaLabel) + '">',
 					'<span class="dh-section-link-title">' + escapeHtml(item.title) + '</span>',
-					'</button>'
+					'</a>'
 				].join('');
 			}).join('');
 			bindSectionDirectory(container);
@@ -1766,6 +1800,7 @@
 			{
 				var button = event.target.closest(selector);
 				if (!button) return;
+				event.preventDefault();
 				var dataIndex = button.getAttribute('data-index');
 				goToItem(button.getAttribute('data-nav-kind'), dataIndex === null ? null : parseInt(dataIndex, 10));
 			};
@@ -1786,6 +1821,7 @@
 			{
 				var button = event.target.closest('.dh-section-link');
 				if (!button) return;
+				event.preventDefault();
 				currentSectionIndex = parseInt(button.getAttribute('data-section-index'), 10);
 				renderCurrentSection();
 			};
@@ -1796,7 +1832,7 @@
 		function buildOverviewSectionMarkup(section, index)
 		{
 			return [
-				'<article class="dh-overview-section' + (index === currentSectionIndex ? ' is-active' : '') + '" data-section-index="' + index + '">',
+				'<article class="dh-overview-section' + (index === currentSectionIndex ? ' is-active' : '') + '" id="' + getOverviewArticleId(index) + '" data-section-index="' + index + '">',
 				'<div class="dh-section-eyebrow">' + escapeHtml(getSectionLabel(index)) + '</div>',
 				'<h4 class="dh-overview-section-title">' + escapeHtml(section.title) + '</h4>',
 				'<p class="dh-overview-section-summary">' + escapeHtml(section.summary) + '</p>',
@@ -1807,8 +1843,10 @@
 
 		function renderOverviewBody()
 		{
-			var section = getCurrentLandingSection();
-			var overviewMarkup = buildOverviewSectionMarkup(section, currentSectionIndex);
+			var overviewMarkup = getOverviewSections().map(function(item)
+			{
+				return buildOverviewSectionMarkup(item.section, item.index);
+			}).join('');
 			sectionBody.innerHTML = overviewMarkup;
 			mobileSectionBody.innerHTML = overviewMarkup;
 		}
@@ -1823,6 +1861,17 @@
 
 		function scrollOverviewSectionIntoView()
 		{
+			var targetContainer = isMobileView() ? mobileSectionBody : sectionBody;
+			var targetSection = targetContainer ? targetContainer.querySelector('#' + getOverviewArticleId(currentSectionIndex)) : null;
+			if (targetSection)
+			{
+				targetSection.scrollIntoView({
+					behavior: 'smooth',
+					block: 'start'
+				});
+				return;
+			}
+
 			if (isMobileView())
 			{
 				mobileOverview.scrollIntoView({
@@ -1896,19 +1945,19 @@
 			buildSectionDirectory(mobileSectionDirectory);
 
 			sectionEyebrow.textContent = tagText;
-			sectionTitle.textContent = LANDING_ITEM.title;
-			sectionSubtitle.textContent = LANDING_OVERVIEW_SUMMARY;
+			sectionTitle.textContent = section.title;
+			sectionSubtitle.textContent = section.summary;
 			sectionStatus.textContent = eyebrowText;
 
 			mobileSectionEyebrow.textContent = tagText;
-			mobileSectionTitle.textContent = LANDING_ITEM.title;
-			mobileSectionSubtitle.textContent = LANDING_OVERVIEW_SUMMARY;
+			mobileSectionTitle.textContent = section.title;
+			mobileSectionSubtitle.textContent = section.summary;
 			mobileSectionStatus.textContent = eyebrowText;
 
 			renderOverviewBody();
 			syncActiveOverviewSection(sectionBody);
 			syncActiveOverviewSection(mobileSectionBody);
-			syncSidebarHeight();
+			queueSidebarHeightSync();
 			if (!skipScroll) scrollOverviewSectionIntoView();
 
 			updateChrome();
@@ -1962,7 +2011,7 @@
 			frame.removeAttribute('src');
 			loading.classList.remove('active');
 			customSelect.removeAttribute('open');
-			syncSidebarHeight();
+			queueSidebarHeightSync();
 			updateChrome();
 		}
 
@@ -1994,7 +2043,7 @@
 			}
 
 			customSelect.removeAttribute('open');
-			syncSidebarHeight();
+			queueSidebarHeightSync();
 			updateChrome();
 		}
 
@@ -2068,9 +2117,23 @@
 			else if (document.msExitFullscreen) document.msExitFullscreen();
 		}
 
+		var queuedSidebarSync = false;
+
+		function queueSidebarHeightSync()
+		{
+			if (queuedSidebarSync) return;
+			queuedSidebarSync = true;
+			window.requestAnimationFrame(function()
+			{
+				queuedSidebarSync = false;
+				syncSidebarHeight();
+			});
+		}
+
 		buildNavigation();
 		renderCurrentSection(true);
 		showLanding();
+		queueSidebarHeightSync();
 
 		document.addEventListener('click', function(event)
 		{
@@ -2291,11 +2354,25 @@
 
 		window.addEventListener('resize', function()
 		{
-			syncSidebarHeight();
+			queueSidebarHeightSync();
 			positionSpotlightAndTooltip();
 		});
-		document.addEventListener('fullscreenchange', syncSidebarHeight);
-		document.addEventListener('webkitfullscreenchange', syncSidebarHeight);
+		window.addEventListener('load', queueSidebarHeightSync);
+		document.addEventListener('fullscreenchange', queueSidebarHeightSync);
+		document.addEventListener('webkitfullscreenchange', queueSidebarHeightSync);
+
+		if (window.ResizeObserver)
+		{
+			var layoutObserver = new ResizeObserver(function()
+			{
+				queueSidebarHeightSync();
+			});
+
+			if (viewer) layoutObserver.observe(viewer);
+			if (viewerHeader) layoutObserver.observe(viewerHeader);
+			if (iframeWrap) layoutObserver.observe(iframeWrap);
+		}
+
 		window.addEventListener('scroll', positionSpotlightAndTooltip, true);
 	})();
 </script>
