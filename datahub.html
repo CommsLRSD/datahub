@@ -1200,10 +1200,13 @@
 			icon: 'https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png'
 		};
 
+		var INTRO_SECTION_INDEX = -1;
+		var LANDING_INTRO_BODY_HTML = '<p>Explore LRSD\'s public-facing story about data stewardship, responsible AI use, the systems already in place, and the work that continues ahead.</p><p>This overview brings together LRSD\'s approach to data governance, responsible AI use, and the work underway across the division.</p>';
+
 		var LANDING_INTRO = {
 			title: 'Introduction',
 			summary: 'Start here, then move through each section or jump ahead using the titles below.',
-			bodyHtml: '<p>Explore LRSD\'s public-facing story about data stewardship, responsible AI use, the systems already in place, and the work that continues ahead.</p><p>This overview brings together LRSD\'s approach to data governance, responsible AI use, and the work underway across the division.</p>'
+			bodyHtml: LANDING_INTRO_BODY_HTML
 		};
 
 		var DASHBOARDS = [
@@ -1345,7 +1348,7 @@
 
 		var currentMode = 'landing';
 		var currentDashboardIndex = -1;
-		var currentSectionIndex = -1;
+		var currentSectionIndex = INTRO_SECTION_INDEX;
 
 		function escapeHtml(value)
 		{
@@ -1477,7 +1480,7 @@
 
 		function renderCurrentSection()
 		{
-			var isIntro = currentSectionIndex < 0;
+			var isIntro = currentSectionIndex === INTRO_SECTION_INDEX;
 			var section = isIntro ? LANDING_INTRO : LANDING_SECTIONS[currentSectionIndex];
 			var eyebrowText = isIntro ? 'Introduction' : 'Section ' + (currentSectionIndex + 1) + ' of ' + LANDING_SECTIONS.length;
 
@@ -1518,7 +1521,7 @@
 				activeTitle.textContent = LANDING_ITEM.title;
 				selectText.textContent = LANDING_ITEM.title;
 				activeIcon.setAttribute('src', LANDING_ITEM.icon);
-				counter.textContent = currentSectionIndex < 0 ? 'Introduction' : 'Section ' + (currentSectionIndex + 1) + ' / ' + LANDING_SECTIONS.length;
+				counter.textContent = currentSectionIndex === INTRO_SECTION_INDEX ? 'Introduction' : 'Section ' + (currentSectionIndex + 1) + ' / ' + LANDING_SECTIONS.length;
 				prevBtn.setAttribute('title', 'Previous section');
 				nextBtn.setAttribute('title', 'Next section');
 			}
@@ -1585,11 +1588,25 @@
 			else loadDashboard(index);
 		}
 
+		function getPreviousSectionIndex()
+		{
+			if (currentSectionIndex === INTRO_SECTION_INDEX) return LANDING_SECTIONS.length - 1;
+			if (currentSectionIndex === 0) return INTRO_SECTION_INDEX;
+			return currentSectionIndex - 1;
+		}
+
+		function getNextSectionIndex()
+		{
+			if (currentSectionIndex === INTRO_SECTION_INDEX) return 0;
+			if (currentSectionIndex === LANDING_SECTIONS.length - 1) return INTRO_SECTION_INDEX;
+			return currentSectionIndex + 1;
+		}
+
 		function cyclePrev()
 		{
 			if (currentMode === 'landing')
 			{
-				currentSectionIndex = currentSectionIndex < 0 ? LANDING_SECTIONS.length - 1 : currentSectionIndex - 1;
+				currentSectionIndex = getPreviousSectionIndex();
 				renderCurrentSection();
 			}
 			else
@@ -1602,7 +1619,7 @@
 		{
 			if (currentMode === 'landing')
 			{
-				currentSectionIndex = currentSectionIndex < 0 ? 0 : (currentSectionIndex === LANDING_SECTIONS.length - 1 ? -1 : currentSectionIndex + 1);
+				currentSectionIndex = getNextSectionIndex();
 				renderCurrentSection();
 			}
 			else
