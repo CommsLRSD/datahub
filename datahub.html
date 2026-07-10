@@ -1201,7 +1201,7 @@
 		};
 
 		var INTRO_SECTION_INDEX = -1;
-		var LANDING_INTRO_BODY_HTML = `<p>Explore LRSD's public-facing story about data stewardship, responsible AI use, the systems already in place, and the work still ahead across the division.</p>`;
+		var LANDING_INTRO_BODY_HTML = `<p>Explore LRSD's public-facing story about data stewardship, responsible AI use, the systems already in place, and the ongoing work across the division.</p>`;
 
 		var LANDING_INTRO = {
 			title: 'Introduction',
@@ -1483,6 +1483,7 @@
 			if (currentSectionIndex === INTRO_SECTION_INDEX) return LANDING_INTRO;
 			if (currentSectionIndex < INTRO_SECTION_INDEX || currentSectionIndex >= LANDING_SECTIONS.length)
 			{
+				console.warn('Unexpected landing section index:', currentSectionIndex);
 				currentSectionIndex = INTRO_SECTION_INDEX;
 				return LANDING_INTRO;
 			}
