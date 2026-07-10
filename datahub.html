@@ -1657,8 +1657,10 @@
 
 		function buildNavMarkup(kind, index, title, subtitle, icon)
 		{
+			var targetAttribute = kind === 'dashboard' ? ' target="dhFrame"' : '';
+			var indexAttribute = typeof index === 'number' ? ' data-index="' + index + '"' : '';
 			return [
-				'<a class="dh-nav-item" href="' + getNavigationHref(kind, index) + '"' + (kind === 'dashboard' ? ' target="dhFrame"' : '') + ' data-nav-kind="' + kind + '"' + (typeof index === 'number' ? ' data-index="' + index + '"' : '') + '>',
+				'<a class="dh-nav-item" href="' + getNavigationHref(kind, index) + '"' + targetAttribute + ' data-nav-kind="' + kind + '"' + indexAttribute + '>',
 				'<img src="' + sanitizeUrl(icon) + '" alt="" aria-hidden="true" class="dh-nav-thumb fr-fil fr-dib">',
 				'<span class="dh-nav-copy"><strong>' + escapeHtml(title) + '</strong><span>' + escapeHtml(subtitle) + '</span></span>',
 				'</a>'
@@ -1669,8 +1671,10 @@
 		{
 			optionMarkupUid += 1;
 			var labelId = 'dh-option-label-' + optionMarkupUid;
+			var targetAttribute = kind === 'dashboard' ? ' target="dhFrame"' : '';
+			var indexAttribute = typeof index === 'number' ? ' data-index="' + index + '"' : '';
 			return [
-				'<a class="dh-option" href="' + getNavigationHref(kind, index) + '"' + (kind === 'dashboard' ? ' target="dhFrame"' : '') + ' aria-labelledby="' + labelId + '" data-nav-kind="' + kind + '"' + (typeof index === 'number' ? ' data-index="' + index + '"' : '') + '>',
+				'<a class="dh-option" href="' + getNavigationHref(kind, index) + '"' + targetAttribute + ' aria-labelledby="' + labelId + '" data-nav-kind="' + kind + '"' + indexAttribute + '>',
 				'<img src="' + sanitizeUrl(icon) + '" alt="" aria-hidden="true" class="dh-item-icon fr-fil fr-dib">',
 				'<span class="dh-item-text" id="' + labelId + '">' + escapeHtml(title) + '</span>',
 				'</a>'
@@ -1942,7 +1946,7 @@
 		// skipScroll is used on initial render so the intro state doesn't animate the landing panel.
 		function renderCurrentSection(skipScroll)
 		{
-			var currentSection = getCurrentLandingSection();
+			var currentSection = getCurrentLandingSection() || LANDING_INTRO_SECTION;
 			var eyebrowText = getCurrentSectionLabel();
 			var tagText = getCurrentSectionTagLabel();
 
