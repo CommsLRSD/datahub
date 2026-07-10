@@ -5,7 +5,7 @@
 
 	.data-hub-wrapper {
 		--dh-aspect-ratio: 19 / 6;
-		--dh-sidebar-max-height: auto;
+		--dh-sidebar-height: auto;
 		--dh-overview-card-min-height: 420px;
 		--accent-red: #be5247;
 		--accent-green: #2ba680;
@@ -202,7 +202,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.55rem;
-		height: var(--dh-sidebar-max-height);
+		height: var(--dh-sidebar-height);
 		overflow: hidden;
 	}
 
@@ -1287,6 +1287,7 @@
 	(function()
 	{
 		var MOBILE_BREAKPOINT = 760;
+		// Keep this in sync with the desktop-only sidebar media query.
 		var DESKTOP_SIDEBAR_BREAKPOINT = 1180;
 		var LANDING_ITEM = {
 			title: 'Data Governance & AI Overview',
@@ -1604,13 +1605,25 @@
 
 			container.innerHTML = items.map(function(item)
 			{
-				return '<button class="dh-section-link' + (item.index === currentSectionIndex ? ' is-active' : '') + '" type="button" data-section-index="' + item.index + '"><span class="dh-section-link-label">' + escapeHtml(item.label) + '</span><span class="dh-section-link-title">' + escapeHtml(item.title) + '</span></button>';
+				return [
+					'<button class="dh-section-link' + (item.index === currentSectionIndex ? ' is-active' : '') + '" type="button" data-section-index="' + item.index + '">',
+					'<span class="dh-section-link-label">' + escapeHtml(item.label) + '</span>',
+					'<span class="dh-section-link-title">' + escapeHtml(item.title) + '</span>',
+					'</button>'
+				].join('');
 			}).join('');
 		}
 
 		function buildOverviewSectionMarkup(section, index)
 		{
-			return '<article class="dh-overview-section' + (index === currentSectionIndex ? ' is-active' : '') + '" data-section-index="' + index + '"><div class="dh-section-eyebrow">' + escapeHtml(index === LANDING_INTRO_SECTION_INDEX ? LANDING_INTRO_SECTION.title : 'Section ' + (index + 1) + ' of ' + LANDING_SECTIONS.length) + '</div><h4 class="dh-overview-section-title">' + escapeHtml(section.title) + '</h4><p class="dh-overview-section-summary">' + escapeHtml(section.summary) + '</p><div class="dh-overview-section-body">' + sanitizeSectionHtml(section.bodyHtml) + '</div></article>';
+			return [
+				'<article class="dh-overview-section' + (index === currentSectionIndex ? ' is-active' : '') + '" data-section-index="' + index + '">',
+				'<div class="dh-section-eyebrow">' + escapeHtml(index === LANDING_INTRO_SECTION_INDEX ? LANDING_INTRO_SECTION.title : 'Section ' + (index + 1) + ' of ' + LANDING_SECTIONS.length) + '</div>',
+				'<h4 class="dh-overview-section-title">' + escapeHtml(section.title) + '</h4>',
+				'<p class="dh-overview-section-summary">' + escapeHtml(section.summary) + '</p>',
+				'<div class="dh-overview-section-body">' + sanitizeSectionHtml(section.bodyHtml) + '</div>',
+				'</article>'
+			].join('');
 		}
 
 		function buildOverviewBodyMarkup()
@@ -1654,15 +1667,22 @@
 		function syncSidebarHeight()
 		{
 			if (!dataHubWrapper) return;
-			if (window.innerWidth <= DESKTOP_SIDEBAR_BREAKPOINT || !viewer)
+			if (!viewer)
 			{
-				dataHubWrapper.style.setProperty('--dh-sidebar-max-height', 'auto');
+				dataHubWrapper.style.setProperty('--dh-sidebar-height', 'auto');
 				return;
 			}
 
-			dataHubWrapper.style.setProperty('--dh-sidebar-max-height', viewer.offsetHeight + 'px');
+			if (window.innerWidth <= DESKTOP_SIDEBAR_BREAKPOINT)
+			{
+				dataHubWrapper.style.setProperty('--dh-sidebar-height', 'auto');
+				return;
+			}
+
+			dataHubWrapper.style.setProperty('--dh-sidebar-height', viewer.offsetHeight + 'px');
 		}
 
+		// skipScroll is used on initial render so the intro state doesn't animate the landing panel.
 		function renderCurrentSection(skipScroll)
 		{
 			var section = getCurrentLandingSection();
