@@ -719,16 +719,14 @@
 		color: var(--accent-green);
 	}
 
-	.data-hub-wrapper .dh-section-title,
-	.data-hub-wrapper h2.dh-section-title,
-	.data-hub-wrapper h3.dh-section-title {
-		font-size: clamp(1.55rem, 2.1vw, 2.15rem) !important;
-		line-height: 1.14 !important;
-		letter-spacing: -0.02em !important;
-		font-weight: 700 !important;
-		color: var(--text-primary) !important;
-		margin: 0 !important;
-		text-align: left !important;
+	.dh-section-title {
+		font-size: clamp(1.55rem, 2.1vw, 2.15rem);
+		line-height: 1.14;
+		letter-spacing: -0.02em;
+		font-weight: 700;
+		color: var(--text-primary);
+		margin: 0;
+		text-align: left;
 	}
 
 	.data-hub-wrapper .dh-section-subtitle {
@@ -1088,7 +1086,7 @@
 				</div>
 				<nav class="dh-mobile-section-directory" id="dhMobileSectionDirectory" aria-label="Mobile data governance and AI section navigation"></nav>
 				<div class="dh-mobile-overview-copy">
-					<h3 class="dh-section-title" id="dhMobileSectionTitle" style="font-size:clamp(1.55rem,2.1vw,2.15rem);line-height:1.14;letter-spacing:-0.02em;font-weight:700;color:var(--text-primary);margin:0;text-align:left;">Data Governance &amp; AI Overview</h3>
+					<h3 class="dh-section-title" id="dhMobileSectionTitle">Data Governance &amp; AI Overview</h3>
 					<p class="dh-section-subtitle" id="dhMobileSectionSubtitle">LRSD's public-facing overview of data stewardship, AI use, and the work underway across the division.</p>
 				</div>
 				<div class="dh-section-body" id="dhMobileSectionBody"></div>
@@ -1135,7 +1133,7 @@
 							</aside>
 							<div class="dh-overview-panel">
 								<div class="dh-overview-copy">
-									<h2 class="dh-section-title" id="dhSectionTitle" style="font-size:clamp(1.55rem,2.1vw,2.15rem);line-height:1.14;letter-spacing:-0.02em;font-weight:700;color:var(--text-primary);margin:0;text-align:left;">Data Governance &amp; AI Overview</h2>
+									<h2 class="dh-section-title" id="dhSectionTitle">Data Governance &amp; AI Overview</h2>
 									<p class="dh-section-subtitle" id="dhSectionSubtitle">LRSD's public-facing overview of data stewardship, AI use, and the work underway across the division.</p>
 								</div>
 								<div class="dh-section-body" id="dhSectionBody"></div>
@@ -1317,8 +1315,6 @@
 		var sectionTitle = document.getElementById('dhSectionTitle');
 		var sectionSubtitle = document.getElementById('dhSectionSubtitle');
 		var sectionBody = document.getElementById('dhSectionBody');
-		var sectionPrev = document.getElementById('dhSectionPrev');
-		var sectionNext = document.getElementById('dhSectionNext');
 		var mobileOverview = document.getElementById('dhMobileOverview');
 		var mobileSectionDirectory = document.getElementById('dhMobileSectionDirectory');
 		var mobileSectionStatus = document.getElementById('dhMobileSectionStatus');
@@ -1409,6 +1405,18 @@
 		function getSectionLabel(index)
 		{
 			return 'Section ' + (index + 1) + ' of ' + LANDING_SECTIONS.length;
+		}
+
+		function applyForcedSectionTitleStyles(element)
+		{
+			if (!element) return;
+			element.style.setProperty('font-size', 'clamp(1.55rem, 2.1vw, 2.15rem)', 'important');
+			element.style.setProperty('line-height', '1.14', 'important');
+			element.style.setProperty('letter-spacing', '-0.02em', 'important');
+			element.style.setProperty('font-weight', '700', 'important');
+			element.style.setProperty('color', 'var(--text-primary)', 'important');
+			element.style.setProperty('margin', '0', 'important');
+			element.style.setProperty('text-align', 'left', 'important');
 		}
 
 		function buildSidebarItem(kind, index, title, icon)
@@ -1634,6 +1642,7 @@
 
 		buildNavigation();
 		buildMobileList();
+		[sectionTitle, mobileSectionTitle].forEach(applyForcedSectionTitleStyles);
 		renderSections();
 		showLanding();
 
@@ -1710,8 +1719,6 @@
 
 		prevBtn.addEventListener('click', cyclePrev);
 		nextBtn.addEventListener('click', cycleNext);
-		if (sectionPrev) sectionPrev.addEventListener('click', prevSection);
-		if (sectionNext) sectionNext.addEventListener('click', nextSection);
 		mobileSectionPrev.addEventListener('click', prevSection);
 		mobileSectionNext.addEventListener('click', nextSection);
 		fsBtn.addEventListener('click', toggleFullscreen);
