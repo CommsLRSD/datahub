@@ -971,7 +971,7 @@
 			<div class="dh-viewer-header">
 				<div class="dh-report-info">
 					<details class="dh-custom-select" id="dhCustomSelect">
-						<summary class="dh-select-trigger" id="dhSelectTrigger"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" class="dh-item-icon fr-fil fr-dib" id="dhActiveIcon" alt=""> <span class="dh-item-text" id="dhActiveText">Data Governance &amp; AI Overview</span> <img src="https://media.lrsd.net/media/Default/frl/dropdown-arrow.23ae4383430.png" class="dh-chevron fr-fil fr-dib" alt="Dropdown Arrow"></summary>
+						<summary class="dh-select-trigger" id="dhSelectTrigger"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" class="dh-item-icon fr-fil fr-dib" id="dhActiveIcon" alt=""> <span class="dh-item-text" id="dhActiveText">Data Governance &amp; AI Overview</span> <img src="https://media.lrsd.net/media/Default/frl/dropdown-arrow.23ae4383430.png" class="dh-chevron fr-fil fr-dib" alt=""></summary>
 						<div class="dh-select-options" id="dhSelectOptions"></div>
 					</details>
 				</div>
@@ -979,7 +979,7 @@
 					<div class="dh-nav-arrows">
 						<button class="dh-arrow-btn" id="dhPrev" title="Previous section">&larr;</button>
 						<button class="dh-arrow-btn" id="dhNext" title="Next section">&rarr;</button>
-						<button class="dh-arrow-btn" id="dhFullscreen" title="Toggle Fullscreen"><img src="https://media.lrsd.net/media/Default/frl/fullscreenicon.f13c4683422.png" alt="Fullscreen Icon" class="dh-fs-img fr-dib"></button>
+						<button class="dh-arrow-btn" id="dhFullscreen" title="Toggle Fullscreen"><img src="https://media.lrsd.net/media/Default/frl/fullscreenicon.f13c4683422.png" alt="" class="dh-fs-img fr-dib"></button>
 						<button class="dh-arrow-btn dh-help-btn" id="dhHelpBtn" type="button" title="Show tutorial">?</button>
 					</div></div></div>
 			<div class="dh-viewer-body" id="dhViewerBody">
@@ -1216,18 +1216,20 @@
 
 		function escapeHtml(s)
 		{
-			return String(s).replace(/[&<>"'`]/g, function(ch)
+			return String(s).replace(/[&<>"'`\/]/g, function(ch)
 			{
-				return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '`': '&#96;' })[ch];
+				return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '`': '&#96;', '/': '&#47;' })[ch];
 			});
 		}
 
 		function sanitizeUrl(value)
 		{
-			if (!value) return '';
+			if (value === null || value === undefined) return '';
+			var trimmed = String(value).trim();
+			if (!trimmed) return '';
 			try
 			{
-				var parsed = new URL(String(value).trim(), window.location.href);
+				var parsed = new URL(trimmed, window.location.href);
 				if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') return '';
 				return parsed.href;
 			}
@@ -1242,7 +1244,7 @@
 			var template = document.createElement('template');
 			template.innerHTML = html || '';
 
-			Array.prototype.slice.call(template.content.querySelectorAll('script, style, iframe, object, embed')).forEach(function(node)
+			Array.prototype.slice.call(template.content.querySelectorAll('script, style, iframe, object, embed, base, form, meta, link')).forEach(function(node)
 			{
 				node.remove();
 			});
@@ -1252,7 +1254,7 @@
 				Array.prototype.slice.call(node.attributes).forEach(function(attr)
 				{
 					var name = attr.name.toLowerCase();
-					if (name.indexOf('on') === 0)
+					if (name.indexOf('on') === 0 || name === 'action' || name === 'formaction' || name === 'xmlns' || name === 'xlink:href')
 					{
 						node.removeAttribute(attr.name);
 						return;
@@ -1289,7 +1291,8 @@
 
 		function buildSidebarItem(kind, index, title, subtitle, icon)
 		{
-			return '<button class="dh-nav-item" type="button" data-nav-kind="' + kind + '"' + (index === null ? '' : ' data-index="' + index + '"') + '>' +
+			var safeKind = kind === 'dashboard' ? 'dashboard' : 'landing';
+			return '<button class="dh-nav-item" type="button" data-nav-kind="' + safeKind + '"' + (index === null ? '' : ' data-index="' + index + '"') + '>' +
 				'<img src="' + sanitizeUrl(icon) + '" class="dh-item-icon fr-fil fr-dib" alt="">' +
 				'<span class="dh-nav-copy"><strong>' + escapeHtml(title) + '</strong><span>' + escapeHtml(subtitle) + '</span></span>' +
 			'</button>';
@@ -1297,7 +1300,8 @@
 
 		function buildOptionItem(kind, index, title, icon)
 		{
-			return '<div class="dh-option" data-nav-kind="' + kind + '"' + (index === null ? '' : ' data-index="' + index + '"') + '>' +
+			var safeKind = kind === 'dashboard' ? 'dashboard' : 'landing';
+			return '<div class="dh-option" data-nav-kind="' + safeKind + '"' + (index === null ? '' : ' data-index="' + index + '"') + '>' +
 				'<img src="' + sanitizeUrl(icon) + '" class="dh-item-icon fr-fil fr-dib" alt="">' +
 				'<span class="dh-item-text">' + escapeHtml(title) + '</span>' +
 			'</div>';
@@ -1439,8 +1443,15 @@
 
 		function goToItem(kind, idx)
 		{
-			if (kind === 'landing') showLanding();
-			else loadDashboard(parseInt(idx, 10));
+			if (kind === 'landing')
+			{
+				showLanding();
+				return;
+			}
+
+			var parsedIndex = parseInt(idx, 10);
+			if (!Number.isFinite(parsedIndex)) return;
+			loadDashboard(parsedIndex);
 		}
 
 		function prevSection()
