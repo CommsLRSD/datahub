@@ -57,6 +57,18 @@
 		height: auto;
 	}
 
+	.dh-visually-hidden {
+		position: absolute !important;
+		width: 1px !important;
+		height: 1px !important;
+		padding: 0 !important;
+		margin: -1px !important;
+		overflow: hidden !important;
+		clip: rect(0, 0, 0, 0) !important;
+		white-space: nowrap !important;
+		border: 0 !important;
+	}
+
 	.dh-header {
 		padding: 2rem;
 		background: var(--bg-glass-strong);
@@ -1296,7 +1308,7 @@
 							<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
 							<span class="dh-section-eyebrow" id="dhMobileSectionEyebrow"></span>
 						</div>
-						<nav class="dh-section-directory" id="dhMobileSectionDirectory" aria-label="Overview sections"></nav>
+						<nav class="dh-section-directory" id="dhMobileSectionDirectory" aria-label="Data Governance &amp; AI Overview sections navigation"></nav>
 						<div class="dh-landing-card-head">
 							<h3 class="dh-section-title" id="dhMobileSectionTitle"></h3>
 							<p class="dh-section-subtitle" id="dhMobileSectionSubtitle">Start here, then move through each section or jump ahead using the titles below.</p>
@@ -1363,7 +1375,7 @@
 									<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
 									<span class="dh-section-eyebrow" id="dhSectionEyebrow"></span>
 								</div>
-								<nav class="dh-section-directory" id="dhSectionDirectory" aria-label="Overview sections"></nav>
+								<nav class="dh-section-directory" id="dhSectionDirectory" aria-label="Data Governance &amp; AI Overview sections navigation"></nav>
 								<div class="dh-landing-card-head">
 									<h3 class="dh-section-title" id="dhSectionTitle"></h3>
 									<p class="dh-section-subtitle" id="dhSectionSubtitle">Start here, then move through each section or jump ahead using the titles below.</p>
@@ -1733,6 +1745,11 @@
 		{
 			return [
 				'<article class="dh-overview-section' + (index === currentSectionIndex ? ' is-active' : '') + '" data-section-index="' + index + '">',
+				'<div class="dh-visually-hidden">',
+				'<div class="dh-section-eyebrow">' + escapeHtml(getSectionLabel(index)) + '</div>',
+				'<h4 class="dh-overview-section-title">' + escapeHtml(section.title) + '</h4>',
+				'<p class="dh-overview-section-summary">' + escapeHtml(section.summary) + '</p>',
+				'</div>',
 				'<div class="dh-overview-section-body">' + sanitizeSectionHtml(section.bodyHtml) + '</div>',
 				'</article>'
 			].join('');
@@ -1791,8 +1808,9 @@
 			var headerHeight = viewerHeader.offsetHeight || 0;
 			var maxViewerHeight = Math.floor(window.innerHeight * VIEWER_MAX_VIEWPORT_RATIO);
 			var targetFrameHeight = Math.round(viewerWidth * 9 / 16);
-			var effectiveMinimumFrameHeight = Math.max(VIEWER_MIN_FRAME_HEIGHT_PX, Math.min(VIEWER_MAX_FRAME_HEIGHT_PX, Math.floor(window.innerHeight * VIEWER_MIN_FRAME_HEIGHT_RATIO)));
-			var totalHeight = Math.min(maxViewerHeight, Math.max(headerHeight + effectiveMinimumFrameHeight, headerHeight + targetFrameHeight));
+			var viewportBasedMinimumFrameHeight = Math.floor(window.innerHeight * VIEWER_MIN_FRAME_HEIGHT_RATIO);
+			var clampedMinimumFrameHeight = Math.max(VIEWER_MIN_FRAME_HEIGHT_PX, Math.min(VIEWER_MAX_FRAME_HEIGHT_PX, viewportBasedMinimumFrameHeight));
+			var totalHeight = Math.min(maxViewerHeight, Math.max(headerHeight + clampedMinimumFrameHeight, headerHeight + targetFrameHeight));
 
 			dataHubWrapper.style.setProperty('--dh-viewer-height', totalHeight + 'px');
 		}
