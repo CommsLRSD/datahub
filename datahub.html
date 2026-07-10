@@ -1288,7 +1288,7 @@
 	{
 		var MOBILE_BREAKPOINT = 760;
 		// Keep this in sync with the desktop-only sidebar media query.
-		var DESKTOP_SIDEBAR_BREAKPOINT = 1180;
+		var DESKTOP_SIDEBAR_BREAKPOINT = 1181;
 		var LANDING_ITEM = {
 			title: 'Data Governance & AI Overview',
 			subtitle: 'Landing page',
@@ -1576,14 +1576,24 @@
 			return LANDING_SECTIONS[currentSectionIndex];
 		}
 
+		function getSectionLabel(index)
+		{
+			return index === LANDING_INTRO_SECTION_INDEX ? LANDING_INTRO_SECTION.title : 'Section ' + (index + 1) + ' of ' + LANDING_SECTIONS.length;
+		}
+
 		function getCurrentSectionLabel()
 		{
-			return currentSectionIndex === LANDING_INTRO_SECTION_INDEX ? LANDING_INTRO_SECTION.title : 'Section ' + (currentSectionIndex + 1) + ' of ' + LANDING_SECTIONS.length;
+			return getSectionLabel(currentSectionIndex);
 		}
 
 		function getCurrentSectionTagLabel()
 		{
 			return currentSectionIndex === LANDING_INTRO_SECTION_INDEX ? LANDING_SECTIONS.length + ' sections' : 'Section ' + (currentSectionIndex + 1) + ' of ' + LANDING_SECTIONS.length;
+		}
+
+		function isMobileView()
+		{
+			return window.innerWidth <= MOBILE_BREAKPOINT;
 		}
 
 		function buildSectionDirectory(container)
@@ -1618,7 +1628,7 @@
 		{
 			return [
 				'<article class="dh-overview-section' + (index === currentSectionIndex ? ' is-active' : '') + '" data-section-index="' + index + '">',
-				'<div class="dh-section-eyebrow">' + escapeHtml(index === LANDING_INTRO_SECTION_INDEX ? LANDING_INTRO_SECTION.title : 'Section ' + (index + 1) + ' of ' + LANDING_SECTIONS.length) + '</div>',
+				'<div class="dh-section-eyebrow">' + escapeHtml(getSectionLabel(index)) + '</div>',
 				'<h4 class="dh-overview-section-title">' + escapeHtml(section.title) + '</h4>',
 				'<p class="dh-overview-section-summary">' + escapeHtml(section.summary) + '</p>',
 				'<div class="dh-overview-section-body">' + sanitizeSectionHtml(section.bodyHtml) + '</div>',
@@ -1656,7 +1666,7 @@
 		function scrollOverviewSectionIntoView()
 		{
 			var targetSelector = '.dh-overview-section[data-section-index="' + currentSectionIndex + '"]';
-			var target = window.innerWidth <= MOBILE_BREAKPOINT ? mobileSectionBody.querySelector(targetSelector) : sectionBody.querySelector(targetSelector);
+			var target = isMobileView() ? mobileSectionBody.querySelector(targetSelector) : sectionBody.querySelector(targetSelector);
 			if (!target) return;
 			target.scrollIntoView({
 				behavior: 'smooth',
@@ -1673,7 +1683,7 @@
 				return;
 			}
 
-			if (window.innerWidth <= DESKTOP_SIDEBAR_BREAKPOINT)
+			if (window.innerWidth < DESKTOP_SIDEBAR_BREAKPOINT)
 			{
 				dataHubWrapper.style.setProperty('--dh-sidebar-height', 'auto');
 				return;
@@ -2053,7 +2063,7 @@
 
 		function startTour()
 		{
-			if (window.innerWidth <= MOBILE_BREAKPOINT) return;
+			if (isMobileView()) return;
 			tourActive = true;
 			firstTooltipTop = null;
 			tourBackdrop.classList.add('active');
