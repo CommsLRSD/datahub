@@ -1579,21 +1579,23 @@
 		{
 			var items = [{
 				index: LANDING_INTRO_SECTION_INDEX,
-				title: LANDING_INTRO_SECTION.title
+				title: LANDING_INTRO_SECTION.title,
+				ariaLabel: LANDING_INTRO_SECTION.title + ': ' + LANDING_INTRO_SECTION.title
 			}];
 
 			LANDING_SECTIONS.forEach(function(section, index)
 			{
 				items.push({
 					index: index,
-					title: section.title
+					title: section.title,
+					ariaLabel: 'Section ' + (index + 1) + ' of ' + LANDING_SECTIONS.length + ': ' + section.title
 				});
 			});
 
 			container.innerHTML = items.map(function(item)
 			{
 				return [
-					'<button class="dh-section-link' + (item.index === currentSectionIndex ? ' is-active' : '') + '" type="button" data-section-index="' + item.index + '" aria-label="' + escapeHtml(getSectionLabel(item.index) + ': ' + item.title) + '">',
+					'<button class="dh-section-link' + (item.index === currentSectionIndex ? ' is-active' : '') + '" type="button" data-section-index="' + item.index + '" aria-label="' + escapeHtml(item.ariaLabel) + '">',
 					'<span class="dh-section-link-title">' + escapeHtml(item.title) + '</span>',
 					'</button>'
 				].join('');
