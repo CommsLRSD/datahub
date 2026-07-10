@@ -6,6 +6,8 @@
 	.data-hub-wrapper {
 		--dh-aspect-ratio: 16 / 9.55;
 		--dh-desktop-frame-height: clamp(680px, calc(100vw * 0.57), 760px);
+		--dh-sidebar-chrome-height: 5rem;
+		--dh-overview-card-min-height: 420px;
 		--accent-red: #be5247;
 		--accent-green: #2ba680;
 		--accent-red-light: rgba(190, 82, 71, 0.12);
@@ -201,7 +203,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.7rem;
-		max-height: calc(var(--dh-desktop-frame-height) + 5rem);
+		max-height: calc(var(--dh-desktop-frame-height) + var(--dh-sidebar-chrome-height));
 		overflow: hidden;
 	}
 
@@ -642,7 +644,7 @@
 
 	.dh-landing-logo {
 		display: block;
-		height: 2.5rem !important;
+		height: 2.5rem;
 		width: auto;
 	}
 
@@ -727,7 +729,7 @@
 
 	.dh-landing-card {
 		padding: 1.25rem 1.3rem;
-		min-height: 0;
+		min-height: var(--dh-overview-card-min-height);
 		display: flex;
 		flex-direction: column;
 	}
