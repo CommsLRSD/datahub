@@ -1648,8 +1648,7 @@
 
 		function getNavigationHref(kind, index)
 		{
-			if (kind !== 'landing' && kind !== 'dashboard') return '#dhLanding';
-			if (kind === 'dashboard' && typeof index === 'number' && DASHBOARDS[index])
+			if (kind === 'dashboard' && Number.isFinite(index) && DASHBOARDS[index])
 			{
 				return sanitizeUrl(DASHBOARDS[index].url);
 			}
@@ -1748,8 +1747,7 @@
 
 		function getOverviewArticleId(index)
 		{
-			if (typeof index !== 'number') return 'dh-overview-section-introduction';
-			if (!isFinite(index)) return 'dh-overview-section-introduction';
+			if (!Number.isFinite(index)) return 'dh-overview-section-introduction';
 			return index === LANDING_INTRO_SECTION_INDEX ? 'dh-overview-section-introduction' : 'dh-overview-section-' + index;
 		}
 
@@ -1949,9 +1947,6 @@
 		// skipScroll is used on initial render so the intro state doesn't animate the landing panel.
 		function renderCurrentSection(skipScroll)
 		{
-			var selectedSection = getCurrentLandingSection();
-			// Preserve the intro state if a malformed section index ever slips through.
-			var resolvedSection = selectedSection || LANDING_INTRO_SECTION;
 			var eyebrowText = getCurrentSectionLabel();
 			var tagText = getCurrentSectionTagLabel();
 
@@ -1959,13 +1954,13 @@
 			buildSectionDirectory(mobileSectionDirectory);
 
 			sectionEyebrow.textContent = tagText;
-			sectionTitle.textContent = resolvedSection.title;
-			sectionSubtitle.textContent = resolvedSection.summary;
+			sectionTitle.textContent = LANDING_ITEM.title;
+			sectionSubtitle.textContent = LANDING_OVERVIEW_SUMMARY;
 			sectionStatus.textContent = eyebrowText;
 
 			mobileSectionEyebrow.textContent = tagText;
-			mobileSectionTitle.textContent = resolvedSection.title;
-			mobileSectionSubtitle.textContent = resolvedSection.summary;
+			mobileSectionTitle.textContent = LANDING_ITEM.title;
+			mobileSectionSubtitle.textContent = LANDING_OVERVIEW_SUMMARY;
 			mobileSectionStatus.textContent = eyebrowText;
 
 			renderOverviewBody();
