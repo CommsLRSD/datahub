@@ -6,7 +6,7 @@
 	.data-hub-wrapper {
 		--dh-aspect-ratio: 16 / 9;
 		--dh-frame-height: 540px;
-		--dh-sidebar-height: auto;
+		--dh-sidebar-height: var(--dh-frame-height);
 		--dh-viewer-height: 760px;
 		--dh-viewer-max-height: 95vh;
 		--dh-section-directory-offset: 2.7rem;
@@ -206,7 +206,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.55rem;
-		height: var(--dh-frame-height);
+		height: var(--dh-sidebar-height);
 		overflow: hidden;
 	}
 
@@ -1658,7 +1658,7 @@
 
 		function buildNavMarkup(kind, index, title, subtitle, icon)
 		{
-			var targetAttribute = kind === 'dashboard' ? ' target="dhFrame"' : '';
+			var targetAttribute = kind === 'dashboard' ? ' target="dhFrame" rel="noopener"' : '';
 			var indexAttribute = typeof index === 'number' ? ' data-index="' + index + '"' : '';
 			return [
 				'<a class="dh-nav-item" href="' + getNavigationUrl(kind, index) + '"' + targetAttribute + ' data-nav-kind="' + kind + '"' + indexAttribute + '>',
@@ -1672,7 +1672,7 @@
 		{
 			optionMarkupUid += 1;
 			var labelId = 'dh-option-label-' + optionMarkupUid;
-			var targetAttribute = kind === 'dashboard' ? ' target="dhFrame"' : '';
+			var targetAttribute = kind === 'dashboard' ? ' target="dhFrame" rel="noopener"' : '';
 			var indexAttribute = typeof index === 'number' ? ' data-index="' + index + '"' : '';
 			return [
 				'<a class="dh-option" href="' + getNavigationUrl(kind, index) + '"' + targetAttribute + ' aria-labelledby="' + labelId + '" data-nav-kind="' + kind + '"' + indexAttribute + '>',
@@ -1748,8 +1748,8 @@
 
 		function getOverviewArticleId(index)
 		{
-			if (!Number.isFinite(index)) return LANDING_INTRO_SECTION_ID;
-			return index === LANDING_INTRO_SECTION_INDEX ? LANDING_INTRO_SECTION_ID : 'dh-overview-section-' + index;
+			if (!Number.isFinite(index) || index === LANDING_INTRO_SECTION_INDEX) return LANDING_INTRO_SECTION_ID;
+			return 'dh-overview-section-' + index;
 		}
 
 		function getOverviewSections()
@@ -1811,7 +1811,7 @@
 			{
 				var button = event.target.closest(selector);
 				if (!button) return;
-				// Keep the shared JS state in sync while preserving href-based navigation as a no-JS fallback.
+				// Use JS navigation when available so the shared UI state stays in sync; the href remains as a no-JS fallback.
 				event.preventDefault();
 				var dataIndex = button.getAttribute('data-index');
 				goToItem(button.getAttribute('data-nav-kind'), dataIndex === null ? null : parseInt(dataIndex, 10));
