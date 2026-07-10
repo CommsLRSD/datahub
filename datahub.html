@@ -5,6 +5,7 @@
 
 	.data-hub-wrapper {
 		--dh-aspect-ratio: 16 / 9;
+		--dh-frame-height: 540px;
 		--dh-sidebar-height: auto;
 		--dh-viewer-height: 760px;
 		--dh-viewer-max-height: 95vh;
@@ -428,14 +429,22 @@
 		display: flex;
 		align-items: center;
 		gap: 0.75rem;
+		width: 100%;
 		padding: 0.62rem 0.72rem;
+		border: none;
 		border-radius: var(--radius);
+		background: transparent;
 		cursor: pointer;
 		transition: var(--transition);
+		font-family: inherit;
+		text-align: left;
+		color: var(--text-primary);
 	}
 
-	.dh-option:hover {
+	.dh-option:hover,
+	.dh-option:focus {
 		background: var(--bg-secondary);
+		outline: none;
 	}
 
 	.dh-option.is-active {
@@ -525,9 +534,9 @@
 	.dh-iframe-wrap {
 		position: relative;
 		width: 100%;
-		flex: 1 1 auto;
+		flex: 0 0 var(--dh-frame-height);
+		height: var(--dh-frame-height);
 		min-height: 0;
-		aspect-ratio: var(--dh-aspect-ratio);
 		overflow: hidden;
 		background: linear-gradient(180deg, #f8fbfc 0%, #edf5f5 100%);
 	}
@@ -535,7 +544,7 @@
 	.dh-viewer:fullscreen .dh-iframe-wrap,
 	.dh-viewer:-webkit-full-screen .dh-iframe-wrap {
 		flex: 1;
-		aspect-ratio: auto;
+		height: auto;
 	}
 
 	.dh-iframe-wrap iframe {
@@ -1120,12 +1129,6 @@
 		}
 	}
 
-	@media (min-width: 1181px) {
-		.dh-iframe-wrap {
-			aspect-ratio: var(--dh-aspect-ratio);
-		}
-	}
-
 	@media (max-width: 1180px) {
 		.dh-main {
 			grid-template-columns: 1fr;
@@ -1554,6 +1557,9 @@
 		var currentMode = 'landing';
 		var currentDashboardIndex = -1;
 		var currentSectionIndex = LANDING_INTRO_SECTION_INDEX;
+		var optionMarkupUid = 0;
+		var navigationHandlerMap = new WeakMap();
+		var sectionHandlerMap = new WeakMap();
 
 		function escapeHtml(value)
 		{
@@ -1645,7 +1651,14 @@
 
 		function buildOptionMarkup(kind, index, title, icon)
 		{
-			return '<div class="dh-option" data-nav-kind="' + kind + '"' + (typeof index === 'number' ? ' data-index="' + index + '"' : '') + '><img src="' + sanitizeUrl(icon) + '" alt="" aria-hidden="true" class="dh-item-icon fr-fil fr-dib"><span class="dh-item-text">' + escapeHtml(title) + '</span></div>';
+			optionMarkupUid += 1;
+			var labelId = 'dh-option-label-' + optionMarkupUid;
+			return [
+				'<button class="dh-option" type="button" aria-labelledby="' + labelId + '" data-nav-kind="' + kind + '"' + (typeof index === 'number' ? ' data-index="' + index + '"' : '') + '>',
+				'<img src="' + sanitizeUrl(icon) + '" alt="" aria-hidden="true" class="dh-item-icon fr-fil fr-dib">',
+				'<span class="dh-item-text" id="' + labelId + '">' + escapeHtml(title) + '</span>',
+				'</button>'
+			].join('');
 		}
 
 		function buildMobileMarkup()
@@ -1674,6 +1687,8 @@
 			sidebarList.innerHTML = sidebarHtml;
 			selectOptions.innerHTML = optionsHtml;
 			mobileListItems.innerHTML = buildMobileMarkup();
+			bindNavigationButtons(sidebarList, '.dh-nav-item');
+			bindNavigationButtons(selectOptions, '.dh-option');
 		}
 
 		function getCurrentLandingSection()
@@ -1735,6 +1750,47 @@
 					'</button>'
 				].join('');
 			}).join('');
+			bindSectionDirectory(container);
+		}
+
+		function bindNavigationButtons(container, selector)
+		{
+			if (!container) return;
+			var existingHandler = navigationHandlerMap.get(container);
+			if (existingHandler)
+			{
+				container.removeEventListener('click', existingHandler);
+			}
+
+			var handler = function(event)
+			{
+				var button = event.target.closest(selector);
+				if (!button) return;
+				var dataIndex = button.getAttribute('data-index');
+				goToItem(button.getAttribute('data-nav-kind'), dataIndex === null ? null : parseInt(dataIndex, 10));
+			};
+			navigationHandlerMap.set(container, handler);
+			container.addEventListener('click', handler);
+		}
+
+		function bindSectionDirectory(container)
+		{
+			if (!container) return;
+			var existingHandler = sectionHandlerMap.get(container);
+			if (existingHandler)
+			{
+				container.removeEventListener('click', existingHandler);
+			}
+
+			var handler = function(event)
+			{
+				var button = event.target.closest('.dh-section-link');
+				if (!button) return;
+				currentSectionIndex = parseInt(button.getAttribute('data-section-index'), 10);
+				renderCurrentSection();
+			};
+			sectionHandlerMap.set(container, handler);
+			container.addEventListener('click', handler);
 		}
 
 		function buildOverviewSectionMarkup(section, index)
@@ -1788,6 +1844,7 @@
 			if (window.innerWidth <= MOBILE_BREAKPOINT)
 			{
 				dataHubWrapper.style.setProperty('--dh-viewer-height', 'auto');
+				dataHubWrapper.style.setProperty('--dh-frame-height', 'auto');
 				return;
 			}
 
@@ -1796,11 +1853,14 @@
 
 			var headerHeight = viewerHeader.offsetHeight || DEFAULT_HEADER_HEIGHT;
 			var maxViewerHeight = Math.floor(window.innerHeight * VIEWER_MAX_VIEWPORT_RATIO);
+			var frameHeightLimit = Math.max(VIEWER_MIN_FRAME_HEIGHT_PX, maxViewerHeight - headerHeight);
 			var targetFrameHeight = Math.round(viewerWidth * 9 / 16);
 			var viewportBasedMinimumFrameHeight = Math.floor(window.innerHeight * VIEWER_MIN_FRAME_HEIGHT_RATIO);
 			var clampedMinimumFrameHeight = clamp(viewportBasedMinimumFrameHeight, VIEWER_MIN_FRAME_HEIGHT_PX, VIEWER_MAX_FRAME_HEIGHT_PX);
-			var totalHeight = Math.min(maxViewerHeight, Math.max(headerHeight + clampedMinimumFrameHeight, headerHeight + targetFrameHeight));
+			var frameHeight = Math.min(frameHeightLimit, Math.max(clampedMinimumFrameHeight, targetFrameHeight));
+			var totalHeight = headerHeight + frameHeight;
 
+			dataHubWrapper.style.setProperty('--dh-frame-height', frameHeight + 'px');
 			dataHubWrapper.style.setProperty('--dh-viewer-height', totalHeight + 'px');
 		}
 
@@ -1820,7 +1880,9 @@
 				return;
 			}
 
-			dataHubWrapper.style.setProperty('--dh-sidebar-height', viewer.offsetHeight + 'px');
+			var frameWrapHeight = iframeWrap ? iframeWrap.offsetHeight : 0;
+			var sidebarHeight = frameWrapHeight || viewer.offsetHeight;
+			dataHubWrapper.style.setProperty('--dh-sidebar-height', sidebarHeight + 'px');
 		}
 
 		// skipScroll is used on initial render so the intro state doesn't animate the landing panel.
@@ -2010,20 +2072,6 @@
 		renderCurrentSection(true);
 		showLanding();
 
-		sidebarList.addEventListener('click', function(event)
-		{
-			var button = event.target.closest('.dh-nav-item');
-			if (!button) return;
-			goToItem(button.getAttribute('data-nav-kind'), button.hasAttribute('data-index') ? parseInt(button.getAttribute('data-index'), 10) : null);
-		});
-
-		selectOptions.addEventListener('click', function(event)
-		{
-			var option = event.target.closest('.dh-option');
-			if (!option) return;
-			goToItem(option.getAttribute('data-nav-kind'), option.hasAttribute('data-index') ? parseInt(option.getAttribute('data-index'), 10) : null);
-		});
-
 		document.addEventListener('click', function(event)
 		{
 			if (!customSelect.contains(event.target)) customSelect.removeAttribute('open');
@@ -2038,14 +2086,6 @@
 				behavior: 'smooth',
 				block: 'start'
 			});
-		});
-
-		document.addEventListener('click', function(event)
-		{
-			var sectionLink = event.target.closest('.dh-section-link');
-			if (!sectionLink) return;
-			currentSectionIndex = parseInt(sectionLink.getAttribute('data-section-index'), 10);
-			renderCurrentSection();
 		});
 
 		prevBtn.addEventListener('click', cyclePrev);
@@ -2063,6 +2103,23 @@
 			frame.classList.add('dh-frame-ready');
 			loading.classList.remove('active');
 			syncSidebarHeight();
+		});
+
+		document.addEventListener('keydown', function(event)
+		{
+			if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) return;
+			if (/^(input|textarea|select)$/i.test((event.target && event.target.tagName) || '')) return;
+
+			if (event.key === 'ArrowLeft')
+			{
+				event.preventDefault();
+				cyclePrev();
+			}
+			else if (event.key === 'ArrowRight')
+			{
+				event.preventDefault();
+				cycleNext();
+			}
 		});
 
 		var tourBackdrop = document.getElementById('dhTourBackdrop');
