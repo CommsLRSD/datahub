@@ -1200,7 +1200,7 @@
 			icon: 'https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png'
 		};
 
-		var INTRO_SECTION_INDEX = -1;
+		var LANDING_INTRO_INDEX = -1;
 		var LANDING_INTRO_BODY_HTML = `<p>Explore LRSD's public-facing story about data stewardship, responsible AI use, the systems already in place, and the ongoing work across the division.</p>`;
 
 		var LANDING_INTRO = {
@@ -1348,7 +1348,7 @@
 
 		var currentMode = 'landing';
 		var currentDashboardIndex = -1;
-		var currentSectionIndex = INTRO_SECTION_INDEX;
+		var currentSectionIndex = LANDING_INTRO_INDEX;
 
 		function escapeHtml(value)
 		{
@@ -1480,11 +1480,11 @@
 
 		function getCurrentLandingSection()
 		{
-			if (currentSectionIndex === INTRO_SECTION_INDEX) return LANDING_INTRO;
-			if (currentSectionIndex < INTRO_SECTION_INDEX || currentSectionIndex >= LANDING_SECTIONS.length)
+			if (currentSectionIndex === LANDING_INTRO_INDEX) return LANDING_INTRO;
+			if (currentSectionIndex < LANDING_INTRO_INDEX || (currentSectionIndex >= 0 && currentSectionIndex >= LANDING_SECTIONS.length))
 			{
 				console.warn('Unexpected landing section index:', currentSectionIndex);
-				currentSectionIndex = INTRO_SECTION_INDEX;
+				currentSectionIndex = LANDING_INTRO_INDEX;
 				return LANDING_INTRO;
 			}
 
@@ -1494,7 +1494,7 @@
 		function renderCurrentSection()
 		{
 			var section = getCurrentLandingSection();
-			var isIntro = currentSectionIndex === INTRO_SECTION_INDEX;
+			var isIntro = currentSectionIndex === LANDING_INTRO_INDEX;
 			var eyebrowText = isIntro ? 'Introduction' : 'Section ' + (currentSectionIndex + 1) + ' of ' + LANDING_SECTIONS.length;
 
 			buildSectionPills(sectionPills);
@@ -1534,7 +1534,7 @@
 				activeTitle.textContent = LANDING_ITEM.title;
 				selectText.textContent = LANDING_ITEM.title;
 				activeIcon.setAttribute('src', LANDING_ITEM.icon);
-				counter.textContent = currentSectionIndex === INTRO_SECTION_INDEX ? 'Introduction' : 'Section ' + (currentSectionIndex + 1) + ' / ' + LANDING_SECTIONS.length;
+				counter.textContent = currentSectionIndex === LANDING_INTRO_INDEX ? 'Introduction' : 'Section ' + (currentSectionIndex + 1) + ' / ' + LANDING_SECTIONS.length;
 				prevBtn.setAttribute('title', 'Previous section');
 				nextBtn.setAttribute('title', 'Next section');
 			}
@@ -1603,15 +1603,15 @@
 
 		function getPreviousSectionIndex()
 		{
-			if (currentSectionIndex === INTRO_SECTION_INDEX) return LANDING_SECTIONS.length - 1;
-			if (currentSectionIndex === 0) return INTRO_SECTION_INDEX;
+			if (currentSectionIndex === LANDING_INTRO_INDEX) return LANDING_SECTIONS.length - 1;
+			if (currentSectionIndex === 0) return LANDING_INTRO_INDEX;
 			return currentSectionIndex - 1;
 		}
 
 		function getNextSectionIndex()
 		{
-			if (currentSectionIndex === INTRO_SECTION_INDEX) return 0;
-			if (currentSectionIndex === LANDING_SECTIONS.length - 1) return INTRO_SECTION_INDEX;
+			if (currentSectionIndex === LANDING_INTRO_INDEX) return 0;
+			if (currentSectionIndex === LANDING_SECTIONS.length - 1) return LANDING_INTRO_INDEX;
 			return currentSectionIndex + 1;
 		}
 
