@@ -1408,7 +1408,7 @@
 		};
 
 		var LANDING_INTRO_SECTION_INDEX = -1;
-		var OVERVIEW_INTRO_ID = 'dh-overview-section-introduction';
+		var LANDING_INTRO_SECTION_ID = 'dh-overview-section-introduction';
 
 		var LANDING_INTRO_SECTION = {
 			title: 'Introduction',
@@ -1748,8 +1748,8 @@
 
 		function getOverviewArticleId(index)
 		{
-			if (!Number.isFinite(index)) return OVERVIEW_INTRO_ID;
-			return index === LANDING_INTRO_SECTION_INDEX ? OVERVIEW_INTRO_ID : 'dh-overview-section-' + index;
+			if (!Number.isFinite(index)) return LANDING_INTRO_SECTION_ID;
+			return index === LANDING_INTRO_SECTION_INDEX ? LANDING_INTRO_SECTION_ID : 'dh-overview-section-' + index;
 		}
 
 		function getOverviewSections()
@@ -1811,7 +1811,7 @@
 			{
 				var button = event.target.closest(selector);
 				if (!button) return;
-				// Keep the shared JS state in sync while preserving link targets as a no-JS fallback.
+				// Keep the shared JS state in sync while preserving href-based navigation as a no-JS fallback.
 				event.preventDefault();
 				var dataIndex = button.getAttribute('data-index');
 				goToItem(button.getAttribute('data-nav-kind'), dataIndex === null ? null : parseInt(dataIndex, 10));
