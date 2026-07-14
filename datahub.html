@@ -1183,7 +1183,8 @@
 <script>
 	(function()
 	{
-		var dhBootMaxAttempts = 120;
+		var dhBootIntervalMs = 250;
+		var dhBootMaxAttempts = 120; /* ~30 seconds max retry window in page-builder editors */
 		var dhBootAttempts = 0;
 		var dhBootTimer = null;
 		var dhBootObserver = null;
@@ -1355,7 +1356,12 @@
 		var mobileSectionBody = document.getElementById('dhMobileSectionBody');
 		var mobileSectionPrev = document.getElementById('dhMobileSectionPrev');
 		var mobileSectionNext = document.getElementById('dhMobileSectionNext');
-		var requiredElements = [customSelect, selectOptions, mobileListItems, activeIcon, activeText, frame, counter, loading, prevBtn, nextBtn, viewer, landing, sidebarList, sectionDirectory, sectionStatus, sectionTitle, sectionSubtitle, sectionBody, mobileOverview, mobileSectionDirectory, mobileSectionStatus, mobileSectionTitle, mobileSectionSubtitle, mobileSectionBody, mobileSectionPrev, mobileSectionNext];
+		var requiredElements = [
+			customSelect, selectOptions, mobileListItems, activeIcon, activeText, frame, counter, loading,
+			prevBtn, nextBtn, viewer, landing, sidebarList, sectionDirectory, sectionStatus, sectionTitle,
+			sectionSubtitle, sectionBody, mobileOverview, mobileSectionDirectory, mobileSectionStatus,
+			mobileSectionTitle, mobileSectionSubtitle, mobileSectionBody, mobileSectionPrev, mobileSectionNext
+		];
 
 		if (requiredElements.some(function(el) { return !el; })) return false;
 
@@ -1880,7 +1886,7 @@
 		{
 			if (!dhBootTimer)
 			{
-				dhBootTimer = window.setInterval(attemptBoot, 250);
+				dhBootTimer = window.setInterval(attemptBoot, dhBootIntervalMs);
 			}
 
 			if (window.MutationObserver && !dhBootObserver && document.documentElement)
