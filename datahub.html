@@ -1183,13 +1183,14 @@
 <script>
 	(function()
 	{
-		var dhBootIntervalMs = 250;
-		var dhBootTimeoutMs = 30000;
+		var dhBootIntervalMs = 250; /* keeps retries responsive without thrashing during editor reflows */
+		var dhBootTimeoutMs = 30000; /* gives asynchronous page-builder rendering up to 30 seconds */
 		var dhBootMaxAttempts = Math.ceil(dhBootTimeoutMs / dhBootIntervalMs);
 		var dhBootAttempts = 0;
 		var dhBootTimer = null;
 		var dhBootObserver = null;
 		var dhObservationRoot = null;
+		var dhObserverAttemptQueued = false;
 		var dhHasInitialized = false;
 
 		function stopBootWatchers()
@@ -1914,11 +1915,19 @@
 			}
 
 			if (!dhObservationRoot) dhObservationRoot = document.querySelector('.data-hub-wrapper') || document.body || document.documentElement;
-			var observationRoot = dhObservationRoot;
-			if (window.MutationObserver && !dhBootObserver && observationRoot)
+			if (window.MutationObserver && !dhBootObserver && dhObservationRoot)
 			{
-				dhBootObserver = new MutationObserver(attemptBoot);
-				dhBootObserver.observe(observationRoot, { childList: true, subtree: true });
+				dhBootObserver = new MutationObserver(function()
+				{
+					if (dhObserverAttemptQueued) return;
+					dhObserverAttemptQueued = true;
+					setTimeout(function()
+					{
+						dhObserverAttemptQueued = false;
+						attemptBoot();
+					}, 50);
+				});
+				dhBootObserver.observe(dhObservationRoot, { childList: true, subtree: true });
 			}
 		}
 
