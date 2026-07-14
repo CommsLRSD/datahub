@@ -967,6 +967,74 @@
 		font-size: 0.92em;
 	}
 
+	.dh-resource-spotlight {
+		margin-top: 1.5rem;
+		padding: 1.2rem;
+		border: 1px solid rgba(43, 166, 128, 0.18);
+		border-radius: calc(var(--radius) + 2px);
+		background: linear-gradient(180deg, rgba(244, 251, 248, 0.98), rgba(255, 255, 255, 0.98));
+		box-shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
+	}
+
+	.dh-resource-spotlight h4 {
+		font-size: 1rem;
+		font-weight: 700;
+		margin-bottom: 0.45rem;
+		color: var(--text-primary);
+	}
+
+	.dh-resource-meta {
+		color: var(--text-secondary);
+		margin-bottom: 1rem;
+	}
+
+	.dh-resource-preview {
+		border: 1px solid rgba(148, 163, 184, 0.22);
+		border-radius: calc(var(--radius) - 2px);
+		overflow: hidden;
+		background: #ffffff;
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+	}
+
+	.dh-resource-preview iframe {
+		display: block;
+		width: 100%;
+		min-height: 34rem;
+		border: 0;
+		background: #ffffff;
+	}
+
+	.dh-resource-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-top: 1rem;
+	}
+
+	.dh-resource-button,
+	.dh-resource-button:link,
+	.dh-resource-button:visited {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.72rem 1rem;
+		border-radius: 999px;
+		border: 1px solid rgba(43, 166, 128, 0.22);
+		background: #ffffff;
+		color: var(--accent-green) !important;
+		font-weight: 700;
+		text-decoration: none;
+		box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+		transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+	}
+
+	.dh-resource-button:hover,
+	.dh-resource-button:focus {
+		transform: translateY(-1px);
+		border-color: rgba(43, 166, 128, 0.38);
+		box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+	}
+
 	.dh-section-body a,
 	.dh-section-body a:link,
 	.dh-section-body a:visited {
@@ -1033,6 +1101,10 @@
 
 		.dh-section-status {
 			min-width: 0;
+		}
+
+		.dh-resource-preview iframe {
+			min-height: 28rem;
 		}
 	}
 
@@ -1250,6 +1322,17 @@
 			url: 'https://app.powerbi.com/view?r=eyJrIjoiM2EyNzZhZGQtMTQ5ZC00Mzc4LWEyMGMtZjM2NzE4OTBhYmVhIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
 		}];
 
+		var RESOURCE_LINKS = {
+			posterFr: 'https://media.lrsd.net/media/Default/medialib/data-stewards_fr.cb4dbb88898.pd',
+			posterEn: 'https://media.lrsd.net/media/Default/medialib/data-stewards_en.459bf288897.pdf',
+			freePress: 'https://www.winnipegfreepress.com/breakingnews/2026/06/05/louis-riel-school-division-embraces-ai-agents-of-change',
+			nationalAiStrategy: 'https://ised-isde.canada.ca/site/ised/en/canadas-national-artificial-intelligence-strategy-ai-all',
+			charter: 'https://media.lrsd.net/media/Default/medialib/lrsd_data_governance_charter_v2_4_june2026.1bf66388900.pdf',
+			c21UseCase: 'https://media.lrsd.net/media/Default/medialib/mb-lrsd-pdf-aiusecase-2026.9e168a88901.pdf',
+			boardPresentation: 'https://media.lrsd.net/media/Default/medialib/board-presentation-data-governance-ai-in-lrsd-2026-05-05-v3.cfb6c788899.pdf',
+			aiGuidelines: 'https://media.lrsd.net/media/Default/medialib/lrsd-staff-ai-guidelines-full-document-docx.cb861488902.pdf'
+		};
+
 		var LANDING_SECTIONS = [
 		{
 			title: 'Introduction',
@@ -1260,7 +1343,7 @@
 		{
 			title: 'We Are All Data Stewards',
 			summary: 'Improving accuracy, maintaining security, and using information ethically across LRSD.',
-			bodyHtml: '<p><strong>Every day, LRSD works with information that matters enormously</strong> — student achievement, attendance, well-being, family records, and staff data. This information represents real people and real lives, and how we collect, protect, use, and share it reflects who we are as a school division.</p><p>Good data governance is not an IT matter. It is a shared responsibility that belongs to everyone — teachers, educational assistants, school leaders, support staff, and students alike. <strong>That is the idea at the heart of our work: We Are All Data Stewards.</strong></p><p>To lead this work, LRSD has established a Data Governance Executive Committee — senior divisional leaders with clear accountability for how data is managed across the division — supported by a growing network of Data Advisors and Data Champions in schools. Our Data Governance Charter defines the principles, roles, and commitments that guide all of this. And our AI guidelines establish a clear framework for how artificial intelligence tools are used responsibly at LRSD, grounded in our values and in Manitoba\'s Freedom of Information and Protection of Privacy Act (FIPPA).</p>'
+			bodyHtml: '<p><strong>Every day, LRSD works with information that matters enormously</strong> — student achievement, attendance, well-being, family records, and staff data. This information represents real people and real lives, and how we collect, protect, use, and share it reflects who we are as a school division.</p><p>Good data governance is not an IT matter. It is a shared responsibility that belongs to everyone — teachers, educational assistants, school leaders, support staff, and students alike. <strong>That is the idea at the heart of our work: <a href="' + RESOURCE_LINKS.posterEn + '">We Are All Data Stewards</a>.</strong></p><p>To lead this work, LRSD has established a Data Governance Executive Committee — senior divisional leaders with clear accountability for how data is managed across the division — supported by a growing network of Data Advisors and Data Champions in schools. Our <a href="' + RESOURCE_LINKS.charter + '">Data Governance Charter</a> defines the principles, roles, and commitments that guide all of this. And our <a href="' + RESOURCE_LINKS.aiGuidelines + '">AI guidelines</a> establish a clear framework for how artificial intelligence tools are used responsibly at LRSD, grounded in our values and in Manitoba\'s Freedom of Information and Protection of Privacy Act (FIPPA).</p>'
 		},
 		{
 			title: 'How LRSD Uses Data',
@@ -1275,7 +1358,7 @@
 		{
 			title: 'Our AI Agents',
 			summary: 'Purpose-built AI agents are designed in-house for LRSD\'s context, curriculum, privacy expectations, and ethical safeguards.',
-			bodyHtml: '<p><strong>Beyond Copilot itself, LRSD has developed a set of purpose-built AI agents</strong> — tools configured to do one specific job, with LRSD\'s values, Manitoba curriculum expectations, privacy requirements, and ethical safeguards encoded directly into their design.</p><p>These are not generic tools imported from elsewhere. <strong>They are built in-house, for our context, our community, and our students.</strong> A shared design principle runs through all of them: rather than relying on policy documents or training to shape how people use AI, we encode our values and requirements into the tools themselves.</p><div class="dh-agent-grid"><div class="dh-agent-card"><h4>SPARK</h4><p>Strategic Partner for Amplifying Reflective Knowledge was built for school leaders so they can explore, question, and develop informed perspectives on AI before supporting staff and students.</p></div><div class="dh-agent-card"><h4>LEAP</h4><p>Language Education Assessment and Planning supports Student Services staff with consistent, high-quality, equity-centred planning for multilingual learners across the division.</p></div><div class="dh-agent-card"><h4>ATLAS</h4><p>Assisting Teachers with Lessons, Adaptations and Support helps teachers move from Manitoba learning outcomes to classroom-ready materials more efficiently while keeping professional judgment in their hands.</p></div><div class="dh-agent-card"><h4>CHALK</h4><p>Classroom Helper for Academic Learning and Knowledge supports students in Grades 7 through 12 by guiding thinking instead of giving answers, and includes a crisis support protocol directly in its design.</p></div><div class="dh-agent-card"><h4>CLARA</h4><p>Curriculum-Linked Assessment and Reporting Assistant helps teachers create outcome-aligned, strength-based, parent-friendly report card comments while preserving the teacher\'s voice, review, edits, and approval.</p></div></div><p>LRSD\'s integrated approach — building governance and AI strategy together, led from the leadership table, grounded in our own values — has been recognized by Microsoft, Google, Dell Canada, and C21 Canada. Dell and C21 selected LRSD as a national case study on responsible AI adoption in education.</p>'
+			bodyHtml: '<p><strong>Beyond Copilot itself, LRSD has developed a set of purpose-built AI agents</strong> — tools configured to do one specific job, with LRSD\'s values, Manitoba curriculum expectations, privacy requirements, and ethical safeguards encoded directly into their design.</p><p>These are not generic tools imported from elsewhere. <strong>They are built in-house, for our context, our community, and our students.</strong> A shared design principle runs through all of them: rather than relying on policy documents or training to shape how people use AI, we encode our values and requirements into the tools themselves.</p><div class="dh-agent-grid"><div class="dh-agent-card"><h4>SPARK</h4><p>Strategic Partner for Amplifying Reflective Knowledge was built for school leaders so they can explore, question, and develop informed perspectives on AI before supporting staff and students.</p></div><div class="dh-agent-card"><h4>LEAP</h4><p>Language Education Assessment and Planning supports Student Services staff with consistent, high-quality, equity-centred planning for multilingual learners across the division.</p></div><div class="dh-agent-card"><h4>ATLAS</h4><p>Assisting Teachers with Lessons, Adaptations and Support helps teachers move from Manitoba learning outcomes to classroom-ready materials more efficiently while keeping professional judgment in their hands.</p></div><div class="dh-agent-card"><h4>CHALK</h4><p>Classroom Helper for Academic Learning and Knowledge supports students in Grades 7 through 12 by guiding thinking instead of giving answers, and includes a crisis support protocol directly in its design.</p></div><div class="dh-agent-card"><h4>CLARA</h4><p>Curriculum-Linked Assessment and Reporting Assistant helps teachers create outcome-aligned, strength-based, parent-friendly report card comments while preserving the teacher\'s voice, review, edits, and approval.</p></div></div><p>LRSD\'s integrated approach — building governance and AI strategy together, led from the leadership table, grounded in our own values — has been recognized by Microsoft, Google, Dell Canada, and C21 Canada. Dell and C21 selected LRSD as a national <a href="' + RESOURCE_LINKS.c21UseCase + '">case study on responsible AI adoption in education</a>.</p>'
 		},
 		{
 			title: 'Responsible Use Means Knowing When Not to Use AI',
@@ -1285,17 +1368,26 @@
 		{
 			title: 'What We\'ve Built',
 			summary: 'LRSD has already established governance, guidelines, awareness, and tools that many systems are only beginning to consider.',
-			bodyHtml: '<p><strong>In the past year, LRSD has completed a division-wide data maturity assessment, formed the Data Governance Executive Committee, finalized comprehensive AI guidelines, completed the Data Governance Charter, launched the “We Are All Data Stewards” awareness campaign, and deployed five purpose-built AI agents across the division.</strong></p><p>A review of divisional policies and procedures is underway. Canada\'s federal government released a national AI strategy in June 2026; as of that date, only a small number of provincial ministries of education had published formal AI guidance for K–12 schools. <strong>LRSD has already built what many school divisions are only beginning to consider.</strong></p>'
+			bodyHtml: '<p><strong>In the past year, LRSD has completed a division-wide data maturity assessment, formed the Data Governance Executive Committee, finalized comprehensive <a href="' + RESOURCE_LINKS.aiGuidelines + '">AI guidelines</a>, completed the <a href="' + RESOURCE_LINKS.charter + '">Data Governance Charter</a>, launched the <a href="' + RESOURCE_LINKS.posterEn + '">“We Are All Data Stewards” awareness campaign</a>, and deployed five purpose-built AI agents across the division.</strong></p><p>A review of divisional policies and procedures is underway. Canada\'s federal government released a <a href="' + RESOURCE_LINKS.nationalAiStrategy + '">national AI strategy</a> in June 2026; as of that date, only a small number of provincial ministries of education had published formal AI guidance for K–12 schools. <strong>LRSD has already built what many school divisions are only beginning to consider.</strong></p>'
 		},
 		{
 			title: 'What\'s Still Ahead',
 			summary: 'The work continues through broader engagement, better systems, evolving guidance, stronger learning, and clearer community pathways.',
-			bodyHtml: '<p><strong>We want to be clear: there is significant work still to do, and we are committed to doing it thoughtfully.</strong></p><ul><li><strong>Governance:</strong> Our data governance structure is in its early stages. The Executive Committee has provided foundational leadership, but broader voices — schools, families, students, and community members — have not yet been meaningfully included. Building those connections is part of what comes next, including growing a Data Champions Network in every school and department.</li><li><strong>Systems:</strong> Our data itself is a work in progress. We are continuing to move away from paper-based processes, improve data quality and consistency, and build the shared systems that allow information to be used well across the division.</li><li><strong>Guidance:</strong> Our AI guidelines and policies will need to evolve as tools change, as research develops, and as our own experience teaches us more. We are committed to updating our frameworks as we learn and to communicating those changes openly.</li><li><strong>Learning:</strong> We are also developing professional learning opportunities to support staff in building their data literacy and AI literacy — and working toward the resources and structures that will help teachers introduce these topics meaningfully in classrooms.</li><li><strong>Community pathways:</strong> A process for community members to raise questions or concerns is in development. More information to come.</li></ul>'
+			bodyHtml: '<p><strong>We want to be clear: there is significant work still to do, and we are committed to doing it thoughtfully.</strong></p><ul><li><strong>Governance:</strong> Our data governance structure is in its early stages. The Executive Committee has provided foundational leadership, but broader voices — schools, families, students, and community members — have not yet been meaningfully included. Building those connections is part of what comes next, including growing a Data Champions Network in every school and department.</li><li><strong>Systems:</strong> Our data itself is a work in progress. We are continuing to move away from paper-based processes, improve data quality and consistency, and build the shared systems that allow information to be used well across the division.</li><li><strong>Guidance:</strong> Our <a href="' + RESOURCE_LINKS.aiGuidelines + '">AI guidelines</a> and policies will need to evolve as tools change, as research develops, and as our own experience teaches us more. We are committed to updating our frameworks as we learn and to communicating those changes openly.</li><li><strong>Learning:</strong> We are also developing professional learning opportunities to support staff in building their data literacy and AI literacy — and working toward the resources and structures that will help teachers introduce these topics meaningfully in classrooms.</li><li><strong>Community pathways:</strong> A process for community members to raise questions or concerns is in development. More information to come.</li></ul>'
 		},
 		{
 			title: 'Resources',
 			summary: 'Supporting documents, links, and reference material that accompany the public overview.',
-			bodyHtml: '<p>The following materials are identified in the public content package:</p><ul class="dh-resource-list"><li>Data Governance Charter</li><li>“We Are All Data Stewards” poster</li><li>AI Guidelines (full document)</li><li>Links to Board meeting discussions on Data Governance and AI</li><li>Link to C21 Use case</li><li>Link to Free Press article “Agents of Change”</li><li>FAQ document <span class="dh-resource-note">(to be developed)</span></li><li>Link to relevant policies</li><li>Bibliography of resources <span class="dh-resource-note">(to be developed)</span></li><li>Link to Canada’s AI Strategy</li></ul>'
+			bodyHtml: '<p>The following public-facing materials are currently available:</p><ul class="dh-resource-list"><li><a href="' + RESOURCE_LINKS.charter + '">Data Governance Charter</a></li><li><a href="' + RESOURCE_LINKS.aiGuidelines + '">AI Guidelines</a></li><li><a href="' + RESOURCE_LINKS.boardPresentation + '">Board Presentation on Data Governance and AI</a></li><li><a href="' + RESOURCE_LINKS.c21UseCase + '">C21 Use Case</a></li><li><a href="' + RESOURCE_LINKS.freePress + '">Winnipeg Free Press article: “Louis Riel School Division embraces AI agents of change”</a></li><li><a href="' + RESOURCE_LINKS.nationalAiStrategy + '">Canada’s National Artificial Intelligence Strategy: AI for All</a></li></ul>',
+			spotlight: {
+				title: 'We Are All Data Stewards poster',
+				description: 'Preview the English poster below, then open either language version in a new tab for a closer look.',
+				previewUrl: RESOURCE_LINKS.posterEn,
+				primaryUrl: RESOURCE_LINKS.posterEn,
+				primaryLabel: 'Open English poster',
+				secondaryUrl: RESOURCE_LINKS.posterFr,
+				secondaryLabel: 'Open French poster'
+			}
 		}
 		];
 
@@ -1483,7 +1575,36 @@
 			var introLogoHtml = index === 0
 				? '<img src="' + sanitizeUrl(LANDING_ITEM.icon) + '" alt="Data Hub" class="dh-section-logo fr-fil fr-dib">'
 				: '';
-			return '<div class="dh-section-body-inner">' + introLogoHtml + sanitizeSectionHtml(section.bodyHtml) + '</div>';
+			return '<div class="dh-section-body-inner">' + introLogoHtml + sanitizeSectionHtml(section.bodyHtml) + buildSectionSpotlightHtml(section) + '</div>';
+		}
+
+		function buildSectionSpotlightHtml(section)
+		{
+			if (!section || !section.spotlight) return '';
+
+			var title = section.spotlight.title ? escapeHtml(section.spotlight.title) : 'Featured resource';
+			var description = section.spotlight.description ? '<p class="dh-resource-meta">' + escapeHtml(section.spotlight.description) + '</p>' : '';
+			var previewUrl = sanitizeUrl(section.spotlight.previewUrl);
+			var primaryUrl = sanitizeUrl(section.spotlight.primaryUrl || previewUrl);
+			var secondaryUrl = sanitizeUrl(section.spotlight.secondaryUrl);
+			var primaryLabel = escapeHtml(section.spotlight.primaryLabel || 'Open resource');
+			var secondaryLabel = escapeHtml(section.spotlight.secondaryLabel || 'Open alternate version');
+			var previewHtml = previewUrl
+				? '<div class="dh-resource-preview"><iframe src="' + previewUrl + '#toolbar=0&navpanes=0&scrollbar=0" title="' + title + ' preview" loading="lazy"></iframe></div>'
+				: '';
+			var actions = [];
+
+			if (primaryUrl)
+			{
+				actions.push('<a class="dh-resource-button" href="' + primaryUrl + '" target="_blank" rel="noopener">' + primaryLabel + '</a>');
+			}
+
+			if (secondaryUrl)
+			{
+				actions.push('<a class="dh-resource-button" href="' + secondaryUrl + '" target="_blank" rel="noopener">' + secondaryLabel + '</a>');
+			}
+
+			return '<div class="dh-resource-spotlight"><h4>' + title + '</h4>' + description + previewHtml + (actions.length ? '<div class="dh-resource-actions">' + actions.join('') + '</div>' : '') + '</div>';
 		}
 
 		function renderSections()
