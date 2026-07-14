@@ -1457,21 +1457,12 @@
 			}
 		}
 
-		function withUrlHash(value, hash)
+		function buildPdfPreviewUrl(value)
 		{
 			var safeValue = sanitizeUrl(value);
 			if (!safeValue) return '';
 
-			try
-			{
-				var parsed = new URL(safeValue, window.location.href);
-				parsed.hash = hash || '';
-				return parsed.href;
-			}
-			catch (e)
-			{
-				return '';
-			}
+			return sanitizeUrl(safeValue + '#toolbar=0&navpanes=0&scrollbar=0');
 		}
 
 		function sanitizeSectionHtml(html)
@@ -1602,7 +1593,7 @@
 			var title = section.spotlight.title ? escapeHtml(section.spotlight.title) : 'Featured resource';
 			var description = section.spotlight.description ? '<p class="dh-resource-meta">' + escapeHtml(section.spotlight.description) + '</p>' : '';
 			var previewUrl = sanitizeUrl(section.spotlight.previewUrl);
-			var previewFrameUrl = withUrlHash(previewUrl, 'toolbar=0&navpanes=0&scrollbar=0');
+			var previewFrameUrl = buildPdfPreviewUrl(previewUrl);
 			var primaryUrl = sanitizeUrl(section.spotlight.primaryUrl || previewUrl);
 			var secondaryUrl = sanitizeUrl(section.spotlight.secondaryUrl);
 			var primaryLabel = escapeHtml(section.spotlight.primaryLabel || 'Open resource');
