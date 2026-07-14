@@ -1323,8 +1323,8 @@
 		}];
 
 		var RESOURCE_LINKS = {
-			posterFr: 'https://media.lrsd.net/media/Default/medialib/data-stewards_fr.cb4dbb88898.pd',
-			posterEn: 'https://media.lrsd.net/media/Default/medialib/data-stewards_en.459bf288897.pdf',
+			posterEnglish: 'https://media.lrsd.net/media/Default/medialib/data-stewards_en.459bf288897.pdf',
+			posterFrench: 'https://media.lrsd.net/media/Default/medialib/data-stewards_fr.cb4dbb88898.pdf',
 			freePress: 'https://www.winnipegfreepress.com/breakingnews/2026/06/05/louis-riel-school-division-embraces-ai-agents-of-change',
 			nationalAiStrategy: 'https://ised-isde.canada.ca/site/ised/en/canadas-national-artificial-intelligence-strategy-ai-all',
 			charter: 'https://media.lrsd.net/media/Default/medialib/lrsd_data_governance_charter_v2_4_june2026.1bf66388900.pdf',
@@ -1343,7 +1343,7 @@
 		{
 			title: 'We Are All Data Stewards',
 			summary: 'Improving accuracy, maintaining security, and using information ethically across LRSD.',
-			bodyHtml: '<p><strong>Every day, LRSD works with information that matters enormously</strong> — student achievement, attendance, well-being, family records, and staff data. This information represents real people and real lives, and how we collect, protect, use, and share it reflects who we are as a school division.</p><p>Good data governance is not an IT matter. It is a shared responsibility that belongs to everyone — teachers, educational assistants, school leaders, support staff, and students alike. <strong>That is the idea at the heart of our work: <a href="' + RESOURCE_LINKS.posterEn + '">We Are All Data Stewards</a>.</strong></p><p>To lead this work, LRSD has established a Data Governance Executive Committee — senior divisional leaders with clear accountability for how data is managed across the division — supported by a growing network of Data Advisors and Data Champions in schools. Our <a href="' + RESOURCE_LINKS.charter + '">Data Governance Charter</a> defines the principles, roles, and commitments that guide all of this. And our <a href="' + RESOURCE_LINKS.aiGuidelines + '">AI guidelines</a> establish a clear framework for how artificial intelligence tools are used responsibly at LRSD, grounded in our values and in Manitoba\'s Freedom of Information and Protection of Privacy Act (FIPPA).</p>'
+			bodyHtml: '<p><strong>Every day, LRSD works with information that matters enormously</strong> — student achievement, attendance, well-being, family records, and staff data. This information represents real people and real lives, and how we collect, protect, use, and share it reflects who we are as a school division.</p><p>Good data governance is not an IT matter. It is a shared responsibility that belongs to everyone — teachers, educational assistants, school leaders, support staff, and students alike. <strong>That is the idea at the heart of our work: <a href="' + RESOURCE_LINKS.posterEnglish + '">We Are All Data Stewards</a>.</strong></p><p>To lead this work, LRSD has established a Data Governance Executive Committee — senior divisional leaders with clear accountability for how data is managed across the division — supported by a growing network of Data Advisors and Data Champions in schools. Our <a href="' + RESOURCE_LINKS.charter + '">Data Governance Charter</a> defines the principles, roles, and commitments that guide all of this. And our <a href="' + RESOURCE_LINKS.aiGuidelines + '">AI guidelines</a> establish a clear framework for how artificial intelligence tools are used responsibly at LRSD, grounded in our values and in Manitoba\'s Freedom of Information and Protection of Privacy Act (FIPPA).</p>'
 		},
 		{
 			title: 'How LRSD Uses Data',
@@ -1368,7 +1368,7 @@
 		{
 			title: 'What We\'ve Built',
 			summary: 'LRSD has already established governance, guidelines, awareness, and tools that many systems are only beginning to consider.',
-			bodyHtml: '<p><strong>In the past year, LRSD has completed a division-wide data maturity assessment, formed the Data Governance Executive Committee, finalized comprehensive <a href="' + RESOURCE_LINKS.aiGuidelines + '">AI guidelines</a>, completed the <a href="' + RESOURCE_LINKS.charter + '">Data Governance Charter</a>, launched the <a href="' + RESOURCE_LINKS.posterEn + '">“We Are All Data Stewards” awareness campaign</a>, and deployed five purpose-built AI agents across the division.</strong></p><p>A review of divisional policies and procedures is underway. Canada\'s federal government released a <a href="' + RESOURCE_LINKS.nationalAiStrategy + '">national AI strategy</a> in June 2026; as of that date, only a small number of provincial ministries of education had published formal AI guidance for K–12 schools. <strong>LRSD has already built what many school divisions are only beginning to consider.</strong></p>'
+			bodyHtml: '<p><strong>In the past year, LRSD has completed a division-wide data maturity assessment, formed the Data Governance Executive Committee, finalized comprehensive <a href="' + RESOURCE_LINKS.aiGuidelines + '">AI guidelines</a>, completed the <a href="' + RESOURCE_LINKS.charter + '">Data Governance Charter</a>, launched the <a href="' + RESOURCE_LINKS.posterEnglish + '">“We Are All Data Stewards” awareness campaign</a>, and deployed five purpose-built AI agents across the division.</strong></p><p>A review of divisional policies and procedures is underway. Canada\'s federal government released a <a href="' + RESOURCE_LINKS.nationalAiStrategy + '">national AI strategy</a> in June 2026; as of that date, only a small number of provincial ministries of education had published formal AI guidance for K–12 schools. <strong>LRSD has already built what many school divisions are only beginning to consider.</strong></p>'
 		},
 		{
 			title: 'What\'s Still Ahead',
@@ -1382,10 +1382,10 @@
 			spotlight: {
 				title: 'We Are All Data Stewards poster',
 				description: 'Preview the English poster below, then open either language version in a new tab for a closer look.',
-				previewUrl: RESOURCE_LINKS.posterEn,
-				primaryUrl: RESOURCE_LINKS.posterEn,
+				previewUrl: RESOURCE_LINKS.posterEnglish,
+				primaryUrl: RESOURCE_LINKS.posterEnglish,
 				primaryLabel: 'Open English poster',
-				secondaryUrl: RESOURCE_LINKS.posterFr,
+				secondaryUrl: RESOURCE_LINKS.posterFrench,
 				secondaryLabel: 'Open French poster'
 			}
 		}
@@ -1590,7 +1590,7 @@
 			var primaryLabel = escapeHtml(section.spotlight.primaryLabel || 'Open resource');
 			var secondaryLabel = escapeHtml(section.spotlight.secondaryLabel || 'Open alternate version');
 			var previewHtml = previewUrl
-				? '<div class="dh-resource-preview"><iframe src="' + previewUrl + '#toolbar=0&navpanes=0&scrollbar=0" title="' + title + ' preview" loading="lazy"></iframe></div>'
+				? '<div class="dh-resource-preview"><iframe src="' + previewUrl + '#toolbar=0&navpanes=0&scrollbar=0" title="PDF preview of ' + title + '" loading="lazy"></iframe></div>'
 				: '';
 			var actions = [];
 
