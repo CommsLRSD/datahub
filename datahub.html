@@ -1184,7 +1184,7 @@
 	(function()
 	{
 		var dhBootIntervalMs = 250;
-		var dhBootMaxAttempts = 120; /* ~30 seconds max retry window in page-builder editors */
+		var dhBootMaxAttempts = 120; /* 30 seconds max retry window in page-builder editors */
 		var dhBootAttempts = 0;
 		var dhBootTimer = null;
 		var dhBootObserver = null;
@@ -1357,10 +1357,32 @@
 		var mobileSectionPrev = document.getElementById('dhMobileSectionPrev');
 		var mobileSectionNext = document.getElementById('dhMobileSectionNext');
 		var requiredElements = [
-			customSelect, selectOptions, mobileListItems, activeIcon, activeText, frame, counter, loading,
-			prevBtn, nextBtn, viewer, landing, sidebarList, sectionDirectory, sectionStatus, sectionTitle,
-			sectionSubtitle, sectionBody, mobileOverview, mobileSectionDirectory, mobileSectionStatus,
-			mobileSectionTitle, mobileSectionSubtitle, mobileSectionBody, mobileSectionPrev, mobileSectionNext
+			customSelect,
+			selectOptions,
+			mobileListItems,
+			activeIcon,
+			activeText,
+			frame,
+			counter,
+			loading,
+			prevBtn,
+			nextBtn,
+			viewer,
+			landing,
+			sidebarList,
+			sectionDirectory,
+			sectionStatus,
+			sectionTitle,
+			sectionSubtitle,
+			sectionBody,
+			mobileOverview,
+			mobileSectionDirectory,
+			mobileSectionStatus,
+			mobileSectionTitle,
+			mobileSectionSubtitle,
+			mobileSectionBody,
+			mobileSectionPrev,
+			mobileSectionNext
 		];
 
 		if (requiredElements.some(function(el) { return !el; })) return false;
@@ -1889,10 +1911,11 @@
 				dhBootTimer = window.setInterval(attemptBoot, dhBootIntervalMs);
 			}
 
-			if (window.MutationObserver && !dhBootObserver && document.documentElement)
+			var observationRoot = document.querySelector('.data-hub-wrapper') || document.body || document.documentElement;
+			if (window.MutationObserver && !dhBootObserver && observationRoot)
 			{
 				dhBootObserver = new MutationObserver(attemptBoot);
-				dhBootObserver.observe(document.documentElement, { childList: true, subtree: true });
+				dhBootObserver.observe(observationRoot, { childList: true, subtree: true });
 			}
 		}
 
