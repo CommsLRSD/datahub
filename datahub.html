@@ -1184,17 +1184,19 @@
 	(function()
 	{
 		var dhBootIntervalMs = 250;
-		var dhBootMaxAttempts = 120; /* 30 seconds max retry window in page-builder editors */
+		var dhBootTimeoutMs = 30000;
+		var dhBootMaxAttempts = Math.ceil(dhBootTimeoutMs / dhBootIntervalMs);
 		var dhBootAttempts = 0;
 		var dhBootTimer = null;
 		var dhBootObserver = null;
+		var dhObservationRoot = null;
 		var dhHasInitialized = false;
 
 		function stopBootWatchers()
 		{
 			if (dhBootTimer)
 			{
-				window.clearInterval(dhBootTimer);
+				clearInterval(dhBootTimer);
 				dhBootTimer = null;
 			}
 			if (dhBootObserver)
@@ -1908,10 +1910,11 @@
 		{
 			if (!dhBootTimer)
 			{
-				dhBootTimer = window.setInterval(attemptBoot, dhBootIntervalMs);
+				dhBootTimer = setInterval(attemptBoot, dhBootIntervalMs);
 			}
 
-			var observationRoot = document.querySelector('.data-hub-wrapper') || document.body || document.documentElement;
+			if (!dhObservationRoot) dhObservationRoot = document.querySelector('.data-hub-wrapper') || document.body || document.documentElement;
+			var observationRoot = dhObservationRoot;
 			if (window.MutationObserver && !dhBootObserver && observationRoot)
 			{
 				dhBootObserver = new MutationObserver(attemptBoot);
