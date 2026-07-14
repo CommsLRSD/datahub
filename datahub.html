@@ -1183,6 +1183,30 @@
 <script>
 	(function()
 	{
+		var dhBootMaxAttempts = 120;
+		var dhBootAttempts = 0;
+		var dhBootTimer = null;
+		var dhBootObserver = null;
+		var dhHasInitialized = false;
+
+		function stopBootWatchers()
+		{
+			if (dhBootTimer)
+			{
+				window.clearInterval(dhBootTimer);
+				dhBootTimer = null;
+			}
+			if (dhBootObserver)
+			{
+				dhBootObserver.disconnect();
+				dhBootObserver = null;
+			}
+		}
+
+		function boot()
+		{
+			if (dhHasInitialized) return true;
+
 		var LANDING_ITEM = {
 			title: 'Data Governance & AI Overview',
 			icon: 'https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png'
@@ -1331,6 +1355,12 @@
 		var mobileSectionBody = document.getElementById('dhMobileSectionBody');
 		var mobileSectionPrev = document.getElementById('dhMobileSectionPrev');
 		var mobileSectionNext = document.getElementById('dhMobileSectionNext');
+		var requiredElements = [customSelect, selectOptions, mobileListItems, activeIcon, activeText, frame, counter, loading, prevBtn, nextBtn, viewer, landing, sidebarList, sectionDirectory, sectionStatus, sectionTitle, sectionSubtitle, sectionBody, mobileOverview, mobileSectionDirectory, mobileSectionStatus, mobileSectionTitle, mobileSectionSubtitle, mobileSectionBody, mobileSectionPrev, mobileSectionNext];
+
+		if (requiredElements.some(function(el) { return !el; })) return false;
+
+		dhHasInitialized = true;
+		stopBootWatchers();
 
 		var allowedSectionClassNames = ['dh-agent-grid', 'dh-agent-card', 'dh-resource-list', 'dh-resource-note'];
 		var frameReuseDelayMs = 120;
@@ -1716,7 +1746,7 @@
 		nextBtn.addEventListener('click', cycleNext);
 		mobileSectionPrev.addEventListener('click', prevSection);
 		mobileSectionNext.addEventListener('click', nextSection);
-		fsBtn.addEventListener('click', toggleFullscreen);
+		if (fsBtn) fsBtn.addEventListener('click', toggleFullscreen);
 
 		frame.addEventListener('load', function()
 		{
@@ -1824,14 +1854,49 @@
 			tourTooltip.classList.remove('active');
 		}
 
-		helpBtn.addEventListener('click', startTour);
-		tourSkip.addEventListener('click', endTour);
-		tourBackdrop.addEventListener('click', endTour);
-		tourBack.addEventListener('click', function() { if (tourIndex > 0) showStep(tourIndex - 1); });
-		tourNext.addEventListener('click', function() { if (tourIndex < tourSteps.length - 1) showStep(tourIndex + 1); else endTour(); });
-		document.addEventListener('keydown', function(e) { if (!tourActive) return; if (e.key === 'Escape') endTour(); });
-		window.addEventListener('resize', positionSpotlightAndTooltip);
-		window.addEventListener('scroll', positionSpotlightAndTooltip, true);
+		if (helpBtn && tourBackdrop && tourSpotlight && tourTooltip && tourStep && tourTitle && tourBody && tourSkip && tourBack && tourNext)
+		{
+			helpBtn.addEventListener('click', startTour);
+			tourSkip.addEventListener('click', endTour);
+			tourBackdrop.addEventListener('click', endTour);
+			tourBack.addEventListener('click', function() { if (tourIndex > 0) showStep(tourIndex - 1); });
+			tourNext.addEventListener('click', function() { if (tourIndex < tourSteps.length - 1) showStep(tourIndex + 1); else endTour(); });
+			document.addEventListener('keydown', function(e) { if (!tourActive) return; if (e.key === 'Escape') endTour(); });
+			window.addEventListener('resize', positionSpotlightAndTooltip);
+			window.addEventListener('scroll', positionSpotlightAndTooltip, true);
+		}
+
+		return true;
+		}
+
+		function attemptBoot()
+		{
+			if (boot()) return;
+			dhBootAttempts += 1;
+			if (dhBootAttempts >= dhBootMaxAttempts) stopBootWatchers();
+		}
+
+		function startBootWatchers()
+		{
+			if (!dhBootTimer)
+			{
+				dhBootTimer = window.setInterval(attemptBoot, 250);
+			}
+
+			if (window.MutationObserver && !dhBootObserver && document.documentElement)
+			{
+				dhBootObserver = new MutationObserver(attemptBoot);
+				dhBootObserver.observe(document.documentElement, { childList: true, subtree: true });
+			}
+		}
+
+		attemptBoot();
+		if (!dhHasInitialized)
+		{
+			if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', attemptBoot);
+			window.addEventListener('load', attemptBoot);
+			startBootWatchers();
+		}
 	})();
 
 </script>
