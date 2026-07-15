@@ -947,7 +947,7 @@
 	.dh-agent-card {
 		display: grid;
 		grid-template-columns: auto minmax(0, 1fr);
-		gap: 0.15rem 0.95rem;
+		gap: 0.25rem 1rem;
 		align-items: start;
 		padding: 1rem 1.05rem;
 		border: 1px solid rgba(43, 166, 128, 0.14);
@@ -1451,7 +1451,26 @@
 			chalk: 'https://media.lrsd.net/media/Default/frl/chalk.19861b88947.png'
 		};
 
-		var DATA_FOUNDATIONS_CARDS_HTML = '<div class="dh-info-grid"><div class="dh-info-card"><h4>Data Informed</h4><p>Using evidence to make decisions with confidence.</p></div><div class="dh-info-card"><h4>Data Ready</h4><p>Ensuring the right data is available in the right format at the right time.</p></div><div class="dh-info-card"><h4>Data Efficacious</h4><p>Building the skills to understand and use data effectively.</p></div><div class="dh-info-card"><h4>Data Stewards</h4><p>Using data ethically as a flashlight, not a hammer&mdash;to help, not harm.</p></div></div>';
+		var DATA_FOUNDATIONS_CARDS = [
+			{
+				title: 'Data Informed',
+				description: 'Using evidence to make decisions with confidence.'
+			},
+			{
+				title: 'Data Ready',
+				description: 'Ensuring the right data is available in the right format at the right time.'
+			},
+			{
+				title: 'Data Efficacious',
+				description: 'Building the skills to understand and use data effectively.'
+			},
+			{
+				title: 'Data Stewards',
+				description: 'Using data ethically as a flashlight, not a hammer—to help, not harm.'
+			}
+		];
+
+		var DATA_FOUNDATIONS_CARDS_HTML = buildInfoCardsHtml(DATA_FOUNDATIONS_CARDS);
 
 		var LANDING_SECTIONS = [
 		{
@@ -1663,6 +1682,14 @@
 			});
 
 			return template.innerHTML;
+		}
+
+		function buildInfoCardsHtml(cards)
+		{
+			return '<div class="dh-info-grid">' + cards.map(function(card)
+			{
+				return '<div class="dh-info-card"><h4>' + escapeHtml(card.title) + '</h4><p>' + escapeHtml(card.description) + '</p></div>';
+			}).join('') + '</div>';
 		}
 
 		function getSectionLabel(index)
