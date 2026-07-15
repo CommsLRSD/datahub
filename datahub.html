@@ -1699,7 +1699,7 @@
 			var description = section.spotlight.description ? '<p class="dh-resource-meta">' + escapeHtml(section.spotlight.description) + '</p>' : '';
 			var previewUrl = sanitizeUrl(section.spotlight.previewUrl);
 			var previewFrameUrl = buildPdfPreviewUrl(previewUrl);
-			var primaryUrl = sanitizeUrl(section.spotlight.primaryUrl);
+			var primaryUrl = section.spotlight.primaryUrl ? sanitizeUrl(section.spotlight.primaryUrl) : '';
 			var secondaryUrl = sanitizeUrl(section.spotlight.secondaryUrl);
 			var primaryLabel = escapeHtml(section.spotlight.primaryLabel || 'Open resource');
 			var secondaryLabel = escapeHtml(section.spotlight.secondaryLabel || 'Open alternate version');
