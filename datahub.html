@@ -1177,7 +1177,7 @@
 				<img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-logo-img dh-logo-horizontal fr-fil fr-dib">
 				<img src="https://media.lrsd.net/media/Default/frl/dh-logo-vert-fc-svg-2x.d681e083557.png" alt="Data Hub" class="dh-logo-img dh-logo-vertical fr-fic fr-dii">
 			</div>
-			<button type="button" class="dh-mobile-help-btn" id="dhMobileHelpBtn" title="About these dashboards">?</button>
+			<button type="button" class="dh-mobile-help-btn" id="dhMobileHelpBtn" title="Show help tour">?</button>
 
 			<p class="dh-tagline">We are committed to using data to inform decision-making, monitor progress, and share our story with the community.
 				<br>This involves a growth mindset and a solid grounding in data ethics, tools, and processes.</p>
@@ -1233,6 +1233,24 @@
 						<img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-section-logo fr-fil fr-dib">
 						<p><strong>Explore how LRSD approaches data stewardship, responsible artificial intelligence, and the systems already in place to support students, staff, and families.</strong></p>
 						<p>Use the section list to jump directly to any topic in the overview.</p>
+						<div class="dh-info-grid">
+							<div class="dh-info-card">
+								<h4>Data Informed</h4>
+								<p>Using evidence to make decisions with confidence.</p>
+							</div>
+							<div class="dh-info-card">
+								<h4>Data Ready</h4>
+								<p>Ensuring the right data is available in the right format at the right time.</p>
+							</div>
+							<div class="dh-info-card">
+								<h4>Data Efficacious</h4>
+								<p>Building the skills to understand and use data effectively.</p>
+							</div>
+							<div class="dh-info-card">
+								<h4>Data Stewards</h4>
+								<p>Using data ethically as a flashlight, not a hammer, to help, not harm.</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -1266,7 +1284,7 @@
 						<button class="dh-arrow-btn" id="dhPrev" title="Previous section">&larr;</button>
 						<button class="dh-arrow-btn" id="dhNext" title="Next section">&rarr;</button>
 						<button class="dh-arrow-btn" id="dhFullscreen" title="Toggle Fullscreen"><img src="https://media.lrsd.net/media/Default/frl/fullscreenicon.f13c4683422.png" alt="" class="dh-fs-img fr-dib"></button>
-						<button class="dh-arrow-btn dh-help-btn" id="dhHelpBtn" type="button" title="Show tutorial">?</button>
+						<button class="dh-arrow-btn dh-help-btn" id="dhHelpBtn" type="button" title="Show help tour">?</button>
 					</div></div></div>
 			<div class="dh-viewer-body" id="dhViewerBody">
 				<aside class="dh-sidebar" id="dhSidebar">
@@ -1324,6 +1342,24 @@
 										<img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-section-logo fr-fil fr-dib">
 										<p><strong>Explore how LRSD approaches data stewardship, responsible artificial intelligence, and the systems already in place to support students, staff, and families.</strong></p>
 										<p>Use the section list to jump directly to any topic in the overview.</p>
+										<div class="dh-info-grid">
+											<div class="dh-info-card">
+												<h4>Data Informed</h4>
+												<p>Using evidence to make decisions with confidence.</p>
+											</div>
+											<div class="dh-info-card">
+												<h4>Data Ready</h4>
+												<p>Ensuring the right data is available in the right format at the right time.</p>
+											</div>
+											<div class="dh-info-card">
+												<h4>Data Efficacious</h4>
+												<p>Building the skills to understand and use data effectively.</p>
+											</div>
+											<div class="dh-info-card">
+												<h4>Data Stewards</h4>
+												<p>Using data ethically as a flashlight, not a hammer, to help, not harm.</p>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -2002,11 +2038,11 @@
 		var tourNext = document.getElementById('dhTourNext');
 
 		var tourSteps = [
-		{ targetId: 'dhCustomSelect', title: 'Choose a view', body: 'Use the dropdown to open the overview or jump directly to any dashboard.' },
-		{ targetId: 'dhIframeWrap', title: 'Read or explore', body: 'The viewer holds either the public overview or the selected Power BI dashboard.' },
-		{ targetId: 'dhPrev', title: 'Move through content', body: 'Use the arrows to move between overview sections or switch dashboards once a report is open.', targetGroup: ['dhPrev', 'dhNext'] },
-		{ targetId: 'dhFullscreen', title: 'Go fullscreen', body: 'Expand the viewer when you want more room for reading or dashboard exploration.' },
-		{ targetId: 'dhHelpBtn', title: 'Need help again?', body: 'Open this tour any time from the help button.' }
+		{ targetId: 'dhCustomSelect', title: 'Choose a view', body: 'Use the dropdown to switch between the Data Governance and AI overview and the LRSD dashboards.' },
+		{ targetId: 'dhCounter', title: 'Track where you are', body: 'The counter updates as you move through overview sections or switch from one dashboard to the next.' },
+		{ targetId: 'dhIframeWrap', title: 'Read and scroll here', body: 'The viewer displays the overview content and loaded dashboards. Longer overview sections scroll inside this card.' },
+		{ targetId: 'dhPrev', title: 'Move step by step', body: 'Use these arrows to move through overview sections in order, or to switch dashboards after you open one.', targetGroup: ['dhPrev', 'dhNext'] },
+		{ targetId: 'dhFullscreen', title: 'More room and quick help', body: 'Use fullscreen for more space, and reopen this tour from the question mark any time.', targetGroup: ['dhFullscreen', 'dhHelpBtn'] }
 		];
 
 		var tourIndex = 0, tourActive = false;
