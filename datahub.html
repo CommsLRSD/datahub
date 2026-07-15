@@ -1507,7 +1507,8 @@
 			spotlight: {
 				title: 'We Are All Data Stewards poster',
 				description: 'Preview the English poster below.',
-				previewUrl: RESOURCE_LINKS.posterEnglish
+				previewUrl: RESOURCE_LINKS.posterEnglish,
+				showActions: false
 			}
 		}
 		];
@@ -1699,21 +1700,22 @@
 			var description = section.spotlight.description ? '<p class="dh-resource-meta">' + escapeHtml(section.spotlight.description) + '</p>' : '';
 			var previewUrl = sanitizeUrl(section.spotlight.previewUrl);
 			var previewFrameUrl = buildPdfPreviewUrl(previewUrl);
-			var primaryUrl = section.spotlight.primaryUrl ? sanitizeUrl(section.spotlight.primaryUrl) : '';
+			var primaryUrl = sanitizeUrl(section.spotlight.primaryUrl || previewUrl);
 			var secondaryUrl = sanitizeUrl(section.spotlight.secondaryUrl);
 			var primaryLabel = escapeHtml(section.spotlight.primaryLabel || 'Open resource');
 			var secondaryLabel = escapeHtml(section.spotlight.secondaryLabel || 'Open alternate version');
+			var showActions = section.spotlight.showActions !== false;
 			var previewHtml = previewFrameUrl
 				? '<div class="dh-resource-preview"><iframe src="' + previewFrameUrl + '" title="Preview of ' + title + ' - interactive document viewer" loading="lazy" width="100%" height="544"></iframe></div>'
 				: '';
 			var actions = [];
 
-			if (primaryUrl)
+			if (showActions && primaryUrl)
 			{
 				actions.push('<a class="dh-resource-button" href="' + primaryUrl + '" target="_blank" rel="noopener">' + primaryLabel + '</a>');
 			}
 
-			if (secondaryUrl)
+			if (showActions && secondaryUrl)
 			{
 				actions.push('<a class="dh-resource-button" href="' + secondaryUrl + '" target="_blank" rel="noopener">' + secondaryLabel + '</a>');
 			}
