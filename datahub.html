@@ -1,35 +1,6 @@
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-	.data-hub-wrapper {
-		--dh-aspect-ratio: 16 / 9.55;
-		--accent-red: #BE5247;
-		--accent-green: #2BA680;
-		--accent-red-light: rgba(190, 82, 71, 0.1);
-		--accent-green-light: rgba(43, 166, 128, 0.1);
-		--bg-primary: #ffffff;
-		--bg-secondary: #f8f9fa;
-		--bg-glass: rgba(255, 255, 255, 0.75);
-		--bg-glass-strong: rgba(255, 255, 255, 0.9);
-		--text-primary: #1a1a2e;
-		--text-secondary: #64748b;
-		--text-muted: #94a3b8;
-		--border-light: rgba(0, 0, 0, 0.06);
-		--border-medium: rgba(0, 0, 0, 0.1);
-		--shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.06);
-		--shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.08);
-		--shadow-glow-green: 0 4px 20px rgba(43, 166, 128, 0.25);
-		--blur-amount: 20px;
-		--overview-logo-max-width: 300px;
-		--overview-nav-width: 21rem;
-		--overview-reading-width: 66ch;
-		--section-status-min-width: 9.5rem;
-		--radius: 12px;
-		--radius-lg: 16px;
-		--radius-xl: 20px;
-		--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'); .data-hub-wrapper {
+		--dh-aspect-ratio: 16 / 9.55; --accent-red: #BE5247; --accent-green: #2BA680; --accent-red-light: rgba(190, 82, 71, 0.1); --accent-green-light: rgba(43, 166, 128, 0.1); --bg-primary: #ffffff; --bg-secondary: #f8f9fa; --bg-glass: rgba(255, 255, 255, 0.75); --bg-glass-strong: rgba(255, 255, 255, 0.9); --text-primary: #1a1a2e; --text-secondary: #64748b; --text-muted: #94a3b8; --border-light: rgba(0, 0, 0, 0.06); --border-medium: rgba(0, 0, 0, 0.1); --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.06); --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.08); --shadow-glow-green: 0 4px 20px rgba(43, 166, 128, 0.25); --blur-amount: 20px; --overview-logo-max-width: 300px; --overview-nav-width: 21rem; --overview-reading-width: 66ch; --section-status-min-width: 9.5rem; --radius: 12px; --radius-lg: 16px; --radius-xl: 20px; --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 	
 	.data-hub-wrapper,
@@ -343,7 +314,7 @@
 	}
 	
 	.dh-landing {
-		position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg-primary); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1.5rem; overflow: hidden; border-radius: 0 0 var(--radius-lg) var(--radius-lg); z-index: 5;
+		position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg-primary); display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; padding: 2rem 1.5rem; overflow-y: auto; border-radius: 0 0 var(--radius-lg) var(--radius-lg); z-index: 5;
 	}
 	
 	.dh-landing.dh-hidden {
@@ -616,423 +587,313 @@
 			padding: 0.875rem 0.625rem;
 		}
 	}
-
+	
 	.dh-main {
-		display: block;
-		padding: 1.5rem;
-		max-width: 2140px;
-		margin: 0 auto;
-		width: 100%;
-		min-width: 0;
+		display: block; padding: 1.5rem; max-width: 2140px; margin: 0 auto; width: 100%; min-width: 0;
 	}
-
+	
 	.dh-viewer-body {
-		display: grid;
-		grid-template-columns: 240px minmax(0, 1fr);
-		gap: 1rem;
-		padding: 1rem 1rem 1rem 1.25rem;
-		align-items: stretch;
+		display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 1rem; padding: 1rem 1rem 1rem 1.25rem; align-items: stretch;
 	}
-
+	
 	.dh-sidebar {
-		background: rgba(248, 250, 252, 0.96);
-		border: 1px solid var(--border-light);
-		border-radius: var(--radius-lg);
-		padding: 0.9rem;
-		display: flex;
-		flex-direction: column;
-		gap: 0.7rem;
-		overflow: hidden;
-		min-height: 100%;
+		background: rgba(248, 250, 252, 0.96); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 0.9rem; display: flex; flex-direction: column; gap: 0.7rem; overflow: hidden; min-height: 100%;
 	}
-
+	
 	.dh-sidebar-head {
-		padding-bottom: 0.55rem;
-		border-bottom: 1px solid var(--border-light);
+		padding-bottom: 0.55rem; border-bottom: 1px solid var(--border-light);
 	}
-
+	
 	.dh-sidebar-head h2 {
-		font-size: 0.82rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: var(--text-secondary);
+		font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary);
 	}
-
+	
 	.dh-sidebar-list {
-		display: flex;
-		flex-direction: column;
-		gap: 0.35rem;
-		overflow-y: auto;
-		padding-right: 0.15rem;
+		display: flex; flex-direction: column; gap: 0.35rem; overflow-y: auto; padding-right: 0.15rem;
 	}
-
+	
 	.dh-nav-item,
 	.dh-nav-item:link,
 	.dh-nav-item:visited {
-		display: flex;
-		align-items: center;
-		gap: 0.75rem;
-		padding: 0.6rem 0.7rem;
-		border-radius: var(--radius);
-		border: 1px solid transparent;
-		background: transparent;
-		cursor: pointer;
-		text-align: left;
-		text-decoration: none !important;
-		color: var(--text-primary) !important;
-		transition: var(--transition);
-		font-family: inherit;
+		display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0.7rem; border-radius: var(--radius); border: 1px solid transparent; background: transparent; cursor: pointer; text-align: left; text-decoration: none !important; color: var(--text-primary) !important; transition: var(--transition); font-family: inherit;
 	}
-
+	
 	.dh-nav-item:hover,
 	.dh-nav-item:focus {
-		background: var(--bg-primary);
-		border-color: rgba(43, 166, 128, 0.2);
-		outline: none;
+		background: var(--bg-primary); border-color: rgba(43, 166, 128, 0.2); outline: none;
 	}
-
+	
 	.dh-nav-item.selected {
-		background: var(--accent-green-light);
-		border-color: rgba(43, 166, 128, 0.28);
+		background: var(--accent-green-light); border-color: rgba(43, 166, 128, 0.28);
 	}
-
+	
 	.dh-nav-copy {
-		min-width: 0;
-		flex: 1 1 auto;
+		min-width: 0; flex: 1 1 auto;
 	}
-
+	
 	.dh-nav-copy strong {
-		display: block;
-		font-size: 0.88rem;
-		line-height: 1.35;
+		display: block; font-size: 0.88rem; line-height: 1.35;
 	}
-
+	
 	.dh-landing-kicker {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.45rem;
-		font-size: 0.76rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: var(--accent-green);
+		display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-green);
 	}
-
+	
 	.data-hub-wrapper .dh-section-title {
-		font-size: clamp(1.55rem, 2.1vw, 2.15rem);
-		line-height: 1.14;
-		letter-spacing: -0.02em;
-		font-weight: 700;
-		color: var(--text-primary);
-		margin: 0;
-		text-align: left;
+		font-size: clamp(1.55rem, 2.1vw, 2.15rem); line-height: 1.14; letter-spacing: -0.02em; font-weight: 700; color: var(--text-primary); margin: 0; text-align: left;
 	}
-
+	
 	.data-hub-wrapper .dh-section-subtitle {
-		margin-top: 0.6rem;
-		font-size: 1rem;
-		line-height: 1.65;
-		color: var(--text-secondary);
-		max-width: 62ch;
+		margin-top: 0.6rem; font-size: 1rem; line-height: 1.65; color: var(--text-secondary); max-width: 62ch;
 	}
-
+	
 	.dh-section-actions {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.7rem;
+		display: inline-flex; align-items: center; gap: 0.7rem;
 	}
-
+	
 	.dh-section-status {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		min-width: var(--section-status-min-width);
-		padding: 0.45rem 0.85rem;
-		border-radius: 999px;
-		border: 1px solid rgba(43, 166, 128, 0.14);
-		background: rgba(248, 250, 252, 0.92);
-		font-size: 0.78rem;
-		font-weight: 600;
-		color: var(--text-secondary);
+		display: inline-flex; align-items: center; justify-content: center; min-width: var(--section-status-min-width); padding: 0.45rem 0.85rem; border-radius: 999px; border: 1px solid rgba(43, 166, 128, 0.14); background: rgba(248, 250, 252, 0.92); font-size: 0.78rem; font-weight: 600; color: var(--text-secondary);
 	}
-
+	
 	.dh-viewer {
 		max-width: 100%;
 	}
-
+	
 	.dh-iframe-wrap {
 		background: linear-gradient(180deg, #f8fbfc 0%, #edf5f5 100%);
 	}
-
+	
 	.dh-mobile-overview {
 		margin-top: 0.85rem;
 	}
-
+	
 	.dh-mobile-overview-card {
-		background: var(--bg-glass-strong);
-		border: 1px solid var(--border-light);
-		border-radius: var(--radius-lg);
-		padding: 1rem;
-		box-shadow: var(--shadow-soft);
+		background: var(--bg-glass-strong); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1rem; box-shadow: var(--shadow-soft);
 	}
-
+	
 	.dh-mobile-overview-head,
 	.dh-overview-nav-head {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 0.75rem;
-		margin-bottom: 0.9rem;
+		display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.9rem;
 	}
-
+	
 	.dh-mobile-overview-head {
 		margin-bottom: 1rem;
 	}
-
+	
 	.dh-mobile-section-directory {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.35rem 0.8rem;
-		margin-bottom: 1rem;
+		display: flex; flex-wrap: wrap; gap: 0.35rem 0.8rem; margin-bottom: 1rem;
 	}
-
+	
 	.dh-mobile-overview-copy {
 		margin-bottom: 1rem;
 	}
-
+	
 	.dh-mobile-section-controls {
 		display: none;
 	}
-
+	
 	.dh-landing {
 		padding: 1.15rem;
 	}
-
+	
 	.dh-landing-shell {
-		max-width: 100%;
-		margin: 0;
-		display: grid;
-		grid-template-columns: var(--overview-nav-width) minmax(0, 1fr);
-		gap: 1rem;
-		align-items: stretch;
-		min-height: 100%;
+		max-width: 100%; margin: 0; display: grid; grid-template-columns: var(--overview-nav-width) minmax(0, 1fr); gap: 1rem; align-items: stretch; min-height: 100%;
 	}
-
+	
 	.dh-overview-nav,
 	.dh-overview-panel {
-		background: rgba(255, 255, 255, 0.88);
-		border: 1px solid rgba(255, 255, 255, 0.72);
-		border-radius: var(--radius-lg);
-		box-shadow: var(--shadow-soft);
+		background: rgba(255, 255, 255, 0.88); border: 1px solid rgba(255, 255, 255, 0.72); border-radius: var(--radius-lg); box-shadow: var(--shadow-soft);
 	}
-
+	
 	.dh-overview-nav {
-		padding: 1rem 1rem 1.05rem;
-		display: flex;
-		flex-direction: column;
+		padding: 1rem 1rem 1.05rem; display: flex; flex-direction: column;
 	}
-
+	
 	.dh-overview-panel {
-		padding: 1.35rem 1.5rem;
-		display: flex;
-		flex-direction: column;
+		padding: 1.35rem 1.5rem; display: flex; flex-direction: column; min-height: 0;
 	}
-
+	
 	.dh-overview-copy {
-		width: min(100%, var(--overview-reading-width));
-		margin: 0 auto 1rem;
+		width: min(100%, var(--overview-reading-width)); margin: 0 auto 1rem;
 	}
-
+	
 	.dh-section-directory {
-		display: flex;
-		flex-direction: column;
-		gap: 0.15rem;
-		margin-bottom: 0;
+		display: flex; flex-direction: column; gap: 0.15rem; margin-bottom: 0;
 	}
-
+	
 	.dh-section-link,
 	.dh-section-link:link,
 	.dh-section-link:visited {
-		display: block;
-		width: 100%;
-		padding: 0.55rem 0.2rem 0.55rem 0.9rem;
-		border-radius: 0;
-		border: none;
-		border-left: 2px solid transparent;
-		background: transparent;
-		text-decoration: none !important;
-		color: var(--text-secondary) !important;
-		font-size: 0.88rem;
-		font-weight: 500;
-		line-height: 1.45;
-		transition: var(--transition);
+		display: block; width: 100%; padding: 0.55rem 0.2rem 0.55rem 0.9rem; border-radius: 0; border: none; border-left: 2px solid transparent; background: transparent; text-decoration: none !important; color: var(--text-secondary) !important; font-size: 0.88rem; font-weight: 500; line-height: 1.45; transition: var(--transition);
 	}
-
+	
 	.dh-section-link:hover,
 	.dh-section-link:focus {
-		background: transparent;
-		border-left-color: rgba(43, 166, 128, 0.35);
-		color: var(--text-primary) !important;
-		outline: none;
+		background: transparent; border-left-color: rgba(43, 166, 128, 0.35); color: var(--text-primary) !important; outline: none;
 	}
-
+	
 	.dh-section-link.is-active {
-		border-left-color: var(--accent-green);
-		color: var(--text-primary) !important;
-		font-weight: 600;
+		border-left-color: var(--accent-green); color: var(--text-primary) !important; font-weight: 600;
 	}
-
+	
 	.dh-section-link-title {
-		display: block;
-		font-weight: inherit;
+		display: block; font-weight: inherit;
 	}
-
+	
 	.dh-section-body {
-		flex: 1 1 auto;
-		display: flex;
-		justify-content: center;
-		padding: 1.35rem 1.5rem;
-		border-radius: var(--radius-lg);
-		background: rgba(255, 255, 255, 0.92);
-		border: 1px solid var(--border-light);
-		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+		flex: 1 1 auto; display: flex; justify-content: center; padding: 1.35rem 1.5rem; border-radius: var(--radius-lg); background: rgba(255, 255, 255, 0.92); border: 1px solid var(--border-light); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65); overflow-y: auto; min-height: 0;
 	}
-
+	
 	.dh-section-body-inner {
-		width: min(100%, var(--overview-reading-width));
-		margin: 0 auto;
+		width: min(100%, var(--overview-reading-width)); margin: 0 auto;
 	}
-
+	
 	.dh-section-logo {
-		display: block;
-		max-width: var(--overview-logo-max-width);
-		width: 100%;
-		height: auto;
-		margin: 0 0 1.25rem;
+		display: block; max-width: var(--overview-logo-max-width); width: 100%; height: auto; margin: 0 0 1.25rem;
 	}
-
+	
 	.dh-section-body p,
 	.dh-section-body li {
-		font-size: 0.98rem;
-		line-height: 1.78;
-		color: var(--text-primary);
+		font-size: 0.98rem; line-height: 1.78; color: var(--text-primary);
 	}
-
+	
 	.dh-section-body strong {
-		font-weight: 700;
-		color: var(--text-primary);
+		font-weight: 700; color: var(--text-primary);
 	}
-
+	
 	.dh-section-body p + p,
 	.dh-section-body p + ul,
 	.dh-section-body ul + p {
 		margin-top: 1rem;
 	}
-
+	
 	.dh-section-body ul {
 		padding-left: 1.25rem;
 	}
-
+	
 	.dh-agent-grid,
 	.dh-resource-list {
-		display: grid;
-		gap: 0.9rem;
-		max-width: none;
+		display: grid; gap: 0.9rem; max-width: none;
 	}
-
+	
 	.dh-agent-card {
-		padding: 1rem 1.05rem;
-		border: 1px solid rgba(43, 166, 128, 0.14);
-		border-radius: var(--radius);
-		background: linear-gradient(180deg, rgba(248, 250, 252, 0.95), rgba(255, 255, 255, 0.98));
-		box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+		display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.25rem 1rem; align-items: start; padding: 1rem 1.05rem; border: 1px solid rgba(43, 166, 128, 0.14); border-radius: var(--radius); background: linear-gradient(180deg, rgba(248, 250, 252, 0.95), rgba(255, 255, 255, 0.98)); box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
 	}
-
+	
+	.dh-agent-card img {
+		display: block; grid-column: 1; grid-row: 1 / span 2; width: auto; height: 3rem; max-width: 100%; margin: 0; align-self: start;
+	}
+	
 	.dh-agent-card h4 {
-		font-size: 0.85rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: var(--accent-green);
-		margin-bottom: 0.4rem;
+		grid-column: 2; grid-row: 1; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-green); margin: 0 0 0.4rem;
 	}
-
+	
 	.dh-agent-card p,
 	.dh-resource-note {
 		color: var(--text-secondary);
 	}
-
+	
+	.dh-agent-card p {
+		grid-column: 2; grid-row: 2; margin: 0;
+	}
+	
+	.dh-section-body .dh-info-grid {
+		margin-top: 1.25rem; max-width: none;
+	}
+	
 	.dh-resource-note {
 		font-size: 0.92em;
 	}
-
+	
+	.dh-resource-spotlight {
+		margin-top: 1.5rem; padding: 1.2rem; border: 1px solid rgba(43, 166, 128, 0.18); border-radius: calc(var(--radius) + 2px); background: linear-gradient(180deg, rgba(244, 251, 248, 0.98), rgba(255, 255, 255, 0.98)); box-shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
+	}
+	
+	.dh-resource-spotlight h4 {
+		font-size: 1rem; font-weight: 700; margin-bottom: 0.45rem; color: var(--text-primary);
+	}
+	
+	.dh-resource-meta {
+		color: var(--text-secondary); margin-bottom: 1rem;
+	}
+	
+	.dh-resource-preview {
+		border: 1px solid rgba(148, 163, 184, 0.22); border-radius: calc(var(--radius) - 2px); overflow: hidden; background: #ffffff; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+	}
+	
+	.dh-resource-preview iframe {
+		display: block; width: 100%; min-height: 34rem; border: 0; background: #ffffff;
+	}
+	
+	.dh-resource-actions {
+		display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem;
+	}
+	
+	.dh-resource-button,
+	.dh-resource-button:link,
+	.dh-resource-button:visited {
+		display: inline-flex; align-items: center; justify-content: center; padding: 0.72rem 1rem; border-radius: 999px; border: 1px solid rgba(43, 166, 128, 0.22); background: #ffffff; color: var(--accent-green) !important; font-weight: 700; text-decoration: none; box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05); transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+	}
+	
+	.dh-resource-button:hover,
+	.dh-resource-button:focus {
+		transform: translateY(-1px); border-color: rgba(43, 166, 128, 0.38); box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+	}
+	
 	.dh-section-body a,
 	.dh-section-body a:link,
 	.dh-section-body a:visited {
-		color: var(--accent-green) !important;
-		text-decoration-color: rgba(43, 166, 128, 0.3);
+		color: var(--accent-green) !important; text-decoration-color: rgba(43, 166, 128, 0.3);
 	}
-
+	
 	.dh-section-body a:hover,
 	.dh-section-body a:focus {
 		color: #259473 !important;
 	}
-
+	
 	.dh-agent-grid,
 	.dh-resource-list {
 		grid-template-columns: 1fr;
 	}
-
+	
 	@media (max-width: 1200px) {
 		.dh-viewer-body {
-			grid-template-columns: 1fr;
-			padding: 0 0 1rem 0;
+			grid-template-columns: 1fr; padding: 0 0 1rem 0;
 		}
-
 		.dh-sidebar {
 			display: none;
 		}
-
 		.dh-iframe-wrap {
 			border-top: 1px solid var(--border-light);
 		}
-
 		.dh-landing-shell {
 			grid-template-columns: 1fr;
 		}
-
 		.dh-section-directory {
-			flex-direction: row;
-			flex-wrap: wrap;
-			gap: 0.45rem 0.9rem;
+			flex-direction: row; flex-wrap: wrap; gap: 0.45rem 0.9rem;
 		}
-
 		.dh-section-link,
 		.dh-section-link:link,
 		.dh-section-link:visited {
-			padding: 0.55rem 0.7rem;
-			border-radius: var(--radius);
-			border-left-width: 1px;
+			padding: 0.55rem 0.7rem; border-radius: var(--radius); border-left-width: 1px;
 		}
 	}
-
+	
 	@media (max-width: 768px) {
 		.dh-mobile-overview-card {
 			padding: 0.9rem;
 		}
-
 		.dh-mobile-section-directory {
-			flex-direction: column;
-			gap: 0.35rem;
+			flex-direction: column; gap: 0.35rem;
 		}
-
 		.dh-section-body {
 			padding: 0.95rem;
 		}
-
 		.dh-section-status {
 			min-width: 0;
+		}
+		.dh-resource-preview iframe {
+			min-height: 28rem;
 		}
 	}
 
@@ -1040,13 +901,16 @@
 <style>
 	.data-hub-wrapper #dhSectionTitle.dh-section-title,
 	.data-hub-wrapper #dhMobileSectionTitle.dh-section-title {
-		font: 700 clamp(1.55rem, 2.1vw, 2.15rem) / 1.14 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important;
-		color: var(--text-primary) !important;
-		text-align: left !important;
+		font: 700 clamp(1.55rem, 2.1vw, 2.15rem) / 1.14 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif !important; color: var(--text-primary) !important; text-align: left !important;
 	}
+
 </style>
-<div class="dh-tour-backdrop" id="dhTourBackdrop"></div>
-<div class="dh-tour-spotlight" id="dhTourSpotlight"></div>
+<div class="dh-tour-backdrop" id="dhTourBackdrop">
+	<br>
+</div>
+<div class="dh-tour-spotlight" id="dhTourSpotlight">
+	<br>
+</div>
 <div class="dh-tour-tooltip" id="dhTourTooltip">
 	<div class="dh-tour-step" id="dhTourStep">Step 1 of 5</div>
 
@@ -1070,11 +934,8 @@
 <div class="data-hub-wrapper">
 	<header class="dh-header">
 		<div class="dh-header-content">
-			<div class="dh-logo">
-				<img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-logo-img dh-logo-horizontal fr-fil fr-dib">
-				<img src="https://media.lrsd.net/media/Default/frl/dh-logo-vert-fc-svg-2x.d681e083557.png" alt="Data Hub" class="dh-logo-img dh-logo-vertical fr-fic fr-dii">
-			</div>
-			<button type="button" class="dh-mobile-help-btn" id="dhMobileHelpBtn" title="About these dashboards">?</button>
+			<div class="dh-logo"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-logo-img dh-logo-horizontal fr-fil fr-dib">&nbsp;<img src="https://media.lrsd.net/media/Default/frl/dh-logo-vert-fc-svg-2x.d681e083557.png" alt="Data Hub" class="dh-logo-img dh-logo-vertical fr-fic fr-dii"></div>
+			<button type="button" class="dh-mobile-help-btn" id="dhMobileHelpBtn" title="Show help tour">?</button>
 
 			<p class="dh-tagline">We are committed to using data to inform decision-making, monitor progress, and share our story with the community.
 				<br>This involves a growth mindset and a solid grounding in data ethics, tools, and processes.</p>
@@ -1082,11 +943,7 @@
 	</header>
 	<div class="dh-mobile-list" id="dhMobileList">
 		<div class="dh-mobile-list-items" id="dhMobileListItems">
-			<button class="dh-mobile-list-item" type="button" id="dhMobileOverviewBtn">
-				<img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="" class="fr-fil fr-dib">
-				<span class="dh-mobile-list-text">Data Governance &amp; AI Overview</span>
-				<span class="dh-mobile-list-arrow">&darr;</span>
-			</button>
+			<button class="dh-mobile-list-item" type="button" id="dhMobileOverviewBtn"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="" class="fr-fil fr-dib"> <span class="dh-mobile-list-text">Data Governance &amp; AI Overview</span> <span class="dh-mobile-list-arrow">&darr;</span>&nbsp;</button>
 			<button class="dh-mobile-list-item" type="button" data-mobile-dashboard="0"><img src="https://media.lrsd.net/media/Default/frl/learning-indicators-3x.2a12da82676.png" alt="" class="fr-fil fr-dib"><span class="dh-mobile-list-text">Learning Indicators</span><span class="dh-mobile-list-arrow">&rarr;</span></button>
 			<button class="dh-mobile-list-item" type="button" data-mobile-dashboard="1"><img src="https://media.lrsd.net/media/Default/frl/student-enrolment-3x.722bba82678.png" alt="" class="fr-fil fr-dib"><span class="dh-mobile-list-text">Student Enrolment</span><span class="dh-mobile-list-arrow">&rarr;</span></button>
 			<button class="dh-mobile-list-item" type="button" data-mobile-dashboard="2"><img src="https://media.lrsd.net/media/Default/frl/class-size-2x.9ea68b83520.png" alt="" class="fr-fil fr-dib"><span class="dh-mobile-list-text">Class Size Tracker</span><span class="dh-mobile-list-arrow">&rarr;</span></button>
@@ -1102,37 +959,49 @@
 		</div>
 		<section class="dh-mobile-overview" id="dhMobileOverview">
 			<div class="dh-mobile-overview-card">
-				<div class="dh-mobile-overview-head">
-					<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
+				<div class="dh-mobile-overview-head"><span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
 					<div class="dh-section-actions">
-						<button class="dh-arrow-btn" id="dhMobileSectionPrev" type="button" title="Previous section">&larr;</button>
-						<span class="dh-section-status" id="dhMobileSectionStatus">Section 1 of 9</span>
+						<button class="dh-arrow-btn" id="dhMobileSectionPrev" type="button" title="Previous section">&larr;</button> <span class="dh-section-status" id="dhMobileSectionStatus">Section 1 of 9</span>
 						<button class="dh-arrow-btn" id="dhMobileSectionNext" type="button" title="Next section">&rarr;</button>
-					</div>
-				</div>
-				<nav class="dh-mobile-section-directory" id="dhMobileSectionDirectory" aria-label="Mobile data governance and AI section navigation">
-					<a class="dh-section-link is-active" href="#" data-section-index="0"><span class="dh-section-link-title">Introduction</span></a>
-					<a class="dh-section-link" href="#" data-section-index="1"><span class="dh-section-link-title">We Are All Data Stewards</span></a>
-					<a class="dh-section-link" href="#" data-section-index="2"><span class="dh-section-link-title">How LRSD Uses Data</span></a>
-					<a class="dh-section-link" href="#" data-section-index="3"><span class="dh-section-link-title">How LRSD Uses Artificial Intelligence</span></a>
-					<a class="dh-section-link" href="#" data-section-index="4"><span class="dh-section-link-title">Our AI Agents</span></a>
-					<a class="dh-section-link" href="#" data-section-index="5"><span class="dh-section-link-title">Responsible Use Means Knowing When Not to Use AI</span></a>
-					<a class="dh-section-link" href="#" data-section-index="6"><span class="dh-section-link-title">What We've Built</span></a>
-					<a class="dh-section-link" href="#" data-section-index="7"><span class="dh-section-link-title">What's Still Ahead</span></a>
-					<a class="dh-section-link" href="#" data-section-index="8"><span class="dh-section-link-title">Resources</span></a>
-				</nav>
+					</div></div>
+				<nav class="dh-mobile-section-directory" id="dhMobileSectionDirectory"><a class="dh-section-link is-active" href="#" data-section-index="0"><span class="dh-section-link-title">Introduction</span></a> <a class="dh-section-link" href="#" data-section-index="1"><span class="dh-section-link-title">We Are All Data Stewards</span></a> <a class="dh-section-link" href="#" data-section-index="2"><span class="dh-section-link-title">How LRSD Uses Data</span></a> <a class="dh-section-link" href="#" data-section-index="3"><span class="dh-section-link-title">How LRSD Uses Artificial Intelligence</span></a> <a class="dh-section-link" href="#" data-section-index="4"><span class="dh-section-link-title">Our AI Agents</span></a> <a class="dh-section-link" href="#" data-section-index="5"><span class="dh-section-link-title">Responsible Use Means Knowing When Not to Use AI</span></a> <a class="dh-section-link" href="#" data-section-index="6"><span class="dh-section-link-title">What We&#39;ve Built</span></a> <a class="dh-section-link" href="#" data-section-index="7"><span class="dh-section-link-title">What&#39;s Still Ahead</span></a> <a class="dh-section-link" href="#" data-section-index="8"><span class="dh-section-link-title">Resources</span></a></nav>
 				<div class="dh-mobile-overview-copy">
+
 					<h3 class="dh-section-title" id="dhMobileSectionTitle">Data Governance &amp; AI Overview</h3>
-					<p class="dh-section-subtitle" id="dhMobileSectionSubtitle">LRSD's public-facing overview of data stewardship, AI use, and the work underway across the division.</p>
+
+					<p class="dh-section-subtitle" id="dhMobileSectionSubtitle">LRSD&#39;s public-facing overview of data stewardship, AI use, and the work underway across the division.</p>
 				</div>
 				<div class="dh-section-body" id="dhMobileSectionBody">
-					<div class="dh-section-body-inner">
-						<img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-section-logo fr-fil fr-dib">
+					<div class="dh-section-body-inner"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-section-logo fr-fil fr-dib">
+
 						<p><strong>Explore how LRSD approaches data stewardship, responsible artificial intelligence, and the systems already in place to support students, staff, and families.</strong></p>
+
 						<p>Use the section list to jump directly to any topic in the overview.</p>
-					</div>
-				</div>
-			</div>
+						<div class="dh-info-grid">
+							<div class="dh-info-card">
+
+								<h4>Data Informed</h4>
+
+								<p>Using evidence to make decisions with confidence.</p>
+							</div>
+							<div class="dh-info-card">
+
+								<h4>Data Ready</h4>
+
+								<p>Ensuring the right data is available in the right format at the right time.</p>
+							</div>
+							<div class="dh-info-card">
+
+								<h4>Data Efficacious</h4>
+
+								<p>Building the skills to understand and use data effectively.</p>
+							</div>
+							<div class="dh-info-card">
+
+								<h4>Data Stewards</h4>
+
+								<p>Using data ethically as a flashlight, not a hammer, to help, not harm.</p>
+							</div></div></div></div></div>
 		</section>
 	</div>
 	<div class="dh-main">
@@ -1140,7 +1009,7 @@
 			<div class="dh-viewer-header">
 				<div class="dh-report-info">
 					<details class="dh-custom-select" id="dhCustomSelect">
-						<summary class="dh-select-trigger" id="dhSelectTrigger"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" class="dh-item-icon fr-fil fr-dib" id="dhActiveIcon" alt=""> <span class="dh-item-text" id="dhActiveText">Data Governance &amp; AI Overview</span> <img src="https://media.lrsd.net/media/Default/frl/dropdown-arrow.23ae4383430.png" class="dh-chevron fr-fil fr-dib" alt=""></summary>
+						<summary class="dh-select-trigger" id="dhSelectTrigger"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" class="dh-item-icon fr-fil fr-dib" id="dhActiveIcon" alt=""> <span class="dh-item-text" id="dhActiveText">Data Governance &amp; AI Overview</span>&nbsp;<img src="https://media.lrsd.net/media/Default/frl/dropdown-arrow.23ae4383430.png" class="dh-chevron fr-fil fr-dib" alt=""></summary>
 						<div class="dh-select-options" id="dhSelectOptions">
 							<div class="dh-option selected" data-nav-kind="landing"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" class="dh-item-icon fr-fil fr-dib" alt=""><span class="dh-item-text">Data Governance &amp; AI Overview</span></div>
 							<div class="dh-option" data-nav-kind="dashboard" data-index="0"><img src="https://media.lrsd.net/media/Default/frl/learning-indicators-3x.2a12da82676.png" class="dh-item-icon fr-fil fr-dib" alt=""><span class="dh-item-text">Learning Indicators</span></div>
@@ -1154,8 +1023,7 @@
 							<div class="dh-option" data-nav-kind="dashboard" data-index="8"><img src="https://media.lrsd.net/media/Default/frl/fdk-web-2x.c8981883524.png" class="dh-item-icon fr-fil fr-dib" alt=""><span class="dh-item-text">Impact of Full-Day Kindergarten</span></div>
 							<div class="dh-option" data-nav-kind="dashboard" data-index="9"><img src="https://media.lrsd.net/media/Default/frl/gr9-web-2x.a7d1ed83531.png" class="dh-item-icon fr-fil fr-dib" alt=""><span class="dh-item-text">Grade 9 Credit Attainment</span></div>
 							<div class="dh-option" data-nav-kind="dashboard" data-index="10"><img src="https://media.lrsd.net/media/Default/frl/grad-rates-web-2x.d83b2883532.png" class="dh-item-icon fr-fil fr-dib" alt=""><span class="dh-item-text">Graduation Rates</span></div>
-							<div class="dh-option" data-nav-kind="dashboard" data-index="11"><img src="https://media.lrsd.net/media/Default/frl/early-middle-3x.36869683526.png" class="dh-item-icon fr-fil fr-dib" alt=""><span class="dh-item-text">Early and Middle Years Provincial Assessments</span></div>
-						</div>
+							<div class="dh-option" data-nav-kind="dashboard" data-index="11"><img src="https://media.lrsd.net/media/Default/frl/early-middle-3x.36869683526.png" class="dh-item-icon fr-fil fr-dib" alt=""><span class="dh-item-text">Early and Middle Years Provincial Assessments</span></div></div>
 					</details>
 				</div>
 				<div class="dh-nav-controls"><span class="dh-report-counter" id="dhCounter">Section 1 of 9</span>
@@ -1163,11 +1031,12 @@
 						<button class="dh-arrow-btn" id="dhPrev" title="Previous section">&larr;</button>
 						<button class="dh-arrow-btn" id="dhNext" title="Next section">&rarr;</button>
 						<button class="dh-arrow-btn" id="dhFullscreen" title="Toggle Fullscreen"><img src="https://media.lrsd.net/media/Default/frl/fullscreenicon.f13c4683422.png" alt="" class="dh-fs-img fr-dib"></button>
-						<button class="dh-arrow-btn dh-help-btn" id="dhHelpBtn" type="button" title="Show tutorial">?</button>
+						<button class="dh-arrow-btn dh-help-btn" id="dhHelpBtn" type="button" title="Show help tour">?</button>
 					</div></div></div>
 			<div class="dh-viewer-body" id="dhViewerBody">
 				<aside class="dh-sidebar" id="dhSidebar">
 					<div class="dh-sidebar-head">
+
 						<h2>Explore</h2>
 					</div>
 					<div class="dh-sidebar-list" id="dhSidebarList">
@@ -1189,75 +1058,56 @@
 				<div class="dh-iframe-wrap" id="dhIframeWrap">
 					<iframe name="dhFrame" id="dhFrame" title="Data Hub Viewer" allowfullscreen=""></iframe>
 					<div class="dh-loading" id="dhLoading">
-						<div class="dh-spinner"></div><span>Loading Dashboard...</span></div>
+						<div class="dh-spinner">
+							<br>
+						</div><span>Loading Dashboard...</span></div>
 					<div class="dh-landing" id="dhLanding">
 						<div class="dh-landing-shell">
 							<aside class="dh-overview-nav">
-								<div class="dh-overview-nav-head">
-									<span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
-									<div class="dh-section-actions">
-										<span class="dh-section-status" id="dhSectionStatus">Section 1 of 9</span>
-									</div>
-								</div>
-								<nav class="dh-section-directory" id="dhSectionDirectory" aria-label="Data Governance and AI section navigation">
-									<a class="dh-section-link is-active" href="#" data-section-index="0"><span class="dh-section-link-title">Introduction</span></a>
-									<a class="dh-section-link" href="#" data-section-index="1"><span class="dh-section-link-title">We Are All Data Stewards</span></a>
-									<a class="dh-section-link" href="#" data-section-index="2"><span class="dh-section-link-title">How LRSD Uses Data</span></a>
-									<a class="dh-section-link" href="#" data-section-index="3"><span class="dh-section-link-title">How LRSD Uses Artificial Intelligence</span></a>
-									<a class="dh-section-link" href="#" data-section-index="4"><span class="dh-section-link-title">Our AI Agents</span></a>
-									<a class="dh-section-link" href="#" data-section-index="5"><span class="dh-section-link-title">Responsible Use Means Knowing When Not to Use AI</span></a>
-									<a class="dh-section-link" href="#" data-section-index="6"><span class="dh-section-link-title">What We've Built</span></a>
-									<a class="dh-section-link" href="#" data-section-index="7"><span class="dh-section-link-title">What's Still Ahead</span></a>
-									<a class="dh-section-link" href="#" data-section-index="8"><span class="dh-section-link-title">Resources</span></a>
-								</nav>
+								<div class="dh-overview-nav-head"><span class="dh-landing-kicker">Data Governance &amp; AI Overview</span>
+									<div class="dh-section-actions"><span class="dh-section-status" id="dhSectionStatus">Section 1 of 9</span></div></div>
+								<nav class="dh-section-directory" id="dhSectionDirectory"><a class="dh-section-link is-active" href="#" data-section-index="0"><span class="dh-section-link-title">Introduction</span></a> <a class="dh-section-link" href="#" data-section-index="1"><span class="dh-section-link-title">We Are All Data Stewards</span></a> <a class="dh-section-link" href="#" data-section-index="2"><span class="dh-section-link-title">How LRSD Uses Data</span></a> <a class="dh-section-link" href="#" data-section-index="3"><span class="dh-section-link-title">How LRSD Uses Artificial Intelligence</span></a> <a class="dh-section-link" href="#" data-section-index="4"><span class="dh-section-link-title">Our AI Agents</span></a> <a class="dh-section-link" href="#" data-section-index="5"><span class="dh-section-link-title">Responsible Use Means Knowing When Not to Use AI</span></a> <a class="dh-section-link" href="#" data-section-index="6"><span class="dh-section-link-title">What We&#39;ve Built</span></a> <a class="dh-section-link" href="#" data-section-index="7"><span class="dh-section-link-title">What&#39;s Still Ahead</span></a> <a class="dh-section-link" href="#" data-section-index="8"><span class="dh-section-link-title">Resources</span></a></nav>
 							</aside>
 							<div class="dh-overview-panel">
 								<div class="dh-overview-copy">
+
 									<h2 class="dh-section-title" id="dhSectionTitle">Data Governance &amp; AI Overview</h2>
-									<p class="dh-section-subtitle" id="dhSectionSubtitle">LRSD's public-facing overview of data stewardship, AI use, and the work underway across the division.</p>
+
+									<p class="dh-section-subtitle" id="dhSectionSubtitle">LRSD&#39;s public-facing overview of data stewardship, AI use, and the work underway across the division.</p>
 								</div>
 								<div class="dh-section-body" id="dhSectionBody">
-									<div class="dh-section-body-inner">
-										<img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-section-logo fr-fil fr-dib">
+									<div class="dh-section-body-inner"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="Data Hub" class="dh-section-logo fr-fil fr-dib">
+
 										<p><strong>Explore how LRSD approaches data stewardship, responsible artificial intelligence, and the systems already in place to support students, staff, and families.</strong></p>
+
 										<p>Use the section list to jump directly to any topic in the overview.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+										<div class="dh-info-grid">
+											<div class="dh-info-card">
+
+												<h4>Data Informed</h4>
+
+												<p>Using evidence to make decisions with confidence.</p>
+											</div>
+											<div class="dh-info-card">
+
+												<h4>Data Ready</h4>
+
+												<p>Ensuring the right data is available in the right format at the right time.</p>
+											</div>
+											<div class="dh-info-card">
+
+												<h4>Data Efficacious</h4>
+
+												<p>Building the skills to understand and use data effectively.</p>
+											</div>
+											<div class="dh-info-card">
+
+												<h4>Data Stewards</h4>
+
+												<p>Using data ethically as a flashlight, not a hammer, to help, not harm.</p>
+											</div></div></div></div></div></div></div></div></div>
 		</main>
-	</div>
-	<section class="dh-info-panel">
-		<div class="dh-info-grid">
-			<div class="dh-info-card">
-
-				<h4>Data Informed</h4>
-
-				<p>Using evidence to make decisions with confidence.</p>
-			</div>
-			<div class="dh-info-card">
-
-				<h4>Data Ready</h4>
-
-				<p>Ensuring the right data is available in the right format at the right time.</p>
-			</div>
-			<div class="dh-info-card">
-
-				<h4>Data Efficacious</h4>
-
-				<p>Building the skills to understand and use data effectively.</p>
-			</div>
-			<div class="dh-info-card">
-
-				<h4>Data Stewards</h4>
-
-				<p>Using data ethically as a flashlight, not a hammer&mdash;to help, not harm.</p>
-			</div></div>
-	</section>
-</div>
+	</div></div>
 <script>
 	(function()
 	{
@@ -1289,631 +1139,803 @@
 		{
 			if (dhHasInitialized) return true;
 
-		var LANDING_ITEM = {
-			title: 'Data Governance & AI Overview',
-			icon: 'https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png'
-		};
+			var LANDING_ITEM = {
+				title: 'Data Governance & AI Overview',
+				icon: 'https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png'
+			};
 
-		var DASHBOARDS = [
-		{
-			title: 'Learning Indicators',
-			icon: 'https://media.lrsd.net/media/Default/frl/learning-indicators-3x.2a12da82676.png',
-			url: 'https://app.powerbi.com/view?r=eyJrIjoiZTk1NDA0ZWItNGIxMS00MjllLThiYjktZjI0YjMwMDU4ZWIyIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
-		},
-		{
-			title: 'Student Enrolment',
-			icon: 'https://media.lrsd.net/media/Default/frl/student-enrolment-3x.722bba82678.png',
-			url: 'https://app.powerbi.com/view?r=eyJrIjoiZTNmNTJkMjItMzgzOS00ZjE4LThiMGYtYzNkM2FhYzBhN2FiIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
-		},
-		{
-			title: 'Class Size Tracker',
-			icon: 'https://media.lrsd.net/media/Default/frl/class-size-2x.9ea68b83520.png',
-			url: 'https://app.powerbi.com/view?r=eyJrIjoiNmQ0NjcxOGEtZjIzYy00MDRjLWI4ZTEtM2Y4YmVmMDEwMjMyIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
-		},
-		{
-			title: 'Student Diversity',
-			icon: 'https://media.lrsd.net/media/Default/frl/student-diversity-bi-icon.392afe83517.png',
-			url: 'https://app.powerbi.com/view?r=eyJrIjoiNjlhNTEzNWEtNTZiYS00ZjY0LTk0ODItYjMzNTk5YjA0MGQyIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
-		},
-		{
-			title: 'Daily Attendance Tracker',
-			icon: 'https://media.lrsd.net/media/Default/frl/daily-attendance-web-2x.733eb683522.png',
-			url: 'https://app.powerbi.com/view?r=eyJrIjoiYjJhNzYyZjgtYjE4MC00NDBlLTkwYmQtZDkyMDNiMWI1NDhlIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
-		},
-		{
-			title: 'Student Absence',
-			icon: 'https://media.lrsd.net/media/Default/frl/student-abs-web-2x.a541c183527.png',
-			url: 'https://app.powerbi.com/view?r=eyJrIjoiZGQ5MWU0MjQtYzQ4MC00YThiLWJhYzgtZmQxMmRjYTgxZDEzIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
-		},
-		{
-			title: 'Student Engagement',
-			icon: 'https://media.lrsd.net/media/Default/frl/student-engage-web-2x.6ce43983529.png',
-			url: 'https://app.powerbi.com/view?r=eyJrIjoiZmJlZjU0MmEtOGFmMC00N2JiLWEzZTgtNzc3MWZhNmY2NjVjIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
-		},
-		{
-			title: 'Social-Emotional Well-Being',
-			icon: 'https://media.lrsd.net/media/Default/frl/social-emo-web-2x.6afc8683530.png',
-			url: 'https://app.powerbi.com/view?r=eyJrIjoiZWIzOWY0MTEtNWIzZC00ZWZjLWIyZTQtNmU5YThhYjJlNDFmIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
-		},
-		{
-			title: 'Impact of Full-Day Kindergarten',
-			icon: 'https://media.lrsd.net/media/Default/frl/fdk-web-2x.c8981883524.png',
-			url: 'https://app.powerbi.com/view?r=eyJrIjoiMTU4ZjY0NjgtODUxMy00NzY4LWJlNDctMGZhYjk4ZjNkMGQ0IiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
-		},
-		{
-			title: 'Grade 9 Credit Attainment',
-			icon: 'https://media.lrsd.net/media/Default/frl/gr9-web-2x.a7d1ed83531.png',
-			url: 'https://app.powerbi.com/view?r=eyJrIjoiYzhhNjYyY2MtYWU0My00MDllLWExMDQtMDNmYTdjYjkyZWNlIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
-		},
-		{
-			title: 'Graduation Rates',
-			icon: 'https://media.lrsd.net/media/Default/frl/grad-rates-web-2x.d83b2883532.png',
-			url: 'https://app.powerbi.com/view?r=eyJrIjoiZjAyNGQ4ZWQtMGY5My00NTJlLTlkMTYtMDI2ZjEyZDA2ZTJmIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
-		},
-		{
-			title: 'Early and Middle Years Provincial Assessments',
-			icon: 'https://media.lrsd.net/media/Default/frl/early-middle-3x.36869683526.png',
-			url: 'https://app.powerbi.com/view?r=eyJrIjoiM2EyNzZhZGQtMTQ5ZC00Mzc4LWEyMGMtZjM2NzE4OTBhYmVhIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
-		}];
-
-		var LANDING_SECTIONS = [
-		{
-			title: 'Introduction',
-			summary: 'Start here for LRSD\'s public-facing overview of data stewardship, AI use, and the work underway across the division.',
-			bodyHtml: '<p><strong>Explore how LRSD approaches data stewardship, responsible artificial intelligence, and the systems already in place to support students, staff, and families.</strong></p><p>Use the section list to jump directly to any topic in the overview.</p>'
-		},
-
-		{
-			title: 'We Are All Data Stewards',
-			summary: 'Improving accuracy, maintaining security, and using information ethically across LRSD.',
-			bodyHtml: '<p><strong>Every day, LRSD works with information that matters enormously</strong> — student achievement, attendance, well-being, family records, and staff data. This information represents real people and real lives, and how we collect, protect, use, and share it reflects who we are as a school division.</p><p>Good data governance is not an IT matter. It is a shared responsibility that belongs to everyone — teachers, educational assistants, school leaders, support staff, and students alike. <strong>That is the idea at the heart of our work: We Are All Data Stewards.</strong></p><p>To lead this work, LRSD has established a Data Governance Executive Committee — senior divisional leaders with clear accountability for how data is managed across the division — supported by a growing network of Data Advisors and Data Champions in schools. Our Data Governance Charter defines the principles, roles, and commitments that guide all of this. And our AI guidelines establish a clear framework for how artificial intelligence tools are used responsibly at LRSD, grounded in our values and in Manitoba\'s Freedom of Information and Protection of Privacy Act (FIPPA).</p>'
-		},
-		{
-			title: 'How LRSD Uses Data',
-			summary: 'Data informs decision-making, program evaluation, and understanding student needs.',
-			bodyHtml: '<p><strong>Good decisions depend on good information.</strong> LRSD is a data-informed school division — data shapes how we allocate support, how we assess whether our programming is working, and how we understand what our students need.</p><p>We draw on many kinds of information: numbers, documents, observations, and student voice. We do not rely on any single source to tell the whole story. Good data practice means bringing different sources together, seeking the whole picture, and remembering that there is a person behind every piece of information.</p><p>LRSD is actively working to improve the quality and accessibility of our data — reducing our reliance on paper-based processes, centralizing information so it can be shared appropriately, and ensuring that what we collect is only what we actually need. Under FIPPA, staff access only the information relevant to their role. <strong>Collect only what we need, protect it carefully, use it only for its purpose</strong> — that principle guides everything we do.</p>'
-		},
-		{
-			title: 'How LRSD Uses Artificial Intelligence',
-			summary: 'AI is treated as a secure, optional support for professional judgment rather than a replacement for it.',
-			bodyHtml: '<p><strong>LRSD\'s position on AI is not to resist it and not to rush it.</strong> We believe AI can genuinely support the work of educators and staff — reducing administrative burden, supporting planning and communication, and freeing up time for the work that only people can do.</p><p>We also believe that no AI tool replaces the relationship between a teacher and a student, or the professional expertise that educators bring to their work. <strong>AI is a tool to support good judgment, not substitute for it.</strong></p><p><strong>LRSD\'s only approved AI tool for any work involving student or staff data is Microsoft Copilot</strong>, accessed through our enterprise Microsoft 365 environment. Free, public AI tools — such as publicly available versions of ChatGPT or Google Gemini — are not approved for Division work. When information is entered into those tools, it leaves our secure environment.</p><p>Our enterprise Copilot operates within LRSD\'s own digital tenant: data stays with us and is not used to train external AI systems. Staff use of AI is optional, not required.</p>'
-		},
-		{
-			title: 'Our AI Agents',
-			summary: 'Purpose-built AI agents are designed in-house for LRSD\'s context, curriculum, privacy expectations, and ethical safeguards.',
-			bodyHtml: '<p><strong>Beyond Copilot itself, LRSD has developed a set of purpose-built AI agents</strong> — tools configured to do one specific job, with LRSD\'s values, Manitoba curriculum expectations, privacy requirements, and ethical safeguards encoded directly into their design.</p><p>These are not generic tools imported from elsewhere. <strong>They are built in-house, for our context, our community, and our students.</strong> A shared design principle runs through all of them: rather than relying on policy documents or training to shape how people use AI, we encode our values and requirements into the tools themselves.</p><div class="dh-agent-grid"><div class="dh-agent-card"><h4>SPARK</h4><p>Strategic Partner for Amplifying Reflective Knowledge was built for school leaders so they can explore, question, and develop informed perspectives on AI before supporting staff and students.</p></div><div class="dh-agent-card"><h4>LEAP</h4><p>Language Education Assessment and Planning supports Student Services staff with consistent, high-quality, equity-centred planning for multilingual learners across the division.</p></div><div class="dh-agent-card"><h4>ATLAS</h4><p>Assisting Teachers with Lessons, Adaptations and Support helps teachers move from Manitoba learning outcomes to classroom-ready materials more efficiently while keeping professional judgment in their hands.</p></div><div class="dh-agent-card"><h4>CHALK</h4><p>Classroom Helper for Academic Learning and Knowledge supports students in Grades 7 through 12 by guiding thinking instead of giving answers, and includes a crisis support protocol directly in its design.</p></div><div class="dh-agent-card"><h4>CLARA</h4><p>Curriculum-Linked Assessment and Reporting Assistant helps teachers create outcome-aligned, strength-based, parent-friendly report card comments while preserving the teacher\'s voice, review, edits, and approval.</p></div></div><p>LRSD\'s integrated approach — building governance and AI strategy together, led from the leadership table, grounded in our own values — has been recognized by Microsoft, Google, Dell Canada, and C21 Canada. Dell and C21 selected LRSD as a national case study on responsible AI adoption in education.</p>'
-		},
-		{
-			title: 'Responsible Use Means Knowing When Not to Use AI',
-			summary: 'Judgment, relationships, and environmental responsibility still matter every time AI is considered.',
-			bodyHtml: '<p><strong>Responsible AI use is not only about privacy and security — it is also about judgment.</strong> We ask whether using an AI tool genuinely serves our students and our work, or whether the human approach would simply be better. Not every task benefits from AI.</p><p>A thoughtful conversation, a teacher\'s direct observation, the relationship between an educator and a student — these have a value that no tool replicates.</p><p>Part of what LRSD is building, for staff and students alike, is the capacity to make these distinctions well. That means understanding what AI can and cannot do, thinking critically about its outputs, and recognizing that an AI-assisted result is only as good as the human judgment applied to it.</p><p><strong>AI systems consume real resources</strong>, and using them intentionally — for purposes that genuinely matter — is both a practical and an ethical responsibility. We ask whether a given use of AI saves more human time and energy than it expends. That question shapes which tools we build and how we encourage people to use them.</p><p>For students, these skills extend well beyond school. They are foundational to participating thoughtfully in a world where AI is woven into workplaces and institutions at every level. LRSD has a real opportunity — and a responsibility — to model and teach what that looks like.</p>'
-		},
-		{
-			title: 'What We\'ve Built',
-			summary: 'LRSD has already established governance, guidelines, awareness, and tools that many systems are only beginning to consider.',
-			bodyHtml: '<p><strong>In the past year, LRSD has completed a division-wide data maturity assessment, formed the Data Governance Executive Committee, finalized comprehensive AI guidelines, completed the Data Governance Charter, launched the “We Are All Data Stewards” awareness campaign, and deployed five purpose-built AI agents across the division.</strong></p><p>A review of divisional policies and procedures is underway. Canada\'s federal government released a national AI strategy in June 2026; as of that date, only a small number of provincial ministries of education had published formal AI guidance for K–12 schools. <strong>LRSD has already built what many school divisions are only beginning to consider.</strong></p>'
-		},
-		{
-			title: 'What\'s Still Ahead',
-			summary: 'The work continues through broader engagement, better systems, evolving guidance, stronger learning, and clearer community pathways.',
-			bodyHtml: '<p><strong>We want to be clear: there is significant work still to do, and we are committed to doing it thoughtfully.</strong></p><ul><li><strong>Governance:</strong> Our data governance structure is in its early stages. The Executive Committee has provided foundational leadership, but broader voices — schools, families, students, and community members — have not yet been meaningfully included. Building those connections is part of what comes next, including growing a Data Champions Network in every school and department.</li><li><strong>Systems:</strong> Our data itself is a work in progress. We are continuing to move away from paper-based processes, improve data quality and consistency, and build the shared systems that allow information to be used well across the division.</li><li><strong>Guidance:</strong> Our AI guidelines and policies will need to evolve as tools change, as research develops, and as our own experience teaches us more. We are committed to updating our frameworks as we learn and to communicating those changes openly.</li><li><strong>Learning:</strong> We are also developing professional learning opportunities to support staff in building their data literacy and AI literacy — and working toward the resources and structures that will help teachers introduce these topics meaningfully in classrooms.</li><li><strong>Community pathways:</strong> A process for community members to raise questions or concerns is in development. More information to come.</li></ul>'
-		},
-		{
-			title: 'Resources',
-			summary: 'Supporting documents, links, and reference material that accompany the public overview.',
-			bodyHtml: '<p>The following materials are identified in the public content package:</p><ul class="dh-resource-list"><li>Data Governance Charter</li><li>“We Are All Data Stewards” poster</li><li>AI Guidelines (full document)</li><li>Links to Board meeting discussions on Data Governance and AI</li><li>Link to C21 Use case</li><li>Link to Free Press article “Agents of Change”</li><li>FAQ document <span class="dh-resource-note">(to be developed)</span></li><li>Link to relevant policies</li><li>Bibliography of resources <span class="dh-resource-note">(to be developed)</span></li><li>Link to Canada’s AI Strategy</li></ul>'
-		}
-		];
-
-		var customSelect = document.getElementById('dhCustomSelect');
-		var selectOptions = document.getElementById('dhSelectOptions');
-		var mobileListItems = document.getElementById('dhMobileListItems');
-		var activeIcon = document.getElementById('dhActiveIcon');
-		var activeText = document.getElementById('dhActiveText');
-		var frame = document.getElementById('dhFrame');
-		var counter = document.getElementById('dhCounter');
-		var loading = document.getElementById('dhLoading');
-		var prevBtn = document.getElementById('dhPrev');
-		var nextBtn = document.getElementById('dhNext');
-		var fsBtn = document.getElementById('dhFullscreen');
-		var viewer = document.getElementById('dhViewer');
-		var helpBtn = document.getElementById('dhHelpBtn');
-		var iframeWrap = document.getElementById('dhIframeWrap');
-		var mobileHelpBtn = document.getElementById('dhMobileHelpBtn');
-		var mobileHelpModal = document.getElementById('dhMobileHelpModal');
-		var mobileHelpClose = document.getElementById('dhMobileHelpClose');
-		var landing = document.getElementById('dhLanding');
-		var sidebarList = document.getElementById('dhSidebarList');
-		var sectionDirectory = document.getElementById('dhSectionDirectory');
-		var sectionStatus = document.getElementById('dhSectionStatus');
-		var sectionTitle = document.getElementById('dhSectionTitle');
-		var sectionSubtitle = document.getElementById('dhSectionSubtitle');
-		var sectionBody = document.getElementById('dhSectionBody');
-		var mobileOverview = document.getElementById('dhMobileOverview');
-		var mobileSectionDirectory = document.getElementById('dhMobileSectionDirectory');
-		var mobileSectionStatus = document.getElementById('dhMobileSectionStatus');
-		var mobileSectionTitle = document.getElementById('dhMobileSectionTitle');
-		var mobileSectionSubtitle = document.getElementById('dhMobileSectionSubtitle');
-		var mobileSectionBody = document.getElementById('dhMobileSectionBody');
-		var mobileSectionPrev = document.getElementById('dhMobileSectionPrev');
-		var mobileSectionNext = document.getElementById('dhMobileSectionNext');
-		var requiredElements = [
-			customSelect,
-			selectOptions,
-			mobileListItems,
-			activeIcon,
-			activeText,
-			frame,
-			counter,
-			loading,
-			prevBtn,
-			nextBtn,
-			viewer,
-			landing,
-			sidebarList,
-			sectionDirectory,
-			sectionStatus,
-			sectionTitle,
-			sectionSubtitle,
-			sectionBody,
-			mobileOverview,
-			mobileSectionDirectory,
-			mobileSectionStatus,
-			mobileSectionTitle,
-			mobileSectionSubtitle,
-			mobileSectionBody,
-			mobileSectionPrev,
-			mobileSectionNext
-		];
-
-		if (requiredElements.some(function(el) { return !el; })) return false;
-
-		dhHasInitialized = true;
-		stopBootWatchers();
-
-		var allowedSectionClassNames = ['dh-agent-grid', 'dh-agent-card', 'dh-resource-list', 'dh-resource-note'];
-		var frameReuseDelayMs = 120;
-		var currentMode = 'landing';
-		var currentSectionIndex = 0;
-		var currentDashboardIndex = -1;
-		var optionElements = Array.prototype.slice.call(selectOptions.querySelectorAll('.dh-option'));
-		var sidebarElements = Array.prototype.slice.call(sidebarList.querySelectorAll('.dh-nav-item'));
-		var sectionDirectoryLinks = Array.prototype.slice.call(sectionDirectory.querySelectorAll('.dh-section-link'));
-		var mobileSectionDirectoryLinks = Array.prototype.slice.call(mobileSectionDirectory.querySelectorAll('.dh-section-link'));
-
-		function sanitizeUrl(value)
-		{
-			if (value === null || value === undefined) return '';
-			var trimmed = String(value).trim();
-			if (!trimmed) return '';
-			try
+			var DASHBOARDS = [
 			{
-				var parsed = new URL(trimmed, window.location.href);
-				if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') return '';
-				return parsed.href;
-			}
-			catch (e)
+				title: 'Learning Indicators',
+				icon: 'https://media.lrsd.net/media/Default/frl/learning-indicators-3x.2a12da82676.png',
+				url: 'https://app.powerbi.com/view?r=eyJrIjoiZTk1NDA0ZWItNGIxMS00MjllLThiYjktZjI0YjMwMDU4ZWIyIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
+			},
 			{
-				return '';
-			}
-		}
-
-		function sanitizeSectionHtml(html)
-		{
-			var template = document.createElement('template');
-			template.innerHTML = html || '';
-
-			Array.prototype.slice.call(template.content.querySelectorAll('script, style, iframe, object, embed, base, form, meta, link')).forEach(function(node)
+				title: 'Student Enrolment',
+				icon: 'https://media.lrsd.net/media/Default/frl/student-enrolment-3x.722bba82678.png',
+				url: 'https://app.powerbi.com/view?r=eyJrIjoiZTNmNTJkMjItMzgzOS00ZjE4LThiMGYtYzNkM2FhYzBhN2FiIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
+			},
 			{
-				node.remove();
-			});
-
-			Array.prototype.slice.call(template.content.querySelectorAll('*')).forEach(function(node)
+				title: 'Class Size Tracker',
+				icon: 'https://media.lrsd.net/media/Default/frl/class-size-2x.9ea68b83520.png',
+				url: 'https://app.powerbi.com/view?r=eyJrIjoiNmQ0NjcxOGEtZjIzYy00MDRjLWI4ZTEtM2Y4YmVmMDEwMjMyIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
+			},
 			{
-				Array.prototype.slice.call(node.attributes).forEach(function(attr)
+				title: 'Student Diversity',
+				icon: 'https://media.lrsd.net/media/Default/frl/student-diversity-bi-icon.392afe83517.png',
+				url: 'https://app.powerbi.com/view?r=eyJrIjoiNjlhNTEzNWEtNTZiYS00ZjY0LTk0ODItYjMzNTk5YjA0MGQyIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
+			},
+			{
+				title: 'Daily Attendance Tracker',
+				icon: 'https://media.lrsd.net/media/Default/frl/daily-attendance-web-2x.733eb683522.png',
+				url: 'https://app.powerbi.com/view?r=eyJrIjoiYjJhNzYyZjgtYjE4MC00NDBlLTkwYmQtZDkyMDNiMWI1NDhlIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
+			},
+			{
+				title: 'Student Absence',
+				icon: 'https://media.lrsd.net/media/Default/frl/student-abs-web-2x.a541c183527.png',
+				url: 'https://app.powerbi.com/view?r=eyJrIjoiZGQ5MWU0MjQtYzQ4MC00YThiLWJhYzgtZmQxMmRjYTgxZDEzIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
+			},
+			{
+				title: 'Student Engagement',
+				icon: 'https://media.lrsd.net/media/Default/frl/student-engage-web-2x.6ce43983529.png',
+				url: 'https://app.powerbi.com/view?r=eyJrIjoiZmJlZjU0MmEtOGFmMC00N2JiLWEzZTgtNzc3MWZhNmY2NjVjIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
+			},
+			{
+				title: 'Social-Emotional Well-Being',
+				icon: 'https://media.lrsd.net/media/Default/frl/social-emo-web-2x.6afc8683530.png',
+				url: 'https://app.powerbi.com/view?r=eyJrIjoiZWIzOWY0MTEtNWIzZC00ZWZjLWIyZTQtNmU5YThhYjJlNDFmIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
+			},
+			{
+				title: 'Impact of Full-Day Kindergarten',
+				icon: 'https://media.lrsd.net/media/Default/frl/fdk-web-2x.c8981883524.png',
+				url: 'https://app.powerbi.com/view?r=eyJrIjoiMTU4ZjY0NjgtODUxMy00NzY4LWJlNDctMGZhYjk4ZjNkMGQ0IiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
+			},
+			{
+				title: 'Grade 9 Credit Attainment',
+				icon: 'https://media.lrsd.net/media/Default/frl/gr9-web-2x.a7d1ed83531.png',
+				url: 'https://app.powerbi.com/view?r=eyJrIjoiYzhhNjYyY2MtYWU0My00MDllLWExMDQtMDNmYTdjYjkyZWNlIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
+			},
+			{
+				title: 'Graduation Rates',
+				icon: 'https://media.lrsd.net/media/Default/frl/grad-rates-web-2x.d83b2883532.png',
+				url: 'https://app.powerbi.com/view?r=eyJrIjoiZjAyNGQ4ZWQtMGY5My00NTJlLTlkMTYtMDI2ZjEyZDA2ZTJmIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
+			},
+			{
+				title: 'Early and Middle Years Provincial Assessments',
+				icon: 'https://media.lrsd.net/media/Default/frl/early-middle-3x.36869683526.png',
+				url: 'https://app.powerbi.com/view?r=eyJrIjoiM2EyNzZhZGQtMTQ5ZC00Mzc4LWEyMGMtZjM2NzE4OTBhYmVhIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
+			}];
+
+			var RESOURCE_LINKS = {
+				posterEnglish: 'https://media.lrsd.net/media/Default/medialib/data-stewards_en.459bf288897.pdf',
+				posterFrench: 'https://media.lrsd.net/media/Default/medialib/data-stewards_fr.cb4dbb88898.pdf',
+				freePress: 'https://www.winnipegfreepress.com/breakingnews/2026/06/05/louis-riel-school-division-embraces-ai-agents-of-change',
+				nationalAiStrategy: 'https://ised-isde.canada.ca/site/ised/en/canadas-national-artificial-intelligence-strategy-ai-all',
+				charter: 'https://media.lrsd.net/media/Default/medialib/lrsd_data_governance_charter_v2_4_june2026.1bf66388900.pdf',
+				c21UseCase: 'https://media.lrsd.net/media/Default/medialib/mb-lrsd-pdf-aiusecase-2026.9e168a88901.pdf',
+				boardPresentation: 'https://media.lrsd.net/media/Default/medialib/board-presentation-data-governance-ai-in-lrsd-2026-05-05-v3.cfb6c788899.pdf',
+				aiGuidelines: 'https://media.lrsd.net/media/Default/medialib/lrsd-staff-ai-guidelines-full-document-docx.cb861488902.pdf'
+			};
+
+			var AI_AGENT_LOGOS = {
+				leap: 'https://media.lrsd.net/media/Default/frl/leap.50756188945.png',
+				atlas: 'https://media.lrsd.net/media/Default/frl/atlas.54632788946.png',
+				spark: 'https://media.lrsd.net/media/Default/frl/spark.af047088949.png',
+				clara: 'https://media.lrsd.net/media/Default/frl/clara.e9214b88948.png',
+				chalk: 'https://media.lrsd.net/media/Default/frl/chalk.19861b88947.png'
+			};
+
+			var DATA_FOUNDATIONS_CARDS = [
+			{
+				title: 'Data Informed',
+				description: 'Using evidence to make decisions with confidence.'
+			},
+			{
+				title: 'Data Ready',
+				description: 'Ensuring the right data is available in the right format at the right time.'
+			},
+			{
+				title: 'Data Efficacious',
+				description: 'Building the skills to understand and use data effectively.'
+			},
+			{
+				title: 'Data Stewards',
+				description: 'Using data ethically as a flashlight, not a hammer, to help, not harm.'
+			}];
+
+			var DATA_FOUNDATIONS_CARDS_HTML = buildInfoCardsHtml(DATA_FOUNDATIONS_CARDS);
+
+			var LANDING_SECTIONS = [
 				{
-					var name = attr.name.toLowerCase();
-					if (name.indexOf('on') === 0 || name === 'action' || name === 'formaction' || name === 'xmlns' || name === 'xlink:href')
+					title: 'Introduction',
+					summary: 'Start here for LRSD\'s public-facing overview of data stewardship, AI use, and the work underway across the division.',
+					bodyHtml: '<p><strong>Explore how LRSD approaches data stewardship, responsible artificial intelligence, and the systems already in place to support students, staff, and families.</strong></p><p>Use the section list to jump directly to any topic in the overview.</p>' + DATA_FOUNDATIONS_CARDS_HTML
+				},
+
+				{
+					title: 'We Are All Data Stewards',
+					summary: 'Improving accuracy, maintaining security, and using information ethically across LRSD.',
+					bodyHtml: '<p><strong>Every day, LRSD works with information that matters enormously</strong> — student achievement, attendance, well-being, family records, and staff data. This information represents real people and real lives, and how we collect, protect, use, and share it reflects who we are as a school division.</p><p>Good data governance is not an IT matter. It is a shared responsibility that belongs to everyone — teachers, educational assistants, school leaders, support staff, and students alike. <strong>That is the idea at the heart of our work: <a href="' + RESOURCE_LINKS.posterEnglish + '">We Are All Data Stewards</a>.</strong></p><p>To lead this work, LRSD has established a Data Governance Executive Committee — senior divisional leaders with clear accountability for how data is managed across the division — supported by a growing network of Data Advisors and Data Champions in schools. Our <a href="' + RESOURCE_LINKS.charter + '">Data Governance Charter</a> defines the principles, roles, and commitments that guide all of this. And our <a href="' + RESOURCE_LINKS.aiGuidelines + '">AI guidelines</a> establish a clear framework for how artificial intelligence tools are used responsibly at LRSD, grounded in our values and in Manitoba\'s Freedom of Information and Protection of Privacy Act (FIPPA).</p>'
+				},
+				{
+					title: 'How LRSD Uses Data',
+					summary: 'Data informs decision-making, program evaluation, and understanding student needs.',
+					bodyHtml: '<p><strong>Good decisions depend on good information.</strong> LRSD is a data-informed school division — data shapes how we allocate support, how we assess whether our programming is working, and how we understand what our students need.</p><p>We draw on many kinds of information: numbers, documents, observations, and student voice. We do not rely on any single source to tell the whole story. Good data practice means bringing different sources together, seeking the whole picture, and remembering that there is a person behind every piece of information.</p><p>LRSD is actively working to improve the quality and accessibility of our data — reducing our reliance on paper-based processes, centralizing information so it can be shared appropriately, and ensuring that what we collect is only what we actually need. Under FIPPA, staff access only the information relevant to their role. <strong>Collect only what we need, protect it carefully, use it only for its purpose</strong> — that principle guides everything we do.</p>'
+				},
+				{
+					title: 'How LRSD Uses Artificial Intelligence',
+					summary: 'AI is treated as a secure, optional support for professional judgment rather than a replacement for it.',
+					bodyHtml: '<p><strong>LRSD\'s position on AI is not to resist it and not to rush it.</strong> We believe AI can genuinely support the work of educators and staff — reducing administrative burden, supporting planning and communication, and freeing up time for the work that only people can do.</p><p>We also believe that no AI tool replaces the relationship between a teacher and a student, or the professional expertise that educators bring to their work. <strong>AI is a tool to support good judgment, not substitute for it.</strong></p><p><strong>LRSD\'s only approved AI tool for any work involving student or staff data is Microsoft Copilot</strong>, accessed through our enterprise Microsoft 365 environment. Free, public AI tools — such as publicly available versions of ChatGPT or Google Gemini — are not approved for Division work. When information is entered into those tools, it leaves our secure environment.</p><p>Our enterprise Copilot operates within LRSD\'s own digital tenant: data stays with us and is not used to train external AI systems. Staff use of AI is optional, not required.</p>'
+				},
+				{
+					title: 'Our AI Agents',
+					summary: 'Purpose-built AI agents are designed in-house for LRSD\'s context, curriculum, privacy expectations, and ethical safeguards.',
+					bodyHtml: '<p><strong>Beyond Copilot itself, LRSD has developed a set of purpose-built AI agents</strong> — tools configured to do one specific job, with LRSD\'s values, Manitoba curriculum expectations, privacy requirements, and ethical safeguards encoded directly into their design.</p><p>These are not generic tools imported from elsewhere. <strong>They are built in-house, for our context, our community, and our students.</strong> A shared design principle runs through all of them: rather than relying on policy documents or training to shape how people use AI, we encode our values and requirements into the tools themselves.</p><div class="dh-agent-grid"><div class="dh-agent-card"><img src="' + AI_AGENT_LOGOS.spark + '" alt="SPARK logo"><h4>SPARK</h4><p>Strategic Partner for Amplifying Reflective Knowledge was built for school leaders so they can explore, question, and develop informed perspectives on AI before supporting staff and students.</p></div><div class="dh-agent-card"><img src="' + AI_AGENT_LOGOS.leap + '" alt="LEAP logo"><h4>LEAP</h4><p>Language Education Assessment and Planning supports Student Services staff with consistent, high-quality, equity-centred planning for multilingual learners across the division.</p></div><div class="dh-agent-card"><img src="' + AI_AGENT_LOGOS.atlas + '" alt="ATLAS logo"><h4>ATLAS</h4><p>Assisting Teachers with Lessons, Adaptations and Support helps teachers move from Manitoba learning outcomes to classroom-ready materials more efficiently while keeping professional judgment in their hands.</p></div><div class="dh-agent-card"><img src="' + AI_AGENT_LOGOS.chalk + '" alt="CHALK logo"><h4>CHALK</h4><p>Classroom Helper for Academic Learning and Knowledge supports students in Grades 7 through 12 by guiding thinking instead of giving answers, and includes a crisis support protocol directly in its design.</p></div><div class="dh-agent-card"><img src="' + AI_AGENT_LOGOS.clara + '" alt="CLARA logo"><h4>CLARA</h4><p>Curriculum-Linked Assessment and Reporting Assistant helps teachers create outcome-aligned, strength-based, parent-friendly report card comments while preserving the teacher\'s voice, review, edits, and approval.</p></div></div><p>LRSD\'s integrated approach — building governance and AI strategy together, led from the leadership table, grounded in our own values — has been recognized by Microsoft, Google, Dell Canada, and C21 Canada. Dell and C21 selected LRSD as a national <a href="' + RESOURCE_LINKS.c21UseCase + '">case study on responsible AI adoption in education</a>.</p>'
+				},
+				{
+					title: 'Responsible Use Means Knowing When Not to Use AI',
+					summary: 'Judgment, relationships, and environmental responsibility still matter every time AI is considered.',
+					bodyHtml: '<p><strong>Responsible AI use is not only about privacy and security — it is also about judgment.</strong> We ask whether using an AI tool genuinely serves our students and our work, or whether the human approach would simply be better. Not every task benefits from AI.</p><p>A thoughtful conversation, a teacher\'s direct observation, the relationship between an educator and a student — these have a value that no tool replicates.</p><p>Part of what LRSD is building, for staff and students alike, is the capacity to make these distinctions well. That means understanding what AI can and cannot do, thinking critically about its outputs, and recognizing that an AI-assisted result is only as good as the human judgment applied to it.</p><p><strong>AI systems consume real resources</strong>, and using them intentionally — for purposes that genuinely matter — is both a practical and an ethical responsibility. We ask whether a given use of AI saves more human time and energy than it expends. That question shapes which tools we build and how we encourage people to use them.</p><p>For students, these skills extend well beyond school. They are foundational to participating thoughtfully in a world where AI is woven into workplaces and institutions at every level. LRSD has a real opportunity — and a responsibility — to model and teach what that looks like.</p>'
+				},
+				{
+					title: 'What We\'ve Built',
+					summary: 'LRSD has already established governance, guidelines, awareness, and tools that many systems are only beginning to consider.',
+					bodyHtml: '<p><strong>In the past year, LRSD has completed a division-wide data maturity assessment, formed the Data Governance Executive Committee, finalized comprehensive <a href="' + RESOURCE_LINKS.aiGuidelines + '">AI guidelines</a>, completed the <a href="' + RESOURCE_LINKS.charter + '">Data Governance Charter</a>, launched the <a href="' + RESOURCE_LINKS.posterEnglish + '">“We Are All Data Stewards” awareness campaign</a>, and deployed five purpose-built AI agents across the division.</strong></p><p>A review of divisional policies and procedures is underway. Canada\'s federal government released a <a href="' + RESOURCE_LINKS.nationalAiStrategy + '">national AI strategy</a> in June 2026; as of that date, only a small number of provincial ministries of education had published formal AI guidance for K–12 schools. <strong>LRSD has already built what many school divisions are only beginning to consider.</strong></p>'
+				},
+				{
+					title: 'What\'s Still Ahead',
+					summary: 'The work continues through broader engagement, better systems, evolving guidance, stronger learning, and clearer community pathways.',
+					bodyHtml: '<p><strong>We want to be clear: there is significant work still to do, and we are committed to doing it thoughtfully.</strong></p><ul><li><strong>Governance:</strong> Our data governance structure is in its early stages. The Executive Committee has provided foundational leadership, but broader voices — schools, families, students, and community members — have not yet been meaningfully included. Building those connections is part of what comes next, including growing a Data Champions Network in every school and department.</li><li><strong>Systems:</strong> Our data itself is a work in progress. We are continuing to move away from paper-based processes, improve data quality and consistency, and build the shared systems that allow information to be used well across the division.</li><li><strong>Guidance:</strong> Our <a href="' + RESOURCE_LINKS.aiGuidelines + '">AI guidelines</a> and policies will need to evolve as tools change, as research develops, and as our own experience teaches us more. We are committed to updating our frameworks as we learn and to communicating those changes openly.</li><li><strong>Learning:</strong> We are also developing professional learning opportunities to support staff in building their data literacy and AI literacy — and working toward the resources and structures that will help teachers introduce these topics meaningfully in classrooms.</li><li><strong>Community pathways:</strong> A process for community members to raise questions or concerns is in development. More information to come.</li></ul>'
+				},
+				{
+					title: 'Resources',
+					summary: 'Supporting documents, links, and reference material that accompany the public overview.',
+					bodyHtml: '<p>The following public-facing materials are currently available:</p><ul class="dh-resource-list"><li><a href="' + RESOURCE_LINKS.charter + '">Data Governance Charter</a></li><li><a href="' + RESOURCE_LINKS.aiGuidelines + '">AI Guidelines</a></li><li><a href="' + RESOURCE_LINKS.posterEnglish + '">We Are All Data Stewards poster (English)</a></li><li><a href="' + RESOURCE_LINKS.posterFrench + '">We Are All Data Stewards poster (French)</a></li><li><a href="' + RESOURCE_LINKS.boardPresentation + '">Board Presentation on Data Governance and AI</a></li><li><a href="' + RESOURCE_LINKS.c21UseCase + '">C21 Use Case</a></li><li><a href="' + RESOURCE_LINKS.freePress + '">Winnipeg Free Press article: “Louis Riel School Division embraces AI agents of change”</a></li><li><a href="' + RESOURCE_LINKS.nationalAiStrategy + '">Canada’s National Artificial Intelligence Strategy: AI for All</a></li></ul>',
+					spotlight:
 					{
-						node.removeAttribute(attr.name);
-						return;
+						title: 'We Are All Data Stewards poster',
+						description: 'Preview the English poster below.',
+						previewUrl: RESOURCE_LINKS.posterEnglish,
+						showActions: false
 					}
-					if (name === 'href' || name === 'src')
+				}
+			];
+
+			var customSelect = document.getElementById('dhCustomSelect');
+			var selectOptions = document.getElementById('dhSelectOptions');
+			var mobileListItems = document.getElementById('dhMobileListItems');
+			var activeIcon = document.getElementById('dhActiveIcon');
+			var activeText = document.getElementById('dhActiveText');
+			var frame = document.getElementById('dhFrame');
+			var counter = document.getElementById('dhCounter');
+			var loading = document.getElementById('dhLoading');
+			var prevBtn = document.getElementById('dhPrev');
+			var nextBtn = document.getElementById('dhNext');
+			var fsBtn = document.getElementById('dhFullscreen');
+			var viewer = document.getElementById('dhViewer');
+			var helpBtn = document.getElementById('dhHelpBtn');
+			var iframeWrap = document.getElementById('dhIframeWrap');
+			var mobileHelpBtn = document.getElementById('dhMobileHelpBtn');
+			var mobileHelpModal = document.getElementById('dhMobileHelpModal');
+			var mobileHelpClose = document.getElementById('dhMobileHelpClose');
+			var landing = document.getElementById('dhLanding');
+			var sidebarList = document.getElementById('dhSidebarList');
+			var sectionDirectory = document.getElementById('dhSectionDirectory');
+			var sectionStatus = document.getElementById('dhSectionStatus');
+			var sectionTitle = document.getElementById('dhSectionTitle');
+			var sectionSubtitle = document.getElementById('dhSectionSubtitle');
+			var sectionBody = document.getElementById('dhSectionBody');
+			var mobileOverview = document.getElementById('dhMobileOverview');
+			var mobileSectionDirectory = document.getElementById('dhMobileSectionDirectory');
+			var mobileSectionStatus = document.getElementById('dhMobileSectionStatus');
+			var mobileSectionTitle = document.getElementById('dhMobileSectionTitle');
+			var mobileSectionSubtitle = document.getElementById('dhMobileSectionSubtitle');
+			var mobileSectionBody = document.getElementById('dhMobileSectionBody');
+			var mobileSectionPrev = document.getElementById('dhMobileSectionPrev');
+			var mobileSectionNext = document.getElementById('dhMobileSectionNext');
+			var requiredElements = [
+				customSelect,
+				selectOptions,
+				mobileListItems,
+				activeIcon,
+				activeText,
+				frame,
+				counter,
+				loading,
+				prevBtn,
+				nextBtn,
+				viewer,
+				landing,
+				sidebarList,
+				sectionDirectory,
+				sectionStatus,
+				sectionTitle,
+				sectionSubtitle,
+				sectionBody,
+				mobileOverview,
+				mobileSectionDirectory,
+				mobileSectionStatus,
+				mobileSectionTitle,
+				mobileSectionSubtitle,
+				mobileSectionBody,
+				mobileSectionPrev,
+				mobileSectionNext
+			];
+
+			if (requiredElements.some(function(el)
+				{
+					return !el;
+				})) return false;
+
+			dhHasInitialized = true;
+			stopBootWatchers();
+
+			var allowedSectionClassNames = ['dh-agent-grid', 'dh-agent-card', 'dh-resource-list', 'dh-resource-note', 'dh-info-grid', 'dh-info-card'];
+			var frameReuseDelayMs = 120;
+			var currentMode = 'landing';
+			var currentSectionIndex = 0;
+			var currentDashboardIndex = -1;
+			var optionElements = Array.prototype.slice.call(selectOptions.querySelectorAll('.dh-option'));
+			var sidebarElements = Array.prototype.slice.call(sidebarList.querySelectorAll('.dh-nav-item'));
+			var sectionDirectoryLinks = Array.prototype.slice.call(sectionDirectory.querySelectorAll('.dh-section-link'));
+			var mobileSectionDirectoryLinks = Array.prototype.slice.call(mobileSectionDirectory.querySelectorAll('.dh-section-link'));
+
+			function sanitizeUrl(value)
+			{
+				if (value === null || value === undefined) return '';
+				var trimmed = String(value).trim();
+				if (!trimmed) return '';
+				try
+				{
+					var parsed = new URL(trimmed, window.location.href);
+					if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') return '';
+					return parsed.href;
+				}
+				catch (e)
+				{
+					return '';
+				}
+			}
+
+			function escapeHtml(value)
+			{
+				if (value === null || value === undefined) return '';
+				return String(value)
+					.replace(/&/g, '&')
+					.replace(/</g, '&lt;')
+					.replace(/>/g, '&gt;')
+					.replace(/"/g, '&quot;')
+					.replace(/'/g, '&#39;');
+			}
+
+			function buildPdfPreviewUrl(value)
+			{
+				var safeValue = sanitizeUrl(value);
+				if (!safeValue) return '';
+
+				return sanitizeUrl(safeValue + '#toolbar=0&navpanes=0&scrollbar=0');
+			}
+
+			function sanitizeSectionHtml(html)
+			{
+				var template = document.createElement('template');
+				template.innerHTML = html || '';
+
+				Array.prototype.slice.call(template.content.querySelectorAll('script, style, iframe, object, embed, base, form, meta, link')).forEach(function(node)
+				{
+					node.remove();
+				});
+
+				Array.prototype.slice.call(template.content.querySelectorAll('*')).forEach(function(node)
+				{
+					Array.prototype.slice.call(node.attributes).forEach(function(attr)
 					{
-						var safeValue = sanitizeUrl(attr.value);
-						if (safeValue) node.setAttribute(attr.name, safeValue);
-						else node.removeAttribute(attr.name);
-					}
-					if (name === 'class')
-					{
-						node.setAttribute('class', attr.value.split(/\s+/).filter(function(className)
+						var name = attr.name.toLowerCase();
+						if (name.indexOf('on') === 0 || name === 'action' || name === 'formaction' || name === 'xmlns' || name === 'xlink:href')
 						{
-							return allowedSectionClassNames.indexOf(className) !== -1;
-						}).join(' '));
+							node.removeAttribute(attr.name);
+							return;
+						}
+						if (name === 'href' || name === 'src')
+						{
+							var safeValue = sanitizeUrl(attr.value);
+							if (safeValue) node.setAttribute(attr.name, safeValue);
+							else node.removeAttribute(attr.name);
+						}
+						if (name === 'class')
+						{
+							node.setAttribute('class', attr.value.split(/\s+/).filter(function(className)
+							{
+								return allowedSectionClassNames.indexOf(className) !== -1;
+							}).join(' '));
+						}
+					});
+
+					if (node.tagName === 'A')
+					{
+						node.setAttribute('target', '_blank');
+						node.setAttribute('rel', 'noopener');
 					}
 				});
 
-				if (node.tagName === 'A')
+				return template.innerHTML;
+			}
+
+			function buildInfoCardsHtml(cards)
+			{
+				return '<div class="dh-info-grid">' + cards.map(function(card)
 				{
-					node.setAttribute('target', '_blank');
-					node.setAttribute('rel', 'noopener');
+					return '<div class="dh-info-card"><h4>' + escapeHtml(card.title) + '</h4><p>' + escapeHtml(card.description) + '</p></div>';
+				}).join('') + '</div>';
+			}
+
+			function getSectionLabel(index)
+			{
+				return 'Section ' + (index + 1) + ' of ' + LANDING_SECTIONS.length;
+			}
+
+			function updateSectionLinkState(links)
+			{
+				links.forEach(function(link)
+				{
+					var linkIndex = parseInt(link.getAttribute('data-section-index'), 10);
+					link.classList.toggle('is-active', linkIndex === currentSectionIndex);
+				});
+			}
+
+			function getSectionBodyHtml(section, index)
+			{
+				var introLogoHtml = index === 0 ? '<img src="' + sanitizeUrl(LANDING_ITEM.icon) + '" alt="Data Hub" class="dh-section-logo fr-fil fr-dib">' : '';
+				return '<div class="dh-section-body-inner">' + introLogoHtml + sanitizeSectionHtml(section.bodyHtml) + buildSectionSpotlightHtml(section) + '</div>';
+			}
+
+			function buildSectionSpotlightHtml(section)
+			{
+				if (!section || !section.spotlight) return '';
+
+				var title = section.spotlight.title ? escapeHtml(section.spotlight.title) : 'Featured resource';
+				var description = section.spotlight.description ? '<p class="dh-resource-meta">' + escapeHtml(section.spotlight.description) + '</p>' : '';
+				var previewUrl = sanitizeUrl(section.spotlight.previewUrl);
+				var previewFrameUrl = buildPdfPreviewUrl(previewUrl);
+				var primaryUrl = sanitizeUrl(section.spotlight.primaryUrl || previewUrl);
+				var secondaryUrl = sanitizeUrl(section.spotlight.secondaryUrl);
+				var primaryLabel = escapeHtml(section.spotlight.primaryLabel || 'Open resource');
+				var secondaryLabel = escapeHtml(section.spotlight.secondaryLabel || 'Open alternate version');
+				var showActions = section.spotlight.showActions !== false;
+				var previewHtml = previewFrameUrl ? '<div class="dh-resource-preview"><iframe src="' + previewFrameUrl + '" title="Preview of ' + title + ' - interactive document viewer" loading="lazy" width="100%" height="544"></iframe></div>' : '';
+				var actions = [];
+
+				if (showActions && primaryUrl)
+				{
+					actions.push('<a class="dh-resource-button" href="' + primaryUrl + '" target="_blank" rel="noopener">' + primaryLabel + '</a>');
+				}
+
+				if (showActions && secondaryUrl)
+				{
+					actions.push('<a class="dh-resource-button" href="' + secondaryUrl + '" target="_blank" rel="noopener">' + secondaryLabel + '</a>');
+				}
+
+				return '<div class="dh-resource-spotlight"><h4>' + title + '</h4>' + description + previewHtml + (actions.length ? '<div class="dh-resource-actions">' + actions.join('') + '</div>' : '') + '</div>';
+			}
+
+			function renderSections()
+			{
+				var currentSection = LANDING_SECTIONS[currentSectionIndex];
+				updateSectionLinkState(sectionDirectoryLinks);
+				updateSectionLinkState(mobileSectionDirectoryLinks);
+
+				sectionStatus.textContent = getSectionLabel(currentSectionIndex);
+				sectionTitle.textContent = currentSection.title;
+				sectionSubtitle.textContent = currentSection.summary;
+				sectionBody.innerHTML = getSectionBodyHtml(currentSection, currentSectionIndex);
+
+				mobileSectionStatus.textContent = getSectionLabel(currentSectionIndex);
+				mobileSectionTitle.textContent = currentSection.title;
+				mobileSectionSubtitle.textContent = currentSection.summary;
+				mobileSectionBody.innerHTML = getSectionBodyHtml(currentSection, currentSectionIndex);
+
+				if (currentMode === 'landing')
+				{
+					counter.textContent = getSectionLabel(currentSectionIndex);
+				}
+			}
+
+			function updateSelectedNavigation()
+			{
+				optionElements.forEach(function(option)
+				{
+					var isLanding = option.getAttribute('data-nav-kind') === 'landing';
+					var isActive = currentMode === 'landing' ? isLanding : (!isLanding && parseInt(option.getAttribute('data-index'), 10) === currentDashboardIndex);
+					option.classList.toggle('selected', isActive);
+				});
+
+				sidebarElements.forEach(function(option)
+				{
+					var isLanding = option.getAttribute('data-nav-kind') === 'landing';
+					var isActive = currentMode === 'landing' ? isLanding : (!isLanding && parseInt(option.getAttribute('data-index'), 10) === currentDashboardIndex);
+					option.classList.toggle('selected', isActive);
+				});
+			}
+
+			function hideLanding()
+			{
+				landing.classList.add('dh-hidden');
+			}
+
+			function showLanding()
+			{
+				currentMode = 'landing';
+				landing.classList.remove('dh-hidden');
+				frame.classList.remove('dh-frame-ready');
+				frame.removeAttribute('src');
+				loading.classList.remove('active');
+				activeIcon.src = LANDING_ITEM.icon;
+				activeText.textContent = LANDING_ITEM.title;
+				prevBtn.title = 'Previous section';
+				nextBtn.title = 'Next section';
+				renderSections();
+				updateSelectedNavigation();
+				customSelect.removeAttribute('open');
+			}
+
+			function loadDashboard(idx)
+			{
+				if (idx < 0 || idx >= DASHBOARDS.length) return;
+				currentMode = 'dashboard';
+				currentDashboardIndex = idx;
+				var d = DASHBOARDS[idx];
+				hideLanding();
+				activeText.textContent = d.title;
+				activeIcon.src = d.icon;
+				counter.textContent = 'Dashboard ' + (idx + 1) + ' / ' + DASHBOARDS.length;
+				prevBtn.title = 'Previous dashboard';
+				nextBtn.title = 'Next dashboard';
+				frame.classList.remove('dh-frame-ready');
+				loading.classList.add('active');
+				if (frame.getAttribute('src') !== d.url) frame.setAttribute('src', d.url);
+				else window.setTimeout(function()
+				{
+					frame.classList.add('dh-frame-ready'); loading.classList.remove('active');
+				}, frameReuseDelayMs);
+				customSelect.removeAttribute('open');
+				updateSelectedNavigation();
+			}
+
+			function isEditableTarget(target)
+			{
+				if (!target) return false;
+				if (target.isContentEditable) return true;
+				return /^(input|textarea|select)$/i.test(target.tagName || '');
+			}
+
+			function goToItem(kind, idx)
+			{
+				if (kind === 'landing')
+				{
+					showLanding();
+					return;
+				}
+
+				var parsedIndex = parseInt(idx, 10);
+				if (!Number.isFinite(parsedIndex)) return;
+				loadDashboard(parsedIndex);
+			}
+
+			function prevSection()
+			{
+				currentSectionIndex = (currentSectionIndex - 1 + LANDING_SECTIONS.length) % LANDING_SECTIONS.length;
+				renderSections();
+			}
+
+			function nextSection()
+			{
+				currentSectionIndex = (currentSectionIndex + 1) % LANDING_SECTIONS.length;
+				renderSections();
+			}
+
+			function cyclePrev()
+			{
+				if (currentMode === 'landing') prevSection();
+				else loadDashboard((currentDashboardIndex - 1 + DASHBOARDS.length) % DASHBOARDS.length);
+			}
+
+			function cycleNext()
+			{
+				if (currentMode === 'landing') nextSection();
+				else loadDashboard((currentDashboardIndex + 1) % DASHBOARDS.length);
+			}
+
+			function requestFullscreenSafe(el)
+			{
+				try
+				{
+					if (el.requestFullscreen) el.requestFullscreen();
+					else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+					else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+					else if (el.msRequestFullscreen) el.msRequestFullscreen();
+				}
+				catch (e)
+				{}
+			}
+
+			function toggleFullscreen()
+			{
+				var fsElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+				if (!fsElement) requestFullscreenSafe(viewer);
+				else
+				{
+					if (document.exitFullscreen) document.exitFullscreen();
+					else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+					else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+					else if (document.msExitFullscreen) document.msExitFullscreen();
+				}
+			}
+
+			renderSections();
+			showLanding();
+
+			if (mobileHelpModal && mobileHelpModal.parentNode !== document.body)
+			{
+				document.body.appendChild(mobileHelpModal);
+			}
+
+			if (mobileHelpBtn && mobileHelpModal && mobileHelpClose)
+			{
+				mobileHelpBtn.addEventListener('click', function(e)
+				{
+					e.preventDefault(); e.stopPropagation(); mobileHelpModal.classList.add('active');
+				});
+				mobileHelpClose.addEventListener('click', function(e)
+				{
+					e.preventDefault(); e.stopPropagation(); mobileHelpModal.classList.remove('active');
+				});
+				mobileHelpModal.addEventListener('click', function(e)
+				{
+					if (e.target === mobileHelpModal) mobileHelpModal.classList.remove('active');
+				});
+			}
+
+			document.addEventListener('click', function(e)
+			{
+				if (!customSelect.contains(e.target)) customSelect.removeAttribute('open');
+			});
+
+			selectOptions.addEventListener('click', function(e)
+			{
+				var option = e.target.closest('.dh-option');
+				if (!option) return;
+				e.stopPropagation();
+				goToItem(option.getAttribute('data-nav-kind'), option.getAttribute('data-index'));
+			});
+
+			sidebarList.addEventListener('click', function(e)
+			{
+				var option = e.target.closest('.dh-nav-item');
+				if (!option) return;
+				goToItem(option.getAttribute('data-nav-kind'), option.getAttribute('data-index'));
+			});
+
+			mobileListItems.addEventListener('click', function(e)
+			{
+				var overviewButton = e.target.closest('#dhMobileOverviewBtn');
+				if (overviewButton)
+				{
+					mobileOverview.scrollIntoView(
+					{
+						behavior: 'smooth',
+						block: 'start'
+					});
+					return;
+				}
+
+				var dashboardButton = e.target.closest('[data-mobile-dashboard]');
+				if (!dashboardButton) return;
+				loadDashboard(parseInt(dashboardButton.getAttribute('data-mobile-dashboard'), 10));
+				window.scrollTo(
+				{
+					top: viewer.getBoundingClientRect().top + window.pageYOffset - 16,
+					behavior: 'smooth'
+				});
+			});
+
+			function bindSectionDirectory(target)
+			{
+				target.addEventListener('click', function(e)
+				{
+					var link = e.target.closest('.dh-section-link');
+					if (!link) return;
+					e.preventDefault();
+					currentSectionIndex = parseInt(link.getAttribute('data-section-index'), 10);
+					renderSections();
+				});
+			}
+
+			bindSectionDirectory(sectionDirectory);
+			bindSectionDirectory(mobileSectionDirectory);
+
+			prevBtn.addEventListener('click', cyclePrev);
+			nextBtn.addEventListener('click', cycleNext);
+			mobileSectionPrev.addEventListener('click', prevSection);
+			mobileSectionNext.addEventListener('click', nextSection);
+			if (fsBtn) fsBtn.addEventListener('click', toggleFullscreen);
+
+			frame.addEventListener('load', function()
+			{
+				var src = frame.getAttribute('src');
+				if (!src || src === 'about:blank') return;
+				frame.classList.add('dh-frame-ready');
+				loading.classList.remove('active');
+			});
+
+			document.addEventListener('keydown', function(e)
+			{
+				if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || isEditableTarget(e.target)) return;
+				if (e.key === 'ArrowLeft')
+				{
+					e.preventDefault(); cyclePrev();
+				}
+				if (e.key === 'ArrowRight')
+				{
+					e.preventDefault(); cycleNext();
+				}
+				if (e.key === 'f' || e.key === 'F')
+				{
+					e.preventDefault(); toggleFullscreen();
 				}
 			});
 
-			return template.innerHTML;
-		}
+			var tourBackdrop = document.getElementById('dhTourBackdrop');
+			var tourSpotlight = document.getElementById('dhTourSpotlight');
+			var tourTooltip = document.getElementById('dhTourTooltip');
+			var tourStep = document.getElementById('dhTourStep');
+			var tourTitle = document.getElementById('dhTourTitle');
+			var tourBody = document.getElementById('dhTourBody');
+			var tourSkip = document.getElementById('dhTourSkip');
+			var tourBack = document.getElementById('dhTourBack');
+			var tourNext = document.getElementById('dhTourNext');
 
-		function getSectionLabel(index)
-		{
-			return 'Section ' + (index + 1) + ' of ' + LANDING_SECTIONS.length;
-		}
-
-		function updateSectionLinkState(links)
-		{
-			links.forEach(function(link)
+			var tourSteps = [
 			{
-				var linkIndex = parseInt(link.getAttribute('data-section-index'), 10);
-				link.classList.toggle('is-active', linkIndex === currentSectionIndex);
-			});
-		}
-
-		function getSectionBodyHtml(section, index)
-		{
-			var introLogoHtml = index === 0
-				? '<img src="' + sanitizeUrl(LANDING_ITEM.icon) + '" alt="Data Hub" class="dh-section-logo fr-fil fr-dib">'
-				: '';
-			return '<div class="dh-section-body-inner">' + introLogoHtml + sanitizeSectionHtml(section.bodyHtml) + '</div>';
-		}
-
-		function renderSections()
-		{
-			var currentSection = LANDING_SECTIONS[currentSectionIndex];
-			updateSectionLinkState(sectionDirectoryLinks);
-			updateSectionLinkState(mobileSectionDirectoryLinks);
-
-			sectionStatus.textContent = getSectionLabel(currentSectionIndex);
-			sectionTitle.textContent = currentSection.title;
-			sectionSubtitle.textContent = currentSection.summary;
-			sectionBody.innerHTML = getSectionBodyHtml(currentSection, currentSectionIndex);
-
-			mobileSectionStatus.textContent = getSectionLabel(currentSectionIndex);
-			mobileSectionTitle.textContent = currentSection.title;
-			mobileSectionSubtitle.textContent = currentSection.summary;
-			mobileSectionBody.innerHTML = getSectionBodyHtml(currentSection, currentSectionIndex);
-
-			if (currentMode === 'landing')
+				targetId: 'dhCustomSelect',
+				title: 'Choose a view',
+				body: 'Use the dropdown to switch between the Data Governance and AI overview and the LRSD dashboards.'
+			},
 			{
-				counter.textContent = getSectionLabel(currentSectionIndex);
-			}
-		}
-
-		function updateSelectedNavigation()
-		{
-			optionElements.forEach(function(option)
+				targetId: 'dhCounter',
+				title: 'Track where you are',
+				body: 'The counter updates as you move through overview sections or switch from one dashboard to the next.'
+			},
 			{
-				var isLanding = option.getAttribute('data-nav-kind') === 'landing';
-				var isActive = currentMode === 'landing' ? isLanding : (!isLanding && parseInt(option.getAttribute('data-index'), 10) === currentDashboardIndex);
-				option.classList.toggle('selected', isActive);
-			});
-
-			sidebarElements.forEach(function(option)
+				targetId: 'dhIframeWrap',
+				title: 'Read and scroll here',
+				body: 'The viewer displays the overview content and loaded dashboards. Longer overview sections scroll inside this card.'
+			},
 			{
-				var isLanding = option.getAttribute('data-nav-kind') === 'landing';
-				var isActive = currentMode === 'landing' ? isLanding : (!isLanding && parseInt(option.getAttribute('data-index'), 10) === currentDashboardIndex);
-				option.classList.toggle('selected', isActive);
-			});
-		}
-
-		function hideLanding()
-		{
-			landing.classList.add('dh-hidden');
-		}
-
-		function showLanding()
-		{
-			currentMode = 'landing';
-			landing.classList.remove('dh-hidden');
-			frame.classList.remove('dh-frame-ready');
-			frame.removeAttribute('src');
-			loading.classList.remove('active');
-			activeIcon.src = LANDING_ITEM.icon;
-			activeText.textContent = LANDING_ITEM.title;
-			prevBtn.title = 'Previous section';
-			nextBtn.title = 'Next section';
-			renderSections();
-			updateSelectedNavigation();
-			customSelect.removeAttribute('open');
-		}
-
-		function loadDashboard(idx)
-		{
-			if (idx < 0 || idx >= DASHBOARDS.length) return;
-			currentMode = 'dashboard';
-			currentDashboardIndex = idx;
-			var d = DASHBOARDS[idx];
-			hideLanding();
-			activeText.textContent = d.title;
-			activeIcon.src = d.icon;
-			counter.textContent = 'Dashboard ' + (idx + 1) + ' / ' + DASHBOARDS.length;
-			prevBtn.title = 'Previous dashboard';
-			nextBtn.title = 'Next dashboard';
-			frame.classList.remove('dh-frame-ready');
-			loading.classList.add('active');
-			if (frame.getAttribute('src') !== d.url) frame.setAttribute('src', d.url);
-			else window.setTimeout(function() { frame.classList.add('dh-frame-ready'); loading.classList.remove('active'); }, frameReuseDelayMs);
-			customSelect.removeAttribute('open');
-			updateSelectedNavigation();
-		}
-
-		function isEditableTarget(target)
-		{
-			if (!target) return false;
-			if (target.isContentEditable) return true;
-			return /^(input|textarea|select)$/i.test(target.tagName || '');
-		}
-
-		function goToItem(kind, idx)
-		{
-			if (kind === 'landing')
+				targetId: 'dhPrev',
+				title: 'Move step by step',
+				body: 'Use these arrows to move through overview sections in order, or to switch dashboards after you open one.',
+				targetGroup: ['dhPrev', 'dhNext']
+			},
 			{
-				showLanding();
-				return;
+				targetId: 'dhFullscreen',
+				title: 'More room and quick help',
+				body: 'Use fullscreen for more space, and reopen this tour from the question mark any time.',
+				targetGroup: ['dhFullscreen', 'dhHelpBtn']
+			}];
+
+			var tourIndex = 0, tourActive = false;
+
+			function getCombinedRect(ids)
+			{
+				var rects = ids.map(function(id)
+				{
+					return document.getElementById(id).getBoundingClientRect();
+				});
+				var top = Math.min.apply(null, rects.map(function(r)
+				{
+					return r.top;
+				}));
+				var left = Math.min.apply(null, rects.map(function(r)
+				{
+					return r.left;
+				}));
+				var right = Math.max.apply(null, rects.map(function(r)
+				{
+					return r.right;
+				}));
+				var bottom = Math.max.apply(null, rects.map(function(r)
+				{
+					return r.bottom;
+				}));
+				return {
+					top: top,
+					left: left,
+					width: right - left,
+					height: bottom - top
+				};
 			}
 
-			var parsedIndex = parseInt(idx, 10);
-			if (!Number.isFinite(parsedIndex)) return;
-			loadDashboard(parsedIndex);
-		}
-
-		function prevSection()
-		{
-			currentSectionIndex = (currentSectionIndex - 1 + LANDING_SECTIONS.length) % LANDING_SECTIONS.length;
-			renderSections();
-		}
-
-		function nextSection()
-		{
-			currentSectionIndex = (currentSectionIndex + 1) % LANDING_SECTIONS.length;
-			renderSections();
-		}
-
-		function cyclePrev()
-		{
-			if (currentMode === 'landing') prevSection();
-			else loadDashboard((currentDashboardIndex - 1 + DASHBOARDS.length) % DASHBOARDS.length);
-		}
-
-		function cycleNext()
-		{
-			if (currentMode === 'landing') nextSection();
-			else loadDashboard((currentDashboardIndex + 1) % DASHBOARDS.length);
-		}
-
-		function requestFullscreenSafe(el)
-		{
-			try
+			function positionSpotlightAndTooltip()
 			{
-				if (el.requestFullscreen) el.requestFullscreen();
-				else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-				else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
-				else if (el.msRequestFullscreen) el.msRequestFullscreen();
-			}
-			catch (e)
-			{}
-		}
-
-		function toggleFullscreen()
-		{
-			var fsElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
-			if (!fsElement) requestFullscreenSafe(viewer);
-			else
-			{
-				if (document.exitFullscreen) document.exitFullscreen();
-				else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-				else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
-				else if (document.msExitFullscreen) document.msExitFullscreen();
-			}
-		}
-
-		renderSections();
-		showLanding();
-
-		if (mobileHelpModal && mobileHelpModal.parentNode !== document.body)
-		{
-			document.body.appendChild(mobileHelpModal);
-		}
-
-		if (mobileHelpBtn && mobileHelpModal && mobileHelpClose)
-		{
-			mobileHelpBtn.addEventListener('click', function(e)
-			{
-				e.preventDefault(); e.stopPropagation(); mobileHelpModal.classList.add('active');
-			});
-			mobileHelpClose.addEventListener('click', function(e)
-			{
-				e.preventDefault(); e.stopPropagation(); mobileHelpModal.classList.remove('active');
-			});
-			mobileHelpModal.addEventListener('click', function(e)
-			{
-				if (e.target === mobileHelpModal) mobileHelpModal.classList.remove('active');
-			});
-		}
-
-		document.addEventListener('click', function(e)
-		{
-			if (!customSelect.contains(e.target)) customSelect.removeAttribute('open');
-		});
-
-		selectOptions.addEventListener('click', function(e)
-		{
-			var option = e.target.closest('.dh-option');
-			if (!option) return;
-			e.stopPropagation();
-			goToItem(option.getAttribute('data-nav-kind'), option.getAttribute('data-index'));
-		});
-
-		sidebarList.addEventListener('click', function(e)
-		{
-			var option = e.target.closest('.dh-nav-item');
-			if (!option) return;
-			goToItem(option.getAttribute('data-nav-kind'), option.getAttribute('data-index'));
-		});
-
-		mobileListItems.addEventListener('click', function(e)
-		{
-			var overviewButton = e.target.closest('#dhMobileOverviewBtn');
-			if (overviewButton)
-			{
-				mobileOverview.scrollIntoView({ behavior: 'smooth', block: 'start' });
-				return;
+				if (!tourActive) return;
+				var step = tourSteps[tourIndex];
+				var ids = step.targetGroup || [step.targetId];
+				var rect = getCombinedRect(ids);
+				var pad = 8;
+				tourSpotlight.style.top = (rect.top - pad) + 'px';
+				tourSpotlight.style.left = (rect.left - pad) + 'px';
+				tourSpotlight.style.width = (rect.width + pad * 2) + 'px';
+				tourSpotlight.style.height = (rect.height + pad * 2) + 'px';
+				var tooltipRect = tourTooltip.getBoundingClientRect();
+				var tooltipH = tooltipRect.height || 200;
+				var tooltipW = tooltipRect.width || 340;
+				var gap = 16;
+				var topPos = rect.top + rect.height + pad + gap;
+				if (topPos + tooltipH > window.innerHeight - 10)
+				{
+					topPos = rect.top - pad - gap - tooltipH;
+					if (topPos < 10) topPos = 10;
+				}
+				var leftPos = rect.left + (rect.width / 2) - (tooltipW / 2);
+				if (leftPos < 10) leftPos = 10;
+				if (leftPos + tooltipW > window.innerWidth - 10) leftPos = window.innerWidth - tooltipW - 10;
+				tourTooltip.style.top = topPos + 'px';
+				tourTooltip.style.left = leftPos + 'px';
 			}
 
-			var dashboardButton = e.target.closest('[data-mobile-dashboard]');
-			if (!dashboardButton) return;
-			loadDashboard(parseInt(dashboardButton.getAttribute('data-mobile-dashboard'), 10));
-			window.scrollTo({ top: viewer.getBoundingClientRect().top + window.pageYOffset - 16, behavior: 'smooth' });
-		});
-
-		function bindSectionDirectory(target)
-		{
-			target.addEventListener('click', function(e)
+			function showStep(i)
 			{
-				var link = e.target.closest('.dh-section-link');
-				if (!link) return;
-				e.preventDefault();
-				currentSectionIndex = parseInt(link.getAttribute('data-section-index'), 10);
-				renderSections();
-			});
-		}
-
-		bindSectionDirectory(sectionDirectory);
-		bindSectionDirectory(mobileSectionDirectory);
-
-		prevBtn.addEventListener('click', cyclePrev);
-		nextBtn.addEventListener('click', cycleNext);
-		mobileSectionPrev.addEventListener('click', prevSection);
-		mobileSectionNext.addEventListener('click', nextSection);
-		if (fsBtn) fsBtn.addEventListener('click', toggleFullscreen);
-
-		frame.addEventListener('load', function()
-		{
-			var src = frame.getAttribute('src');
-			if (!src || src === 'about:blank') return;
-			frame.classList.add('dh-frame-ready');
-			loading.classList.remove('active');
-		});
-
-		document.addEventListener('keydown', function(e)
-		{
-			if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || isEditableTarget(e.target)) return;
-			if (e.key === 'ArrowLeft') { e.preventDefault(); cyclePrev(); }
-			if (e.key === 'ArrowRight') { e.preventDefault(); cycleNext(); }
-			if (e.key === 'f' || e.key === 'F') { e.preventDefault(); toggleFullscreen(); }
-		});
-
-		var tourBackdrop = document.getElementById('dhTourBackdrop');
-		var tourSpotlight = document.getElementById('dhTourSpotlight');
-		var tourTooltip = document.getElementById('dhTourTooltip');
-		var tourStep = document.getElementById('dhTourStep');
-		var tourTitle = document.getElementById('dhTourTitle');
-		var tourBody = document.getElementById('dhTourBody');
-		var tourSkip = document.getElementById('dhTourSkip');
-		var tourBack = document.getElementById('dhTourBack');
-		var tourNext = document.getElementById('dhTourNext');
-
-		var tourSteps = [
-		{ targetId: 'dhCustomSelect', title: 'Choose a view', body: 'Use the dropdown to open the overview or jump directly to any dashboard.' },
-		{ targetId: 'dhIframeWrap', title: 'Read or explore', body: 'The viewer holds either the public overview or the selected Power BI dashboard.' },
-		{ targetId: 'dhPrev', title: 'Move through content', body: 'Use the arrows to move between overview sections or switch dashboards once a report is open.', targetGroup: ['dhPrev', 'dhNext'] },
-		{ targetId: 'dhFullscreen', title: 'Go fullscreen', body: 'Expand the viewer when you want more room for reading or dashboard exploration.' },
-		{ targetId: 'dhHelpBtn', title: 'Need help again?', body: 'Open this tour any time from the help button.' }
-		];
-
-		var tourIndex = 0, tourActive = false;
-
-		function getCombinedRect(ids)
-		{
-			var rects = ids.map(function(id)
-			{
-				return document.getElementById(id).getBoundingClientRect();
-			});
-			var top = Math.min.apply(null, rects.map(function(r) { return r.top; }));
-			var left = Math.min.apply(null, rects.map(function(r) { return r.left; }));
-			var right = Math.max.apply(null, rects.map(function(r) { return r.right; }));
-			var bottom = Math.max.apply(null, rects.map(function(r) { return r.bottom; }));
-			return { top: top, left: left, width: right - left, height: bottom - top };
-		}
-
-		function positionSpotlightAndTooltip()
-		{
-			if (!tourActive) return;
-			var step = tourSteps[tourIndex];
-			var ids = step.targetGroup || [step.targetId];
-			var rect = getCombinedRect(ids);
-			var pad = 8;
-			tourSpotlight.style.top = (rect.top - pad) + 'px';
-			tourSpotlight.style.left = (rect.left - pad) + 'px';
-			tourSpotlight.style.width = (rect.width + pad * 2) + 'px';
-			tourSpotlight.style.height = (rect.height + pad * 2) + 'px';
-			var tooltipRect = tourTooltip.getBoundingClientRect();
-			var tooltipH = tooltipRect.height || 200;
-			var tooltipW = tooltipRect.width || 340;
-			var gap = 16;
-			var topPos = rect.top + rect.height + pad + gap;
-			if (topPos + tooltipH > window.innerHeight - 10)
-			{
-				topPos = rect.top - pad - gap - tooltipH;
-				if (topPos < 10) topPos = 10;
+				tourIndex = i;
+				var step = tourSteps[i];
+				tourStep.textContent = 'Step ' + (i + 1) + ' of ' + tourSteps.length;
+				tourTitle.textContent = step.title;
+				tourBody.textContent = step.body;
+				tourBack.disabled = (i === 0);
+				tourNext.textContent = (i === tourSteps.length - 1) ? 'Finish' : 'Next';
+				requestAnimationFrame(positionSpotlightAndTooltip);
 			}
-			var leftPos = rect.left + (rect.width / 2) - (tooltipW / 2);
-			if (leftPos < 10) leftPos = 10;
-			if (leftPos + tooltipW > window.innerWidth - 10) leftPos = window.innerWidth - tooltipW - 10;
-			tourTooltip.style.top = topPos + 'px';
-			tourTooltip.style.left = leftPos + 'px';
-		}
 
-		function showStep(i)
-		{
-			tourIndex = i;
-			var step = tourSteps[i];
-			tourStep.textContent = 'Step ' + (i + 1) + ' of ' + tourSteps.length;
-			tourTitle.textContent = step.title;
-			tourBody.textContent = step.body;
-			tourBack.disabled = (i === 0);
-			tourNext.textContent = (i === tourSteps.length - 1) ? 'Finish' : 'Next';
-			requestAnimationFrame(positionSpotlightAndTooltip);
-		}
+			function startTour()
+			{
+				tourActive = true;
+				tourBackdrop.classList.add('active');
+				tourSpotlight.classList.add('active');
+				tourTooltip.classList.add('active');
+				showStep(0);
+			}
 
-		function startTour()
-		{
-			tourActive = true;
-			tourBackdrop.classList.add('active');
-			tourSpotlight.classList.add('active');
-			tourTooltip.classList.add('active');
-			showStep(0);
-		}
+			function endTour()
+			{
+				tourActive = false;
+				tourBackdrop.classList.remove('active');
+				tourSpotlight.classList.remove('active');
+				tourTooltip.classList.remove('active');
+			}
 
-		function endTour()
-		{
-			tourActive = false;
-			tourBackdrop.classList.remove('active');
-			tourSpotlight.classList.remove('active');
-			tourTooltip.classList.remove('active');
-		}
+			if (helpBtn && tourBackdrop && tourSpotlight && tourTooltip && tourStep && tourTitle && tourBody && tourSkip && tourBack && tourNext)
+			{
+				helpBtn.addEventListener('click', startTour);
+				tourSkip.addEventListener('click', endTour);
+				tourBackdrop.addEventListener('click', endTour);
+				tourBack.addEventListener('click', function()
+				{
+					if (tourIndex > 0) showStep(tourIndex - 1);
+				});
+				tourNext.addEventListener('click', function()
+				{
+					if (tourIndex < tourSteps.length - 1) showStep(tourIndex + 1);
+					else endTour();
+				});
+				document.addEventListener('keydown', function(e)
+				{
+					if (!tourActive) return;
+					if (e.key === 'Escape') endTour();
+				});
+				window.addEventListener('resize', positionSpotlightAndTooltip);
+				window.addEventListener('scroll', positionSpotlightAndTooltip, true);
+			}
 
-		if (helpBtn && tourBackdrop && tourSpotlight && tourTooltip && tourStep && tourTitle && tourBody && tourSkip && tourBack && tourNext)
-		{
-			helpBtn.addEventListener('click', startTour);
-			tourSkip.addEventListener('click', endTour);
-			tourBackdrop.addEventListener('click', endTour);
-			tourBack.addEventListener('click', function() { if (tourIndex > 0) showStep(tourIndex - 1); });
-			tourNext.addEventListener('click', function() { if (tourIndex < tourSteps.length - 1) showStep(tourIndex + 1); else endTour(); });
-			document.addEventListener('keydown', function(e) { if (!tourActive) return; if (e.key === 'Escape') endTour(); });
-			window.addEventListener('resize', positionSpotlightAndTooltip);
-			window.addEventListener('scroll', positionSpotlightAndTooltip, true);
-		}
-
-		return true;
+			return true;
 		}
 
 		function attemptBoot()
@@ -1943,7 +1965,11 @@
 						attemptBoot();
 					}, 50);
 				});
-				dhBootObserver.observe(dhObservationRoot, { childList: true, subtree: true });
+				dhBootObserver.observe(dhObservationRoot,
+				{
+					childList: true,
+					subtree: true
+				});
 			}
 		}
 
