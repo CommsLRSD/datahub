@@ -1715,13 +1715,21 @@
 			}
 
 			renderSections();
+			var initialHash = window.location.hash;
 			showLanding();
 
-			var initialDashboardIndex = getDashboardIndexByHash(window.location.hash);
+			var initialDashboardIndex = getDashboardIndexByHash(initialHash);
 			if (initialDashboardIndex !== -1)
 			{
 				loadDashboard(initialDashboardIndex);
 			}
+
+			window.addEventListener('hashchange', function()
+			{
+				var idx = getDashboardIndexByHash(window.location.hash);
+				if (idx !== -1) loadDashboard(idx);
+				else showLanding();
+			});
 
 			if (mobileHelpModal && mobileHelpModal.parentNode !== document.body)
 			{
