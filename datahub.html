@@ -1207,6 +1207,21 @@
 				url: 'https://app.powerbi.com/view?r=eyJrIjoiM2EyNzZhZGQtMTQ5ZC00Mzc4LWEyMGMtZjM2NzE4OTBhYmVhIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
 			}];
 
+			var DASHBOARD_SLUGS = [
+				'learning-indicators',
+				'student-enrolment',
+				'class-size',
+				'student-diversity',
+				'daily-attendance',
+				'student-absence',
+				'student-engagement',
+				'social-emotional-wellbeing',
+				'full-day-kindergarten',
+				'grade-9-credit',
+				'graduation-rates',
+				'early-middle-years'
+			];
+
 			var RESOURCE_LINKS = {
 				posterEnglish: 'https://media.lrsd.net/media/Default/medialib/data-stewards_en.459bf288897.pdf',
 				posterFrench: 'https://media.lrsd.net/media/Default/medialib/data-stewards_fr.cb4dbb88898.pdf',
@@ -1398,6 +1413,31 @@
 				}
 			}
 
+			function updateHash(slug)
+			{
+				try
+				{
+					var base = window.location.pathname + window.location.search;
+					if (window.history && window.history.replaceState)
+					{
+						window.history.replaceState(null, '', slug ? base + '#' + slug : base);
+					}
+				}
+				catch (e)
+				{}
+			}
+
+			function getDashboardIndexByHash(hash)
+			{
+				var slug = hash ? hash.replace(/^#/, '') : '';
+				if (!slug) return -1;
+				for (var i = 0; i < DASHBOARD_SLUGS.length; i++)
+				{
+					if (DASHBOARD_SLUGS[i] === slug) return i;
+				}
+				return -1;
+			}
+
 			function escapeHtml(value)
 			{
 				if (value === null || value === undefined) return '';
@@ -1566,6 +1606,7 @@
 			function showLanding()
 			{
 				currentMode = 'landing';
+				updateHash('');
 				landing.classList.remove('dh-hidden');
 				frame.classList.remove('dh-frame-ready');
 				frame.removeAttribute('src');
@@ -1584,6 +1625,7 @@
 				if (idx < 0 || idx >= DASHBOARDS.length) return;
 				currentMode = 'dashboard';
 				currentDashboardIndex = idx;
+				updateHash(DASHBOARD_SLUGS[idx]);
 				var d = DASHBOARDS[idx];
 				hideLanding();
 				activeText.textContent = d.title;
@@ -1674,6 +1716,12 @@
 
 			renderSections();
 			showLanding();
+
+			var initialDashboardIndex = getDashboardIndexByHash(window.location.hash);
+			if (initialDashboardIndex !== -1)
+			{
+				loadDashboard(initialDashboardIndex);
+			}
 
 			if (mobileHelpModal && mobileHelpModal.parentNode !== document.body)
 			{
