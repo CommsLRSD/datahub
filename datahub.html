@@ -1,4 +1,3 @@
-
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'); .data-hub-wrapper {
 		--dh-aspect-ratio: 16 / 9.55; --accent-red: #BE5247; --accent-green: #2BA680; --accent-red-light: rgba(190, 82, 71, 0.1); --accent-green-light: rgba(43, 166, 128, 0.1); --bg-primary: #ffffff; --bg-secondary: #f8f9fa; --bg-glass: rgba(255, 255, 255, 0.75); --bg-glass-strong: rgba(255, 255, 255, 0.9); --text-primary: #1a1a2e; --text-secondary: #64748b; --text-muted: #94a3b8; --border-light: rgba(0, 0, 0, 0.06); --border-medium: rgba(0, 0, 0, 0.1); --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.06); --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.08); --shadow-glow-green: 0 4px 20px rgba(43, 166, 128, 0.25); --blur-amount: 20px; --overview-logo-max-width: 300px; --overview-nav-width: 21rem; --overview-reading-width: 66ch; --section-status-min-width: 9.5rem; --radius: 12px; --radius-lg: 16px; --radius-xl: 20px; --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1207,6 +1206,21 @@
 				url: 'https://app.powerbi.com/view?r=eyJrIjoiM2EyNzZhZGQtMTQ5ZC00Mzc4LWEyMGMtZjM2NzE4OTBhYmVhIiwidCI6IjQ5NTFiMjk4LTEyNDItNDk5Yy04YTNjLWEyMWY4NTkxZmI4OSJ9'
 			}];
 
+			var DASHBOARD_SLUGS = [
+				'learning-indicators',
+				'student-enrolment',
+				'class-size',
+				'student-diversity',
+				'daily-attendance',
+				'student-absence',
+				'student-engagement',
+				'social-emotional-wellbeing',
+				'full-day-kindergarten',
+				'grade-9-credit',
+				'graduation-rates',
+				'early-middle-years'
+			];
+
 			var RESOURCE_LINKS = {
 				posterEnglish: 'https://media.lrsd.net/media/Default/medialib/data-stewards_en.459bf288897.pdf',
 				posterFrench: 'https://media.lrsd.net/media/Default/medialib/data-stewards_fr.cb4dbb88898.pdf',
@@ -1398,6 +1412,31 @@
 				}
 			}
 
+			function updateHash(slug)
+			{
+				try
+				{
+					var base = window.location.pathname + window.location.search;
+					if (window.history && window.history.replaceState)
+					{
+						window.history.replaceState(null, '', slug ? base + '#' + slug : base);
+					}
+				}
+				catch (e)
+				{}
+			}
+
+			function getDashboardIndexByHash(hash)
+			{
+				var slug = hash ? hash.replace(/^#/, '') : '';
+				if (!slug) return -1;
+				for (var i = 0; i < DASHBOARD_SLUGS.length; i++)
+				{
+					if (DASHBOARD_SLUGS[i] === slug) return i;
+				}
+				return -1;
+			}
+
 			function escapeHtml(value)
 			{
 				if (value === null || value === undefined) return '';
@@ -1566,6 +1605,7 @@
 			function showLanding()
 			{
 				currentMode = 'landing';
+				updateHash('');
 				landing.classList.remove('dh-hidden');
 				frame.classList.remove('dh-frame-ready');
 				frame.removeAttribute('src');
@@ -1584,6 +1624,7 @@
 				if (idx < 0 || idx >= DASHBOARDS.length) return;
 				currentMode = 'dashboard';
 				currentDashboardIndex = idx;
+				updateHash(DASHBOARD_SLUGS[idx]);
 				var d = DASHBOARDS[idx];
 				hideLanding();
 				activeText.textContent = d.title;
@@ -1673,7 +1714,21 @@
 			}
 
 			renderSections();
+			var initialHash = window.location.hash;
 			showLanding();
+
+			var initialDashboardIndex = getDashboardIndexByHash(initialHash);
+			if (initialDashboardIndex !== -1)
+			{
+				loadDashboard(initialDashboardIndex);
+			}
+
+			window.addEventListener('hashchange', function()
+			{
+				var idx = getDashboardIndexByHash(window.location.hash);
+				if (idx !== -1) loadDashboard(idx);
+				else showLanding();
+			});
 
 			if (mobileHelpModal && mobileHelpModal.parentNode !== document.body)
 			{
