@@ -846,11 +846,11 @@
 	}
 
 	.dh-policy-list {
-		padding-left: 1.25rem;
+		padding-left: 1.25rem; margin: 0;
 	}
 
 	.dh-policy-links {
-		margin-top: 0.35rem;
+		padding-left: 1.25rem; margin: 0;
 	}
 
 	.dh-section-body-inner::after {
@@ -1612,7 +1612,7 @@
 						return '<li><a href="' + sanitizeUrl(link.url) + '">' + escapeHtml(link.label) + '</a></li>';
 					}).join('');
 
-					return '<li><strong>Policy ' + escapeHtml(policyResource.policy) + '</strong>' + (links ? '<ul class="dh-policy-links">' + links + '</ul>' : '') + '</li>';
+					return '<li>Policy ' + escapeHtml(policyResource.policy) + (links ? '<ul class="dh-policy-links">' + links + '</ul>' : '') + '</li>';
 				}).join('') + '</ul>';
 			}
 
