@@ -846,15 +846,11 @@
 	}
 
 	.dh-policy-list {
-		gap: 0.5rem;
-	}
-
-	.dh-policy-item {
-		padding: 0.7rem 0.85rem; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: calc(var(--radius) - 2px); background: rgba(248, 250, 252, 0.72);
+		padding-left: 1.25rem;
 	}
 
 	.dh-policy-links {
-		display: grid; gap: 0.35rem; padding-left: 1.1rem; margin-top: 0.45rem;
+		margin-top: 0.35rem;
 	}
 
 	.dh-section-body-inner::after {
@@ -1478,7 +1474,7 @@
 			dhHasInitialized = true;
 			stopBootWatchers();
 
-			var allowedSectionClassNames = ['dh-agent-grid', 'dh-agent-card', 'dh-resource-list', 'dh-resource-note', 'dh-info-grid', 'dh-info-card', 'dh-policy-list', 'dh-policy-item', 'dh-policy-links'];
+			var allowedSectionClassNames = ['dh-agent-grid', 'dh-agent-card', 'dh-resource-list', 'dh-resource-note', 'dh-info-grid', 'dh-info-card', 'dh-policy-list', 'dh-policy-links'];
 			var frameReuseDelayMs = 120;
 			var currentMode = 'landing';
 			var currentSectionIndex = 0;
@@ -1606,7 +1602,7 @@
 			{
 				if (!policyResources || !policyResources.length) return '';
 
-				return '<ul class="dh-resource-list dh-policy-list">' + policyResources.map(function(policyResource)
+				return '<ul class="dh-policy-list">' + policyResources.map(function(policyResource)
 				{
 					var links = (policyResource.links || []).filter(function(link)
 					{
@@ -1616,7 +1612,7 @@
 						return '<li><a href="' + sanitizeUrl(link.url) + '">' + escapeHtml(link.label) + '</a></li>';
 					}).join('');
 
-					return '<li class="dh-policy-item"><strong>Policy ' + escapeHtml(policyResource.policy) + '</strong>' + (links ? '<ul class="dh-policy-links">' + links + '</ul>' : '') + '</li>';
+					return '<li><strong>Policy ' + escapeHtml(policyResource.policy) + '</strong>' + (links ? '<ul class="dh-policy-links">' + links + '</ul>' : '') + '</li>';
 				}).join('') + '</ul>';
 			}
 
