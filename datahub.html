@@ -824,6 +824,10 @@
 	.dh-resource-preview iframe {
 		display: block; width: 100%; min-height: 34rem; border: 0; background: #ffffff;
 	}
+
+	.dh-resource-preview img {
+		display: block; width: 100%; height: auto; border: 0; background: #ffffff;
+	}
 	
 	.dh-resource-actions {
 		display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem;
@@ -1223,6 +1227,7 @@
 
 			var RESOURCE_LINKS = {
 				posterEnglish: 'https://media.lrsd.net/media/Default/medialib/data-stewards_en.459bf288897.pdf',
+				posterEnglishPreview: 'https://media.lrsd.net/media/Default/frl/data-stewards_en.9e59ae89019.png',
 				posterFrench: 'https://media.lrsd.net/media/Default/medialib/data-stewards_fr.cb4dbb88898.pdf',
 				freePress: 'https://www.winnipegfreepress.com/breakingnews/2026/06/05/louis-riel-school-division-embraces-ai-agents-of-change',
 				nationalAiStrategy: 'https://ised-isde.canada.ca/site/ised/en/canadas-national-artificial-intelligence-strategy-ai-all',
@@ -1310,6 +1315,7 @@
 					{
 						title: 'We Are All Data Stewards poster',
 						description: 'Preview the English poster below.',
+						previewImageUrl: RESOURCE_LINKS.posterEnglishPreview,
 						previewUrl: RESOURCE_LINKS.posterEnglish,
 						showActions: false
 					}
@@ -1535,6 +1541,7 @@
 
 				var title = section.spotlight.title ? escapeHtml(section.spotlight.title) : 'Featured resource';
 				var description = section.spotlight.description ? '<p class="dh-resource-meta">' + escapeHtml(section.spotlight.description) + '</p>' : '';
+				var previewImageUrl = sanitizeUrl(section.spotlight.previewImageUrl);
 				var previewUrl = sanitizeUrl(section.spotlight.previewUrl);
 				var previewFrameUrl = buildPdfPreviewUrl(previewUrl);
 				var primaryUrl = sanitizeUrl(section.spotlight.primaryUrl || previewUrl);
@@ -1542,7 +1549,16 @@
 				var primaryLabel = escapeHtml(section.spotlight.primaryLabel || 'Open resource');
 				var secondaryLabel = escapeHtml(section.spotlight.secondaryLabel || 'Open alternate version');
 				var showActions = section.spotlight.showActions !== false;
-				var previewHtml = previewFrameUrl ? '<div class="dh-resource-preview"><iframe src="' + previewFrameUrl + '" title="Preview of ' + title + ' - interactive document viewer" loading="lazy" width="100%" height="544"></iframe></div>' : '';
+				var previewHtml = '';
+
+				if (previewImageUrl)
+				{
+					previewHtml = '<div class="dh-resource-preview"><img src="' + previewImageUrl + '" alt="Preview image for ' + title + '" loading="lazy"></div>';
+				}
+				else if (previewFrameUrl)
+				{
+					previewHtml = '<div class="dh-resource-preview"><iframe src="' + previewFrameUrl + '" title="Preview of ' + title + ' - interactive document viewer" loading="lazy" width="100%" height="544"></iframe></div>';
+				}
 				var actions = [];
 
 				if (showActions && primaryUrl)
