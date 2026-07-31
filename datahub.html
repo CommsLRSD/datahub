@@ -664,7 +664,11 @@
 	}
 	
 	.dh-mobile-overview {
-		margin: 0 0 0.85rem 0;
+		display: none; margin: 0.5rem 0 0.85rem 0;
+	}
+
+	.dh-mobile-overview.is-open {
+		display: block;
 	}
 	
 	.dh-mobile-overview-card {
@@ -986,7 +990,7 @@
 	</header>
 	<div class="dh-mobile-list" id="dhMobileList">
 		<div class="dh-mobile-list-items" id="dhMobileListItems">
-			<button class="dh-mobile-list-item" type="button" id="dhMobileOverviewBtn"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="" class="fr-fil fr-dib"> <span class="dh-mobile-list-text">Data Governance &amp; AI Overview</span> <span class="dh-mobile-list-arrow">&darr;</span>&nbsp;</button>
+			<button class="dh-mobile-list-item" type="button" id="dhMobileOverviewBtn" aria-expanded="false" aria-controls="dhMobileOverview"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" alt="" class="fr-fil fr-dib"> <span class="dh-mobile-list-text">Data Governance &amp; AI Overview</span> <span class="dh-mobile-list-arrow">&darr;</span>&nbsp;</button>
 			<button class="dh-mobile-list-item" type="button" data-mobile-dashboard="0"><img src="https://media.lrsd.net/media/Default/frl/learning-indicators-3x.2a12da82676.png" alt="" class="fr-fil fr-dib"><span class="dh-mobile-list-text">Learning Indicators</span><span class="dh-mobile-list-arrow">&rarr;</span></button>
 			<button class="dh-mobile-list-item" type="button" data-mobile-dashboard="1"><img src="https://media.lrsd.net/media/Default/frl/student-enrolment-3x.722bba82678.png" alt="" class="fr-fil fr-dib"><span class="dh-mobile-list-text">Student Enrolment</span><span class="dh-mobile-list-arrow">&rarr;</span></button>
 			<button class="dh-mobile-list-item" type="button" data-mobile-dashboard="2"><img src="https://media.lrsd.net/media/Default/frl/class-size-2x.9ea68b83520.png" alt="" class="fr-fil fr-dib"><span class="dh-mobile-list-text">Class Size Tracker</span><span class="dh-mobile-list-arrow">&rarr;</span></button>
@@ -1435,6 +1439,7 @@
 			var sectionSubtitle = document.getElementById('dhSectionSubtitle');
 			var sectionBody = document.getElementById('dhSectionBody');
 			var mobileOverview = document.getElementById('dhMobileOverview');
+			var mobileOverviewBtn = document.getElementById('dhMobileOverviewBtn');
 			var mobileSectionDirectory = document.getElementById('dhMobileSectionDirectory');
 			var mobileSectionStatus = document.getElementById('dhMobileSectionStatus');
 			var mobileSectionTitle = document.getElementById('dhMobileSectionTitle');
@@ -1480,9 +1485,9 @@
 			dhHasInitialized = true;
 			stopBootWatchers();
 
-			if (mobileOverview && mobileListItems && mobileList && mobileOverview.nextElementSibling !== mobileListItems)
+			if (mobileOverview && mobileListItems && mobileOverviewBtn && mobileOverview.parentNode !== mobileListItems)
 			{
-				mobileList.insertBefore(mobileOverview, mobileListItems);
+				mobileListItems.insertBefore(mobileOverview, mobileOverviewBtn.nextSibling);
 			}
 
 			var allowedSectionClassNames = ['dh-agent-grid', 'dh-agent-card', 'dh-resource-list', 'dh-resource-note', 'dh-info-grid', 'dh-info-card', 'dh-policy-list', 'dh-policy-links'];
@@ -1490,6 +1495,7 @@
 			var currentMode = 'landing';
 			var currentSectionIndex = 0;
 			var currentDashboardIndex = -1;
+			var isMobileOverviewOpen = false;
 			var optionElements = Array.prototype.slice.call(selectOptions.querySelectorAll('.dh-option'));
 			var sidebarElements = Array.prototype.slice.call(sidebarList.querySelectorAll('.dh-nav-item'));
 			var sectionDirectoryLinks = Array.prototype.slice.call(sectionDirectory.querySelectorAll('.dh-section-link'));
@@ -1776,6 +1782,17 @@
 				updateSelectedNavigation();
 			}
 
+			function setMobileOverviewOpen(isOpen)
+			{
+				if (!mobileOverview || !mobileOverviewBtn) return;
+				isMobileOverviewOpen = !!isOpen;
+				mobileOverview.classList.toggle('is-open', isMobileOverviewOpen);
+				mobileOverview.setAttribute('aria-hidden', isMobileOverviewOpen ? 'false' : 'true');
+				mobileOverviewBtn.setAttribute('aria-expanded', isMobileOverviewOpen ? 'true' : 'false');
+				var overviewArrow = mobileOverviewBtn.querySelector('.dh-mobile-list-arrow');
+				if (overviewArrow) overviewArrow.innerHTML = isMobileOverviewOpen ? '&uarr;' : '&darr;';
+			}
+
 			function isEditableTarget(target)
 			{
 				if (!target) return false;
@@ -1849,6 +1866,7 @@
 			renderSections();
 			var initialHash = window.location.hash;
 			showLanding();
+			setMobileOverviewOpen(false);
 
 			var initialDashboardIndex = getDashboardIndexByHash(initialHash);
 			if (initialDashboardIndex !== -1)
@@ -1909,11 +1927,15 @@
 				var overviewButton = e.target.closest('#dhMobileOverviewBtn');
 				if (overviewButton)
 				{
-					mobileOverview.scrollIntoView(
+					setMobileOverviewOpen(!isMobileOverviewOpen);
+					if (isMobileOverviewOpen)
 					{
-						behavior: 'smooth',
-						block: 'start'
-					});
+						mobileOverview.scrollIntoView(
+						{
+							behavior: 'smooth',
+							block: 'nearest'
+						});
+					}
 					return;
 				}
 
