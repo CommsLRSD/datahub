@@ -664,7 +664,7 @@
 	}
 	
 	.dh-mobile-overview {
-		margin-top: 0.85rem;
+		margin: 0 0 0.85rem 0;
 	}
 	
 	.dh-mobile-overview-card {
@@ -851,6 +851,11 @@
 
 	.dh-policy-links {
 		padding-left: 1.25rem; margin: 0;
+	}
+
+	.dh-policy-list li,
+	.dh-policy-links li {
+		line-height: 1.4; margin: 0.1rem 0;
 	}
 
 	.dh-section-body-inner::after {
@@ -1437,6 +1442,7 @@
 			var mobileSectionBody = document.getElementById('dhMobileSectionBody');
 			var mobileSectionPrev = document.getElementById('dhMobileSectionPrev');
 			var mobileSectionNext = document.getElementById('dhMobileSectionNext');
+			var mobileList = document.getElementById('dhMobileList');
 			var requiredElements = [
 				customSelect,
 				selectOptions,
@@ -1473,6 +1479,11 @@
 
 			dhHasInitialized = true;
 			stopBootWatchers();
+
+			if (mobileOverview && mobileListItems && mobileList && mobileOverview.nextElementSibling !== mobileListItems)
+			{
+				mobileList.insertBefore(mobileOverview, mobileListItems);
+			}
 
 			var allowedSectionClassNames = ['dh-agent-grid', 'dh-agent-card', 'dh-resource-list', 'dh-resource-note', 'dh-info-grid', 'dh-info-card', 'dh-policy-list', 'dh-policy-links'];
 			var frameReuseDelayMs = 120;
@@ -1908,12 +1919,10 @@
 
 				var dashboardButton = e.target.closest('[data-mobile-dashboard]');
 				if (!dashboardButton) return;
-				loadDashboard(parseInt(dashboardButton.getAttribute('data-mobile-dashboard'), 10));
-				window.scrollTo(
-				{
-					top: viewer.getBoundingClientRect().top + window.pageYOffset - 16,
-					behavior: 'smooth'
-				});
+				var mobileDashboardIndex = parseInt(dashboardButton.getAttribute('data-mobile-dashboard'), 10);
+				if (!Number.isFinite(mobileDashboardIndex) || mobileDashboardIndex < 0 || mobileDashboardIndex >= DASHBOARDS.length) return;
+				var mobileDashboardUrl = sanitizeUrl(DASHBOARDS[mobileDashboardIndex].url);
+				if (mobileDashboardUrl) window.open(mobileDashboardUrl, '_blank', 'noopener');
 			});
 
 			function bindSectionDirectory(target)
