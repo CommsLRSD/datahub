@@ -1128,7 +1128,7 @@
 						<button class="dh-arrow-btn dh-help-btn" id="dhHelpBtn" type="button" title="Show help tour">?</button>
 					</div></div></div>
 			<div class="dh-viewer-body" id="dhViewerBody">
-				<div class="dh-fullscreen-actions" aria-hidden="true">
+				<div class="dh-fullscreen-actions">
 					<button class="dh-arrow-btn" id="dhDrawerToggle" type="button" title="Show menu" aria-label="Show menu">☰</button>
 					<button class="dh-arrow-btn dh-close-btn" id="dhExitFullscreen" type="button" title="Exit fullscreen" aria-label="Exit fullscreen"><span class="dh-close-icon" aria-hidden="true">×</span></button>
 				</div>
@@ -2106,7 +2106,6 @@
 			{
 				if (e.key === 'Escape' && isViewerFullscreen() && sidebarList.parentNode.classList.contains('dh-drawer-open'))
 				{
-					e.preventDefault();
 					clearFullscreenDrawerTimer();
 					setFullscreenDrawerOpen(false);
 					return;
@@ -2258,8 +2257,6 @@
 			{
 				document.addEventListener(eventName, syncFullscreenUi);
 			});
-
-			syncFullscreenUi();
 
 			if (helpBtn && tourBackdrop && tourSpotlight && tourTooltip && tourStep && tourTitle && tourBody && tourSkip && tourBack && tourNext)
 			{
