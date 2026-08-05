@@ -257,22 +257,17 @@
 	}
 
 	.dh-fullscreen-tab {
-		position: absolute; top: 50%; left: 0; transform: translate(-0.35rem, -50%); z-index: 19; display: none; align-items: center; justify-content: center; min-height: 4.25rem; padding: 1rem 0.75rem; border: 1px solid rgba(15, 23, 42, 0.12); border-left: none; border-radius: 0 var(--radius-lg) var(--radius-lg) 0; background: rgba(255, 255, 255, 0.96); color: var(--text-primary); box-shadow: 0 14px 30px rgba(15, 23, 42, 0.16); cursor: pointer; writing-mode: vertical-rl; text-orientation: mixed; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; transition: var(--transition);
+		position: absolute; top: 50%; right: -3.1rem; transform: translateY(-50%); z-index: 19; display: none; align-items: center; justify-content: center; min-height: 4.25rem; padding: 1rem 0.75rem; border: 1px solid rgba(15, 23, 42, 0.12); border-left: none; border-radius: 0 var(--radius-lg) var(--radius-lg) 0; background: rgba(255, 255, 255, 0.96); color: var(--text-primary); box-shadow: 0 14px 30px rgba(15, 23, 42, 0.16); cursor: pointer; writing-mode: vertical-rl; text-orientation: mixed; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; transition: var(--transition);
 	}
 
 	.dh-fullscreen-tab:hover,
 	.dh-fullscreen-tab:focus {
-		transform: translate(0, -50%); background: var(--accent-green); color: #ffffff; border-color: var(--accent-green); outline: none; box-shadow: 0 16px 36px rgba(43, 166, 128, 0.26);
+		right: -3.35rem; background: var(--accent-green); color: #ffffff; border-color: var(--accent-green); outline: none; box-shadow: 0 16px 36px rgba(43, 166, 128, 0.26);
 	}
 
 	.dh-viewer:fullscreen .dh-fullscreen-tab,
 	.dh-viewer:-webkit-full-screen .dh-fullscreen-tab {
 		display: inline-flex;
-	}
-
-	.dh-viewer:fullscreen .dh-sidebar.dh-drawer-open ~ .dh-fullscreen-tab,
-	.dh-viewer:-webkit-full-screen .dh-sidebar.dh-drawer-open ~ .dh-fullscreen-tab {
-		opacity: 0; pointer-events: none; transform: translate(-100%, -50%);
 	}
 
 	.dh-viewer:fullscreen .dh-fullscreen-actions,
@@ -657,7 +652,7 @@
 
 	.dh-viewer:fullscreen .dh-sidebar,
 	.dh-viewer:-webkit-full-screen .dh-sidebar {
-		position: absolute; top: 1rem; left: 1rem; bottom: 1rem; width: var(--fullscreen-drawer-width); max-width: calc(100vw - 2rem); border-radius: var(--radius-xl); box-shadow: 0 18px 48px rgba(15, 23, 42, 0.24); z-index: 18; transform: translateX(calc(-100% - 2rem)); opacity: 0; pointer-events: none; transition: transform 0.35s ease, opacity 0.25s ease;
+		position: absolute; top: 1rem; left: 1rem; bottom: 1rem; width: var(--fullscreen-drawer-width); max-width: calc(100vw - 2rem); border-radius: var(--radius-xl); box-shadow: 0 18px 48px rgba(15, 23, 42, 0.24); z-index: 18; transform: translateX(calc(-100% - 2rem)); opacity: 0; pointer-events: none; overflow: visible; transition: transform 0.35s ease, opacity 0.25s ease;
 	}
 
 	.dh-viewer:fullscreen .dh-sidebar.dh-drawer-open,
@@ -1204,8 +1199,8 @@
 						<button class="dh-nav-item" type="button" data-nav-kind="dashboard" data-index="10"><img src="https://media.lrsd.net/media/Default/frl/grad-rates-web-2x.d83b2883532.png" class="dh-item-icon fr-fil fr-dib" alt=""><span class="dh-nav-copy"><strong>Graduation Rates</strong></span></button>
 						<button class="dh-nav-item" type="button" data-nav-kind="dashboard" data-index="11"><img src="https://media.lrsd.net/media/Default/frl/early-middle-3x.36869683526.png" class="dh-item-icon fr-fil fr-dib" alt=""><span class="dh-nav-copy"><strong>Early and Middle Years Provincial Assessments</strong></span></button>
 					</div>
+					<button class="dh-fullscreen-tab" id="dhDrawerTab" type="button" title="Menu" aria-label="Menu">Menu</button>
 				</aside>
-				<button class="dh-fullscreen-tab" id="dhDrawerTab" type="button" title="Open menu" aria-label="Open menu">Menu</button>
 				<div class="dh-iframe-wrap" id="dhIframeWrap">
 					<iframe name="dhFrame" id="dhFrame" title="Data Hub Viewer" allowfullscreen=""></iframe>
 					<div class="dh-loading" id="dhLoading">
