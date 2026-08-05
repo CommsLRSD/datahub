@@ -253,16 +253,16 @@
 	}
 
 	.dh-fullscreen-actions {
-		position: absolute; top: 1rem; right: 1rem; z-index: 20; display: none; align-items: center; gap: 0.65rem;
+		position: absolute; top: 1rem; right: 1rem; z-index: 20; display: none; align-items: center;
 	}
 
 	.dh-fullscreen-tab {
-		position: absolute; top: 50%; right: -3.1rem; transform: translateY(-50%); z-index: 19; display: none; align-items: center; justify-content: center; min-height: 4.25rem; padding: 1rem 0.75rem; border: 1px solid rgba(15, 23, 42, 0.12); border-left: none; border-radius: 0 var(--radius-lg) var(--radius-lg) 0; background: rgba(255, 255, 255, 0.96); color: var(--text-primary); box-shadow: 0 14px 30px rgba(15, 23, 42, 0.16); cursor: pointer; writing-mode: vertical-rl; text-orientation: mixed; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; transition: var(--transition);
+		position: fixed; top: 50%; left: 1rem; transform: translateY(-50%); z-index: 19; display: none; align-items: center; justify-content: center; min-height: 4.25rem; padding: 1rem 0.75rem; border: 1px solid rgba(15, 23, 42, 0.12); border-left: none; border-radius: 0 var(--radius-lg) var(--radius-lg) 0; background: rgba(255, 255, 255, 0.96); color: var(--text-primary); box-shadow: 0 14px 30px rgba(15, 23, 42, 0.16); cursor: pointer; writing-mode: vertical-rl; text-orientation: mixed; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; transition: left 0.35s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 	}
 
 	.dh-fullscreen-tab:hover,
 	.dh-fullscreen-tab:focus {
-		right: -3.35rem; background: var(--accent-green); color: #ffffff; border-color: var(--accent-green); outline: none; box-shadow: 0 16px 36px rgba(43, 166, 128, 0.26);
+		background: var(--accent-green); color: #ffffff; border-color: var(--accent-green); outline: none; box-shadow: 0 16px 36px rgba(43, 166, 128, 0.26);
 	}
 
 	.dh-viewer:fullscreen .dh-fullscreen-tab,
@@ -277,10 +277,6 @@
 	
 	.dh-arrow-btn {
 		width: 38px; height: 38px; border: 1px solid var(--border-light); background: var(--bg-primary); color: var(--text-primary); border-radius: var(--radius); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); font-size: 1rem; font-weight: 500; padding: 0; flex-shrink: 0;
-	}
-
-	.dh-menu-btn {
-		width: auto; min-width: 5.5rem; padding: 0 1rem; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.02em;
 	}
 	
 	.dh-arrow-btn:hover,
@@ -658,6 +654,11 @@
 	.dh-viewer:fullscreen .dh-sidebar.dh-drawer-open,
 	.dh-viewer:-webkit-full-screen .dh-sidebar.dh-drawer-open {
 		transform: translateX(0); opacity: 1; pointer-events: auto;
+	}
+
+	.dh-viewer:fullscreen .dh-sidebar.dh-drawer-open .dh-fullscreen-tab,
+	.dh-viewer:-webkit-full-screen .dh-sidebar.dh-drawer-open .dh-fullscreen-tab {
+		left: calc(1rem + var(--fullscreen-drawer-width));
 	}
 
 	.dh-viewer:fullscreen .dh-sidebar-head h2,
@@ -1176,7 +1177,6 @@
 					</div></div></div>
 			<div class="dh-viewer-body" id="dhViewerBody">
 				<div class="dh-fullscreen-actions">
-					<button class="dh-arrow-btn dh-menu-btn" id="dhDrawerToggle" type="button" title="Show menu" aria-label="Show menu">Menu</button>
 					<button class="dh-arrow-btn dh-close-btn" id="dhExitFullscreen" type="button" title="Exit fullscreen" aria-label="Exit fullscreen"><span class="dh-close-icon" aria-hidden="true">×</span></button>
 				</div>
 				<aside class="dh-sidebar" id="dhSidebar">
@@ -1527,7 +1527,6 @@
 			var fsBtn = document.getElementById('dhFullscreen');
 			var viewer = document.getElementById('dhViewer');
 			var helpBtn = document.getElementById('dhHelpBtn');
-			var drawerToggleBtn = document.getElementById('dhDrawerToggle');
 			var exitFsBtn = document.getElementById('dhExitFullscreen');
 			var drawerTabBtn = document.getElementById('dhDrawerTab');
 			var iframeWrap = document.getElementById('dhIframeWrap');
@@ -1973,12 +1972,12 @@
 			{
 				if (!sidebarList) return;
 				sidebarList.parentNode.classList.toggle('dh-drawer-open', !!isOpen);
-				if (drawerToggleBtn)
+				if (drawerTabBtn)
 				{
-					drawerToggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-					drawerToggleBtn.textContent = isOpen ? 'Close menu' : 'Menu';
-					drawerToggleBtn.setAttribute('title', drawerToggleBtn.textContent);
-					drawerToggleBtn.setAttribute('aria-label', drawerToggleBtn.textContent);
+					drawerTabBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+					drawerTabBtn.textContent = isOpen ? 'Close menu' : 'Menu';
+					drawerTabBtn.setAttribute('title', drawerTabBtn.textContent);
+					drawerTabBtn.setAttribute('aria-label', drawerTabBtn.textContent);
 				}
 			}
 
@@ -2140,7 +2139,6 @@
 				setFullscreenDrawerOpen(!isOpen);
 			}
 
-			if (drawerToggleBtn) drawerToggleBtn.addEventListener('click', toggleDrawerMenu);
 			if (drawerTabBtn) drawerTabBtn.addEventListener('click', toggleDrawerMenu);
 			if (exitFsBtn) exitFsBtn.addEventListener('click', function()
 			{
