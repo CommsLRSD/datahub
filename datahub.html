@@ -1,6 +1,6 @@
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'); .data-hub-wrapper {
-		--dh-aspect-ratio: 16 / 9.55; --accent-red: #BE5247; --accent-green: #2BA680; --accent-red-light: rgba(190, 82, 71, 0.1); --accent-green-light: rgba(43, 166, 128, 0.1); --bg-primary: #ffffff; --bg-secondary: #f8f9fa; --bg-glass: rgba(255, 255, 255, 0.75); --bg-glass-strong: rgba(255, 255, 255, 0.9); --text-primary: #1a1a2e; --text-secondary: #64748b; --text-muted: #94a3b8; --border-light: rgba(0, 0, 0, 0.06); --border-medium: rgba(0, 0, 0, 0.1); --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.06); --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.08); --shadow-glow-green: 0 4px 20px rgba(43, 166, 128, 0.25); --blur-amount: 20px; --overview-logo-max-width: 300px; --overview-nav-width: 21rem; --overview-reading-width: 66ch; --section-status-min-width: 9.5rem; --radius: 12px; --radius-lg: 16px; --radius-xl: 20px; --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		--dh-aspect-ratio: 16 / 9.55; --accent-red: #BE5247; --accent-green: #2BA680; --accent-red-light: rgba(190, 82, 71, 0.1); --accent-green-light: rgba(43, 166, 128, 0.1); --bg-primary: #ffffff; --bg-secondary: #f8f9fa; --bg-glass: rgba(255, 255, 255, 0.75); --bg-glass-strong: rgba(255, 255, 255, 0.9); --text-primary: #1a1a2e; --text-secondary: #64748b; --text-muted: #94a3b8; --border-light: rgba(0, 0, 0, 0.06); --border-medium: rgba(0, 0, 0, 0.1); --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.06); --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.08); --shadow-glow-green: 0 4px 20px rgba(43, 166, 128, 0.25); --blur-amount: 20px; --overview-logo-max-width: 300px; --overview-nav-width: 21rem; --overview-reading-width: 66ch; --section-status-min-width: 9.5rem; --fullscreen-drawer-width: min(26rem, calc(100vw - 2rem)); --radius: 12px; --radius-lg: 16px; --radius-xl: 20px; --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 	
 	.data-hub-wrapper,
@@ -141,6 +141,11 @@
 	.dh-viewer:-webkit-full-screen .dh-iframe-wrap iframe {
 		border-radius: 0;
 	}
+
+	.dh-viewer:fullscreen .dh-viewer-header,
+	.dh-viewer:-webkit-full-screen .dh-viewer-header {
+		display: none;
+	}
 	
 	.dh-viewer-header {
 		display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; background: var(--bg-glass); border-bottom: 1px solid var(--border-light); flex-wrap: wrap; gap: 0.75rem; max-width: 100%; min-width: 0;
@@ -246,6 +251,15 @@
 	.dh-nav-arrows {
 		display: flex; gap: 0.4rem;
 	}
+
+	.dh-fullscreen-actions {
+		position: absolute; top: 1rem; right: 1rem; z-index: 20; display: none; align-items: center; gap: 0.5rem;
+	}
+
+	.dh-viewer:fullscreen .dh-fullscreen-actions,
+	.dh-viewer:-webkit-full-screen .dh-fullscreen-actions {
+		display: flex;
+	}
 	
 	.dh-arrow-btn {
 		width: 38px; height: 38px; border: 1px solid var(--border-light); background: var(--bg-primary); color: var(--text-primary); border-radius: var(--radius); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); font-size: 1rem; font-weight: 500; padding: 0; flex-shrink: 0;
@@ -272,6 +286,19 @@
 	.dh-help-btn:hover,
 	.dh-help-btn:focus {
 		background: #a14338; border-color: #a14338; box-shadow: 0 4px 20px rgba(190, 82, 71, 0.35);
+	}
+
+	.dh-close-btn {
+		background: rgba(255, 255, 255, 0.94); color: var(--text-primary); border-color: rgba(15, 23, 42, 0.12); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+	}
+
+	.dh-close-btn:hover,
+	.dh-close-btn:focus {
+		background: var(--accent-red); color: #ffffff; border-color: var(--accent-red); box-shadow: 0 10px 30px rgba(190, 82, 71, 0.35);
+	}
+
+	.dh-close-btn .dh-close-icon {
+		font-size: 1.2rem; line-height: 1;
 	}
 	
 	.dh-iframe-wrap {
@@ -593,11 +620,26 @@
 	}
 	
 	.dh-viewer-body {
-		display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 1rem; padding: 1rem 1rem 1rem 1.25rem; align-items: stretch;
+		display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 1rem; padding: 1rem 1rem 1rem 1.25rem; align-items: stretch; position: relative; min-height: 0;
+	}
+
+	.dh-viewer:fullscreen .dh-viewer-body,
+	.dh-viewer:-webkit-full-screen .dh-viewer-body {
+		grid-template-columns: minmax(0, 1fr); gap: 0; padding: 0; height: 100%; min-height: 100vh; background: #000000;
 	}
 	
 	.dh-sidebar {
 		background: rgba(248, 250, 252, 0.96); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 0.9rem; display: flex; flex-direction: column; gap: 0.7rem; overflow: hidden; min-height: 100%;
+	}
+
+	.dh-viewer:fullscreen .dh-sidebar,
+	.dh-viewer:-webkit-full-screen .dh-sidebar {
+		position: absolute; top: 1rem; left: 1rem; bottom: 1rem; width: var(--fullscreen-drawer-width); max-width: calc(100vw - 2rem); border-radius: var(--radius-xl); box-shadow: 0 18px 48px rgba(15, 23, 42, 0.24); z-index: 18; transform: translateX(calc(-100% - 2rem)); opacity: 0; pointer-events: none; transition: transform 0.35s ease, opacity 0.25s ease;
+	}
+
+	.dh-viewer:fullscreen .dh-sidebar.dh-drawer-open,
+	.dh-viewer:-webkit-full-screen .dh-sidebar.dh-drawer-open {
+		transform: translateX(0); opacity: 1; pointer-events: auto;
 	}
 	
 	.dh-sidebar-head {
@@ -661,6 +703,11 @@
 	
 	.dh-iframe-wrap {
 		background: linear-gradient(180deg, #f8fbfc 0%, #edf5f5 100%);
+	}
+
+	.dh-viewer:fullscreen .dh-iframe-wrap,
+	.dh-viewer:-webkit-full-screen .dh-iframe-wrap {
+		border-top: none; background: #000000;
 	}
 	
 	.dh-mobile-overview {
@@ -1081,6 +1128,10 @@
 						<button class="dh-arrow-btn dh-help-btn" id="dhHelpBtn" type="button" title="Show help tour">?</button>
 					</div></div></div>
 			<div class="dh-viewer-body" id="dhViewerBody">
+				<div class="dh-fullscreen-actions" aria-hidden="true">
+					<button class="dh-arrow-btn" id="dhDrawerToggle" type="button" title="Show menu" aria-label="Show menu">☰</button>
+					<button class="dh-arrow-btn dh-close-btn" id="dhExitFullscreen" type="button" title="Exit fullscreen" aria-label="Exit fullscreen"><span class="dh-close-icon" aria-hidden="true">×</span></button>
+				</div>
 				<aside class="dh-sidebar" id="dhSidebar">
 					<div class="dh-sidebar-head">
 
@@ -1420,6 +1471,7 @@
 			var activeIcon = document.getElementById('dhActiveIcon');
 			var activeText = document.getElementById('dhActiveText');
 			var frame = document.getElementById('dhFrame');
+			var viewerBody = document.getElementById('dhViewerBody');
 			var counter = document.getElementById('dhCounter');
 			var loading = document.getElementById('dhLoading');
 			var prevBtn = document.getElementById('dhPrev');
@@ -1427,6 +1479,8 @@
 			var fsBtn = document.getElementById('dhFullscreen');
 			var viewer = document.getElementById('dhViewer');
 			var helpBtn = document.getElementById('dhHelpBtn');
+			var drawerToggleBtn = document.getElementById('dhDrawerToggle');
+			var exitFsBtn = document.getElementById('dhExitFullscreen');
 			var iframeWrap = document.getElementById('dhIframeWrap');
 			var mobileHelpBtn = document.getElementById('dhMobileHelpBtn');
 			var mobileHelpModal = document.getElementById('dhMobileHelpModal');
@@ -1460,6 +1514,7 @@
 				prevBtn,
 				nextBtn,
 				viewer,
+				viewerBody,
 				landing,
 				sidebarList,
 				sectionDirectory,
@@ -1496,6 +1551,8 @@
 			var currentSectionIndex = 0;
 			var currentDashboardIndex = -1;
 			var isMobileOverviewOpen = false;
+			var fullscreenDrawerHideTimer = null;
+			var fullscreenDrawerIntroPlayed = false;
 			var optionElements = Array.prototype.slice.call(selectOptions.querySelectorAll('.dh-option'));
 			var sidebarElements = Array.prototype.slice.call(sidebarList.querySelectorAll('.dh-nav-item'));
 			var sectionDirectoryLinks = Array.prototype.slice.call(sectionDirectory.querySelectorAll('.dh-section-link'));
@@ -1850,10 +1907,68 @@
 				{}
 			}
 
+			function isViewerFullscreen()
+			{
+				var fsElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+				return fsElement === viewer;
+			}
+
+			function clearFullscreenDrawerTimer()
+			{
+				if (!fullscreenDrawerHideTimer) return;
+				window.clearTimeout(fullscreenDrawerHideTimer);
+				fullscreenDrawerHideTimer = null;
+			}
+
+			function setFullscreenDrawerOpen(isOpen)
+			{
+				if (!sidebarList) return;
+				sidebarList.parentNode.classList.toggle('dh-drawer-open', !!isOpen);
+				if (drawerToggleBtn)
+				{
+					drawerToggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+					drawerToggleBtn.setAttribute('title', isOpen ? 'Hide menu' : 'Show menu');
+					drawerToggleBtn.setAttribute('aria-label', isOpen ? 'Hide menu' : 'Show menu');
+				}
+			}
+
+			function scheduleFullscreenDrawerAutoHide()
+			{
+				clearFullscreenDrawerTimer();
+				fullscreenDrawerHideTimer = window.setTimeout(function()
+				{
+					setFullscreenDrawerOpen(false);
+					fullscreenDrawerHideTimer = null;
+				}, 1800);
+			}
+
+			function syncFullscreenUi()
+			{
+				var isFullscreen = isViewerFullscreen();
+				viewer.classList.toggle('dh-is-fullscreen', isFullscreen);
+				if (!isFullscreen)
+				{
+					clearFullscreenDrawerTimer();
+					setFullscreenDrawerOpen(false);
+					fullscreenDrawerIntroPlayed = false;
+					return;
+				}
+				setFullscreenDrawerOpen(true);
+				if (!fullscreenDrawerIntroPlayed)
+				{
+					fullscreenDrawerIntroPlayed = true;
+					scheduleFullscreenDrawerAutoHide();
+				}
+			}
+
 			function toggleFullscreen()
 			{
 				var fsElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
-				if (!fsElement) requestFullscreenSafe(viewer);
+				if (!fsElement)
+				{
+					fullscreenDrawerIntroPlayed = false;
+					requestFullscreenSafe(viewer);
+				}
 				else
 				{
 					if (document.exitFullscreen) document.exitFullscreen();
@@ -1967,6 +2082,17 @@
 			mobileSectionPrev.addEventListener('click', prevSection);
 			mobileSectionNext.addEventListener('click', nextSection);
 			if (fsBtn) fsBtn.addEventListener('click', toggleFullscreen);
+			if (drawerToggleBtn) drawerToggleBtn.addEventListener('click', function()
+			{
+				if (!isViewerFullscreen()) return;
+				clearFullscreenDrawerTimer();
+				var isOpen = sidebarList.parentNode.classList.contains('dh-drawer-open');
+				setFullscreenDrawerOpen(!isOpen);
+			});
+			if (exitFsBtn) exitFsBtn.addEventListener('click', function()
+			{
+				if (isViewerFullscreen()) toggleFullscreen();
+			});
 
 			frame.addEventListener('load', function()
 			{
@@ -1978,6 +2104,13 @@
 
 			document.addEventListener('keydown', function(e)
 			{
+				if (e.key === 'Escape' && isViewerFullscreen() && sidebarList.parentNode.classList.contains('dh-drawer-open'))
+				{
+					e.preventDefault();
+					clearFullscreenDrawerTimer();
+					setFullscreenDrawerOpen(false);
+					return;
+				}
 				if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || isEditableTarget(e.target)) return;
 				if (e.key === 'ArrowLeft')
 				{
@@ -2120,6 +2253,13 @@
 				tourSpotlight.classList.remove('active');
 				tourTooltip.classList.remove('active');
 			}
+
+			['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'].forEach(function(eventName)
+			{
+				document.addEventListener(eventName, syncFullscreenUi);
+			});
+
+			syncFullscreenUi();
 
 			if (helpBtn && tourBackdrop && tourSpotlight && tourTooltip && tourStep && tourTitle && tourBody && tourSkip && tourBack && tourNext)
 			{
