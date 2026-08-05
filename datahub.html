@@ -1981,9 +1981,9 @@
 				if (drawerToggleBtn)
 				{
 					drawerToggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-					drawerToggleBtn.setAttribute('title', isOpen ? 'Hide menu' : 'Show menu');
-					drawerToggleBtn.setAttribute('aria-label', isOpen ? 'Hide menu' : 'Show menu');
 					drawerToggleBtn.textContent = isOpen ? 'Close menu' : 'Menu';
+					drawerToggleBtn.setAttribute('title', drawerToggleBtn.textContent);
+					drawerToggleBtn.setAttribute('aria-label', drawerToggleBtn.textContent);
 				}
 			}
 
