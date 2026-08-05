@@ -664,7 +664,11 @@
 	}
 	
 	.dh-mobile-overview {
-		margin-top: 0.85rem;
+		display: none; margin: 0.5rem 0 0.85rem 0;
+	}
+	
+	.dh-mobile-overview.is-open {
+		display: block;
 	}
 	
 	.dh-mobile-overview-card {
@@ -825,6 +829,43 @@
 		display: block; width: 100%; min-height: 34rem; border: 0; background: #ffffff;
 	}
 	
+	.dh-resource-preview img {
+		display: block; width: 100%; height: auto; border: 0; background: #ffffff;
+	}
+	
+	.dh-resource-preview-link {
+		display: block;
+	}
+	
+	.dh-resource-spotlight-compact {
+		float: right; width: min(38%, 18rem); margin: 0 0 1rem 1rem; padding: 0.85rem;
+	}
+	
+	.dh-resource-spotlight-compact .dh-resource-meta {
+		margin-bottom: 0.65rem; font-size: 0.9rem;
+	}
+	
+	.dh-resource-spotlight-compact .dh-resource-preview img {
+		max-height: 16rem; object-fit: contain;
+	}
+	
+	.dh-policy-list {
+		padding-left: 1.25rem; margin: 0;
+	}
+	
+	.dh-policy-links {
+		padding-left: 1.25rem; margin: 0;
+	}
+	
+	.dh-policy-list li,
+	.dh-policy-links li {
+		line-height: 1.4; margin: 0.1rem 0;
+	}
+	
+	.dh-section-body-inner::after {
+		content: ''; display: block; clear: both;
+	}
+	
 	.dh-resource-actions {
 		display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem;
 	}
@@ -894,6 +935,12 @@
 		}
 		.dh-resource-preview iframe {
 			min-height: 28rem;
+		}
+		.dh-resource-spotlight-compact {
+			float: none; width: 100%; margin: 0 0 1rem 0;
+		}
+		.dh-resource-spotlight-compact .dh-resource-preview img {
+			max-height: none;
 		}
 	}
 
@@ -1223,6 +1270,7 @@
 
 			var RESOURCE_LINKS = {
 				posterEnglish: 'https://media.lrsd.net/media/Default/medialib/data-stewards_en.459bf288897.pdf',
+				posterEnglishPreview: 'https://media.lrsd.net/media/Default/frl/data-stewards_en.9e59ae89019.png',
 				posterFrench: 'https://media.lrsd.net/media/Default/medialib/data-stewards_fr.cb4dbb88898.pdf',
 				freePress: 'https://www.winnipegfreepress.com/breakingnews/2026/06/05/louis-riel-school-division-embraces-ai-agents-of-change',
 				nationalAiStrategy: 'https://ised-isde.canada.ca/site/ised/en/canadas-national-artificial-intelligence-strategy-ai-all',
@@ -1231,6 +1279,52 @@
 				boardPresentation: 'https://media.lrsd.net/media/Default/medialib/board-presentation-data-governance-ai-in-lrsd-2026-05-05-v3.cfb6c788899.pdf',
 				aiGuidelines: 'https://media.lrsd.net/media/Default/medialib/lrsd-staff-ai-guidelines-full-document-docx.cb861488902.pdf'
 			};
+
+			var POLICY_RESOURCES = [
+			{
+				policy: 'ILC/KCBB',
+				links: [
+				{
+					label: 'Policy: Collection and Use of Data',
+					url: 'https://media.lrsd.net/media/Default/medialib/ilc-kcbb-divisional-data-collection-initiatives.58313925812.pdf'
+				}]
+			},
+			{
+				policy: 'GBEB',
+				links: [
+				{
+					label: 'Policy: Divisional Standards for Employee Conduct',
+					url: 'https://media.lrsd.net/media/Default/medialib/gbeb-standards-of-employee-conduct.40ea9c25705.pdf'
+				},
+				{
+					label: 'Appendix: Guidelines for Collegial Resolution of Concerns in the Louis Riel School Division',
+					url: 'https://media.lrsd.net/media/Default/medialib/gbeb-appendix-a.368e3425704.pdf'
+				}]
+			},
+			{
+				policy: 'JRA',
+				links: [
+				{
+					label: 'Policy: Pupil Files/Student Records',
+					url: 'https://media.lrsd.net/media/Default/medialib/jra-pupil-files-student-records.c00ed725758.pdf'
+				},
+				{
+					label: 'Protocol: Pupil File',
+					url: 'https://media.lrsd.net/media/Default/medialib/jra-protocol-for-the-pupil-support-file.cebd2225757.pdf'
+				},
+				{
+					label: 'Form: Authorization for Exchange of Information',
+					url: 'https://media.lrsd.net/media/Default/medialib/jra-authorization-for-exchange-of-information.a405ac29957.pdf'
+				}]
+			},
+			{
+				policy: 'GBL',
+				links: [
+				{
+					label: 'Policy: Management of Employee Files',
+					url: 'https://media.lrsd.net/media/Default/medialib/gbl-management-of-employee-files.d614d625710.pdf'
+				}]
+			}];
 
 			var AI_AGENT_LOGOS = {
 				leap: 'https://media.lrsd.net/media/Default/frl/leap.50756188945.png',
@@ -1259,6 +1353,7 @@
 			}];
 
 			var DATA_FOUNDATIONS_CARDS_HTML = buildInfoCardsHtml(DATA_FOUNDATIONS_CARDS);
+			var POLICY_RESOURCES_HTML = buildPolicyResourcesHtml(POLICY_RESOURCES);
 
 			var LANDING_SECTIONS = [
 				{
@@ -1305,11 +1400,14 @@
 				{
 					title: 'Resources',
 					summary: 'Supporting documents, links, and reference material that accompany the public overview.',
-					bodyHtml: '<p>The following public-facing materials are currently available:</p><ul class="dh-resource-list"><li><a href="' + RESOURCE_LINKS.charter + '">Data Governance Charter</a></li><li><a href="' + RESOURCE_LINKS.aiGuidelines + '">AI Guidelines</a></li><li><a href="' + RESOURCE_LINKS.posterEnglish + '">We Are All Data Stewards poster (English)</a></li><li><a href="' + RESOURCE_LINKS.posterFrench + '">We Are All Data Stewards poster (French)</a></li><li><a href="' + RESOURCE_LINKS.boardPresentation + '">Board Presentation on Data Governance and AI</a></li><li><a href="' + RESOURCE_LINKS.c21UseCase + '">C21 Use Case</a></li><li><a href="' + RESOURCE_LINKS.freePress + '">Winnipeg Free Press article: “Louis Riel School Division embraces AI agents of change”</a></li><li><a href="' + RESOURCE_LINKS.nationalAiStrategy + '">Canada’s National Artificial Intelligence Strategy: AI for All</a></li></ul>',
+					bodyHtml: '<p>The following public-facing materials are currently available:</p><ul class="dh-resource-list"><li><a href="' + RESOURCE_LINKS.charter + '">Data Governance Charter</a></li><li><a href="' + RESOURCE_LINKS.aiGuidelines + '">AI Guidelines</a></li><li><a href="' + RESOURCE_LINKS.posterEnglish + '">We Are All Data Stewards poster (English)</a></li><li><a href="' + RESOURCE_LINKS.posterFrench + '">We Are All Data Stewards poster (French)</a></li><li><a href="' + RESOURCE_LINKS.boardPresentation + '">Board Presentation on Data Governance and AI</a></li><li><a href="' + RESOURCE_LINKS.c21UseCase + '">C21 Use Case</a></li><li><a href="' + RESOURCE_LINKS.freePress + '">Winnipeg Free Press article: “Louis Riel School Division embraces AI agents of change”</a></li><li><a href="' + RESOURCE_LINKS.nationalAiStrategy + '">Canada’s National Artificial Intelligence Strategy: AI for All</a></li></ul><p><strong>Related LRSD Policies</strong></p>' + POLICY_RESOURCES_HTML,
 					spotlight:
 					{
 						title: 'We Are All Data Stewards poster',
-						description: 'Preview the English poster below.',
+						description: 'Select the poster image to open the English PDF.',
+						className: 'dh-resource-spotlight-compact',
+						position: 'before',
+						previewImageUrl: RESOURCE_LINKS.posterEnglishPreview,
 						previewUrl: RESOURCE_LINKS.posterEnglish,
 						showActions: false
 					}
@@ -1341,6 +1439,7 @@
 			var sectionSubtitle = document.getElementById('dhSectionSubtitle');
 			var sectionBody = document.getElementById('dhSectionBody');
 			var mobileOverview = document.getElementById('dhMobileOverview');
+			var mobileOverviewBtn = document.getElementById('dhMobileOverviewBtn');
 			var mobileSectionDirectory = document.getElementById('dhMobileSectionDirectory');
 			var mobileSectionStatus = document.getElementById('dhMobileSectionStatus');
 			var mobileSectionTitle = document.getElementById('dhMobileSectionTitle');
@@ -1348,6 +1447,7 @@
 			var mobileSectionBody = document.getElementById('dhMobileSectionBody');
 			var mobileSectionPrev = document.getElementById('dhMobileSectionPrev');
 			var mobileSectionNext = document.getElementById('dhMobileSectionNext');
+			var mobileList = document.getElementById('dhMobileList');
 			var requiredElements = [
 				customSelect,
 				selectOptions,
@@ -1385,11 +1485,17 @@
 			dhHasInitialized = true;
 			stopBootWatchers();
 
-			var allowedSectionClassNames = ['dh-agent-grid', 'dh-agent-card', 'dh-resource-list', 'dh-resource-note', 'dh-info-grid', 'dh-info-card'];
+			if (mobileOverview && mobileListItems && mobileOverviewBtn && mobileOverview.parentNode !== mobileListItems)
+			{
+				mobileListItems.insertBefore(mobileOverview, mobileOverviewBtn.nextSibling);
+			}
+
+			var allowedSectionClassNames = ['dh-agent-grid', 'dh-agent-card', 'dh-resource-list', 'dh-resource-note', 'dh-info-grid', 'dh-info-card', 'dh-policy-list', 'dh-policy-links'];
 			var frameReuseDelayMs = 120;
 			var currentMode = 'landing';
 			var currentSectionIndex = 0;
 			var currentDashboardIndex = -1;
+			var isMobileOverviewOpen = false;
 			var optionElements = Array.prototype.slice.call(selectOptions.querySelectorAll('.dh-option'));
 			var sidebarElements = Array.prototype.slice.call(sidebarList.querySelectorAll('.dh-nav-item'));
 			var sectionDirectoryLinks = Array.prototype.slice.call(sectionDirectory.querySelectorAll('.dh-section-link'));
@@ -1509,6 +1615,24 @@
 				}).join('') + '</div>';
 			}
 
+			function buildPolicyResourcesHtml(policyResources)
+			{
+				if (!policyResources || !policyResources.length) return '';
+
+				return '<ul class="dh-policy-list">' + policyResources.map(function(policyResource)
+				{
+					var links = (policyResource.links || []).filter(function(link)
+					{
+						return link && link.url;
+					}).map(function(link)
+					{
+						return '<li><a href="' + sanitizeUrl(link.url) + '">' + escapeHtml(link.label) + '</a></li>';
+					}).join('');
+
+					return '<li>Policy ' + escapeHtml(policyResource.policy) + (links ? '<ul class="dh-policy-links">' + links + '</ul>' : '') + '</li>';
+				}).join('') + '</ul>';
+			}
+
 			function getSectionLabel(index)
 			{
 				return 'Section ' + (index + 1) + ' of ' + LANDING_SECTIONS.length;
@@ -1526,7 +1650,10 @@
 			function getSectionBodyHtml(section, index)
 			{
 				var introLogoHtml = index === 0 ? '<img src="' + sanitizeUrl(LANDING_ITEM.icon) + '" alt="Data Hub" class="dh-section-logo fr-fil fr-dib">' : '';
-				return '<div class="dh-section-body-inner">' + introLogoHtml + sanitizeSectionHtml(section.bodyHtml) + buildSectionSpotlightHtml(section) + '</div>';
+				var sectionBodyHtml = sanitizeSectionHtml(section.bodyHtml);
+				var spotlightHtml = buildSectionSpotlightHtml(section);
+				var sectionContentHtml = (section && section.spotlight && section.spotlight.position === 'before') ? spotlightHtml + sectionBodyHtml : sectionBodyHtml + spotlightHtml;
+				return '<div class="dh-section-body-inner">' + introLogoHtml + sectionContentHtml + '</div>';
 			}
 
 			function buildSectionSpotlightHtml(section)
@@ -1535,6 +1662,7 @@
 
 				var title = section.spotlight.title ? escapeHtml(section.spotlight.title) : 'Featured resource';
 				var description = section.spotlight.description ? '<p class="dh-resource-meta">' + escapeHtml(section.spotlight.description) + '</p>' : '';
+				var previewImageUrl = sanitizeUrl(section.spotlight.previewImageUrl);
 				var previewUrl = sanitizeUrl(section.spotlight.previewUrl);
 				var previewFrameUrl = buildPdfPreviewUrl(previewUrl);
 				var primaryUrl = sanitizeUrl(section.spotlight.primaryUrl || previewUrl);
@@ -1542,7 +1670,18 @@
 				var primaryLabel = escapeHtml(section.spotlight.primaryLabel || 'Open resource');
 				var secondaryLabel = escapeHtml(section.spotlight.secondaryLabel || 'Open alternate version');
 				var showActions = section.spotlight.showActions !== false;
-				var previewHtml = previewFrameUrl ? '<div class="dh-resource-preview"><iframe src="' + previewFrameUrl + '" title="Preview of ' + title + ' - interactive document viewer" loading="lazy" width="100%" height="544"></iframe></div>' : '';
+				var spotlightClassName = section.spotlight.className === 'dh-resource-spotlight-compact' ? ' dh-resource-spotlight-compact' : '';
+				var previewHtml = '';
+
+				if (previewImageUrl)
+				{
+					var previewImageElement = '<img src="' + previewImageUrl + '" alt="Preview image for ' + title + '" loading="lazy">';
+					previewHtml = '<div class="dh-resource-preview">' + (primaryUrl ? '<a class="dh-resource-preview-link" href="' + primaryUrl + '" target="_blank" rel="noopener">' + previewImageElement + '</a>' : previewImageElement) + '</div>';
+				}
+				else if (previewFrameUrl)
+				{
+					previewHtml = '<div class="dh-resource-preview"><iframe src="' + previewFrameUrl + '" title="Preview of ' + title + ' - interactive document viewer" loading="lazy" width="100%" height="544"></iframe></div>';
+				}
 				var actions = [];
 
 				if (showActions && primaryUrl)
@@ -1555,7 +1694,7 @@
 					actions.push('<a class="dh-resource-button" href="' + secondaryUrl + '" target="_blank" rel="noopener">' + secondaryLabel + '</a>');
 				}
 
-				return '<div class="dh-resource-spotlight"><h4>' + title + '</h4>' + description + previewHtml + (actions.length ? '<div class="dh-resource-actions">' + actions.join('') + '</div>' : '') + '</div>';
+				return '<div class="dh-resource-spotlight' + spotlightClassName + '"><h4>' + title + '</h4>' + description + previewHtml + (actions.length ? '<div class="dh-resource-actions">' + actions.join('') + '</div>' : '') + '</div>';
 			}
 
 			function renderSections()
@@ -1643,6 +1782,17 @@
 				updateSelectedNavigation();
 			}
 
+			function setMobileOverviewOpen(isOpen)
+			{
+				if (!mobileOverview || !mobileOverviewBtn) return;
+				isMobileOverviewOpen = !!isOpen;
+				mobileOverview.classList.toggle('is-open', isMobileOverviewOpen);
+				mobileOverview.setAttribute('aria-hidden', isMobileOverviewOpen ? 'false' : 'true');
+				mobileOverviewBtn.setAttribute('aria-expanded', isMobileOverviewOpen ? 'true' : 'false');
+				var overviewArrow = mobileOverviewBtn.querySelector('.dh-mobile-list-arrow');
+				if (overviewArrow) overviewArrow.innerHTML = isMobileOverviewOpen ? '&uarr;' : '&darr;';
+			}
+
 			function isEditableTarget(target)
 			{
 				if (!target) return false;
@@ -1716,6 +1866,7 @@
 			renderSections();
 			var initialHash = window.location.hash;
 			showLanding();
+			setMobileOverviewOpen(false);
 
 			var initialDashboardIndex = getDashboardIndexByHash(initialHash);
 			if (initialDashboardIndex !== -1)
@@ -1776,22 +1927,24 @@
 				var overviewButton = e.target.closest('#dhMobileOverviewBtn');
 				if (overviewButton)
 				{
-					mobileOverview.scrollIntoView(
+					setMobileOverviewOpen(!isMobileOverviewOpen);
+					if (isMobileOverviewOpen)
 					{
-						behavior: 'smooth',
-						block: 'start'
-					});
+						mobileOverview.scrollIntoView(
+						{
+							behavior: 'smooth',
+							block: 'nearest'
+						});
+					}
 					return;
 				}
 
 				var dashboardButton = e.target.closest('[data-mobile-dashboard]');
 				if (!dashboardButton) return;
-				loadDashboard(parseInt(dashboardButton.getAttribute('data-mobile-dashboard'), 10));
-				window.scrollTo(
-				{
-					top: viewer.getBoundingClientRect().top + window.pageYOffset - 16,
-					behavior: 'smooth'
-				});
+				var mobileDashboardIndex = parseInt(dashboardButton.getAttribute('data-mobile-dashboard'), 10);
+				if (!Number.isFinite(mobileDashboardIndex) || mobileDashboardIndex < 0 || mobileDashboardIndex >= DASHBOARDS.length) return;
+				var mobileDashboardUrl = sanitizeUrl(DASHBOARDS[mobileDashboardIndex].url);
+				if (mobileDashboardUrl) window.open(mobileDashboardUrl, '_blank', 'noopener');
 			});
 
 			function bindSectionDirectory(target)
