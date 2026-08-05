@@ -1985,10 +1985,6 @@
 					drawerToggleBtn.setAttribute('aria-label', isOpen ? 'Hide menu' : 'Show menu');
 					drawerToggleBtn.textContent = isOpen ? 'Close menu' : 'Menu';
 				}
-				if (drawerTabBtn)
-				{
-					drawerTabBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-				}
 			}
 
 			function scheduleFullscreenDrawerAutoHide()
@@ -2150,12 +2146,7 @@
 			}
 
 			if (drawerToggleBtn) drawerToggleBtn.addEventListener('click', toggleDrawerMenu);
-			if (drawerTabBtn) drawerTabBtn.addEventListener('click', function()
-			{
-				if (!isViewerFullscreen()) return;
-				clearFullscreenDrawerTimer();
-				setFullscreenDrawerOpen(true);
-			});
+			if (drawerTabBtn) drawerTabBtn.addEventListener('click', toggleDrawerMenu);
 			if (exitFsBtn) exitFsBtn.addEventListener('click', function()
 			{
 				if (isViewerFullscreen()) toggleFullscreen();
