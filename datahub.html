@@ -1,6 +1,6 @@
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'); .data-hub-wrapper {
-		--dh-aspect-ratio: 16 / 9.55; --accent-red: #BE5247; --accent-green: #2BA680; --accent-red-light: rgba(190, 82, 71, 0.1); --accent-green-light: rgba(43, 166, 128, 0.1); --bg-primary: #ffffff; --bg-secondary: #f8f9fa; --bg-glass: rgba(255, 255, 255, 0.75); --bg-glass-strong: rgba(255, 255, 255, 0.9); --text-primary: #1a1a2e; --text-secondary: #64748b; --text-muted: #94a3b8; --border-light: rgba(0, 0, 0, 0.06); --border-medium: rgba(0, 0, 0, 0.1); --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.06); --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.08); --shadow-glow-green: 0 4px 20px rgba(43, 166, 128, 0.25); --blur-amount: 20px; --overview-logo-max-width: 300px; --overview-nav-width: 21rem; --overview-reading-width: 66ch; --section-status-min-width: 9.5rem; --fullscreen-drawer-width: min(26rem, calc(100vw - 2rem)); --radius: 12px; --radius-lg: 16px; --radius-xl: 20px; --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		--dh-aspect-ratio: 16 / 9.55; --accent-red: #BE5247; --accent-green: #2BA680; --accent-red-light: rgba(190, 82, 71, 0.1); --accent-green-light: rgba(43, 166, 128, 0.1); --bg-primary: #ffffff; --bg-secondary: #f8f9fa; --bg-glass: rgba(255, 255, 255, 0.75); --bg-glass-strong: rgba(255, 255, 255, 0.9); --text-primary: #1a1a2e; --text-secondary: #64748b; --text-muted: #94a3b8; --border-light: rgba(0, 0, 0, 0.06); --border-medium: rgba(0, 0, 0, 0.1); --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.06); --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.08); --shadow-glow-green: 0 4px 20px rgba(43, 166, 128, 0.25); --blur-amount: 20px; --overview-logo-max-width: 300px; --overview-nav-width: 21rem; --overview-reading-width: 66ch; --section-status-min-width: 9.5rem; --fullscreen-drawer-width: min(26rem, calc(100vw - 2rem)); --fullscreen-tab-top: 50vh; --radius: 12px; --radius-lg: 16px; --radius-xl: 20px; --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 	
 	.data-hub-wrapper,
@@ -257,12 +257,16 @@
 	}
 
 	.dh-fullscreen-tab {
-		position: fixed; top: 50%; left: 1rem; transform: translateY(-50%); z-index: 19; display: none; align-items: center; justify-content: center; min-height: 4.25rem; padding: 1rem 0.75rem; border: 1px solid rgba(15, 23, 42, 0.12); border-left: none; border-radius: 0 var(--radius-lg) var(--radius-lg) 0; background: rgba(255, 255, 255, 0.96); color: var(--text-primary); box-shadow: 0 14px 30px rgba(15, 23, 42, 0.16); cursor: pointer; writing-mode: vertical-rl; text-orientation: mixed; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; transition: left 0.35s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+		position: fixed; top: var(--fullscreen-tab-top); left: 1rem; transform: translateY(-50%); z-index: 19; display: none; align-items: center; justify-content: center; min-height: 4.25rem; padding: 1rem 0.75rem; border: 1px solid rgba(15, 23, 42, 0.12); border-left: none; border-radius: 0 var(--radius-lg) var(--radius-lg) 0; background: rgba(255, 255, 255, 0.96); color: var(--text-primary); box-shadow: 0 14px 30px rgba(15, 23, 42, 0.16); cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; writing-mode: vertical-rl; text-orientation: mixed; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; transition: left 0.35s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 	}
 
 	.dh-fullscreen-tab:hover,
 	.dh-fullscreen-tab:focus {
 		background: var(--accent-green); color: #ffffff; border-color: var(--accent-green); outline: none; box-shadow: 0 16px 36px rgba(43, 166, 128, 0.26);
+	}
+
+	.dh-fullscreen-tab.is-dragging {
+		cursor: grabbing; transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 	}
 
 	.dh-viewer:fullscreen .dh-fullscreen-tab,
@@ -1601,6 +1605,7 @@
 			var isMobileOverviewOpen = false;
 			var fullscreenDrawerHideTimer = null;
 			var fullscreenDrawerIntroPlayed = false;
+			var fullscreenTabDragState = null;
 			var optionElements = Array.prototype.slice.call(selectOptions.querySelectorAll('.dh-option'));
 			var sidebarElements = Array.prototype.slice.call(sidebarList.querySelectorAll('.dh-nav-item'));
 			var sectionDirectoryLinks = Array.prototype.slice.call(sectionDirectory.querySelectorAll('.dh-section-link'));
@@ -1968,6 +1973,22 @@
 				fullscreenDrawerHideTimer = null;
 			}
 
+			function clampFullscreenTabTop(nextTop)
+			{
+				var tabHeight = drawerTabBtn ? drawerTabBtn.offsetHeight : 0;
+				var halfHeight = tabHeight / 2;
+				var minTop = 16 + halfHeight;
+				var maxTop = window.innerHeight - 16 - halfHeight;
+				if (!Number.isFinite(nextTop)) return window.innerHeight / 2;
+				if (maxTop <= minTop) return window.innerHeight / 2;
+				return Math.min(Math.max(nextTop, minTop), maxTop);
+			}
+
+			function setFullscreenTabTop(nextTop)
+			{
+				viewer.style.setProperty('--fullscreen-tab-top', clampFullscreenTabTop(nextTop) + 'px');
+			}
+
 			function setFullscreenDrawerOpen(isOpen)
 			{
 				if (!sidebarList) return;
@@ -2000,8 +2021,11 @@
 					clearFullscreenDrawerTimer();
 					setFullscreenDrawerOpen(false);
 					fullscreenDrawerIntroPlayed = false;
+					if (drawerTabBtn) drawerTabBtn.classList.remove('is-dragging');
+					fullscreenTabDragState = null;
 					return;
 				}
+				setFullscreenTabTop(parseFloat(getComputedStyle(viewer).getPropertyValue('--fullscreen-tab-top')) || (window.innerHeight / 2));
 				setFullscreenDrawerOpen(true);
 				if (!fullscreenDrawerIntroPlayed)
 				{
@@ -2134,11 +2158,43 @@
 			function toggleDrawerMenu()
 			{
 				if (!isViewerFullscreen()) return;
+				if (fullscreenTabDragState && fullscreenTabDragState.moved) return;
 				clearFullscreenDrawerTimer();
 				var isOpen = sidebarList.parentNode.classList.contains('dh-drawer-open');
 				setFullscreenDrawerOpen(!isOpen);
 			}
 
+			function handleFullscreenTabPointerMove(e)
+			{
+				if (!fullscreenTabDragState || !drawerTabBtn) return;
+				var clientY = typeof e.clientY === 'number' ? e.clientY : fullscreenTabDragState.startClientY;
+				var nextTop = fullscreenTabDragState.startTop + (clientY - fullscreenTabDragState.startClientY);
+				if (Math.abs(clientY - fullscreenTabDragState.startClientY) > 4) fullscreenTabDragState.moved = true;
+				setFullscreenTabTop(nextTop);
+			}
+
+			function handleFullscreenTabPointerUp()
+			{
+				if (!fullscreenTabDragState || !drawerTabBtn) return;
+				drawerTabBtn.classList.remove('is-dragging');
+				fullscreenTabDragState = null;
+			}
+
+			if (drawerTabBtn) drawerTabBtn.addEventListener('pointerdown', function(e)
+			{
+				if (!isViewerFullscreen() || e.button !== 0) return;
+				fullscreenTabDragState = {
+					startClientY: e.clientY,
+					startTop: clampFullscreenTabTop(drawerTabBtn.getBoundingClientRect().top + (drawerTabBtn.offsetHeight / 2)),
+					moved: false
+				};
+				drawerTabBtn.classList.add('is-dragging');
+				clearFullscreenDrawerTimer();
+				if (drawerTabBtn.setPointerCapture) drawerTabBtn.setPointerCapture(e.pointerId);
+			});
+			if (drawerTabBtn) drawerTabBtn.addEventListener('pointermove', handleFullscreenTabPointerMove);
+			if (drawerTabBtn) drawerTabBtn.addEventListener('pointerup', handleFullscreenTabPointerUp);
+			if (drawerTabBtn) drawerTabBtn.addEventListener('pointercancel', handleFullscreenTabPointerUp);
 			if (drawerTabBtn) drawerTabBtn.addEventListener('click', toggleDrawerMenu);
 			if (exitFsBtn) exitFsBtn.addEventListener('click', function()
 			{
@@ -2174,6 +2230,11 @@
 				{
 					e.preventDefault(); toggleFullscreen();
 				}
+			});
+
+			window.addEventListener('resize', function()
+			{
+				if (drawerTabBtn) setFullscreenTabTop(drawerTabBtn.getBoundingClientRect().top + (drawerTabBtn.offsetHeight / 2));
 			});
 
 			var tourBackdrop = document.getElementById('dhTourBackdrop');
