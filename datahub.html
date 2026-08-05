@@ -253,7 +253,26 @@
 	}
 
 	.dh-fullscreen-actions {
-		position: absolute; top: 1rem; right: 1rem; z-index: 20; display: none; align-items: center; gap: 0.5rem;
+		position: absolute; top: 1rem; right: 1rem; z-index: 20; display: none; align-items: center; gap: 0.65rem;
+	}
+
+	.dh-fullscreen-tab {
+		position: absolute; top: 50%; left: 0; transform: translate(-0.35rem, -50%); z-index: 19; display: none; align-items: center; justify-content: center; min-height: 4.25rem; padding: 1rem 0.75rem; border: 1px solid rgba(15, 23, 42, 0.12); border-left: none; border-radius: 0 var(--radius-lg) var(--radius-lg) 0; background: rgba(255, 255, 255, 0.96); color: var(--text-primary); box-shadow: 0 14px 30px rgba(15, 23, 42, 0.16); cursor: pointer; writing-mode: vertical-rl; text-orientation: mixed; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; transition: var(--transition);
+	}
+
+	.dh-fullscreen-tab:hover,
+	.dh-fullscreen-tab:focus {
+		transform: translate(0, -50%); background: var(--accent-green); color: #ffffff; border-color: var(--accent-green); outline: none; box-shadow: 0 16px 36px rgba(43, 166, 128, 0.26);
+	}
+
+	.dh-viewer:fullscreen .dh-fullscreen-tab,
+	.dh-viewer:-webkit-full-screen .dh-fullscreen-tab {
+		display: inline-flex;
+	}
+
+	.dh-viewer:fullscreen .dh-sidebar.dh-drawer-open ~ .dh-fullscreen-tab,
+	.dh-viewer:-webkit-full-screen .dh-sidebar.dh-drawer-open ~ .dh-fullscreen-tab {
+		opacity: 0; pointer-events: none; transform: translate(-100%, -50%);
 	}
 
 	.dh-viewer:fullscreen .dh-fullscreen-actions,
@@ -263,6 +282,10 @@
 	
 	.dh-arrow-btn {
 		width: 38px; height: 38px; border: 1px solid var(--border-light); background: var(--bg-primary); color: var(--text-primary); border-radius: var(--radius); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); font-size: 1rem; font-weight: 500; padding: 0; flex-shrink: 0;
+	}
+
+	.dh-menu-btn {
+		width: auto; min-width: 5.5rem; padding: 0 1rem; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.02em;
 	}
 	
 	.dh-arrow-btn:hover,
@@ -640,6 +663,35 @@
 	.dh-viewer:fullscreen .dh-sidebar.dh-drawer-open,
 	.dh-viewer:-webkit-full-screen .dh-sidebar.dh-drawer-open {
 		transform: translateX(0); opacity: 1; pointer-events: auto;
+	}
+
+	.dh-viewer:fullscreen .dh-sidebar-head h2,
+	.dh-viewer:-webkit-full-screen .dh-sidebar-head h2 {
+		font-size: 0.95rem; letter-spacing: 0.12em;
+	}
+
+	.dh-viewer:fullscreen .dh-sidebar-list,
+	.dh-viewer:-webkit-full-screen .dh-sidebar-list {
+		gap: 0.55rem; padding-right: 0.35rem;
+	}
+
+	.dh-viewer:fullscreen .dh-nav-item,
+	.dh-viewer:fullscreen .dh-nav-item:link,
+	.dh-viewer:fullscreen .dh-nav-item:visited,
+	.dh-viewer:-webkit-full-screen .dh-nav-item,
+	.dh-viewer:-webkit-full-screen .dh-nav-item:link,
+	.dh-viewer:-webkit-full-screen .dh-nav-item:visited {
+		gap: 0.9rem; padding: 0.9rem 0.95rem;
+	}
+
+	.dh-viewer:fullscreen .dh-nav-copy strong,
+	.dh-viewer:-webkit-full-screen .dh-nav-copy strong {
+		font-size: 1rem; line-height: 1.45;
+	}
+
+	.dh-viewer:fullscreen .dh-item-icon,
+	.dh-viewer:-webkit-full-screen .dh-item-icon {
+		width: 48px !important; height: 48px !important; padding: 7px !important;
 	}
 	
 	.dh-sidebar-head {
@@ -1129,7 +1181,7 @@
 					</div></div></div>
 			<div class="dh-viewer-body" id="dhViewerBody">
 				<div class="dh-fullscreen-actions">
-					<button class="dh-arrow-btn" id="dhDrawerToggle" type="button" title="Show menu" aria-label="Show menu">☰</button>
+					<button class="dh-arrow-btn dh-menu-btn" id="dhDrawerToggle" type="button" title="Show menu" aria-label="Show menu">Menu</button>
 					<button class="dh-arrow-btn dh-close-btn" id="dhExitFullscreen" type="button" title="Exit fullscreen" aria-label="Exit fullscreen"><span class="dh-close-icon" aria-hidden="true">×</span></button>
 				</div>
 				<aside class="dh-sidebar" id="dhSidebar">
@@ -1153,6 +1205,7 @@
 						<button class="dh-nav-item" type="button" data-nav-kind="dashboard" data-index="11"><img src="https://media.lrsd.net/media/Default/frl/early-middle-3x.36869683526.png" class="dh-item-icon fr-fil fr-dib" alt=""><span class="dh-nav-copy"><strong>Early and Middle Years Provincial Assessments</strong></span></button>
 					</div>
 				</aside>
+				<button class="dh-fullscreen-tab" id="dhDrawerTab" type="button" title="Open menu" aria-label="Open menu">Menu</button>
 				<div class="dh-iframe-wrap" id="dhIframeWrap">
 					<iframe name="dhFrame" id="dhFrame" title="Data Hub Viewer" allowfullscreen=""></iframe>
 					<div class="dh-loading" id="dhLoading">
@@ -1481,6 +1534,7 @@
 			var helpBtn = document.getElementById('dhHelpBtn');
 			var drawerToggleBtn = document.getElementById('dhDrawerToggle');
 			var exitFsBtn = document.getElementById('dhExitFullscreen');
+			var drawerTabBtn = document.getElementById('dhDrawerTab');
 			var iframeWrap = document.getElementById('dhIframeWrap');
 			var mobileHelpBtn = document.getElementById('dhMobileHelpBtn');
 			var mobileHelpModal = document.getElementById('dhMobileHelpModal');
@@ -1929,6 +1983,11 @@
 					drawerToggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 					drawerToggleBtn.setAttribute('title', isOpen ? 'Hide menu' : 'Show menu');
 					drawerToggleBtn.setAttribute('aria-label', isOpen ? 'Hide menu' : 'Show menu');
+					drawerToggleBtn.textContent = isOpen ? 'Close menu' : 'Menu';
+				}
+				if (drawerTabBtn)
+				{
+					drawerTabBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 				}
 			}
 
@@ -2082,12 +2141,20 @@
 			mobileSectionPrev.addEventListener('click', prevSection);
 			mobileSectionNext.addEventListener('click', nextSection);
 			if (fsBtn) fsBtn.addEventListener('click', toggleFullscreen);
-			if (drawerToggleBtn) drawerToggleBtn.addEventListener('click', function()
+			function toggleDrawerMenu()
 			{
 				if (!isViewerFullscreen()) return;
 				clearFullscreenDrawerTimer();
 				var isOpen = sidebarList.parentNode.classList.contains('dh-drawer-open');
 				setFullscreenDrawerOpen(!isOpen);
+			}
+
+			if (drawerToggleBtn) drawerToggleBtn.addEventListener('click', toggleDrawerMenu);
+			if (drawerTabBtn) drawerTabBtn.addEventListener('click', function()
+			{
+				if (!isViewerFullscreen()) return;
+				clearFullscreenDrawerTimer();
+				setFullscreenDrawerOpen(true);
 			});
 			if (exitFsBtn) exitFsBtn.addEventListener('click', function()
 			{
