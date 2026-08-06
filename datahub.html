@@ -141,6 +141,16 @@
 	.dh-viewer:-webkit-full-screen .dh-iframe-wrap iframe {
 		border-radius: 0;
 	}
+
+	.dh-viewer:fullscreen .dh-viewer-header,
+	.dh-viewer:-webkit-full-screen .dh-viewer-header {
+		display: none;
+	}
+
+	.dh-viewer:fullscreen .dh-viewer-body,
+	.dh-viewer:-webkit-full-screen .dh-viewer-body {
+		grid-template-columns: 1fr; position: relative; padding: 0; flex: 1 1 auto; display: flex; flex-direction: column;
+	}
 	
 	.dh-viewer-header {
 		display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; background: var(--bg-glass); border-bottom: 1px solid var(--border-light); flex-wrap: wrap; gap: 0.75rem; max-width: 100%; min-width: 0;
@@ -273,7 +283,46 @@
 	.dh-help-btn:focus {
 		background: #a14338; border-color: #a14338; box-shadow: 0 4px 20px rgba(190, 82, 71, 0.35);
 	}
-	
+
+	.dh-fullscreen-actions {
+		position: absolute; top: 1rem; right: 1rem; z-index: 20; display: none; align-items: center;
+	}
+
+	.dh-viewer:fullscreen .dh-fullscreen-actions,
+	.dh-viewer:-webkit-full-screen .dh-fullscreen-actions {
+		display: flex;
+	}
+
+	.dh-close-btn {
+		background: rgba(255, 255, 255, 0.94); color: var(--text-primary); border-color: rgba(15, 23, 42, 0.12); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+	}
+
+	.dh-close-btn:hover,
+	.dh-close-btn:focus {
+		background: var(--accent-red); color: #ffffff; border-color: var(--accent-red); box-shadow: 0 10px 30px rgba(190, 82, 71, 0.35);
+	}
+
+	.dh-close-btn .dh-close-icon {
+		font-size: 1.2rem; line-height: 1;
+	}
+
+	.dh-fs-menu-btn {
+		position: fixed; top: 1rem; left: 1rem; z-index: 20; display: none; align-items: center; justify-content: center; padding: 0.55rem 1.1rem; border: 1px solid rgba(15, 23, 42, 0.12); border-radius: var(--radius); background: rgba(255, 255, 255, 0.96); color: var(--text-primary); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18); cursor: pointer; font-family: inherit; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; transition: var(--transition);
+	}
+
+	.dh-fs-menu-btn:hover,
+	.dh-fs-menu-btn:focus {
+		background: var(--accent-green); color: #ffffff; border-color: var(--accent-green); box-shadow: var(--shadow-glow-green); outline: none;
+	}
+
+	.dh-is-fullscreen .dh-fs-menu-btn {
+		display: inline-flex;
+	}
+
+	.dh-is-fullscreen.dh-drawer-is-open .dh-fs-menu-btn {
+		display: none;
+	}
+
 	.dh-iframe-wrap {
 		position: relative; background: transparent; width: 100%; aspect-ratio: var(--dh-aspect-ratio); overflow: hidden;
 	}
@@ -599,9 +648,28 @@
 	.dh-sidebar {
 		background: rgba(248, 250, 252, 0.96); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 0.9rem; display: flex; flex-direction: column; gap: 0.7rem; overflow: hidden; min-height: 100%;
 	}
-	
+
+	.dh-viewer:fullscreen .dh-sidebar,
+	.dh-viewer:-webkit-full-screen .dh-sidebar {
+		position: absolute; top: 1rem; left: 1rem; bottom: 1rem; width: min(26rem, calc(100vw - 2rem)); max-width: calc(100vw - 2rem); border-radius: var(--radius-xl); box-shadow: 0 18px 48px rgba(15, 23, 42, 0.24); z-index: 18; transform: translateX(calc(-100% - 2rem)); opacity: 0; pointer-events: none; overflow: hidden; transition: transform 0.35s ease, opacity 0.25s ease; min-height: 0;
+	}
+
+	.dh-viewer:fullscreen .dh-sidebar.dh-drawer-open,
+	.dh-viewer:-webkit-full-screen .dh-sidebar.dh-drawer-open {
+		transform: translateX(0); opacity: 1; pointer-events: auto;
+	}
+
 	.dh-sidebar-head {
-		padding-bottom: 0.55rem; border-bottom: 1px solid var(--border-light);
+		padding-bottom: 0.55rem; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+	}
+
+	.dh-sidebar-close-btn {
+		display: none; flex-shrink: 0;
+	}
+
+	.dh-viewer:fullscreen .dh-sidebar-close-btn,
+	.dh-viewer:-webkit-full-screen .dh-sidebar-close-btn {
+		display: flex;
 	}
 	
 	.dh-sidebar-head h2 {
@@ -1081,10 +1149,15 @@
 						<button class="dh-arrow-btn dh-help-btn" id="dhHelpBtn" type="button" title="Show help tour">?</button>
 					</div></div></div>
 			<div class="dh-viewer-body" id="dhViewerBody">
+				<div class="dh-fullscreen-actions">
+					<button class="dh-arrow-btn dh-close-btn" id="dhExitFullscreen" type="button" title="Exit fullscreen" aria-label="Exit fullscreen"><span class="dh-close-icon" aria-hidden="true">&times;</span></button>
+				</div>
+				<button class="dh-fs-menu-btn" id="dhFsMenuBtn" type="button" aria-label="Open menu" aria-expanded="false">Menu</button>
 				<aside class="dh-sidebar" id="dhSidebar">
 					<div class="dh-sidebar-head">
 
 						<h2>Explore</h2>
+						<button class="dh-arrow-btn dh-close-btn dh-sidebar-close-btn" id="dhDrawerClose" type="button" title="Close menu" aria-label="Close menu"><span class="dh-close-icon" aria-hidden="true">&times;</span></button>
 					</div>
 					<div class="dh-sidebar-list" id="dhSidebarList">
 						<button class="dh-nav-item selected" type="button" data-nav-kind="landing"><img src="https://media.lrsd.net/media/Default/frl/dh-logo-fc-svg-2x.ff4e9d83556.png" class="dh-item-icon fr-fil fr-dib" alt=""><span class="dh-nav-copy"><strong>Data Governance &amp; AI Overview</strong></span></button>
@@ -1427,6 +1500,9 @@
 			var fsBtn = document.getElementById('dhFullscreen');
 			var viewer = document.getElementById('dhViewer');
 			var helpBtn = document.getElementById('dhHelpBtn');
+			var exitFsBtn = document.getElementById('dhExitFullscreen');
+			var fsMenuBtn = document.getElementById('dhFsMenuBtn');
+			var drawerCloseBtn = document.getElementById('dhDrawerClose');
 			var iframeWrap = document.getElementById('dhIframeWrap');
 			var mobileHelpBtn = document.getElementById('dhMobileHelpBtn');
 			var mobileHelpModal = document.getElementById('dhMobileHelpModal');
@@ -1496,6 +1572,8 @@
 			var currentSectionIndex = 0;
 			var currentDashboardIndex = -1;
 			var isMobileOverviewOpen = false;
+			var fullscreenDrawerHideTimer = null;
+			var fullscreenDrawerIntroPlayed = false;
 			var optionElements = Array.prototype.slice.call(selectOptions.querySelectorAll('.dh-option'));
 			var sidebarElements = Array.prototype.slice.call(sidebarList.querySelectorAll('.dh-nav-item'));
 			var sectionDirectoryLinks = Array.prototype.slice.call(sectionDirectory.querySelectorAll('.dh-section-link'));
@@ -1850,10 +1928,64 @@
 				{}
 			}
 
+			function isViewerFullscreen()
+			{
+				var fsElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+				return fsElement === viewer;
+			}
+
+			function clearFullscreenDrawerTimer()
+			{
+				if (!fullscreenDrawerHideTimer) return;
+				window.clearTimeout(fullscreenDrawerHideTimer);
+				fullscreenDrawerHideTimer = null;
+			}
+
+			function setFullscreenDrawerOpen(isOpen)
+			{
+				if (!sidebarList) return;
+				sidebarList.parentNode.classList.toggle('dh-drawer-open', !!isOpen);
+				viewer.classList.toggle('dh-drawer-is-open', !!isOpen);
+				if (fsMenuBtn) fsMenuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+			}
+
+			function scheduleFullscreenDrawerAutoHide()
+			{
+				clearFullscreenDrawerTimer();
+				fullscreenDrawerHideTimer = window.setTimeout(function()
+				{
+					setFullscreenDrawerOpen(false);
+					fullscreenDrawerHideTimer = null;
+				}, 1800);
+			}
+
+			function syncFullscreenUi()
+			{
+				var isFullscreen = isViewerFullscreen();
+				viewer.classList.toggle('dh-is-fullscreen', isFullscreen);
+				if (!isFullscreen)
+				{
+					clearFullscreenDrawerTimer();
+					setFullscreenDrawerOpen(false);
+					fullscreenDrawerIntroPlayed = false;
+					return;
+				}
+				setFullscreenDrawerOpen(true);
+				if (!fullscreenDrawerIntroPlayed)
+				{
+					fullscreenDrawerIntroPlayed = true;
+					scheduleFullscreenDrawerAutoHide();
+				}
+			}
+
 			function toggleFullscreen()
 			{
 				var fsElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
-				if (!fsElement) requestFullscreenSafe(viewer);
+				if (!fsElement)
+				{
+					fullscreenDrawerIntroPlayed = false;
+					requestFullscreenSafe(viewer);
+				}
 				else
 				{
 					if (document.exitFullscreen) document.exitFullscreen();
@@ -1967,6 +2099,25 @@
 			mobileSectionPrev.addEventListener('click', prevSection);
 			mobileSectionNext.addEventListener('click', nextSection);
 			if (fsBtn) fsBtn.addEventListener('click', toggleFullscreen);
+			if (fsMenuBtn) fsMenuBtn.addEventListener('click', function()
+			{
+				if (!isViewerFullscreen()) return;
+				clearFullscreenDrawerTimer();
+				setFullscreenDrawerOpen(true);
+			});
+			if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', function()
+			{
+				clearFullscreenDrawerTimer();
+				setFullscreenDrawerOpen(false);
+			});
+			if (exitFsBtn) exitFsBtn.addEventListener('click', function()
+			{
+				if (isViewerFullscreen()) toggleFullscreen();
+			});
+			document.addEventListener('fullscreenchange', syncFullscreenUi);
+			document.addEventListener('webkitfullscreenchange', syncFullscreenUi);
+			document.addEventListener('mozfullscreenchange', syncFullscreenUi);
+			document.addEventListener('MSFullscreenChange', syncFullscreenUi);
 
 			frame.addEventListener('load', function()
 			{
@@ -1978,6 +2129,12 @@
 
 			document.addEventListener('keydown', function(e)
 			{
+				if (e.key === 'Escape' && isViewerFullscreen() && sidebarList && sidebarList.parentNode.classList.contains('dh-drawer-open'))
+				{
+					clearFullscreenDrawerTimer();
+					setFullscreenDrawerOpen(false);
+					return;
+				}
 				if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || isEditableTarget(e.target)) return;
 				if (e.key === 'ArrowLeft')
 				{
